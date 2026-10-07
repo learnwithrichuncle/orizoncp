@@ -9,33 +9,27 @@ import {
 } from "react";
 import { api, type AuthStatus } from "../../api";
 import { BrandMark } from "../ui/brand-mark";
-import { SkeletonBlock } from "../ui/skeleton";
 import { AuthStatusContext } from "./auth-context";
 
 function AuthLoading() {
   return (
-    <main className="relative isolate grid min-h-dvh place-items-center overflow-hidden bg-zinc-950 text-zinc-100">
+    <main className="relative isolate grid min-h-dvh place-items-center overflow-hidden bg-base text-ink">
       <div
         aria-hidden
-        className="hero-noise pointer-events-none absolute inset-0"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:72px_72px]"
+        className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:72px_72px]"
       />
       <div
         role="status"
         aria-label="Checking access"
-        className="relative z-10 flex items-center gap-3 border border-zinc-800 bg-zinc-950/85 px-4 py-3"
+        className="relative z-10 flex items-center gap-3 rounded-[14px] border border-line bg-glass px-5 py-4 backdrop-blur-xl"
       >
         <span className="sr-only">Checking access</span>
-        <div className="grid h-9 w-9 place-items-center border border-[#4FB8B2]/35 bg-[#4FB8B2]/10 text-[#4FB8B2]">
+        <span className="grid h-9 w-9 place-items-center rounded-[10px] border border-line bg-hover text-accent">
           <BrandMark />
-        </div>
-        <div className="w-36">
-          <SkeletonBlock className="h-4 w-24" />
-          <SkeletonBlock className="mt-2 h-3 w-36" />
-        </div>
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+          Checking access
+        </span>
       </div>
     </main>
   );
