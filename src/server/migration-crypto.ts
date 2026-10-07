@@ -33,7 +33,7 @@ function parseBundleHeader(bundlePath: string) {
 
   const magic = headerText.slice(0, firstNewline);
   if (magic !== bundleMagic) {
-    throw new Error("This is not an Aeroplane migration bundle");
+    throw new Error("This is not an orizonCP migration bundle");
   }
 
   const header = JSON.parse(headerText.slice(firstNewline + 1, secondNewline)) as EncryptedBundleHeader;

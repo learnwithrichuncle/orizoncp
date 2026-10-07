@@ -74,7 +74,7 @@ export function getDatabaseOption(dbType: DatabaseType) {
 export function getDatabaseCredentialFields(dbType: DatabaseType): DatabaseCredentialField[] {
   if (dbType === "mysql") {
     return [
-      { key: "MYSQL_DATABASE", label: "Database name", placeholder: "aeroplane" },
+      { key: "MYSQL_DATABASE", label: "Database name", placeholder: "orizoncp" },
       { key: "MYSQL_USER", label: "Username", placeholder: "mysql" },
       { key: "MYSQL_PASSWORD", label: "Password", placeholder: "password" },
       { key: "MYSQL_ROOT_PASSWORD", label: "Root password", placeholder: "root password" }
@@ -96,14 +96,14 @@ export function getDatabaseCredentialFields(dbType: DatabaseType): DatabaseCrede
 
   if (dbType === "clickhouse") {
     return [
-      { key: "CLICKHOUSE_DB", label: "Database name", placeholder: "aeroplane" },
+      { key: "CLICKHOUSE_DB", label: "Database name", placeholder: "orizoncp" },
       { key: "CLICKHOUSE_USER", label: "Username", placeholder: "clickhouse" },
       { key: "CLICKHOUSE_PASSWORD", label: "Password", placeholder: "password" }
     ];
   }
 
   const postgresFields = [
-    { key: "POSTGRES_DB", label: "Database name", placeholder: "aeroplane" },
+    { key: "POSTGRES_DB", label: "Database name", placeholder: "orizoncp" },
     { key: "POSTGRES_USER", label: "Username", placeholder: "postgres" },
     { key: "POSTGRES_PASSWORD", label: "Password", placeholder: "password" }
   ];

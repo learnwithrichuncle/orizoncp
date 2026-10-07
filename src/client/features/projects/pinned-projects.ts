@@ -1,4 +1,4 @@
-const pinnedProjectsStorageKey = "aeroplane:pinned-projects";
+const pinnedProjectsStorageKey = "orizoncp:pinned-projects";
 
 export function readPinnedProjectIds() {
   try {

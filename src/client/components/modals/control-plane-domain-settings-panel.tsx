@@ -132,7 +132,7 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
         <div>
           <h2 className="text-xl tracking-[-0.03em] text-white">Dashboard domain</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
-            The hostname used to access this Aeroplane control plane.
+            The hostname used to access this orizonCP control plane.
           </p>
           {hasSavedHostname && !editing ? (
             <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -177,7 +177,7 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
               value={hostname}
               onBlur={() => setHostname(normalizedHostname)}
               onChange={(event) => setHostname(event.target.value)}
-              placeholder="pilot.aeroplane.run"
+              placeholder="pilot.cp.orzn.io"
               inputMode="url"
               autoComplete="off"
               variant="monochrome"

@@ -3,11 +3,11 @@ title: Source Services
 description: Deploy apps from GitHub repositories or direct Git URLs.
 ---
 
-Source services are services Aeroplane builds from code. Use them for most web apps, APIs, workers, and static sites.
+Source services are services orizonCP builds from code. Use them for most web apps, APIs, workers, and static sites.
 
 ## Source Options
 
-Aeroplane supports two source paths:
+orizonCP supports two source paths:
 
 - `GitHub repository`: browse repositories available to the connected GitHub App, choose a branch, and select a root directory.
 - `Git URL`: enter an HTTPS or SSH Git URL manually, then provide the branch and root directory.
@@ -27,13 +27,13 @@ Each source service stores:
 - Optional static output directory.
 - Optional install, build, and start command overrides.
 
-The root directory matters for monorepos. Choose the folder that contains the app you want Aeroplane to build. For direct Git URLs, type the root directory manually.
+The root directory matters for monorepos. Choose the folder that contains the app you want orizonCP to build. For direct Git URLs, type the root directory manually.
 
 ## Build Detection and Overrides
 
-After cloning the repository, Aeroplane checks for a `Dockerfile` at the service root. When one exists, the deployment builds it with `docker build` and skips Railpack entirely — the Dockerfile controls how the image is built and started. Otherwise Aeroplane uses Railpack through BuildKit to detect and build the app. Leave install, build, and start commands blank when auto detection is correct.
+After cloning the repository, orizonCP checks for a `Dockerfile` at the service root. When one exists, the deployment builds it with `docker build` and skips Railpack entirely — the Dockerfile controls how the image is built and started. Otherwise orizonCP uses Railpack through BuildKit to detect and build the app. Leave install, build, and start commands blank when auto detection is correct.
 
-TanStack Start apps are detected automatically when the service root depends on `@tanstack/react-start` or `@tanstack/start`. If the app has no start command, Aeroplane supplies the correct production start behavior for Nitro output or for the `dist/client` plus `dist/server` fetch-handler output used by TanStack Start server builds.
+TanStack Start apps are detected automatically when the service root depends on `@tanstack/react-start` or `@tanstack/start`. If the app has no start command, orizonCP supplies the correct production start behavior for Nitro output or for the `dist/client` plus `dist/server` fetch-handler output used by TanStack Start server builds.
 
 The build method can be pinned per service in Settings:
 
@@ -41,7 +41,7 @@ The build method can be pinned per service in Settings:
 - **Dockerfile** — always build with the Dockerfile; the deployment fails if it is missing.
 - **Railpack** — always build with Railpack, even when a Dockerfile is present.
 
-A Dockerfile in a non-standard location can be selected with the Dockerfile path setting, or with the `AEROPLANE_DOCKERFILE_PATH` service environment variable (the variable wins when both are set). Paths are relative to the service root directory. Install, build, and start command overrides apply only to Railpack builds.
+A Dockerfile in a non-standard location can be selected with the Dockerfile path setting, or with the `ORIZONCP_DOCKERFILE_PATH` service environment variable (the variable wins when both are set). Paths are relative to the service root directory. Install, build, and start command overrides apply only to Railpack builds.
 
 Use command overrides when:
 
@@ -50,13 +50,13 @@ Use command overrides when:
 - The service needs a custom start command.
 - A monorepo package must be launched from a specific path.
 
-The static output setting turns a source service into a static site deployment. Aeroplane copies the output directory out of the built image and serves it through Caddy instead of running the app server.
+The static output setting turns a source service into a static site deployment. orizonCP copies the output directory out of the built image and serves it through Caddy instead of running the app server.
 
 ## Runtime Mode
 
-`web` services must listen on the configured internal port. Aeroplane starts the container, checks the port, reloads Caddy, and routes traffic.
+`web` services must listen on the configured internal port. orizonCP starts the container, checks the port, reloads Caddy, and routes traffic.
 
-`worker` services run without a published port. Aeroplane checks that the container process stays running.
+`worker` services run without a published port. orizonCP checks that the container process stays running.
 
 ## GitHub Push Deploys
 
@@ -66,7 +66,7 @@ When GitHub App webhooks are configured, pushes can enqueue deployments for conn
 https://YOUR_PUBLIC_HOST/api/github/app/webhook
 ```
 
-Aeroplane also supports manual deployments from the service Deployments tab. Manual deployments are useful for first deploys, retries, and direct Git URL services.
+orizonCP also supports manual deployments from the service Deployments tab. Manual deployments are useful for first deploys, retries, and direct Git URL services.
 
 ## Common Failures
 

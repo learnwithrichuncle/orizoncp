@@ -49,7 +49,7 @@ export function ProjectsDashboardSidebar({
         </span>
         <div>
           <div className="font-hero text-sm tracking-[-0.02em] text-white">
-            aeroplane
+            orizoncp
           </div>
           <div className="mt-0.5 font-mono text-[8px] uppercase tracking-[0.25em] text-zinc-500">
             Control plane
@@ -119,7 +119,7 @@ export function ProjectsDashboardSidebar({
           </span>
           <span className="hidden min-w-0 flex-1 lg:block">
             <span className="block truncate text-xs text-white">
-              {currentUser?.name || "Aeroplane user"}
+              {currentUser?.name || "orizonCP user"}
             </span>
             <span className="mt-0.5 block truncate font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-600">
               {currentUser?.role || "Member"}

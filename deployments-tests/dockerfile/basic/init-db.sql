@@ -6,6 +6,6 @@ CREATE TABLE messages (
 );
 
 INSERT INTO messages (id, title, body) VALUES
-  (1, 'Dockerfile detected', 'Aeroplane built this Postgres image with docker build.'),
+  (1, 'Dockerfile detected', 'orizonCP built this Postgres image with docker build.'),
   (2, 'Postgres seeded', 'This row was inserted by docker-entrypoint-initdb.d/init-db.sql.'),
   (3, 'Data ready', 'Connect to the database and select from the messages table.');

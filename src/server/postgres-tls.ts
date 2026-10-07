@@ -7,7 +7,7 @@ import { config } from "./config.js";
 import { runDockerExec } from "./database-viewer-shared.js";
 import type { Service } from "./schema.js";
 
-export const postgresTlsMountPath = "/etc/aeroplane/postgres-tls";
+export const postgresTlsMountPath = "/etc/orizoncp/postgres-tls";
 
 const serverCertFile = "server.crt";
 const serverKeyFile = "server.key";
@@ -22,7 +22,7 @@ export type PostgresTlsAssets = {
   caCertPath: string;
   serverCertPath: string;
   serverKeyPath: string;
-  certificateSource: "aeroplane-ca" | "public-ca";
+  certificateSource: "orizoncp-ca" | "public-ca";
 };
 
 export type PostgresTlsInfo = {
@@ -38,7 +38,7 @@ export type PostgresTlsInfo = {
   caDownloadUrl: string;
   caFingerprint: string | null;
   certificateHosts: string[];
-  certificateSource: "aeroplane-ca" | "public-ca";
+  certificateSource: "orizoncp-ca" | "public-ca";
   wranglerCommand: string | null;
 };
 
@@ -83,7 +83,7 @@ function safeName(value: string) {
 
 function tlsVolumeName(serviceId: string) {
   const hash = createHash("sha256").update(serviceId).digest("hex").slice(0, 16);
-  return `aeroplane-postgres-tls-${hash}`;
+  return `orizoncp-postgres-tls-${hash}`;
 }
 
 function assetPaths(serviceId: string): Omit<PostgresTlsAssets, "certificateSource"> & {
@@ -121,7 +121,7 @@ function opensslConfigForHosts(hosts: string[]) {
     "req_extensions = v3_req",
     "",
     "[dn]",
-    "CN = Aeroplane Postgres",
+    "CN = orizonCP Postgres",
     "",
     "[v3_req]",
     "basicConstraints = CA:FALSE",
@@ -146,10 +146,10 @@ function fileFingerprint(filePath: string) {
 }
 
 function certificateSource(service: Service, serverCertPath: string): PostgresTlsAssets["certificateSource"] {
-  if (!service.databasePublicHostname) return "aeroplane-ca";
+  if (!service.databasePublicHostname) return "orizoncp-ca";
   const caddyCertificate = findCaddyCertificateForHost(service.databasePublicHostname);
-  if (!caddyCertificate) return "aeroplane-ca";
-  return fileFingerprint(serverCertPath) === fileFingerprint(caddyCertificate.certPath) ? "public-ca" : "aeroplane-ca";
+  if (!caddyCertificate) return "orizoncp-ca";
+  return fileFingerprint(serverCertPath) === fileFingerprint(caddyCertificate.certPath) ? "public-ca" : "orizoncp-ca";
 }
 
 async function ensureCa(paths: ReturnType<typeof assetPaths>, service: Service) {
@@ -168,7 +168,7 @@ async function ensureCa(paths: ReturnType<typeof assetPaths>, service: Service) 
     "-days",
     "3650",
     "-subj",
-    `/CN=Aeroplane Postgres CA ${service.slug}`,
+    `/CN=orizonCP Postgres CA ${service.slug}`,
     "-out",
     paths.caCertPath
   ]);
@@ -235,7 +235,7 @@ export async function ensurePostgresTlsAssets(service: Service): Promise<Postgre
     caCertPath: paths.caCertPath,
     serverCertPath: paths.serverCertPath,
     serverKeyPath: paths.serverKeyPath,
-    certificateSource: publicCertificateReady ? "public-ca" : "aeroplane-ca"
+    certificateSource: publicCertificateReady ? "public-ca" : "orizoncp-ca"
   };
 }
 
@@ -244,7 +244,7 @@ export function postgresTlsVolumeCreateDockerArgs(assets: PostgresTlsAssets) {
 }
 
 export function postgresTlsVolumePrepareDockerPlan(image: string, assets: PostgresTlsAssets): PostgresTlsVolumePrepPlan {
-  const containerName = `aeroplane-postgres-tls-prep-${randomBytes(6).toString("hex")}`;
+  const containerName = `orizoncp-postgres-tls-prep-${randomBytes(6).toString("hex")}`;
   const fixPermissions = [
     "set -eu",
     `chown postgres:postgres ${postgresTlsMountPath}/${serverKeyFile} ${postgresTlsMountPath}/${serverCertFile} ${postgresTlsMountPath}/${caCertFile}`,
@@ -301,7 +301,7 @@ function postgresConnectionString(service: Service, envMap: EnvMap) {
   if (!service.databasePublicHostname) return null;
   const user = envMap.get("POSTGRES_USER") || "postgres";
   const password = envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = envMap.get("POSTGRES_DB") || "orizoncp";
   const url = new URL(`postgresql://${service.databasePublicHostname}:${service.hostPort}/${dbName}`);
   url.username = user;
   url.password = password;
@@ -311,10 +311,10 @@ function postgresConnectionString(service: Service, envMap: EnvMap) {
 
 function wranglerCommand(service: Service, connectionString: string | null) {
   if (!connectionString) return null;
-  const caName = `aeroplane-${safeName(service.slug)}-postgres-ca`;
-  const hyperdriveName = `aeroplane-${safeName(service.slug)}`;
+  const caName = `orizoncp-${safeName(service.slug)}-postgres-ca`;
+  const hyperdriveName = `orizoncp-${safeName(service.slug)}`;
   return [
-    `npx wrangler cert upload certificate-authority --ca-cert aeroplane-postgres-ca.pem --name ${shellQuote(caName)}`,
+    `npx wrangler cert upload certificate-authority --ca-cert orizoncp-postgres-ca.pem --name ${shellQuote(caName)}`,
     `npx wrangler hyperdrive create ${shellQuote(hyperdriveName)} --connection-string=${shellQuote(connectionString)} --ca-certificate-id <CA_CERT_ID> --sslmode verify-full`
   ].join("\n");
 }
@@ -322,7 +322,7 @@ function wranglerCommand(service: Service, connectionString: string | null) {
 export async function checkPostgresTlsActive(service: Service, envMap: EnvMap, containerName: string) {
   const user = envMap.get("POSTGRES_USER") || "postgres";
   const password = envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = envMap.get("POSTGRES_DB") || "orizoncp";
 
   try {
     const result = await runDockerExec(
@@ -359,7 +359,7 @@ export function getPostgresTlsInfo(service: Service, envMap: EnvMap, active: boo
     publicAccessEnabled: Boolean(service.databasePublicEnabled),
     hostname: service.databasePublicHostname,
     port: service.hostPort,
-    database: envMap.get("POSTGRES_DB") || "aeroplane",
+    database: envMap.get("POSTGRES_DB") || "orizoncp",
     user: envMap.get("POSTGRES_USER") || "postgres",
     sslMode: "verify-full",
     connectionString,

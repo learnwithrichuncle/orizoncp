@@ -85,7 +85,7 @@ function buildPrompt(input: {
   userPrompt: string;
   sourceCode: string;
 }) {
-  return `Generate function source code for an Aeroplane function service.
+  return `Generate function source code for an orizonCP function service.
 
 Service:
 Name: ${input.service.name}

@@ -398,7 +398,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                   <FormInput
                     value={form.githubAppSlug}
                     onChange={(event) => setForm({ ...form, githubAppSlug: event.target.value })}
-                    placeholder="aeroplane"
+                    placeholder="orizoncp"
                     variant="monochrome"
                     className="border-white/15 bg-white/[0.03]"
                   />

@@ -8,8 +8,8 @@ Environment variables and domains belong to services.
 All examples assume:
 
 ```bash
-export AEROPLANE_URL="https://pilot.example.com"
-export AEROPLANE_API_KEY="ap_..."
+export ORIZONCP_URL="https://pilot.example.com"
+export ORIZONCP_API_KEY="ap_..."
 ```
 
 ## Set Environment Variable
@@ -34,8 +34,8 @@ Payload:
 Example:
 
 ```bash
-curl -X POST "$AEROPLANE_URL/api/services/svc_web/env" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY" \
+curl -X POST "$ORIZONCP_URL/api/services/svc_web/env" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"key":"NODE_ENV","value":"production"}'
 ```
@@ -67,8 +67,8 @@ Project scope: service project must be visible to the key.
 Example:
 
 ```bash
-curl -X DELETE "$AEROPLANE_URL/api/services/svc_web/env/env_123" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -X DELETE "$ORIZONCP_URL/api/services/svc_web/env/env_123" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -102,8 +102,8 @@ Payload:
 Example:
 
 ```bash
-curl -X POST "$AEROPLANE_URL/api/services/svc_web/domains" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY" \
+curl -X POST "$ORIZONCP_URL/api/services/svc_web/domains" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"hostname":"app.example.com"}'
 ```
@@ -161,8 +161,8 @@ Required access: `write`
 Example:
 
 ```bash
-curl -X DELETE "$AEROPLANE_URL/api/services/svc_web/domains/domain_123" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -X DELETE "$ORIZONCP_URL/api/services/svc_web/domains/domain_123" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -206,8 +206,8 @@ Supported provider IDs:
 Example:
 
 ```bash
-curl -X POST "$AEROPLANE_URL/api/services/svc_web/domains/domain_123/dns-records" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY" \
+curl -X POST "$ORIZONCP_URL/api/services/svc_web/domains/domain_123/dns-records" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"providerId":"cloudflare"}'
 ```

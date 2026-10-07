@@ -1,9 +1,9 @@
 {
-  "name": "get-aeroplane",
+  "name": "get-orizoncp",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Tiny installer endpoint for curl -fsSL https://get.aeroplane.run | sh.",
+  "description": "Tiny installer endpoint for curl -fsSL https://get.cp.orzn.io | sh.",
   "scripts": {
     "start": "node server.js"
   },

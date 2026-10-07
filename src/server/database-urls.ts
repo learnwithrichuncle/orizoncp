@@ -56,7 +56,7 @@ function generatedPassword() {
 export function generatedDatabaseEnvVars(dbType: string): Record<string, string> {
   if (dbType === "mysql") {
     return {
-      MYSQL_DATABASE: "aeroplane",
+      MYSQL_DATABASE: "orizoncp",
       MYSQL_USER: "mysql",
       MYSQL_PASSWORD: generatedPassword(),
       MYSQL_ROOT_PASSWORD: generatedPassword()
@@ -78,7 +78,7 @@ export function generatedDatabaseEnvVars(dbType: string): Record<string, string>
 
   if (dbType === "clickhouse") {
     return {
-      CLICKHOUSE_DB: "aeroplane",
+      CLICKHOUSE_DB: "orizoncp",
       CLICKHOUSE_USER: "clickhouse",
       CLICKHOUSE_PASSWORD: generatedPassword(),
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
@@ -86,7 +86,7 @@ export function generatedDatabaseEnvVars(dbType: string): Record<string, string>
   }
 
   const postgresEnv = {
-    POSTGRES_DB: "aeroplane",
+    POSTGRES_DB: "orizoncp",
     POSTGRES_USER: "postgres",
     POSTGRES_PASSWORD: generatedPassword()
   };
@@ -116,7 +116,7 @@ export function buildDatabaseConnectionUrl({ dbType, envMap, host, port, sslMode
   if (dbType === "mysql") {
     const user = envMap.get("MYSQL_USER") || "mysql";
     const password = envMap.get("MYSQL_PASSWORD") || "";
-    const dbName = envMap.get("MYSQL_DATABASE") || "aeroplane";
+    const dbName = envMap.get("MYSQL_DATABASE") || "orizoncp";
     return {
       key: "DATABASE_URL",
       value: `mysql://${user}:${password}@${host}:${port}/${dbName}`
@@ -143,7 +143,7 @@ export function buildDatabaseConnectionUrl({ dbType, envMap, host, port, sslMode
   if (dbType === "clickhouse") {
     const user = envMap.get("CLICKHOUSE_USER") || "clickhouse";
     const password = envMap.get("CLICKHOUSE_PASSWORD") || "";
-    const dbName = envMap.get("CLICKHOUSE_DB") || "aeroplane";
+    const dbName = envMap.get("CLICKHOUSE_DB") || "orizoncp";
     return {
       key: "CLICKHOUSE_URL",
       value: `clickhouse://${user}:${password}@${host}:${port}/${dbName}`
@@ -152,7 +152,7 @@ export function buildDatabaseConnectionUrl({ dbType, envMap, host, port, sslMode
 
   const user = envMap.get("POSTGRES_USER") || "postgres";
   const password = envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = envMap.get("POSTGRES_DB") || "orizoncp";
   const sslQuery = sslMode ? `?sslmode=${sslMode}` : "";
   return {
     key: "DATABASE_URL",

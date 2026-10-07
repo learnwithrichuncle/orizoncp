@@ -1,9 +1,3 @@
-import {
-  CloudUploadIcon,
-  GithubIcon,
-  Globe02Icon,
-  Settings01Icon,
-} from "@hugeicons/core-free-icons";
 import type { FormEvent, ReactNode } from "react";
 import { BackupConfiguration } from "./backup-configuration";
 import { DomainConfiguration } from "./domain-configuration";
@@ -24,44 +18,25 @@ const restartSteps = ["Runtime", "GitHub", "Root domain", "Backups"];
 const stepContent: Record<
   RestartOnboardingStep,
   {
-    icon: unknown;
-    eyebrow: string;
     title: string;
     badge: string;
-    description: string;
   }
 > = {
   runtime: {
-    icon: Settings01Icon,
-    eyebrow: "Re-run · Environment",
     title: "Review the runtime",
     badge: "Host settings",
-    description:
-      "Review where Aeroplane stores data, builds services, and routes traffic on this server.",
   },
   github: {
-    icon: GithubIcon,
-    eyebrow: "Re-run · Source control",
     title: "Review GitHub",
     badge: "Optional",
-    description:
-      "Keep the current integration, reconnect a GitHub App, or enter credentials manually.",
   },
   "root-domain": {
-    icon: Globe02Icon,
-    eyebrow: "Re-run · Networking",
     title: "Review your domains",
     badge: "Optional",
-    description:
-      "Update the dashboard hostname and wildcard service domain used by Aeroplane.",
   },
   backups: {
-    icon: CloudUploadIcon,
-    eyebrow: "Re-run · Resilience",
     title: "Review your backups",
     badge: "Final step",
-    description:
-      "Update default database schedules and optional Cloudflare R2 storage.",
   },
 };
 
@@ -105,22 +80,15 @@ export function OnboardingRestartPage({
       onStepChange={onStepChange}
     >
       <OnboardingStepForm
-        icon={metadata.icon}
-        eyebrow={metadata.eyebrow}
         title={metadata.title}
         badge={metadata.badge}
-        description={metadata.description}
         error={error}
         submitting={submitting}
-        nextLabel={
-          finalStep ? "Save changes" : `Next: ${restartSteps[stepIndex + 1]}`
-        }
         actionLabel={
           finalStep
             ? "Save setup"
             : `Continue to ${restartSteps[stepIndex + 1].toLowerCase()}`
         }
-        finish={finalStep}
         onSubmit={onSubmit}
         onBack={
           stepIndex > 0 ? () => onStepChange(stepIndex - 1) : undefined

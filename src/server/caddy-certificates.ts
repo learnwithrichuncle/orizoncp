@@ -10,7 +10,7 @@ export type CaddyCertificate = {
 };
 
 function caddyDataDir() {
-  return resolve(process.env.CADDY_DATA_DIR ?? process.env.AEROPLANE_CADDY_DATA_DIR ?? join(config.dataDir, "caddy"));
+  return resolve(process.env.CADDY_DATA_DIR ?? process.env.ORIZONCP_CADDY_DATA_DIR ?? process.env.AEROPLANE_CADDY_DATA_DIR ?? join(config.dataDir, "caddy"));
 }
 
 function candidateCertificateDirs(root: string, depth = 0): string[] {

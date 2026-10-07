@@ -8,8 +8,8 @@ Deployment endpoints queue, inspect, abort, and stream deployment work.
 All examples assume:
 
 ```bash
-export AEROPLANE_URL="https://pilot.example.com"
-export AEROPLANE_API_KEY="ap_..."
+export ORIZONCP_URL="https://pilot.example.com"
+export ORIZONCP_API_KEY="ap_..."
 ```
 
 ## Create Deployment
@@ -25,8 +25,8 @@ Project scope: service project must be visible to the key.
 Example:
 
 ```bash
-curl -X POST "$AEROPLANE_URL/api/services/svc_web/deployments" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -X POST "$ORIZONCP_URL/api/services/svc_web/deployments" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -61,8 +61,8 @@ Project scope: service project must be visible to the key.
 Example:
 
 ```bash
-curl "$AEROPLANE_URL/api/services/svc_web/deployments" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/services/svc_web/deployments" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -76,8 +76,8 @@ Response:
       "commitSha": "abc1234",
       "status": "running",
       "trigger": "manual",
-      "imageTag": "aeroplane-svc_web-dep_123",
-      "containerName": "aeroplane-svc_web-stable",
+      "imageTag": "orizoncp-svc_web-dep_123",
+      "containerName": "orizoncp-svc_web-stable",
       "startedAt": "2026-06-10T08:45:00.000Z",
       "finishedAt": "2026-06-10T08:46:00.000Z",
       "createdAt": "2026-06-10T08:45:00.000Z"
@@ -99,8 +99,8 @@ Project scope: deployment service project must be visible to the key.
 Example:
 
 ```bash
-curl -X POST "$AEROPLANE_URL/api/deployments/dep_123/abort" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -X POST "$ORIZONCP_URL/api/deployments/dep_123/abort" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -111,7 +111,7 @@ Response:
 }
 ```
 
-If the deployment cannot be aborted, Aeroplane returns `409`.
+If the deployment cannot be aborted, orizonCP returns `409`.
 
 ## Deployment Logs
 
@@ -126,8 +126,8 @@ Project scope: deployment service project must be visible to the key.
 Example:
 
 ```bash
-curl "$AEROPLANE_URL/api/deployments/dep_123/logs" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/deployments/dep_123/logs" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -168,8 +168,8 @@ This endpoint returns Server-Sent Events.
 Example:
 
 ```bash
-curl -N "$AEROPLANE_URL/api/deployments/dep_123/stream" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -N "$ORIZONCP_URL/api/deployments/dep_123/stream" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Events:
@@ -200,8 +200,8 @@ This endpoint streams logs from the running container.
 Example:
 
 ```bash
-curl -N "$AEROPLANE_URL/api/services/svc_web/runtime-logs/stream" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -N "$ORIZONCP_URL/api/services/svc_web/runtime-logs/stream" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Events:

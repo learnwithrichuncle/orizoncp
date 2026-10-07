@@ -23,7 +23,7 @@ function postgresConnectionEnv(env: Record<string, string>) {
   return {
     user: env.POSTGRES_USER || "postgres",
     password: env.POSTGRES_PASSWORD || "",
-    database: env.POSTGRES_DB || "aeroplane"
+    database: env.POSTGRES_DB || "orizoncp"
   };
 }
 

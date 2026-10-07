@@ -181,9 +181,9 @@ async function readSourcePostgresInfo(sourceUrl: string): Promise<PostgresSource
 }
 
 async function dumpPostgresUrl(sourceUrl: string, options: PostgresDumpOptions = {}) {
-  const tempDir = await mkdtemp(join(tmpdir(), "aeroplane-postgres-import-"));
+  const tempDir = await mkdtemp(join(tmpdir(), "orizoncp-postgres-import-"));
   const dumpPath = join(tempDir, "source.dump");
-  const containerName = `aeroplane-pg-dump-${nanoid(10)}`;
+  const containerName = `orizoncp-pg-dump-${nanoid(10)}`;
   const remotePath = "/tmp/source.dump";
   await runDocker(["pull", postgresDumpImage]);
   const sourceInfo = options.sourceInfo ?? await readSourcePostgresInfo(sourceUrl);
@@ -224,7 +224,7 @@ async function dumpPostgresUrl(sourceUrl: string, options: PostgresDumpOptions =
 async function readTargetPostgresMajor(service: Service, envMap: Map<string, string>, containerName: string) {
   const user = envMap.get("POSTGRES_USER") || "postgres";
   const password = envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = envMap.get("POSTGRES_DB") || "orizoncp";
   const result = await runDockerExec(
     containerName,
     [
@@ -260,7 +260,7 @@ function targetPostgresContext(service: Service, dbType: string): PostgresTarget
   const containerName = containerNameForService(service.id);
   const user = envMap.get("POSTGRES_USER") || "postgres";
   const password = envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = envMap.get("POSTGRES_DB") || "orizoncp";
   return { containerName, dbName, dbType, envMap, password, user };
 }
 
@@ -371,8 +371,8 @@ async function createTimescaleRestoreList(containerName: string, remoteDumpPath:
     .split(/\r?\n/)
     .filter((line) => !shouldSkipTimescaleRestoreListEntry(line))
     .join("\n");
-  const localListPath = join(tmpdir(), `aeroplane-timescale-restore-${nanoid(10)}.list`);
-  const remoteListPath = `/tmp/aeroplane-timescale-restore-${nanoid(10)}.list`;
+  const localListPath = join(tmpdir(), `orizoncp-timescale-restore-${nanoid(10)}.list`);
+  const remoteListPath = `/tmp/orizoncp-timescale-restore-${nanoid(10)}.list`;
 
   try {
     writeFileSync(localListPath, `${filteredList}\n`);
@@ -389,7 +389,7 @@ async function assertTargetPostgresImportCompatible(service: Service, dbType: st
 
   const targetMajor = await readTargetPostgresMajor(service, ctx.envMap, ctx.containerName).catch(() => null);
   if (sourceInfo.major && targetMajor && targetMajor < sourceInfo.major) {
-    throw new Error(`Target Postgres ${targetMajor} is older than source Postgres ${sourceInfo.major}. Redeploy this Aeroplane Postgres service with the current image, then run the import again.`);
+    throw new Error(`Target Postgres ${targetMajor} is older than source Postgres ${sourceInfo.major}. Redeploy this orizonCP Postgres service with the current image, then run the import again.`);
   }
 
   if (dbType === "timescale") {
@@ -401,7 +401,7 @@ async function assertTargetPostgresImportCompatible(service: Service, dbType: st
 
 async function restorePostgresDump(service: Service, dbType: string, dumpPath: string, sourceInfo: PostgresSourceInfo) {
   const ctx = targetPostgresContext(service, dbType);
-  const remotePath = `/tmp/aeroplane-data-import-${nanoid(10)}-${basename(dumpPath)}`;
+  const remotePath = `/tmp/orizoncp-data-import-${nanoid(10)}-${basename(dumpPath)}`;
   const timescaleTarget = dbType === "timescale";
   let remoteListPath: string | null = null;
   let timescaleRestorePrepared = false;
@@ -410,7 +410,7 @@ async function restorePostgresDump(service: Service, dbType: string, dumpPath: s
   await waitForTargetPostgres(service, ctx.containerName, ctx.user);
   const targetMajor = await readTargetPostgresMajor(service, ctx.envMap, ctx.containerName).catch(() => null);
   if (sourceInfo.major && targetMajor && targetMajor < sourceInfo.major) {
-    throw new Error(`Target Postgres ${targetMajor} is older than source Postgres ${sourceInfo.major}. Redeploy this Aeroplane Postgres service with the current image, then run the import again.`);
+    throw new Error(`Target Postgres ${targetMajor} is older than source Postgres ${sourceInfo.major}. Redeploy this orizonCP Postgres service with the current image, then run the import again.`);
   }
 
   if (timescaleTarget) {

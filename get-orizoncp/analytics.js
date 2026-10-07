@@ -25,7 +25,7 @@ function requestIp(req) {
 }
 
 function hashValue(value) {
-  const salt = process.env.POSTHOG_DISTINCT_ID_SALT || apiKey || "get-aeroplane";
+  const salt = process.env.POSTHOG_DISTINCT_ID_SALT || apiKey || "get-orizoncp";
   return createHash("sha256").update(`${salt}:${value}`).digest("hex");
 }
 
@@ -44,7 +44,7 @@ export function captureInstallerRequest(req, url) {
   try {
     posthog.capture({
       distinctId: distinctIdForRequest(req),
-      event: "get_aeroplane_installer_requested",
+      event: "get_orizoncp_installer_requested",
       properties: {
         path: url.pathname,
         host: firstHeaderValue(req.headers.host),

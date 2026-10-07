@@ -42,7 +42,7 @@ export function MaintenanceCleanupCard({
           <span className="shrink-0 font-mono text-xs text-zinc-500">{topDockerRow ? `${formatBytes(topDockerRow.reclaimableBytes)} ${topDockerRow.type}` : "0 B"}</span>
         </div>
         <div className={rowClass}>
-          <span>Aeroplane data</span>
+          <span>orizonCP data</span>
           <span className="shrink-0 font-mono text-xs text-zinc-500">{formatBytes(dataPath?.bytes ?? null)}</span>
         </div>
         <div className={rowClass}>

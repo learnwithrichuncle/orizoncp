@@ -1,7 +1,7 @@
 {
-  "name": "aeroplane",
+  "name": "orizoncp",
   "version": "0.1.0",
-  "description": "Aeroplane is a self-hostable deployment control plane powered by Railpack, Docker, and Caddy.",
+  "description": "orizonCP is a self-hostable deployment control plane powered by Railpack, Docker, and Caddy.",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n api,web -c cyan,magenta \"npm:dev:server\" \"npm:dev:client\"",
@@ -10,11 +10,11 @@
     "download:framework-icons": "tsx scripts/download-framework-icons.ts --force",
     "build": "vite build && tsc -p tsconfig.server.json",
     "start": "NODE_ENV=production node dist/server/index.js",
-    "publish:image": "docker buildx build --platform linux/amd64,linux/arm64 --build-arg AEROPLANE_COMMIT_SHA=$(git rev-parse HEAD) -t ghcr.io/xt42io/aeroplane:latest --push .",
+    "publish:image": "docker buildx build --platform linux/amd64,linux/arm64 --build-arg ORIZONCP_COMMIT_SHA=$(git rev-parse HEAD) -t ${IMAGE_REPO:-ghcr.io/learnwithrichuncle/orizoncp}:latest --push .",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit"
   },
   "keywords": [
-    "aeroplane",
+    "orizoncp",
     "self-hosted",
     "railpack",
     "caddy"
@@ -47,6 +47,7 @@
     "better-sqlite3": "^12.10.0",
     "drizzle-orm": "^0.45.2",
     "hono": "^4.12.21",
+    "lucide-react": "^1.52.0",
     "nanoid": "^5.1.11",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",

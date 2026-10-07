@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const startPackages = ["@tanstack/react-start", "@tanstack/start"];
-const runtimeDir = ".aeroplane";
+const runtimeDir = ".orizoncp";
 const runtimeFile = "tanstack-start-server.mjs";
 const generatedStartCommand = `node ${runtimeDir}/${runtimeFile}`;
 const nitroStartCommand = "node .output/server/index.mjs";
@@ -333,7 +333,7 @@ export function prepareTanStackStartRuntime(options: {
   if (configUsesNitro(options.appDir)) {
     return {
       startCommand: nitroStartCommand,
-      message: "Detected TanStack Start with Nitro; Aeroplane will start the Nitro server output automatically."
+      message: "Detected TanStack Start with Nitro; orizonCP will start the Nitro server output automatically."
     };
   }
 
@@ -343,6 +343,6 @@ export function prepareTanStackStartRuntime(options: {
 
   return {
     startCommand: generatedStartCommand,
-    message: "Detected TanStack Start; Aeroplane generated a Node runtime for dist/client and dist/server output."
+    message: "Detected TanStack Start; orizonCP generated a Node runtime for dist/client and dist/server output."
   };
 }

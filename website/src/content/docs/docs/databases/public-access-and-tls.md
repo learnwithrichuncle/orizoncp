@@ -7,7 +7,7 @@ Database services can be private to the server or exposed through generated publ
 
 ## Public Hostnames
 
-When a root domain is configured, Aeroplane generates database hostnames from the service name. The service settings show the hostname and connection target.
+When a root domain is configured, orizonCP generates database hostnames from the service name. The service settings show the hostname and connection target.
 
 Example:
 
@@ -25,13 +25,13 @@ For custom public domains, add the hostname to the service and point an `A` reco
 
 ## PostgreSQL TLS Assets
 
-For PostgreSQL-family services, Aeroplane prepares TLS assets used by public database access. Those assets are stored under the Aeroplane data directory and are included in Aeroplane migration bundles when present.
+For PostgreSQL-family services, orizonCP prepares TLS assets used by public database access. Those assets are stored under the orizonCP data directory and are included in orizonCP migration bundles when present.
 
-After an Aeroplane bundle import, check restored database hostnames and redeploy services if you need to refresh runtime containers with the restored assets.
+After an orizonCP bundle import, check restored database hostnames and redeploy services if you need to refresh runtime containers with the restored assets.
 
 ## Logical Replication
 
-PostgreSQL-family database services can enable logical replication. When enabled, Aeroplane deploys Postgres with:
+PostgreSQL-family database services can enable logical replication. When enabled, orizonCP deploys Postgres with:
 
 ```txt
 wal_level=logical

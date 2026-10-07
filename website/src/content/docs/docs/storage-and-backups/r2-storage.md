@@ -3,7 +3,7 @@ title: R2 Storage
 description: Connect Cloudflare R2 so database backups can upload off the server.
 ---
 
-Aeroplane can upload database backups to Cloudflare R2. R2 is configured once in System Settings, then selected per database service.
+orizonCP can upload database backups to Cloudflare R2. R2 is configured once in System Settings, then selected per database service.
 
 ## Required Values
 
@@ -14,15 +14,15 @@ Open System Settings, choose Storage, and enter:
 - R2 access key ID.
 - R2 secret access key.
 
-The default bucket name shown in the UI is `aeroplane-backups`.
+The default bucket name shown in the UI is `orizoncp-backups`.
 
 ## Create or Verify Bucket
 
-The R2 form includes `Create or verify bucket`. When enabled, Aeroplane checks whether the bucket exists and creates it if R2 returns not found.
+The R2 form includes `Create or verify bucket`. When enabled, orizonCP checks whether the bucket exists and creates it if R2 returns not found.
 
 R2 credential errors are surfaced with specific guidance for account ID, access key ID, secret access key, bucket access, and token permissions.
 
-## What Aeroplane Stores
+## What orizonCP Stores
 
 Database backup uploads use keys like:
 
@@ -30,7 +30,7 @@ Database backup uploads use keys like:
 database-backups/{projectId}/{serviceSlug}/{filename}
 ```
 
-Aeroplane stores only the public R2 status in the UI: account ID, bucket, endpoint, access key suffix, and timestamps. The secret access key is encrypted in system settings.
+orizonCP stores only the public R2 status in the UI: account ID, bucket, endpoint, access key suffix, and timestamps. The secret access key is encrypted in system settings.
 
 ## Backup Destinations
 
@@ -44,6 +44,6 @@ When R2 is not connected, disk is the only available destination.
 
 ## Disconnecting R2
 
-Disconnecting R2 removes the stored R2 connection and disables future R2 uploads. Existing backup records stay in Aeroplane.
+Disconnecting R2 removes the stored R2 connection and disables future R2 uploads. Existing backup records stay in orizonCP.
 
-If a backup exists only in R2 and you disconnect R2, Aeroplane will not be able to download or restore that backup until R2 is reconnected with access to the same bucket and object.
+If a backup exists only in R2 and you disconnect R2, orizonCP will not be able to download or restore that backup until R2 is reconnected with access to the same bucket and object.

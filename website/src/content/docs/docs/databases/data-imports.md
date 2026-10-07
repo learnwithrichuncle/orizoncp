@@ -3,7 +3,7 @@ title: Data Imports
 description: Import PostgreSQL-compatible or Redis data from URLs or Railway import sources.
 ---
 
-Aeroplane data imports move data into an existing database service. Deploy the target database before importing data.
+orizonCP data imports move data into an existing database service. Deploy the target database before importing data.
 
 ## Supported Imports
 
@@ -33,24 +33,24 @@ redis://
 rediss://
 ```
 
-Aeroplane redacts passwords from error messages when a dump command fails.
+orizonCP redacts passwords from error messages when a dump command fails.
 
 ## Import from Railway
 
-Railway data import uses the service import source metadata saved during Railway project import. Aeroplane fetches Railway service variables again with the Railway API token and searches for public database URLs.
+Railway data import uses the service import source metadata saved during Railway project import. orizonCP fetches Railway service variables again with the Railway API token and searches for public database URLs.
 
-For PostgreSQL, Aeroplane checks keys such as `POSTGRES_PUBLIC_URL`, `DATABASE_PUBLIC_URL`, `POSTGRES_URL`, and `DATABASE_URL`, then falls back to `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, and `PGPASSWORD`.
+For PostgreSQL, orizonCP checks keys such as `POSTGRES_PUBLIC_URL`, `DATABASE_PUBLIC_URL`, `POSTGRES_URL`, and `DATABASE_URL`, then falls back to `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, and `PGPASSWORD`.
 
-For Redis, Aeroplane checks keys such as `REDIS_PUBLIC_URL`, `DATABASE_PUBLIC_URL`, `REDIS_TLS_URL`, `REDIS_URL`, and `DATABASE_URL`, then falls back to Redis host, port, user, and password parts.
+For Redis, orizonCP checks keys such as `REDIS_PUBLIC_URL`, `DATABASE_PUBLIC_URL`, `REDIS_TLS_URL`, `REDIS_URL`, and `DATABASE_URL`, then falls back to Redis host, port, user, and password parts.
 
 ## Railway Internal URLs
 
-Railway internal URLs ending in `.railway.internal` cannot be reached from your Aeroplane server. Enable public networking on the Railway database or use the URL import option with a public URL.
+Railway internal URLs ending in `.railway.internal` cannot be reached from your orizonCP server. Enable public networking on the Railway database or use the URL import option with a public URL.
 
 ## TimescaleDB Compatibility
 
-TimescaleDB imports need source and target extension compatibility. Aeroplane tries to read the source PostgreSQL major version and TimescaleDB extension version. If the target is older or the TimescaleDB extension version differs, import fails with a corrective message.
+TimescaleDB imports need source and target extension compatibility. orizonCP tries to read the source PostgreSQL major version and TimescaleDB extension version. If the target is older or the TimescaleDB extension version differs, import fails with a corrective message.
 
 ## Import History
 
-Aeroplane records data import jobs with status, source label, source variable key, dump size, checksum, error, and timestamps. Use the history to confirm whether an automated Railway import actually copied data or only recreated the service.
+orizonCP records data import jobs with status, source label, source variable key, dump size, checksum, error, and timestamps. Use the history to confirm whether an automated Railway import actually copied data or only recreated the service.

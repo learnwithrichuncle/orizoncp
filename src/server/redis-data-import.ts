@@ -126,9 +126,9 @@ function redactUrl(message: string, sourceUrl: string) {
 }
 
 async function dumpRedisUrl(sourceUrl: string) {
-  const tempDir = await mkdtemp(join(tmpdir(), "aeroplane-redis-import-"));
+  const tempDir = await mkdtemp(join(tmpdir(), "orizoncp-redis-import-"));
   const dumpPath = join(tempDir, "source.rdb");
-  const containerName = `aeroplane-redis-dump-${nanoid(10)}`;
+  const containerName = `orizoncp-redis-dump-${nanoid(10)}`;
   const remotePath = "/tmp/source.rdb";
   await runDocker(["pull", redisImportImage]);
 

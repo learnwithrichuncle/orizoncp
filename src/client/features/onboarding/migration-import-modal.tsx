@@ -71,7 +71,7 @@ export function MigrationImportModal({
                   Server migration
                 </p>
                 <h2 className="mt-1.5 font-hero text-xl tracking-[-0.04em]">
-                  Import existing aeroplane
+                  Import existing orizoncp
                 </h2>
                 <p className="mt-2 text-xs leading-5 text-zinc-500">
                   Restore an encrypted bundle from another server.

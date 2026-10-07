@@ -65,7 +65,7 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
                 </span>
                 <span>
                   <span className="block font-hero text-sm tracking-[-0.02em] text-white">
-                    aeroplane
+                    orizoncp
                   </span>
                   <span className="mt-0.5 block font-mono text-[8px] uppercase tracking-[0.25em] text-zinc-500">
                     Settings
@@ -125,7 +125,7 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-xs text-white">
-                  {currentUser?.name || "Aeroplane user"}
+                  {currentUser?.name || "orizonCP user"}
                 </span>
                 <span className="mt-0.5 block truncate font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-600">
                   {currentUser?.role || "Member"}

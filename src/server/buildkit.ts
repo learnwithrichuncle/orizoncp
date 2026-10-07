@@ -110,7 +110,9 @@ function localBuildkitTarget(target: TcpTarget) {
 
 function composeFiles() {
   const candidates = [
-    process.env.AEROPLANE_INSTALL_DIR ? resolve(process.env.AEROPLANE_INSTALL_DIR, "compose.yml") : "",
+    (process.env.ORIZONCP_INSTALL_DIR ?? process.env.AEROPLANE_INSTALL_DIR)
+      ? resolve(process.env.ORIZONCP_INSTALL_DIR ?? process.env.AEROPLANE_INSTALL_DIR as string, "compose.yml")
+      : "",
     resolve(process.cwd(), "compose.yml"),
     resolve(process.cwd(), "docker-compose.yml")
   ];

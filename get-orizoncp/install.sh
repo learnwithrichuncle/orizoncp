@@ -3,11 +3,11 @@ set -eu
 
 cd /
 
-INSTALL_DIR="${AEROPLANE_HOME:-/opt/aeroplane}"
+INSTALL_DIR="${ORIZONCP_HOME:-/opt/orizoncp}"
 APP_DIR="$INSTALL_DIR/source"
-REPO_URL="${AEROPLANE_REPO_URL:-https://github.com/xt42io/aeroplane.git}"
-REPO_BRANCH="${AEROPLANE_REPO_BRANCH:-main}"
-PORT="${AEROPLANE_PORT:-4310}"
+REPO_URL="${ORIZONCP_REPO_URL:-https://github.com/learnwithrichuncle/orizoncp.git}"
+REPO_BRANCH="${ORIZONCP_REPO_BRANCH:-main}"
+PORT="${ORIZONCP_PORT:-4310}"
 
 if [ "$(id -u)" -eq 0 ]; then
   SUDO=""
@@ -29,7 +29,7 @@ fail() {
 }
 
 require_linux() {
-  [ "$(uname -s)" = "Linux" ] || fail "Aeroplane's VPS installer currently supports Linux hosts."
+  [ "$(uname -s)" = "Linux" ] || fail "orizonCP's VPS installer currently supports Linux hosts."
 
   if [ -r /etc/os-release ]; then
     # shellcheck disable=SC1091
@@ -123,8 +123,8 @@ random_secret() {
 }
 
 detect_public_url() {
-  if [ -n "${AEROPLANE_PUBLIC_URL:-}" ]; then
-    printf '%s\n' "$AEROPLANE_PUBLIC_URL"
+  if [ -n "${ORIZONCP_PUBLIC_URL:-}" ]; then
+    printf '%s\n' "$ORIZONCP_PUBLIC_URL"
     return
   fi
 
@@ -152,7 +152,7 @@ get_env_value() {
 
 write_env_file() {
   env_file="$INSTALL_DIR/.env"
-  secret_key="$(get_env_value "$env_file" AEROPLANE_SECRET_KEY)"
+  secret_key="$(get_env_value "$env_file" ORIZONCP_SECRET_KEY)"
   public_url="$(get_env_value "$env_file" PUBLIC_URL)"
   control_plane_hostname="$(get_env_value "$env_file" CONTROL_PLANE_HOSTNAME)"
 
@@ -165,21 +165,21 @@ write_env_file() {
 
   tmp_file="$(mktemp)"
   if [ -f "$env_file" ]; then
-    grep -v -E '^(AEROPLANE_INSTALL_MODE|AEROPLANE_INSTALL_DIR|AEROPLANE_ENV_PATH|AEROPLANE_REPO_URL|AEROPLANE_REPO_BRANCH|AEROPLANE_IMAGE|AEROPLANE_IMAGE_UPDATE_CMD|AEROPLANE_UPDATE_REPO_URL|AEROPLANE_UPDATE_BRANCH|AEROPLANE_UPDATE_RESTART_CMD|AEROPLANE_SECRET_KEY|DATA_DIR|DEPLOY_DRY_RUN|CADDY_CONFIG_PATH|CADDY_DATA_DIR|CADDY_RELOAD_CMD|PORT|HOST|PUBLIC_URL|CONTROL_PLANE_HOSTNAME|BUILDKIT_HOST|AEROPLANE_RUNTIME_NETWORK)=' "$env_file" > "$tmp_file" || true
+    grep -v -E '^(ORIZONCP_INSTALL_MODE|ORIZONCP_INSTALL_DIR|ORIZONCP_ENV_PATH|ORIZONCP_REPO_URL|ORIZONCP_REPO_BRANCH|ORIZONCP_IMAGE|ORIZONCP_IMAGE_UPDATE_CMD|ORIZONCP_UPDATE_REPO_URL|ORIZONCP_UPDATE_BRANCH|ORIZONCP_UPDATE_RESTART_CMD|ORIZONCP_SECRET_KEY|DATA_DIR|DEPLOY_DRY_RUN|CADDY_CONFIG_PATH|CADDY_DATA_DIR|CADDY_RELOAD_CMD|PORT|HOST|PUBLIC_URL|CONTROL_PLANE_HOSTNAME|BUILDKIT_HOST|ORIZONCP_RUNTIME_NETWORK)=' "$env_file" > "$tmp_file" || true
   else
     : > "$tmp_file"
   fi
 
   cat >> "$tmp_file" <<EOF
-AEROPLANE_INSTALL_MODE=git
-AEROPLANE_INSTALL_DIR=$INSTALL_DIR
-AEROPLANE_ENV_PATH=$INSTALL_DIR/.env
-AEROPLANE_REPO_URL=$REPO_URL
-AEROPLANE_REPO_BRANCH=$REPO_BRANCH
-AEROPLANE_UPDATE_REPO_URL=$REPO_URL
-AEROPLANE_UPDATE_BRANCH=$REPO_BRANCH
-AEROPLANE_UPDATE_RESTART_CMD="systemctl restart aeroplane"
-AEROPLANE_SECRET_KEY=$secret_key
+ORIZONCP_INSTALL_MODE=git
+ORIZONCP_INSTALL_DIR=$INSTALL_DIR
+ORIZONCP_ENV_PATH=$INSTALL_DIR/.env
+ORIZONCP_REPO_URL=$REPO_URL
+ORIZONCP_REPO_BRANCH=$REPO_BRANCH
+ORIZONCP_UPDATE_REPO_URL=$REPO_URL
+ORIZONCP_UPDATE_BRANCH=$REPO_BRANCH
+ORIZONCP_UPDATE_RESTART_CMD="systemctl restart orizoncp"
+ORIZONCP_SECRET_KEY=$secret_key
 DATA_DIR=$INSTALL_DIR/data
 DEPLOY_DRY_RUN=false
 CADDY_CONFIG_PATH=$INSTALL_DIR/data/Caddyfile
@@ -189,7 +189,7 @@ PORT=$PORT
 HOST=0.0.0.0
 PUBLIC_URL=$public_url
 BUILDKIT_HOST=tcp://127.0.0.1:1234
-AEROPLANE_RUNTIME_NETWORK=aeroplane-runtime
+ORIZONCP_RUNTIME_NETWORK=orizoncp-runtime
 EOF
 
   if [ -n "$control_plane_hostname" ]; then
@@ -201,7 +201,7 @@ EOF
 
 clone_or_update_repo() {
   if [ -d "$APP_DIR/.git" ]; then
-    say "Updating Aeroplane source..."
+    say "Updating orizonCP source..."
     status="$(git -C "$APP_DIR" status --porcelain --untracked-files=no)"
     case "$status" in
       " M package-lock.json"|"M  package-lock.json"|"MM package-lock.json")
@@ -224,16 +224,16 @@ clone_or_update_repo() {
     fail "$APP_DIR exists but is not a Git checkout. Move it aside and rerun the installer."
   fi
 
-  say "Cloning Aeroplane..."
+  say "Cloning orizonCP..."
   git clone --branch "$REPO_BRANCH" --single-branch "$REPO_URL" "$APP_DIR"
 }
 
-build_aeroplane() {
-  say "Installing Aeroplane dependencies..."
+build_orizoncp() {
+  say "Installing orizonCP dependencies..."
   cd "$APP_DIR"
   npm ci --include=dev
 
-  say "Building Aeroplane..."
+  say "Building orizonCP..."
   npm run build
   npm prune --omit=dev --package-lock=false
 }
@@ -268,11 +268,11 @@ EOF
 }
 
 write_systemd_unit() {
-  command -v systemctl >/dev/null 2>&1 || fail "systemd is required to run Aeroplane from a Git checkout."
+  command -v systemctl >/dev/null 2>&1 || fail "systemd is required to run orizonCP from a Git checkout."
 
-  $SUDO tee /etc/systemd/system/aeroplane.service >/dev/null <<EOF
+  $SUDO tee /etc/systemd/system/orizoncp.service >/dev/null <<EOF
 [Unit]
-Description=Aeroplane control plane
+Description=orizonCP control plane
 After=network-online.target docker.service
 Wants=network-online.target docker.service
 
@@ -280,7 +280,7 @@ Wants=network-online.target docker.service
 Type=simple
 WorkingDirectory=$APP_DIR
 Environment=NODE_ENV=production
-Environment=AEROPLANE_ENV_PATH=$INSTALL_DIR/.env
+Environment=ORIZONCP_ENV_PATH=$INSTALL_DIR/.env
 EnvironmentFile=-$INSTALL_DIR/.env
 ExecStart=/usr/bin/env node dist/server/index.js
 Restart=always
@@ -298,12 +298,12 @@ start_runtime_services() {
   $SUDO docker compose up -d buildkit caddy
 }
 
-start_aeroplane() {
-  say "Starting Aeroplane..."
-  $SUDO docker rm -f aeroplane >/dev/null 2>&1 || true
+start_orizoncp() {
+  say "Starting orizonCP..."
+  $SUDO docker rm -f orizoncp >/dev/null 2>&1 || true
   $SUDO systemctl daemon-reload
-  $SUDO systemctl enable --now aeroplane
-  $SUDO systemctl restart aeroplane
+  $SUDO systemctl enable --now orizoncp
+  $SUDO systemctl restart orizoncp
 }
 
 print_firewall_hint() {
@@ -332,20 +332,20 @@ main() {
 
   write_env_file
   clone_or_update_repo
-  build_aeroplane
+  build_orizoncp
   write_compose_file
   write_systemd_unit
   start_runtime_services
-  start_aeroplane
+  start_orizoncp
 
   public_url="$(get_env_value "$INSTALL_DIR/.env" PUBLIC_URL)"
   print_firewall_hint
   say ""
-  say "Aeroplane is installed."
+  say "orizonCP is installed."
   say "Open: $public_url"
   say ""
   say "Manage it with:"
-  say "  sudo journalctl -u aeroplane -f"
+  say "  sudo journalctl -u orizoncp -f"
   say "  cd $APP_DIR && git status"
   say "  cd $INSTALL_DIR && sudo docker compose logs -f caddy buildkit"
 }

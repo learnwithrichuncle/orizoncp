@@ -53,7 +53,7 @@ export function SvgsPage() {
             <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#7fe3dd]">Icon Gallery</p>
             <h1 className="mt-3 font-hero text-5xl tracking-tight text-zinc-50 md:text-7xl">SVGs</h1>
             <p className="mt-3 max-w-2xl text-sm text-zinc-400">
-              Checked-in framework and database SVGs served by Aeroplane.
+              Checked-in framework and database SVGs served by orizonCP.
             </p>
           </div>
           <div className="flex gap-3">

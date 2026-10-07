@@ -3,7 +3,7 @@ title: Deployment Lifecycle
 description: Understand queueing, concurrency, aborts, hot swaps, status changes, and deployment logs.
 ---
 
-Aeroplane treats deployments as jobs. A service can have many deployments over time, but only one deployment per service can build at once.
+orizonCP treats deployments as jobs. A service can have many deployments over time, but only one deployment per service can build at once.
 
 ## Deployment Triggers
 
@@ -12,7 +12,7 @@ Deployments can be created by:
 - Clicking `Deploy` in the service Deployments tab.
 - GitHub push webhooks for GitHub-connected services.
 - Railway import automation when `Auto-deploy services` is enabled.
-- Aeroplane migration import follow-up deployment queueing for restored active app services.
+- orizonCP migration import follow-up deployment queueing for restored active app services.
 
 Every deployment records its trigger.
 
@@ -20,7 +20,7 @@ Every deployment records its trigger.
 
 System Settings includes `Concurrent deployments`. The default is `3`; the allowed range is `1` through `10`.
 
-Aeroplane uses that global number as the deployment slot limit. It also prevents two deployments for the same service from running at the same time.
+orizonCP uses that global number as the deployment slot limit. It also prevents two deployments for the same service from running at the same time.
 
 If all slots are full, new deployments stay `queued` until a slot opens.
 
@@ -39,13 +39,13 @@ Older `running` deployments are marked `superseded` when a newer deployment succ
 
 You can abort queued or building deployments from the Deployments tab.
 
-For queued deployments, Aeroplane marks the job aborted before it starts.
+For queued deployments, orizonCP marks the job aborted before it starts.
 
-For building deployments, Aeroplane marks the job aborted, asks the active process to stop, then escalates to a force kill if needed. Any temporary containers are cleaned up by the deployment flow.
+For building deployments, orizonCP marks the job aborted, asks the active process to stop, then escalates to a force kill if needed. Any temporary containers are cleaned up by the deployment flow.
 
 ## Web Hot Swaps
 
-For source-built web services and Docker image web services, Aeroplane keeps the old container live while the new container proves it can answer on the configured port.
+For source-built web services and Docker image web services, orizonCP keeps the old container live while the new container proves it can answer on the configured port.
 
 The hot swap flow is:
 
@@ -57,17 +57,17 @@ The hot swap flow is:
 6. Remove the old stable container.
 7. Mark the new deployment running.
 
-If the new container does not become reachable, Aeroplane keeps the previous service state instead of switching traffic.
+If the new container does not become reachable, orizonCP keeps the previous service state instead of switching traffic.
 
 ## Workers and Static Sites
 
 Worker deployments check that the process stays running. There is no HTTP port probe.
 
-Static site deployments export files from the built image into the static site directory. Aeroplane verifies that the output contains `index.html` before marking the deployment running.
+Static site deployments export files from the built image into the static site directory. orizonCP verifies that the output contains `index.html` before marking the deployment running.
 
 ## Database Deployments
 
-Database deployments are different from app hot swaps. Aeroplane runs database containers with persistent Docker volumes. Deploying a database service ensures the image, volume, runtime network, public hostname route, Postgres TLS assets, and logical replication settings are in place.
+Database deployments are different from app hot swaps. orizonCP runs database containers with persistent Docker volumes. Deploying a database service ensures the image, volume, runtime network, public hostname route, Postgres TLS assets, and logical replication settings are in place.
 
 Database container replacement can interrupt connections, so schedule database deploys with more care than app deploys.
 

@@ -1,6 +1,6 @@
-# Aeroplane Website
+# orizonCP Website
 
-Astro landing page for Aeroplane.
+Astro landing page for orizonCP.
 
 ## Run locally
 

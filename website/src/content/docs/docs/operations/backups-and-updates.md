@@ -1,6 +1,6 @@
 ---
 title: Backups and Updates
-description: Keep database backups, host maintenance, and Aeroplane updates visible.
+description: Keep database backups, host maintenance, and orizonCP updates visible.
 sidebar:
   order: 3
 ---
@@ -36,8 +36,8 @@ Use [System Updates](/docs/operations/system-updates/) to review pending commits
 When you need the server-side view, these commands are the fastest places to start:
 
 ```bash
-sudo journalctl -u aeroplane -f
-cd /opt/aeroplane && sudo docker compose logs -f caddy buildkit
+sudo journalctl -u orizoncp -f
+cd /opt/orizoncp && sudo docker compose logs -f caddy buildkit
 ```
 
-Treat the dashboard and the host logs as a pair: the dashboard shows what Aeroplane believes is happening, and the host logs show what the server is doing underneath.
+Treat the dashboard and the host logs as a pair: the dashboard shows what orizonCP believes is happening, and the host logs show what the server is doing underneath.

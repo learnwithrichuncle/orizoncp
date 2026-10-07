@@ -165,7 +165,7 @@ async function startDatabaseContainer(service: Service, envMap: Map<string, stri
 }
 
 async function copyDumpToContainer(containerName: string, localPath: string) {
-  const remotePath = `/tmp/aeroplane-import-${basename(localPath)}`;
+  const remotePath = `/tmp/orizoncp-import-${basename(localPath)}`;
   await runDocker(["cp", localPath, `${containerName}:${remotePath}`]);
   return remotePath;
 }
@@ -218,7 +218,7 @@ async function restorePostgres(service: Service, envMap: Map<string, string>, co
   const remotePath = await copyDumpToContainer(containerName, localPath);
   const user = envMap.get("POSTGRES_USER") || "postgres";
   const password = envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = envMap.get("POSTGRES_DB") || "orizoncp";
   await runDockerExec(
     containerName,
     ["pg_restore", "-h", "127.0.0.1", "-p", String(service.internalPort), "-U", user, "-d", dbName, "--clean", "--if-exists", "--no-owner", remotePath],
@@ -231,7 +231,7 @@ async function restoreMysql(service: Service, envMap: Map<string, string>, conta
   const remotePath = await copyDumpToContainer(containerName, localPath);
   const user = envMap.get("MYSQL_USER") || "root";
   const password = envMap.get("MYSQL_PASSWORD") || envMap.get("MYSQL_ROOT_PASSWORD") || "";
-  const dbName = envMap.get("MYSQL_DATABASE") || "aeroplane";
+  const dbName = envMap.get("MYSQL_DATABASE") || "orizoncp";
   await runDockerExec(
     containerName,
     ["sh", "-lc", `mysql -h 127.0.0.1 -P ${Number(service.internalPort)} -u ${shellQuote(user)} ${shellQuote(dbName)} < ${shellQuote(remotePath)}`],

@@ -20,7 +20,7 @@ type StoredQuery = {
 type QueryTab = "recents" | "favorites";
 
 function storageKey(scopeLabel: string, kind: QueryTab) {
-  return `aeroplane:mongo:${kind}:${scopeLabel}`;
+  return `orizoncp:mongo:${kind}:${scopeLabel}`;
 }
 
 function readStoredQueries(scopeLabel: string, kind: QueryTab) {

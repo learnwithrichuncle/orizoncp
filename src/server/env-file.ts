@@ -1,9 +1,9 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const envPath = resolve(process.env.AEROPLANE_ENV_PATH ?? resolve(process.cwd(), ".env.local"));
-const blockStart = "# --- Aeroplane managed settings ---";
-const blockEnd = "# --- End Aeroplane managed settings ---";
+const envPath = resolve(process.env.ORIZONCP_ENV_PATH ?? process.env.AEROPLANE_ENV_PATH ?? resolve(process.cwd(), ".env.local"));
+const blockStart = "# --- orizonCP managed settings ---";
+const blockEnd = "# --- End orizonCP managed settings ---";
 
 export type ManagedEnvValues = Record<string, string | number | boolean | null | undefined>;
 

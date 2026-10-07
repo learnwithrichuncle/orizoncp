@@ -3,13 +3,13 @@ title: Projects API
 description: Project API endpoints, request payloads, and response examples.
 ---
 
-Project endpoints manage Aeroplane project groups. Services live inside projects.
+Project endpoints manage orizonCP project groups. Services live inside projects.
 
 All examples assume:
 
 ```bash
-export AEROPLANE_URL="https://pilot.example.com"
-export AEROPLANE_API_KEY="ap_..."
+export ORIZONCP_URL="https://pilot.example.com"
+export ORIZONCP_API_KEY="ap_..."
 ```
 
 ## List Projects
@@ -25,8 +25,8 @@ Project scope: returns all visible projects for the key.
 Example:
 
 ```bash
-curl "$AEROPLANE_URL/api/projects" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/projects" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -102,8 +102,8 @@ Payload:
 Example:
 
 ```bash
-curl -X POST "$AEROPLANE_URL/api/projects" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY" \
+curl -X POST "$ORIZONCP_URL/api/projects" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"name":"Acme","description":"Production services"}'
 ```
@@ -138,8 +138,8 @@ Project scope: project must be visible to the key.
 Example:
 
 ```bash
-curl "$AEROPLANE_URL/api/projects/acme" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/projects/acme" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -181,8 +181,8 @@ Payload:
 Example:
 
 ```bash
-curl -X PATCH "$AEROPLANE_URL/api/projects/project_123" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY" \
+curl -X PATCH "$ORIZONCP_URL/api/projects/project_123" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"name":"Acme Production","description":"Customer-facing services"}'
 ```
@@ -219,8 +219,8 @@ Deleting a project removes its services, domains, environment variables, deploym
 Example:
 
 ```bash
-curl -X DELETE "$AEROPLANE_URL/api/projects/project_123" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl -X DELETE "$ORIZONCP_URL/api/projects/project_123" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:
@@ -248,8 +248,8 @@ Project scope: project must be visible to the key.
 Example:
 
 ```bash
-curl "$AEROPLANE_URL/api/projects/project_123/database-variable-suggestions" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/projects/project_123/database-variable-suggestions" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
 Response:

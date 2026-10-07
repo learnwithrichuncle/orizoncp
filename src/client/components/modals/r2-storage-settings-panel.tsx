@@ -27,7 +27,7 @@ const emptyR2: R2SettingsStatus = {
 function blankForm(): R2FormState {
   return {
     accountId: "",
-    bucket: "aeroplane-backups",
+    bucket: "orizoncp-backups",
     accessKeyId: "",
     secretAccessKey: "",
     createBucket: true
@@ -37,7 +37,7 @@ function blankForm(): R2FormState {
 function formFromR2(r2: R2SettingsStatus): R2FormState {
   return {
     accountId: r2.accountId,
-    bucket: r2.bucket || "aeroplane-backups",
+    bucket: r2.bucket || "orizoncp-backups",
     accessKeyId: r2.accessKeyIdSuffix ? `******${r2.accessKeyIdSuffix}` : "",
     secretAccessKey: "",
     createBucket: false
@@ -227,7 +227,7 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
             </div>
             <div className="grid gap-2 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
               <label htmlFor="r2-bucket" className="text-xs text-zinc-500">Bucket</label>
-              <FormInput id="r2-bucket" value={form.bucket} onChange={(event) => setForm({ ...form, bucket: event.target.value })} placeholder="aeroplane-backups" required variant="monochrome" className="!h-9 border-white/15 bg-white/[0.03] text-sm" />
+              <FormInput id="r2-bucket" value={form.bucket} onChange={(event) => setForm({ ...form, bucket: event.target.value })} placeholder="orizoncp-backups" required variant="monochrome" className="!h-9 border-white/15 bg-white/[0.03] text-sm" />
             </div>
             <div className="grid gap-2 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
               <label htmlFor="r2-access-key" className="text-xs text-zinc-500">Access key ID</label>

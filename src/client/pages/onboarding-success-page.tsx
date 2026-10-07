@@ -128,7 +128,7 @@ export function OnboardingSuccessPage() {
             </span>
             <div>
               <div className="font-hero text-sm tracking-[-0.02em]">
-                aeroplane
+                orizoncp
               </div>
               <div className="mt-0.5 font-mono text-[8px] uppercase tracking-[0.25em] text-zinc-500">
                 Control plane
@@ -144,7 +144,7 @@ export function OnboardingSuccessPage() {
               Setup complete · 05 / 05
             </p>
             <h1 className="mt-3 max-w-sm font-hero text-4xl leading-tight tracking-[-0.055em] sm:text-5xl">
-              Aeroplane is ready.
+              orizonCP is ready.
             </h1>
             <p className="mt-5 max-w-sm text-sm leading-6 text-zinc-400">
               Your control plane is configured and ready for its first

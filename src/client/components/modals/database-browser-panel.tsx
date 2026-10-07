@@ -210,7 +210,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
       });
     } else if (isMongo) {
       setInsertDraft({
-        database: selectedTableMeta?.schema || selectedSchema || "aeroplane",
+        database: selectedTableMeta?.schema || selectedSchema || "orizoncp",
         collection: selectedTable ? selectedTableName : "",
         document: "{\n  \"name\": \"example\"\n}"
       });

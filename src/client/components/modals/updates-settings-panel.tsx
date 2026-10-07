@@ -38,7 +38,7 @@ function runStatusLabel(run: SystemUpdateRun) {
 
 function handledRestartRunKey() {
   try {
-    return window.sessionStorage.getItem("aeroplane:handled-update-restart") ?? "";
+    return window.sessionStorage.getItem("orizonCP:handled-update-restart") ?? "";
   } catch {
     return "";
   }
@@ -46,7 +46,7 @@ function handledRestartRunKey() {
 
 function rememberHandledRestartRun(runKey: string) {
   try {
-    window.sessionStorage.setItem("aeroplane:handled-update-restart", runKey);
+    window.sessionStorage.setItem("orizonCP:handled-update-restart", runKey);
   } catch {
     // Storage can be unavailable in locked-down browsers; the in-memory guard still handles the current page.
   }
@@ -102,9 +102,9 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       setSuccess(
         run.restartQueued
           ? restartAlreadyHandled
-            ? "Update applied. Aeroplane is restarting."
-            : "Update applied. Aeroplane is restarting, then this page will refresh."
-          : "Update built. Restart Aeroplane to load server changes."
+            ? "Update applied. orizonCP is restarting."
+            : "Update applied. orizonCP is restarting, then this page will refresh."
+          : "Update built. Restart orizonCP to load server changes."
       );
       if (run.restartQueued && !restartAlreadyHandled) {
         rememberHandledRestartRun(runKey);
@@ -171,7 +171,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
         <dl className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           <div className="px-5 py-4 sm:px-7 md:px-5">
             <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Repository</dt>
-            <dd className="mt-1.5 truncate font-mono text-xs text-zinc-300">{info?.repo ?? "xt42io/aeroplane"}</dd>
+            <dd className="mt-1.5 truncate font-mono text-xs text-zinc-300">{info?.repo ?? "learnwithrichuncle/orizonCP"}</dd>
           </div>
           <div className="px-5 py-4">
             <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Installed</dt>
@@ -189,7 +189,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
 
       {info?.dirty ? (
         <div className="border-l-2 border-amber-400 bg-amber-400/10 px-4 py-3 text-sm leading-relaxed text-amber-200">
-          The Aeroplane checkout has local changes. Commit, deploy, or discard those changes before using the updater.
+          The orizonCP checkout has local changes. Commit, deploy, or discard those changes before using the updater.
         </div>
       ) : null}
 
@@ -200,14 +200,14 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
           </header>
           <p className="px-5 py-4 text-sm leading-relaxed text-zinc-500">
             {!info.currentCommit
-              ? "This image was built without commit metadata, so Aeroplane cannot compare it with GitHub yet. Publish the image with AEROPLANE_COMMIT_SHA to enable one-click updates."
+              ? "This image was built without commit metadata, so orizonCP cannot compare it with GitHub yet. Publish the image with ORIZONCP_COMMIT_SHA to enable one-click updates."
               : info.canApplyUpdate
-                ? "Aeroplane will pull the latest GHCR image through a short-lived updater container, then replace the running app container."
+                ? "orizonCP will pull the latest GHCR image through a short-lived updater container, then replace the running app container."
                 : "This container does not include a git checkout, and one-click image updates are not configured for this install. Publish a new GHCR image, then run this on the server."}
           </p>
           {!info.canApplyUpdate || info.status === "unknown" ? (
             <pre className="overflow-x-auto border-t border-white/10 bg-white/[0.02] px-5 py-3 font-mono text-[11px] leading-relaxed text-zinc-300">
-              {info.updateCommand ?? "cd /opt/aeroplane && sudo docker compose pull aeroplane && sudo docker compose up -d aeroplane"}
+              {info.updateCommand ?? "cd /opt/orizonCP && sudo docker compose pull orizonCP && sudo docker compose up -d orizonCP"}
             </pre>
           ) : null}
         </section>
@@ -217,7 +217,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
         <section className="flex items-center gap-3 border border-emerald-400/20 bg-emerald-400/[0.06] px-5 py-4">
           <AppIcon icon={CheckmarkCircle02Icon} size={18} className="text-emerald-300" />
           <div>
-            <h3 className="text-sm text-zinc-100">Aeroplane is up to date</h3>
+            <h3 className="text-sm text-zinc-100">orizonCP is up to date</h3>
             <p className="mt-0.5 text-xs text-zinc-500">Installed commit matches GitHub.</p>
           </div>
         </section>
@@ -237,7 +237,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
               disabled={!canUpdate}
             >
               <AppIcon icon={Refresh03Icon} size={13} className={applying || updateRunning ? "animate-spin" : ""} />
-              {updateRunning ? "Updating..." : info.installType === "image" ? "Pull latest image" : "Update Aeroplane"}
+              {updateRunning ? "Updating..." : info.installType === "image" ? "Pull latest image" : "Update orizonCP"}
             </button>
           </header>
 
@@ -276,8 +276,8 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       {info?.status === "diverged" ? (
         <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm leading-relaxed text-rose-200">
           {info.installType === "image"
-            ? "The running image commit is not an ancestor of GitHub main, so Aeroplane will not update automatically. Publish a fresh image manually."
-            : "This checkout has diverged from GitHub, so Aeroplane will not update automatically. Pull or reconcile the repository manually."}
+            ? "The running image commit is not an ancestor of GitHub main, so orizonCP will not update automatically. Publish a fresh image manually."
+            : "This checkout has diverged from GitHub, so orizonCP will not update automatically. Pull or reconcile the repository manually."}
         </div>
       ) : null}
 

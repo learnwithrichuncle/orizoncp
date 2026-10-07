@@ -7,9 +7,9 @@ Successful backups can be downloaded, restored, or deleted from the database Bac
 
 ## Download
 
-When the local backup file exists, Aeroplane downloads it directly from disk.
+When the local backup file exists, orizonCP downloads it directly from disk.
 
-When the backup exists only in R2, Aeroplane downloads the object from R2 into a temporary file, streams it to the browser, then cleans up the temporary file.
+When the backup exists only in R2, orizonCP downloads the object from R2 into a temporary file, streams it to the browser, then cleans up the temporary file.
 
 If neither a local file nor an accessible R2 object exists, the backup file cannot be downloaded.
 
@@ -37,9 +37,9 @@ Restores overwrite target data. Treat restore as destructive:
 
 ## Delete
 
-Deleting a backup removes the local disk file when present. If the backup has an R2 key and R2 is connected, Aeroplane also tries to delete the R2 object.
+Deleting a backup removes the local disk file when present. If the backup has an R2 key and R2 is connected, orizonCP also tries to delete the R2 object.
 
-The database backup record is removed from Aeroplane after deletion.
+The database backup record is removed from orizonCP after deletion.
 
 ## R2 Dependency
 

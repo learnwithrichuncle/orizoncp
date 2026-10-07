@@ -7,15 +7,15 @@ const socialImage = "https://cdn.byteship.cloud/f/p_vId3Rhgf/og.png";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "Aeroplane Docs",
+      title: "orizonCP Docs",
       description:
-        "Documentation for installing and running Aeroplane, a self-hosted deployment control plane for apps and databases.",
+        "Documentation for installing and running orizonCP, a self-hosted deployment control plane for apps and databases.",
       favicon: "/favicon.svg",
       head: [
         { tag: "meta", attrs: { property: "og:image", content: socialImage } },
-        { tag: "meta", attrs: { property: "og:image:alt", content: "Aeroplane docs preview" } },
+        { tag: "meta", attrs: { property: "og:image:alt", content: "orizonCP docs preview" } },
         { tag: "meta", attrs: { name: "twitter:image", content: socialImage } },
-        { tag: "meta", attrs: { name: "twitter:image:alt", content: "Aeroplane docs preview" } },
+        { tag: "meta", attrs: { name: "twitter:image:alt", content: "orizonCP docs preview" } },
       ],
       customCss: ["./src/styles/docs.css"],
       disable404Route: true,
@@ -23,7 +23,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/xt42io/aeroplane",
+          href: "https://github.com/learnwithrichuncle/orizoncp",
         },
       ],
       sidebar: [
@@ -57,7 +57,7 @@ export default defineConfig({
           label: "Migration",
           items: [
             "docs/migration/railway-import",
-            "docs/migration/aeroplane-bundles",
+            "docs/migration/orizoncp-bundles",
           ],
         },
         {

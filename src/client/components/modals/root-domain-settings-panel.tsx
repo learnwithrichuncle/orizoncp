@@ -97,7 +97,7 @@ export function RootDomainSettingsPanel({ open }: { open: boolean }) {
   async function saveSettings(event: FormEvent) {
     event.preventDefault();
     if (!rootDomainUsesWildcard || !normalizedRootDomain) {
-      setError("Root domain must be a wildcard hostname like *.pilot.aeroplane.run.");
+      setError("Root domain must be a wildcard hostname like *.pilot.cp.orzn.io.");
       return;
     }
     setSaving(true);
@@ -210,7 +210,7 @@ export function RootDomainSettingsPanel({ open }: { open: boolean }) {
               if (rootDomainUsesWildcard) setRootDomain(wildcardRootDomain(normalizedRootDomain));
             }}
             onChange={(event) => setRootDomain(event.target.value)}
-            placeholder="*.pilot.aeroplane.run"
+            placeholder="*.pilot.cp.orzn.io"
             required
             inputMode="url"
             autoComplete="off"
@@ -219,7 +219,7 @@ export function RootDomainSettingsPanel({ open }: { open: boolean }) {
           />
           {rootDomain.trim() && !rootDomainUsesWildcard ? (
             <p className="mt-2 text-xs leading-5 text-zinc-300">
-              Include the wildcard prefix, for example *.pilot.aeroplane.run.
+              Include the wildcard prefix, for example *.pilot.cp.orzn.io.
             </p>
           ) : (
             <p className="mt-2 text-xs leading-5 text-zinc-500">
@@ -326,7 +326,7 @@ export function RootDomainSettingsPanel({ open }: { open: boolean }) {
         open={clearDialogOpen}
         title="Remove root domain?"
         subject={wildcardRootDomain(savedRootDomain)}
-        description="Aeroplane will stop generating service URLs from this wildcard root domain. Existing routing may stop working until another domain is configured."
+        description="orizonCP will stop generating service URLs from this wildcard root domain. Existing routing may stop working until another domain is configured."
         confirmLabel="Remove domain"
         busy={saving}
         onClose={() => setClearDialogOpen(false)}

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const APP_NAME = "Aeroplane";
+const APP_NAME = "orizonCP";
 
 function titleFromParts(parts: Array<string | null | undefined>) {
   const cleanParts = parts.map((part) => part?.trim()).filter(Boolean);

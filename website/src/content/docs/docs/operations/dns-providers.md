@@ -1,9 +1,9 @@
 ---
 title: DNS Providers
-description: Connect DNS providers and let Aeroplane create or update A records for service domains.
+description: Connect DNS providers and let orizonCP create or update A records for service domains.
 ---
 
-Aeroplane can create or update service-domain `A` records through supported DNS providers.
+orizonCP can create or update service-domain `A` records through supported DNS providers.
 
 ## Supported Providers
 
@@ -15,7 +15,7 @@ Connect providers from System Settings, DNS.
 
 ## What Automation Does
 
-From a service Domains tab, Aeroplane can apply an `A` record for a public hostname. The record points at the server public IPv4 address.
+From a service Domains tab, orizonCP can apply an `A` record for a public hostname. The record points at the server public IPv4 address.
 
 Automation does not run for local loopback domains, and it currently supports IPv4 `A` records only.
 
@@ -27,7 +27,7 @@ Cloudflare settings include:
 - Account email when using auth key style credentials.
 - Optional zone ID.
 
-When zone ID is blank, Aeroplane searches Cloudflare zones from the hostname. It creates or updates an unproxied `A` record with automatic TTL.
+When zone ID is blank, orizonCP searches Cloudflare zones from the hostname. It creates or updates an unproxied `A` record with automatic TTL.
 
 ## Namecheap
 
@@ -37,7 +37,7 @@ Namecheap settings include:
 - API key.
 - Client IP.
 
-Namecheap requires API access to be enabled on the account and expects the client IP used for API requests. Aeroplane preserves existing host records and adds or replaces the matching `A` record.
+Namecheap requires API access to be enabled on the account and expects the client IP used for API requests. orizonCP preserves existing host records and adds or replaces the matching `A` record.
 
 ## Spaceship
 
@@ -46,7 +46,7 @@ Spaceship settings include:
 - API key.
 - API secret.
 
-Aeroplane resolves the domain, removes conflicting records for the same host when necessary, then writes the `A` record with TTL `1800`.
+orizonCP resolves the domain, removes conflicting records for the same host when necessary, then writes the `A` record with TTL `1800`.
 
 ## Common Issues
 

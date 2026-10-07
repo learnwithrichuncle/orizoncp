@@ -146,7 +146,7 @@ export function DatabaseInsertSheet({
             <div className="space-y-4">
               <label className="block">
                 <span className={insertLabelClass}>Database</span>
-                <FormInput value={draft.database ?? ""} onChange={(event) => onDraftChange({ ...draft, database: event.target.value })} placeholder="aeroplane" required variant="monochrome" className={insertInputClass} />
+                <FormInput value={draft.database ?? ""} onChange={(event) => onDraftChange({ ...draft, database: event.target.value })} placeholder="orizoncp" required variant="monochrome" className={insertInputClass} />
               </label>
               <label className="block">
                 <span className={insertLabelClass}>Collection</span>

@@ -1,6 +1,5 @@
-import { Cancel01Icon } from "@hugeicons/core-free-icons";
+import { XIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import { AppIcon } from "../../components/ui/primitives";
 
 export function ProviderImportShell({
   open,
@@ -30,7 +29,7 @@ export function ProviderImportShell({
           role="dialog"
           aria-modal="true"
           aria-label={title}
-          className={`flex max-h-[min(760px,calc(100dvh-2rem))] min-h-[420px] w-full ${width} flex-col border border-white/15 bg-zinc-950 p-6 text-white shadow-[0_30px_100px_rgba(0,0,0,0.65)] sm:p-8`}
+          className={`flex max-h-[min(760px,calc(100dvh-2rem))] min-h-[420px] w-full ${width} flex-col rounded-lg border border-line bg-surface p-8 text-ink shadow-2xl`}
         >
           <header className="flex items-start justify-between gap-5">
             <div className="flex min-w-0 items-center gap-4">
@@ -38,10 +37,10 @@ export function ProviderImportShell({
                 {logo}
               </span>
               <div className="min-w-0">
-                <h2 className="truncate pb-1 font-hero text-lg leading-[1.3] tracking-[-0.04em]">
+                <h2 className="truncate text-2xl font-bold text-ink">
                   {title}
                 </h2>
-                <p className="font-mono text-[8px] font-semibold uppercase tracking-[0.16em] text-zinc-500">
+                <p className="text-xs text-ink-dim">
                   {stepLabel}
                 </p>
               </div>
@@ -49,14 +48,14 @@ export function ProviderImportShell({
             <button
               type="button"
               onClick={onClose}
-              className="grid h-9 w-9 flex-none place-items-center border border-white/10 text-zinc-500 transition hover:border-white/25 hover:text-white"
+              className="grid h-9 w-9 flex-none place-items-center rounded-md text-ink-dim transition hover:bg-hover hover:text-ink"
               aria-label={`Close ${title}`}
             >
-              <AppIcon icon={Cancel01Icon} size={15} />
+              <XIcon size={20} />
             </button>
           </header>
 
-          <div className={`mt-7 ${bodyClassName}`}>{children}</div>
+          <div className={`mt-8 ${bodyClassName}`}>{children}</div>
         </section>
       </div>
     </div>

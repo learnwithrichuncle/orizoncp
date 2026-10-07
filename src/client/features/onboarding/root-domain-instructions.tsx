@@ -6,7 +6,7 @@ import { normalizeRootDomain, wildcardRootDomain } from "../../lib/root-domain";
 export function RootDomainInstructions({ rootDomain, publicIp }: { rootDomain: string; publicIp: string }) {
   const [copied, setCopied] = useState(false);
   const normalizedDomain = normalizeRootDomain(rootDomain);
-  const wildcardHostname = wildcardRootDomain(rootDomain) || "*.pilot.aeroplane.run";
+  const wildcardHostname = wildcardRootDomain(rootDomain) || "*.pilot.cp.orzn.io";
 
   async function copyIp() {
     try {
@@ -35,7 +35,7 @@ export function RootDomainInstructions({ rootDomain, publicIp }: { rootDomain: s
         <div className="border-b border-zinc-800 px-4 py-3 uppercase tracking-[0.18em] text-zinc-600 sm:border-b-0 sm:border-r">Host</div>
         <div className="px-4 py-3">
           <div className="font-semibold text-white">{wildcardHostname}</div>
-          <div className="mt-1 text-[10px] text-zinc-500">This matches generated service URLs like api.{normalizedDomain || "pilot.aeroplane.run"}.</div>
+          <div className="mt-1 text-[10px] text-zinc-500">This matches generated service URLs like api.{normalizedDomain || "pilot.cp.orzn.io"}.</div>
         </div>
       </div>
       <div className="grid font-mono text-[11px] sm:grid-cols-[110px_minmax(0,1fr)]">

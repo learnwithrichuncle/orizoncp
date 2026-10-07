@@ -98,7 +98,7 @@ async function githubRequest<T>(path: string, options: { body?: unknown; token?:
       Accept: "application/vnd.github+json",
       Authorization: `${options.tokenKind === "token" ? "token" : "Bearer"} ${options.token ?? config.githubAccessToken}`,
       "Content-Type": "application/json",
-      "User-Agent": "aeroplane-control-plane",
+      "User-Agent": "orizoncp-control-plane",
       "X-GitHub-Api-Version": "2022-11-28"
     },
     body: options.body ? JSON.stringify(options.body) : undefined
@@ -475,7 +475,7 @@ export async function convertGitHubManifestCode(code: string): Promise<GitHubApp
     method: "POST",
     headers: {
       Accept: "application/vnd.github+json",
-      "User-Agent": "aeroplane-control-plane",
+      "User-Agent": "orizoncp-control-plane",
       "X-GitHub-Api-Version": "2022-11-28"
     }
   });

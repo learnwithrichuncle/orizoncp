@@ -100,7 +100,7 @@ function classifyVercelProjectSource(project: VercelProjectNode): VercelProjectC
     return {
       kind: "unsupported",
       sourceLabel: "No Git repository connected",
-      unsupportedReason: "This Vercel project has no connected Git repository for Aeroplane to deploy from."
+      unsupportedReason: "This Vercel project has no connected Git repository for orizonCP to deploy from."
     };
   }
 
@@ -109,13 +109,13 @@ function classifyVercelProjectSource(project: VercelProjectNode): VercelProjectC
     return {
       kind: "unsupported",
       sourceLabel: `Unsupported Git provider (${link.type})`,
-      unsupportedReason: "Aeroplane could not resolve a Git repository from this Vercel project."
+      unsupportedReason: "orizonCP could not resolve a Git repository from this Vercel project."
     };
   }
 
   const branch = cleanOptionalString(link.productionBranch) ?? "main";
   const fullName = `${repo.owner}/${repo.repo}`;
-  // GitHub repos integrate with Aeroplane's GitHub App; other providers only get a clone URL.
+  // GitHub repos integrate with orizonCP's GitHub App; other providers only get a clone URL.
   const isGitHub = repo.host === "github.com";
 
   return {

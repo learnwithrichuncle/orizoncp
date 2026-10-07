@@ -5,7 +5,7 @@ function safeDockerIdentifier(value: string, fallback: string) {
 }
 
 export function applicationDataVolumeName(serviceId: string) {
-  return `aeroplane-app-data-${safeDockerIdentifier(serviceId, "service")}`;
+  return `orizoncp-app-data-${safeDockerIdentifier(serviceId, "service")}`;
 }
 
 export function applicationDataVolumeArg(serviceId: string, containerPath: string) {

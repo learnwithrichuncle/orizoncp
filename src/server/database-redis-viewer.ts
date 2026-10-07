@@ -412,7 +412,7 @@ export async function deleteRedisRow(ctx: DatabaseContext, table: string, primar
   if (type === "list") {
     const index = Number(primaryKey.index);
     if (!Number.isInteger(index) || index < 0) throw new Error("List index is required");
-    const marker = `__aeroplane_deleted_${Date.now()}_${Math.random().toString(36).slice(2)}__`;
+    const marker = `__orizoncp_deleted_${Date.now()}_${Math.random().toString(36).slice(2)}__`;
     await runRedis(ctx, ["LSET", key, String(index), marker], database);
     await runRedis(ctx, ["LREM", key, "1", marker], database);
     return { ok: true };

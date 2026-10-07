@@ -5,9 +5,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
 PORT = int(os.environ.get("PORT", "8080"))
-POSTGRES_DB = os.environ.get("POSTGRES_DB", "aeroplane_test")
-POSTGRES_USER = os.environ.get("POSTGRES_USER", "aeroplane")
-POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "aeroplane")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "orizoncp_test")
+POSTGRES_USER = os.environ.get("POSTGRES_USER", "orizoncp")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "orizoncp")
 
 
 def run_psql(sql):

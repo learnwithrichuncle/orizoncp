@@ -434,7 +434,7 @@ const setupSchema = z.object({
     publicUrl: z.string().trim().min(1).default("http://localhost:5173"),
     controlPlaneHostname: publicHostnameSchema,
     buildkitHost: z.string().trim().min(1).default("tcp://127.0.0.1:1234"),
-    runtimeNetworkName: z.string().trim().min(1).default("aeroplane-runtime"),
+    runtimeNetworkName: z.string().trim().min(1).default("orizoncp-runtime"),
     githubAccessToken: optionalString,
     githubAppId: optionalString,
     githubAppClientId: optionalString,
@@ -594,7 +594,7 @@ function currentRuntimeConfig() {
     publicUrl: process.env.PUBLIC_URL ?? config.publicUrl,
     controlPlaneHostname: configuredControlPlaneHostname(),
     buildkitHost: process.env.BUILDKIT_HOST ?? config.buildkitHost,
-    runtimeNetworkName: process.env.AEROPLANE_RUNTIME_NETWORK ?? config.runtimeNetworkName
+    runtimeNetworkName: process.env.ORIZONCP_RUNTIME_NETWORK ?? process.env.AEROPLANE_RUNTIME_NETWORK ?? config.runtimeNetworkName
   };
 }
 
@@ -1153,10 +1153,10 @@ async function saveUploadedMigrationBundle(c: Context) {
     throw new Error("Use the migration passphrase from the source server.");
   }
   if (!isUploadedMigrationFile(bundle)) {
-    throw new Error("Choose an Aeroplane migration bundle.");
+    throw new Error("Choose an orizonCP migration bundle.");
   }
 
-  const uploadDir = mkdtempSync(join(tmpdir(), "aeroplane-upload-"));
+  const uploadDir = mkdtempSync(join(tmpdir(), "orizoncp-upload-"));
   const uploadPath = join(uploadDir, "bundle.aeroplane");
   writeFileSync(uploadPath, Buffer.from(await bundle.arrayBuffer()));
   return { passphrase, uploadDir, uploadPath };
@@ -1268,9 +1268,9 @@ function onboardingSettingsError(error: unknown) {
 }
 
 async function applyOnboardingSettings(input: z.infer<typeof restartOnboardingSchema>, options: { generateSecretKeyIfMissing: boolean }) {
-  const secretKey = input.env.secretKey || process.env.AEROPLANE_SECRET_KEY || config.secretKey || (options.generateSecretKeyIfMissing ? generateSecretKey() : "");
+  const secretKey = input.env.secretKey || process.env.ORIZONCP_SECRET_KEY || process.env.AEROPLANE_SECRET_KEY || config.secretKey || (options.generateSecretKeyIfMissing ? generateSecretKey() : "");
   const managedEnv = {
-    AEROPLANE_SECRET_KEY: secretKey,
+    ORIZONCP_SECRET_KEY: secretKey,
     DATA_DIR: input.env.dataDir,
     DEPLOY_DRY_RUN: input.env.deployDryRun,
     CADDY_CONFIG_PATH: input.env.caddyConfigPath,
@@ -1280,7 +1280,7 @@ async function applyOnboardingSettings(input: z.infer<typeof restartOnboardingSc
     PUBLIC_URL: input.env.publicUrl,
     CONTROL_PLANE_HOSTNAME: input.env.controlPlaneHostname,
     BUILDKIT_HOST: input.env.buildkitHost,
-    AEROPLANE_RUNTIME_NETWORK: input.env.runtimeNetworkName,
+    ORIZONCP_RUNTIME_NETWORK: input.env.runtimeNetworkName,
     GITHUB_ACCESS_TOKEN: input.env.githubAccessToken ?? process.env.GITHUB_ACCESS_TOKEN,
     GITHUB_APP_ID: input.env.githubAppId ?? process.env.GITHUB_APP_ID,
     GITHUB_APP_CLIENT_ID: input.env.githubAppClientId ?? process.env.GITHUB_APP_CLIENT_ID,
@@ -1353,7 +1353,7 @@ app.get("/api/auth/status", (c) => c.json(publicAuthStatus(c)));
 
 app.post("/api/auth/setup", rateLimit, async (c) => {
   if (hasAuthUsers()) {
-    return jsonError("Aeroplane has already been set up", 409);
+    return jsonError("orizonCP has already been set up", 409);
   }
 
   const body = setupSchema.safeParse(await c.req.json());
@@ -1375,7 +1375,7 @@ app.post("/api/auth/setup", rateLimit, async (c) => {
 
 app.post("/api/auth/migration/import", rateLimit, async (c) => {
   if (hasAuthUsers()) {
-    return jsonError("Aeroplane has already been set up", 409);
+    return jsonError("orizonCP has already been set up", 409);
   }
 
   let upload: { passphrase: string; uploadDir: string; uploadPath: string } | null = null;
@@ -1505,7 +1505,7 @@ function defaultGitHubAppName(baseUrl: string) {
   } catch {
     hostSlug = "";
   }
-  const stem = hostSlug && hostSlug !== "localhost" ? `aeroplane-${hostSlug}` : "aeroplane";
+  const stem = hostSlug && hostSlug !== "localhost" ? `orizoncp-${hostSlug}` : "orizoncp";
   return `${stem}-${randomBytes(3).toString("hex")}`.slice(0, 34);
 }
 
@@ -1514,7 +1514,7 @@ function escapeHtml(value: string) {
 }
 
 function renderManifestCallbackPage(ok: boolean, message: string) {
-  const payload = JSON.stringify({ source: "aeroplane-github-manifest", ok, message }).replace(/</g, "\\u003c");
+  const payload = JSON.stringify({ source: "orizoncp-github-manifest", ok, message }).replace(/</g, "\\u003c");
   return `<!doctype html><html><head><meta charset="utf-8"><title>GitHub connection</title></head>
 <body style="font-family:ui-monospace,SFMono-Regular,monospace;background:#09090b;color:#e4e4e7;display:grid;place-items:center;height:100vh;margin:0">
 <div style="text-align:center;max-width:32rem;padding:1.5rem">
@@ -1777,7 +1777,7 @@ app.get("/api/system/r2", (c) => c.json({ r2: publicR2Settings() }));
 
 app.post("/api/system/r2", async (c) => {
   if (!hasSecretKey()) {
-    return jsonError("AEROPLANE_SECRET_KEY is required before saving R2 credentials", 409);
+    return jsonError("ORIZONCP_SECRET_KEY is required before saving R2 credentials", 409);
   }
 
   const existing = getSystemSettings();
@@ -1830,7 +1830,7 @@ app.get("/api/system/dns", (c) => c.json({ dns: publicDnsSettings() }));
 
 app.post("/api/system/dns/:provider", async (c) => {
   if (!hasSecretKey()) {
-    return jsonError("AEROPLANE_SECRET_KEY is required before saving DNS provider credentials", 409);
+    return jsonError("ORIZONCP_SECRET_KEY is required before saving DNS provider credentials", 409);
   }
 
   const provider = dnsProviderIdSchema.safeParse(c.req.param("provider"));
@@ -1979,7 +1979,7 @@ app.post("/api/system/ai/providers/:provider", async (c) => {
   if (!userId) return jsonError("Authenticated user not found", 401);
 
   if (!hasSecretKey()) {
-    return jsonError("AEROPLANE_SECRET_KEY is required before saving AI provider credentials", 409);
+    return jsonError("ORIZONCP_SECRET_KEY is required before saving AI provider credentials", 409);
   }
 
   const provider = aiProviderIdSchema.safeParse(c.req.param("provider"));
@@ -3693,5 +3693,5 @@ void prewarmFrameworkIconCache().catch((error) => {
 });
 
 serve({ fetch: app.fetch, port: config.port, hostname: config.host }, (info) => {
-  console.log(`Aeroplane control plane listening on http://${info.address}:${info.port}`);
+  console.log(`orizonCP control plane listening on http://${info.address}:${info.port}`);
 });

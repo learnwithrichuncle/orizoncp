@@ -74,11 +74,11 @@ export async function ensureStableDatabaseDataVolume({
     "volume",
     "create",
     "--label",
-    "aeroplane.kind=database-data",
+    "orizoncp.kind=database-data",
     "--label",
-    `aeroplane.service-id=${service.id}`,
+    `orizoncp.service-id=${service.id}`,
     "--label",
-    `aeroplane.service-slug=${service.slug}`,
+    `orizoncp.service-slug=${service.slug}`,
     stableVolume
   ]);
 

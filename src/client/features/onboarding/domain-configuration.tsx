@@ -69,20 +69,20 @@ export function DomainConfiguration({
           label="Dashboard domain"
           value={form.controlPlaneHostname}
           onChange={(controlPlaneHostname) => update({ controlPlaneHostname })}
-          placeholder="pilot.aeroplane.run"
+          placeholder="pilot.cp.orzn.io"
         />
         <DomainField
           label="Wildcard service domain"
           value={form.rootDomain}
           onChange={(rootDomain) => update({ rootDomain })}
-          placeholder="*.pilot.aeroplane.run"
+          placeholder="*.pilot.cp.orzn.io"
         />
         {hasRootDomain && !rootDomainValid ? (
           <p className="-mt-3 border-l-2 border-white px-3 text-xs leading-5 text-zinc-300">
             Include the wildcard prefix, for example
             {" "}
             <span className="font-mono text-white">
-              *.pilot.aeroplane.run
+              *.pilot.cp.orzn.io
             </span>
             .
           </p>

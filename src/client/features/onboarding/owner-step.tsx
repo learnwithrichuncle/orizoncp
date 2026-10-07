@@ -47,7 +47,7 @@ export function OwnerStep({
         value={form.ownerName}
         onChange={(ownerName) => update({ ownerName })}
         autoComplete="name"
-        placeholder="Jane Doe"
+        placeholder="Wisdom TECH"
       />
       <OwnerField
         label="Email"
@@ -55,7 +55,7 @@ export function OwnerStep({
         onChange={(ownerEmail) => update({ ownerEmail })}
         type="email"
         autoComplete="email"
-        placeholder="jane@company.com"
+        placeholder="user@email.com"
       />
       <OwnerField
         label="Password"

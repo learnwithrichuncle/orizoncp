@@ -7,9 +7,9 @@ COPY app-server.py start-services.sh ./
 COPY init-db.sql /docker-entrypoint-initdb.d/01-init-db.sql
 RUN chmod +x /app/start-services.sh
 
-ENV POSTGRES_DB=aeroplane_test
-ENV POSTGRES_USER=aeroplane
-ENV POSTGRES_PASSWORD=aeroplane
+ENV POSTGRES_DB=orizoncp_test
+ENV POSTGRES_USER=orizoncp
+ENV POSTGRES_PASSWORD=orizoncp
 ENV PORT=8080
 
 EXPOSE 8080 5432

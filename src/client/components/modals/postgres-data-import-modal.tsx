@@ -165,10 +165,10 @@ export function PostgresDataImportModal({
             </div>
             <p className="mt-4 text-sm leading-6 text-zinc-400">
               {result
-                ? "The source dump was restored into this Aeroplane Postgres database."
+                ? "The source dump was restored into this orizonCP Postgres database."
                 : error
                 ? "The import stopped before completion. Review the error below, then adjust the source and try again."
-                : "Aeroplane is dumping the source database and restoring it into this Postgres service. Large databases can take a few minutes."}
+                : "orizonCP is dumping the source database and restoring it into this Postgres service. Large databases can take a few minutes."}
             </p>
           </div>
 
@@ -285,7 +285,7 @@ export function PostgresDataImportModal({
 
         <div className="border border-rose-500/30 bg-rose-950/20 px-4 py-3">
           <Checkbox checked={confirmed} onChange={setConfirmed} disabled={busy} label="Replace existing Postgres data">
-            <span className="text-sm text-rose-100">Replace existing data in this Aeroplane Postgres database.</span>
+            <span className="text-sm text-rose-100">Replace existing data in this orizonCP Postgres database.</span>
           </Checkbox>
         </div>
 

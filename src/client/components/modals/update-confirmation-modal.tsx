@@ -11,7 +11,7 @@ type UpdateConfirmationModalProps = {
 };
 
 export function UpdateConfirmationModal({ applying, installType, open, onCancel, onConfirm }: UpdateConfirmationModalProps) {
-  const actionLabel = installType === "image" ? "Pull latest image" : "Update Aeroplane";
+  const actionLabel = installType === "image" ? "Pull latest image" : "Update orizonCP";
 
   return (
     <SettingsDialog open={open} title={actionLabel} onClose={() => {
@@ -19,7 +19,7 @@ export function UpdateConfirmationModal({ applying, installType, open, onCancel,
     }} width="max-w-md">
       <div>
         <p className="text-sm leading-relaxed text-zinc-400">
-          Aeroplane may restart after the update. The dashboard can briefly disconnect.
+          orizonCP may restart after the update. The dashboard can briefly disconnect.
         </p>
 
         <div className="mt-5 flex items-center justify-end gap-2 border-t border-white/10 pt-4">

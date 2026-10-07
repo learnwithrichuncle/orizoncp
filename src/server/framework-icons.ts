@@ -8,7 +8,7 @@ type IconMeta = {
   website: string | null;
 };
 
-const checkedInFrameworkIconDir = resolve(process.env.AEROPLANE_FRAMEWORK_ICON_DIR ?? "src/server/assets/framework-icons");
+const checkedInFrameworkIconDir = resolve(process.env.ORIZONCP_FRAMEWORK_ICON_DIR ?? process.env.AEROPLANE_FRAMEWORK_ICON_DIR ?? "src/server/assets/framework-icons");
 
 function normalizeSlug(value: string) {
   return value

@@ -693,7 +693,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   } catch (error) {
     const message = error instanceof Error ? error.message : "Network request failed";
     if (/failed to fetch|networkerror|load failed/i.test(message)) {
-      throw new Error(`Could not reach the Aeroplane API at ${path}. Check that your domain/proxy forwards /api requests to Aeroplane, then try again.`);
+      throw new Error(`Could not reach the orizonCP API at ${path}. Check that your domain/proxy forwards /api requests to orizonCP, then try again.`);
     }
     throw new Error(message);
   }
@@ -1046,7 +1046,7 @@ export const api = {
 
     const blob = await response.blob();
     const disposition = response.headers.get("Content-Disposition") ?? "";
-    const fileName = disposition.match(/filename="([^"]+)"/)?.[1] ?? "aeroplane-export.aeroplane";
+    const fileName = disposition.match(/filename="([^"]+)"/)?.[1] ?? "orizoncp-export.aeroplane";
     downloadFile(blob, fileName);
     return { fileName, sizeBytes: blob.size };
   },

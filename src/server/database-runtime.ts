@@ -17,7 +17,7 @@ export function databaseImage(dbType: string) {
 }
 
 export function databaseDataVolumeName(serviceId: string) {
-  return `aeroplane-db-data-${safeDockerIdentifier(serviceId, "service")}`;
+  return `orizoncp-db-data-${safeDockerIdentifier(serviceId, "service")}`;
 }
 
 export function databaseDataMountPath(dbType: string) {

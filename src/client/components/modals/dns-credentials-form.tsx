@@ -106,7 +106,7 @@ export function DnsCredentialsForm({
         </div>
 
         <p className="mt-auto pt-8 text-sm leading-6 text-zinc-500">
-          Aeroplane uses this connection when creating and updating service DNS records.
+          orizonCP uses this connection when creating and updating service DNS records.
         </p>
       </section>
     );

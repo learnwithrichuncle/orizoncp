@@ -3,11 +3,11 @@ title: Database Overview
 description: Database engines, credentials, public hostnames, data tools, and backup coverage.
 ---
 
-Aeroplane databases are services. They live inside projects, have deployments, variables, logs, data tools, settings, domains where applicable, and backups.
+orizonCP databases are services. They live inside projects, have deployments, variables, logs, data tools, settings, domains where applicable, and backups.
 
 ## Engines
 
-Aeroplane can create:
+orizonCP can create:
 
 | Engine | Default port | Notes |
 | --- | ---: | --- |
@@ -20,7 +20,7 @@ Aeroplane can create:
 
 ## Created Variables
 
-When you create a database service, Aeroplane generates engine-specific variables such as `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `REDIS_PASSWORD`, or `MONGO_INITDB_ROOT_PASSWORD`.
+When you create a database service, orizonCP generates engine-specific variables such as `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `REDIS_PASSWORD`, or `MONGO_INITDB_ROOT_PASSWORD`.
 
 App services in the same project can use database variable suggestions instead of manually copying generated values.
 
@@ -32,7 +32,7 @@ Database services are not hot-swapped like app services. They use persistent vol
 
 ## Public Access
 
-When a root domain is configured, Aeroplane can create public database hostnames. The hostname and host port are shown in the database service settings.
+When a root domain is configured, orizonCP can create public database hostnames. The hostname and host port are shown in the database service settings.
 
 Use public access for admin tools, migrations, or external clients that cannot join the Docker runtime network. Keep it disabled when everything talks privately from app services on the same server.
 

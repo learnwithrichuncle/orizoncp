@@ -1,13 +1,13 @@
 import { api } from "../api";
 
 type ManifestMessage = {
-  source: "aeroplane-github-manifest";
+  source: "orizoncp-github-manifest";
   ok: boolean;
   message: string;
 };
 
 function isManifestMessage(data: unknown): data is ManifestMessage {
-  return Boolean(data) && typeof data === "object" && (data as ManifestMessage).source === "aeroplane-github-manifest";
+  return Boolean(data) && typeof data === "object" && (data as ManifestMessage).source === "orizoncp-github-manifest";
 }
 
 /**
@@ -22,7 +22,7 @@ export async function startGitHubAppManifestFlow(options: {
   redirectTo: "onboarding" | "settings";
   organization?: string;
 }): Promise<{ ok: boolean; message: string }> {
-  const popup = window.open("", "aeroplane-github-app", "width=1024,height=768,menubar=no,toolbar=no");
+  const popup = window.open("", "orizoncp-github-app", "width=1024,height=768,menubar=no,toolbar=no");
   if (!popup) {
     throw new Error("Could not open the GitHub window. Allow pop-ups for this site and try again.");
   }
@@ -39,7 +39,7 @@ export async function startGitHubAppManifestFlow(options: {
   const form = document.createElement("form");
   form.method = "POST";
   form.action = manifest.postUrl;
-  form.target = "aeroplane-github-app";
+  form.target = "orizoncp-github-app";
   form.style.display = "none";
 
   const input = document.createElement("input");

@@ -167,10 +167,10 @@ export function RedisDataImportModal({
             </div>
             <p className="mt-3 text-xs leading-5 text-zinc-500">
               {result
-                ? "The source RDB snapshot was loaded into this Aeroplane Redis service."
+                ? "The source RDB snapshot was loaded into this orizonCP Redis service."
                 : error
                 ? "The import stopped before completion. Review the error below, then adjust the source and try again."
-                : "Aeroplane is creating a Redis RDB snapshot, replacing the target dump, and restarting this Redis service."}
+                : "orizonCP is creating a Redis RDB snapshot, replacing the target dump, and restarting this Redis service."}
             </p>
           </div>
 

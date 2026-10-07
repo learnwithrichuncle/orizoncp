@@ -1,11 +1,5 @@
-import {
-  ArrowRight02Icon,
-  Login02Icon,
-  ShieldUserIcon,
-} from "@hugeicons/core-free-icons";
 import { type FormEvent, useState } from "react";
 import { api } from "../../api";
-import { AppIcon } from "../ui/primitives";
 
 function LoginField({
   label,
@@ -24,7 +18,7 @@ function LoginField({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-zinc-400">
+      <span className="mb-2 block text-xs font-medium text-ink-muted">
         {label}
       </span>
       <input
@@ -34,7 +28,7 @@ function LoginField({
         autoComplete={autoComplete}
         placeholder={placeholder}
         required
-        className="h-12 w-full rounded-sm border border-white/15 bg-white/5 px-3.5 text-[15px] text-white outline-none transition placeholder:text-zinc-600 hover:border-white/30 focus:border-white focus:bg-white/10 focus:ring-2 focus:ring-white/10"
+        className="h-9 w-full rounded-md border border-line bg-elevated px-3 text-sm text-ink outline-none transition placeholder:text-ink-dim hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft"
       />
     </label>
   );
@@ -52,7 +46,7 @@ export function LoginForm() {
     setError("");
     try {
       await api.login({ email, password });
-      window.dispatchEvent(new Event("aeroplane-auth-changed"));
+      window.dispatchEvent(new Event("orizoncp-auth-changed"));
       window.location.assign("/");
     } catch (issue) {
       setError(issue instanceof Error ? issue.message : "Could not sign in");
@@ -63,21 +57,12 @@ export function LoginForm() {
   return (
     <form
       onSubmit={submit}
-      className="w-full max-w-[500px]"
-      aria-label="Sign in to Aeroplane"
+      className="w-full max-w-sm rounded-lg border border-line bg-surface p-8"
+      aria-label="Sign in to orizonCP"
     >
-      <div className="mb-9">
-        <div>
-          <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-black">
-            <AppIcon icon={Login02Icon} size={18} />
-          </span>
-          <h1 className="font-hero text-3xl tracking-[-0.05em] text-white">
-            Welcome back
-          </h1>
-        </div>
-      </div>
+      <h1 className="text-2xl font-bold text-ink">Welcome back</h1>
 
-      <div className="grid gap-y-5">
+      <div className="mt-8 grid gap-y-5">
         <LoginField
           label="Email"
           type="email"
@@ -99,7 +84,7 @@ export function LoginForm() {
       {error ? (
         <div
           role="alert"
-          className="mt-5 border-l-2 border-white bg-white/10 px-4 py-3 text-sm text-white"
+          className="mt-5 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad"
         >
           {error}
         </div>
@@ -108,20 +93,10 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="group mt-7 flex h-14 w-full items-center justify-between rounded-sm bg-white px-5 text-left text-black shadow-[0_18px_40px_rgba(0,0,0,0.3)] transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-60"
+        className="mt-8 flex h-9 w-full items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-hover disabled:cursor-wait disabled:opacity-60"
       >
-        <span className="text-sm font-semibold">
-          {submitting ? "Signing in…" : "Sign in"}
-        </span>
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-black/10 transition-transform group-hover:translate-x-1">
-          <AppIcon
-            icon={submitting ? ShieldUserIcon : ArrowRight02Icon}
-            size={16}
-            className={submitting ? "animate-pulse" : ""}
-          />
-        </span>
+        {submitting ? "Signing in…" : "Sign in"}
       </button>
-
     </form>
   );
 }

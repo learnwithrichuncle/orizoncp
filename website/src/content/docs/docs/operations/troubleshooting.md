@@ -8,15 +8,15 @@ Start with the page that owns the failing workflow, then use server logs for the
 ## Useful Server Logs
 
 ```bash
-sudo journalctl -u aeroplane -f
-cd /opt/aeroplane && sudo docker compose logs -f caddy buildkit
+sudo journalctl -u orizoncp -f
+cd /opt/orizoncp && sudo docker compose logs -f caddy buildkit
 ```
 
-Deployment logs show Aeroplane's job-level view. Runtime logs show container output. Server logs show the underlying control plane, Caddy, and BuildKit behavior.
+Deployment logs show orizonCP's job-level view. Runtime logs show container output. Server logs show the underlying control plane, Caddy, and BuildKit behavior.
 
 ## BuildKit Is Unavailable
 
-Aeroplane source builds need BuildKit at the configured `BUILDKIT_HOST`, usually `tcp://127.0.0.1:1234`.
+orizonCP source builds need BuildKit at the configured `BUILDKIT_HOST`, usually `tcp://127.0.0.1:1234`.
 
 Check:
 
@@ -60,7 +60,7 @@ Common causes:
 
 - Railway returned only a `.railway.internal` database URL.
 - Public networking is not enabled on the Railway database.
-- The target Aeroplane database is not deployed.
+- The target orizonCP database is not deployed.
 - TimescaleDB extension versions differ.
 - The target PostgreSQL major version is older than the source.
 

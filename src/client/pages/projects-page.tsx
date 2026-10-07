@@ -23,8 +23,6 @@ import {
   readPinnedProjectIds,
   writePinnedProjectIds,
 } from "../features/projects/pinned-projects";
-import { ProjectsDashboardHeader } from "../features/projects/projects-dashboard-header";
-import { ProjectsDashboardSidebar } from "../features/projects/projects-dashboard-sidebar";
 import { ProjectsEmptyState } from "../features/projects/projects-empty-state";
 import { ProjectsGridSkeleton } from "../features/projects/projects-grid-skeleton";
 import { SetupTodoList } from "../features/projects/setup-todo-list";
@@ -232,91 +230,63 @@ export function ProjectsPage() {
 
   return (
     <>
-      <main className="relative min-h-dvh bg-black text-white">
-        <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
-          <ProjectsDashboardSidebar
-            currentUser={currentUser}
-            tools={tools}
-            owner={owner}
-          />
+      <h1 className="text-2xl font-semibold tracking-tight">Projects</h1>
+      <div className="mt-4">
+        {error ? (
+          <div className="mt-6 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad">
+            {error}
+          </div>
+        ) : null}
 
-          <section className="relative min-w-0 bg-zinc-950">
-            <div
-              aria-hidden
-              className="hero-noise pointer-events-none absolute inset-0"
+        {!setupLoading && owner ? (
+          <div className="mt-7">
+            <SetupTodoList
+              domainSettings={domainSettings}
+              githubStatus={githubStatus}
+              r2Status={r2Status}
+              tools={tools}
+              onOpenSettings={openSystemSettings}
+              onOpenGitHubInstall={() => setGitHubInstallOpen(true)}
             />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_6%,rgba(255,255,255,0.05),transparent_24%)]"
-            />
+          </div>
+        ) : null}
 
-            <div className="relative z-10 mx-auto w-full max-w-[1680px] px-5 pb-20 pt-6 sm:px-8 lg:px-10 lg:pt-6">
-              <ProjectsDashboardHeader
-                projectCount={projects.length}
-                serviceCount={serviceCount}
-                onCreate={() => setCreateOpen(true)}
-                onImport={() => setProjectImportView("choose")}
+        <div className="mt-7">
+          {!setupLoading && projects.length > 0 ? (
+            <div className="mb-5">
+              <ProjectSearch
+                query={projectSearch}
+                resultCount={visibleProjects.length}
+                totalCount={projects.length}
+                onQueryChange={setProjectSearch}
               />
-
-              {error ? (
-                <div className="mt-6 border-l-2 border-white bg-white/10 px-4 py-3 text-sm text-white">
-                  {error}
-                </div>
-              ) : null}
-
-              {!setupLoading && owner ? (
-                <div className="mt-7">
-                  <SetupTodoList
-                    domainSettings={domainSettings}
-                    githubStatus={githubStatus}
-                    r2Status={r2Status}
-                    tools={tools}
-                    onOpenSettings={openSystemSettings}
-                    onOpenGitHubInstall={() => setGitHubInstallOpen(true)}
-                  />
-                </div>
-              ) : null}
-
-              <div className="mt-7">
-                {!setupLoading && projects.length > 0 ? (
-                  <div className="mb-5">
-                    <ProjectSearch
-                      query={projectSearch}
-                      resultCount={visibleProjects.length}
-                      totalCount={projects.length}
-                      onQueryChange={setProjectSearch}
-                    />
-                  </div>
-                ) : null}
-
-                {setupLoading ? (
-                  <ProjectsGridSkeleton />
-                ) : projects.length === 0 ? (
-                  <ProjectsEmptyState onCreate={() => setCreateOpen(true)} />
-                ) : visibleProjects.length === 0 ? (
-                  <ProjectSearchEmptyState
-                    query={projectSearch.trim()}
-                    onClear={() => setProjectSearch("")}
-                  />
-                ) : (
-                  <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                    {visibleProjects.map((project, index) => (
-                      <ProjectOverviewCard
-                        key={project.id}
-                        project={project}
-                        index={index}
-                        pinned={pinnedProjectIds.includes(project.id)}
-                        onOpen={() => openProject(project)}
-                        onTogglePin={() => togglePinnedProject(project.id)}
-                      />
-                    ))}
-                  </section>
-                )}
-              </div>
             </div>
-          </section>
+          ) : null}
+
+          {setupLoading ? (
+            <ProjectsGridSkeleton />
+          ) : projects.length === 0 ? (
+            <ProjectsEmptyState onCreate={() => setCreateOpen(true)} />
+          ) : visibleProjects.length === 0 ? (
+            <ProjectSearchEmptyState
+              query={projectSearch.trim()}
+              onClear={() => setProjectSearch("")}
+            />
+          ) : (
+            <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {visibleProjects.map((project, index) => (
+                <ProjectOverviewCard
+                  key={project.id}
+                  project={project}
+                  pinned={pinnedProjectIds.includes(project.id)}
+                  onOpen={() => openProject(project)}
+                  onTogglePin={() => togglePinnedProject(project.id)}
+                />
+              ))}
+            </section>
+          )}
         </div>
-      </main>
+      </div>
 
       <CreateProjectModal
         open={createOpen}

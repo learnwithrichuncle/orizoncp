@@ -1,9 +1,9 @@
 ---
 title: API Access
-description: Authenticate scripts and CI jobs with scoped Aeroplane API keys.
+description: Authenticate scripts and CI jobs with scoped orizonCP API keys.
 ---
 
-API keys let scripts, CI jobs, and local tools call Aeroplane without a browser session.
+API keys let scripts, CI jobs, and local tools call orizonCP without a browser session.
 
 API keys use the same `/api/*` endpoints as the dashboard. Browser requests authenticate with the session cookie. Programmatic requests authenticate with a bearer token.
 
@@ -18,25 +18,25 @@ Choose:
 - `Projects`: all projects or selected projects.
 - `Expiration`: `7 days`, `30 days`, `90 days`, or `No expiration`.
 
-After creation, Aeroplane shows the full key once. Copy it before closing the dialog. Later, the API Access page only shows metadata such as prefix, scope, expiration, and last-used time.
+After creation, orizonCP shows the full key once. Copy it before closing the dialog. Later, the API Access page only shows metadata such as prefix, scope, expiration, and last-used time.
 
 ## Authentication
 
 Use bearer authentication:
 
 ```bash
-export AEROPLANE_URL="https://pilot.example.com"
-export AEROPLANE_API_KEY="ap_..."
+export ORIZONCP_URL="https://pilot.example.com"
+export ORIZONCP_API_KEY="ap_..."
 
-curl "$AEROPLANE_URL/api/projects" \
-  -H "Authorization: Bearer $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/projects" \
+  -H "Authorization: Bearer $ORIZONCP_API_KEY"
 ```
 
-Aeroplane also accepts `X-API-Key`:
+orizonCP also accepts `X-API-Key`:
 
 ```bash
-curl "$AEROPLANE_URL/api/projects" \
-  -H "X-API-Key: $AEROPLANE_API_KEY"
+curl "$ORIZONCP_URL/api/projects" \
+  -H "X-API-Key: $ORIZONCP_API_KEY"
 ```
 
 ## Access Levels
@@ -51,7 +51,7 @@ Read-only keys receive `403` for write actions.
 
 `All projects` keys can access every project according to their access level.
 
-`Specific projects` keys can only access the selected projects. For service routes, Aeroplane resolves the service to its project before allowing the request. For deployment routes, Aeroplane resolves the deployment to its service, then to the service project.
+`Specific projects` keys can only access the selected projects. For service routes, orizonCP resolves the service to its project before allowing the request. For deployment routes, orizonCP resolves the deployment to its service, then to the service project.
 
 Selected-project keys cannot create new projects because new projects are outside their scope. Use an all-project write key for project creation.
 

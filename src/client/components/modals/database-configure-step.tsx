@@ -48,7 +48,7 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
     const list: EnvEntry[] = [];
 
     if (isPostgresFamilyDatabase(dbType)) {
-      list.push({ key: "POSTGRES_DB", value: "aeroplane" });
+      list.push({ key: "POSTGRES_DB", value: "orizoncp" });
       list.push({ key: "POSTGRES_USER", value: "postgres" });
       list.push({ key: "POSTGRES_PASSWORD", value: password });
       if (dbType === "timescale") {
@@ -56,7 +56,7 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
       }
     } else if (dbType === "mysql") {
       const userPassword = generateRandomPassword();
-      list.push({ key: "MYSQL_DATABASE", value: "aeroplane" });
+      list.push({ key: "MYSQL_DATABASE", value: "orizoncp" });
       list.push({ key: "MYSQL_USER", value: "mysql" });
       list.push({ key: "MYSQL_PASSWORD", value: userPassword });
       list.push({ key: "MYSQL_ROOT_PASSWORD", value: password });
@@ -66,7 +66,7 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
       list.push({ key: "MONGO_INITDB_ROOT_USERNAME", value: "mongo" });
       list.push({ key: "MONGO_INITDB_ROOT_PASSWORD", value: password });
     } else if (dbType === "clickhouse") {
-      list.push({ key: "CLICKHOUSE_DB", value: "aeroplane" });
+      list.push({ key: "CLICKHOUSE_DB", value: "orizoncp" });
       list.push({ key: "CLICKHOUSE_USER", value: "clickhouse" });
       list.push({ key: "CLICKHOUSE_PASSWORD", value: password });
       list.push({ key: "CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT", value: "1" });

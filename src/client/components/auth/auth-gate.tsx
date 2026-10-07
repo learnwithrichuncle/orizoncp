@@ -64,9 +64,9 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     void loadStatus();
-    window.addEventListener("aeroplane-auth-changed", loadStatus);
+    window.addEventListener("orizoncp-auth-changed", loadStatus);
     return () =>
-      window.removeEventListener("aeroplane-auth-changed", loadStatus);
+      window.removeEventListener("orizoncp-auth-changed", loadStatus);
   }, [loadStatus]);
 
   const redirectTo = useMemo(() => {

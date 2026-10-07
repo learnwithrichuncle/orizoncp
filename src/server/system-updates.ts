@@ -54,7 +54,7 @@ interface CommandResult {
 
 type CommandEnv = NodeJS.ProcessEnv;
 
-const updateRemoteName = "aeroplane-updates";
+const updateRemoteName = "orizoncp-updates";
 const completedRestartRunVisibleMs = 45_000;
 let activeRun: SystemUpdateRun = idleRun();
 let activeUpdate: Promise<void> | null = null;
@@ -177,7 +177,7 @@ async function isGitCheckout() {
 }
 
 function imageManualUpdateCommand() {
-  return "cd /opt/aeroplane && sudo docker compose pull aeroplane && sudo docker compose up -d aeroplane";
+  return "cd /opt/orizoncp && sudo docker compose pull orizoncp && sudo docker compose up -d orizoncp";
 }
 
 function normalizeLegacyImageUpdateCommand(command: string) {
@@ -451,7 +451,7 @@ export async function getSystemUpdateInfo(): Promise<SystemUpdateInfo> {
 async function runImageUpdate() {
   const currentCommit = imageCurrentCommit();
   if (!currentCommit) {
-    throw new Error("This Docker image was built without AEROPLANE_COMMIT_SHA, so Aeroplane cannot compare updates.");
+    throw new Error("This Docker image was built without ORIZONCP_COMMIT_SHA, so orizonCP cannot compare updates.");
   }
 
   const command = configuredImageUpdateCommand();
@@ -468,7 +468,7 @@ async function runImageUpdate() {
   activeRun.targetCommit = targetCommit;
 
   if (currentCommit === targetCommit) {
-    appendLog("Aeroplane is already on the latest published commit.");
+    appendLog("orizonCP is already on the latest published commit.");
     activeRun.status = "succeeded";
     return;
   }
@@ -482,7 +482,7 @@ async function runImageUpdate() {
   appendLog(`Applying ${commits.length} commit${commits.length === 1 ? "" : "s"} up to ${shortSha(targetCommit)} by pulling the latest image.`);
   await runLogged("sh", ["-lc", command]);
   activeRun.restartQueued = true;
-  appendLog("Image update queued. Aeroplane will restart when Docker replaces the container.");
+  appendLog("Image update queued. orizonCP will restart when Docker replaces the container.");
   activeRun.status = "succeeded";
 }
 
@@ -493,7 +493,7 @@ async function runUpdate() {
     finishedAt: null,
     targetCommit: null,
     restartQueued: false,
-    logs: ["Checking GitHub for Aeroplane updates..."],
+    logs: ["Checking GitHub for orizonCP updates..."],
     error: null
   };
 
@@ -508,7 +508,7 @@ async function runUpdate() {
       dirty = await isWorkingTreeDirty();
     }
     if (dirty) {
-      throw new Error("Cannot update while the Aeroplane working tree has local changes.");
+      throw new Error("Cannot update while the orizonCP working tree has local changes.");
     }
 
     await fetchRemote(true);
@@ -517,7 +517,7 @@ async function runUpdate() {
     activeRun.targetCommit = targetCommit;
 
     if (currentCommit === targetCommit) {
-      appendLog("Aeroplane is already on the latest commit.");
+      appendLog("orizonCP is already on the latest commit.");
       activeRun.status = "succeeded";
       return;
     }
@@ -539,9 +539,9 @@ async function runUpdate() {
 
     if (queueRestart()) {
       activeRun.restartQueued = true;
-      appendLog("Restart queued. Aeroplane will come back on the updated build.");
+      appendLog("Restart queued. orizonCP will come back on the updated build.");
     } else {
-      appendLog("Update built. Configure AEROPLANE_UPDATE_RESTART_CMD to restart automatically after updates.");
+      appendLog("Update built. Configure ORIZONCP_UPDATE_RESTART_CMD to restart automatically after updates.");
     }
 
     activeRun.status = "succeeded";

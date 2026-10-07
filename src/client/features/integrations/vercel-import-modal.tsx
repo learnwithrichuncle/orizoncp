@@ -304,7 +304,7 @@ export function VercelImportModal({
       {step === "auth" && (
         <div className="space-y-5">
           <div className="text-sm text-zinc-300 leading-relaxed">
-            Migrate a Vercel project to your self-hosted Aeroplane control
+            Migrate a Vercel project to your self-hosted orizonCP control
             plane. The connected Git repository, build commands, environment
             variables, and custom domains are imported. Builds then run through
             Railpack on your own server.

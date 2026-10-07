@@ -5,7 +5,7 @@ import { AppIcon } from "../ui/primitives";
 export function SignOutButton({ className = "" }: { className?: string }) {
   async function signOut() {
     await api.logout().catch(() => null);
-    window.dispatchEvent(new Event("aeroplane-auth-changed"));
+    window.dispatchEvent(new Event("orizoncp-auth-changed"));
     window.location.assign("/login");
   }
 

@@ -1,4 +1,3 @@
-import { GithubIcon } from "@hugeicons/core-free-icons";
 import type { FormEvent } from "react";
 import { GitHubConfiguration } from "./github-configuration";
 import { OnboardingStepForm } from "./onboarding-step-form";
@@ -31,14 +30,10 @@ export function OnboardingGitHubPage({
       onStepChange={onStepChange}
     >
       <OnboardingStepForm
-        icon={GithubIcon}
-        eyebrow="Step 03 · Source control"
         title="Connect GitHub"
         badge="Optional"
-        description="Connect a GitHub App for repository access and automatic deployments, or skip this for now."
         error={error}
         submitting={submitting}
-        nextLabel="Next: Domains"
         actionLabel="Continue to domains"
         onSubmit={onSubmit}
         onBack={onBack}

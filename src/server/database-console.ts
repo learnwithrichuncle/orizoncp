@@ -175,7 +175,7 @@ function stripTrailingSemicolon(sql: string) {
 async function runPostgres(ctx: DatabaseContext, sql: string) {
   const user = ctx.envMap.get("POSTGRES_USER") || "postgres";
   const password = ctx.envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = ctx.envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = ctx.envMap.get("POSTGRES_DB") || "orizoncp";
   const result = await runDockerExec(
     ctx.containerName,
     [
@@ -210,7 +210,7 @@ async function postgresJson<T>(ctx: DatabaseContext, sql: string): Promise<T> {
 async function runMysql(ctx: DatabaseContext, sql: string) {
   const user = ctx.envMap.get("MYSQL_USER") || "mysql";
   const password = ctx.envMap.get("MYSQL_PASSWORD") || "";
-  const dbName = ctx.envMap.get("MYSQL_DATABASE") || "aeroplane";
+  const dbName = ctx.envMap.get("MYSQL_DATABASE") || "orizoncp";
   const result = await runDockerExec(
     ctx.containerName,
     [

@@ -7,8 +7,8 @@ Use this fixture to verify that Auto detects a Dockerfile at the deployment root
 ## Run
 
 ```sh
-docker build -t aeroplane-dockerfile-basic .
-docker run --rm -p 8080:8080 -p 5432:5432 aeroplane-dockerfile-basic
+docker build -t orizoncp-dockerfile-basic .
+docker run --rm -p 8080:8080 -p 5432:5432 orizoncp-dockerfile-basic
 ```
 
 ## Routes
@@ -20,7 +20,7 @@ docker run --rm -p 8080:8080 -p 5432:5432 aeroplane-dockerfile-basic
 ## Database
 
 ```sh
-psql postgresql://aeroplane:aeroplane@127.0.0.1:5432/aeroplane_test -c "SELECT * FROM messages ORDER BY id;"
+psql postgresql://orizoncp:orizoncp@127.0.0.1:5432/orizoncp_test -c "SELECT * FROM messages ORDER BY id;"
 ```
 
-When deploying through Aeroplane as a source service, set the app port to `8080`.
+When deploying through orizonCP as a source service, set the app port to `8080`.

@@ -29,7 +29,7 @@ export function registerBackupStorageRoutes(app: Hono) {
     const userId = sessionUserId(c);
     if (!userId) return jsonError("A browser session is required", 403);
     if (!hasSecretKey()) {
-      return jsonError("AEROPLANE_SECRET_KEY is required before saving R2 credentials", 409);
+      return jsonError("ORIZONCP_SECRET_KEY is required before saving R2 credentials", 409);
     }
 
     const body = r2ConnectionSchema.safeParse(await c.req.json().catch(() => ({})));

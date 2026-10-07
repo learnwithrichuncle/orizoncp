@@ -4,7 +4,6 @@ import { MigrationImportModal } from "../features/onboarding/migration-import-mo
 import { OnboardingBackupsPage } from "../features/onboarding/onboarding-backups-page";
 import { OnboardingDomainPage } from "../features/onboarding/onboarding-domain-page";
 import { OnboardingGitHubPage } from "../features/onboarding/onboarding-github-page";
-import { OnboardingPageSkeleton } from "../features/onboarding/onboarding-page-skeleton";
 import { OnboardingOwnerPage } from "../features/onboarding/onboarding-owner-page";
 import {
   OnboardingRestartPage,
@@ -221,7 +220,7 @@ export function OnboardingPage() {
       activeStep === "root-domain" &&
       !isWildcardRootDomain(form.rootDomain)
     ) {
-      return "Root domain must be a wildcard hostname like *.pilot.aeroplane.run.";
+      return "Root domain must be a wildcard hostname like *.pilot.cp.orzn.io.";
     }
 
     if (activeStep === "backups") {
@@ -241,7 +240,7 @@ export function OnboardingPage() {
     return "";
   }, [activeStep, form]);
 
-  if (authStatusLoading) return <OnboardingPageSkeleton />;
+  if (authStatusLoading) return null;
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

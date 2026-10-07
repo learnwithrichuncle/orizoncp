@@ -1,15 +1,15 @@
 ---
 title: Domains
-description: Configure generated service hostnames and custom domains for Aeroplane services.
+description: Configure generated service hostnames and custom domains for orizonCP services.
 sidebar:
   order: 2
 ---
 
-Aeroplane uses Caddy to route traffic and manage certificates once DNS resolves to the server.
+orizonCP uses Caddy to route traffic and manage certificates once DNS resolves to the server.
 
 ## Control Plane Domain
 
-The control plane domain serves Aeroplane itself:
+The control plane domain serves orizonCP itself:
 
 ```txt
 A     pilot.example.com     YOUR_SERVER_IPV4
@@ -48,7 +48,7 @@ A     app.example.com     YOUR_SERVER_IPV4
 AAAA  app.example.com     YOUR_SERVER_IPV6
 ```
 
-Then add the domain to the service in Aeroplane. Caddy handles routing and certificates after DNS resolves.
+Then add the domain to the service in orizonCP. Caddy handles routing and certificates after DNS resolves.
 
 ## Service Domain Tab
 
@@ -65,16 +65,16 @@ Local loopback domains such as `localhost` do not need public DNS records.
 
 ## Caddy Behavior
 
-Caddy serves the Aeroplane dashboard, app services, static sites, and custom domains. Aeroplane rewrites and reloads Caddy configuration when domain settings change.
+Caddy serves the orizonCP dashboard, app services, static sites, and custom domains. orizonCP rewrites and reloads Caddy configuration when domain settings change.
 
-If Caddy reload fails, Aeroplane surfaces the reload detail in the deployment or settings flow. Check Caddy logs from the server when DNS is correct but routing still fails.
+If Caddy reload fails, orizonCP surfaces the reload detail in the deployment or settings flow. Check Caddy logs from the server when DNS is correct but routing still fails.
 
 ## DNS Checklist
 
 - The hostname resolves to the server.
 - Ports `80` and `443` are reachable.
 - No other process is bound to those public ports.
-- Caddy is running through the Aeroplane Docker Compose stack.
+- Caddy is running through the orizonCP Docker Compose stack.
 - The service is deployed and active.
 - The service internal port matches the app container's listening port.
 

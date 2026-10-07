@@ -122,7 +122,7 @@ export function MongoDocumentModal({
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <FieldLabel>Database</FieldLabel>
-                <FormInput value={draft.database ?? ""} onChange={(event) => onDraftChange({ ...draft, database: event.target.value })} placeholder="aeroplane" required />
+                <FormInput value={draft.database ?? ""} onChange={(event) => onDraftChange({ ...draft, database: event.target.value })} placeholder="orizoncp" required />
               </label>
               <label className="block">
                 <FieldLabel>Collection</FieldLabel>

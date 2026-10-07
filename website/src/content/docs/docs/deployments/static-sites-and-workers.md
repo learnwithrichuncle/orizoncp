@@ -7,7 +7,7 @@ Static sites and workers are both source or Docker image services with a differe
 
 ## Static Sites
 
-A static site is a web service with a `Static output` directory. Aeroplane builds the source service, creates an image, copies the static output directory from that image into `DATA_DIR/static-sites/{serviceId}`, and serves the files through Caddy.
+A static site is a web service with a `Static output` directory. orizonCP builds the source service, creates an image, copies the static output directory from that image into `DATA_DIR/static-sites/{serviceId}`, and serves the files through Caddy.
 
 Set `Static output` to the directory created by your build, for example:
 
@@ -16,15 +16,15 @@ Set `Static output` to the directory created by your build, for example:
 - `.output/public`
 - `apps/web/dist`
 
-If the folder does not contain `index.html`, Aeroplane treats it as a failed static deployment. That usually means the app is server-rendered or the output directory is wrong.
+If the folder does not contain `index.html`, orizonCP treats it as a failed static deployment. That usually means the app is server-rendered or the output directory is wrong.
 
 ## Static Output Detection
 
 Leave `Static output` blank when the app should run as a server. Set it only when the deployment should serve files directly.
 
-For TanStack Start SSR apps, leave `Static output` blank. Aeroplane detects TanStack Start source services and starts the server-rendered app instead of exporting `dist/client` as a static site.
+For TanStack Start SSR apps, leave `Static output` blank. orizonCP detects TanStack Start source services and starts the server-rendered app instead of exporting `dist/client` as a static site.
 
-For custom commands, Aeroplane expects the static output path to match the output inside the built image. For auto-detected builds, use the framework's output folder.
+For custom commands, orizonCP expects the static output path to match the output inside the built image. For auto-detected builds, use the framework's output folder.
 
 ## Workers
 

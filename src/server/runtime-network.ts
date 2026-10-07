@@ -39,7 +39,7 @@ function compactDockerNetworkName(value: string) {
 }
 
 export function runtimeNetworkNameForProject(projectId: string) {
-  const baseName = safeDockerNetworkPart(config.runtimeNetworkName, "aeroplane-runtime");
+  const baseName = safeDockerNetworkPart(config.runtimeNetworkName, "orizoncp-runtime");
   const projectName = safeDockerNetworkPart(projectId, "project");
   return compactDockerNetworkName(`${baseName}-${projectName}`);
 }

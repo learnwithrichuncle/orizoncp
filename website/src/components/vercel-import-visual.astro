@@ -1,5 +1,5 @@
 ---
-import AeroplaneLogo from "./aeroplane-logo.astro";
+import orizonCPLogo from "./orizoncp-logo.astro";
 import VercelLogo from "./vercel-logo.astro";
 
 const { previewRows, importDetails } = Astro.props;
@@ -36,7 +36,7 @@ const { previewRows, importDetails } = Astro.props;
     <div class="relative grid min-h-24 place-items-center border-b border-white/10 bg-black lg:min-h-0 lg:border-b-0 lg:border-r" aria-label="Migration direction">
       <span class="absolute bottom-0 left-1/2 top-0 border-l border-dashed border-white/15 lg:bottom-auto lg:left-0 lg:right-0 lg:top-1/2 lg:border-l-0 lg:border-t"></span>
       <span class="relative grid size-11 place-items-center border border-white/20 bg-black text-white">
-        <AeroplaneLogo class="size-5 rotate-[135deg] lg:rotate-45" />
+        <orizonCPLogo class="size-5 rotate-[135deg] lg:rotate-45" />
       </span>
       <span class="absolute bottom-2 left-1/2 -translate-x-1/2 font-mono text-[10px] text-zinc-600 lg:hidden">↓</span>
       <span class="absolute right-2 top-1/2 hidden -translate-y-1/2 font-mono text-[10px] text-zinc-600 lg:block">→</span>
@@ -45,7 +45,7 @@ const { previewRows, importDetails } = Astro.props;
     <section class="min-w-0">
       <header class="flex min-h-[73px] items-center justify-between gap-3 border-b border-white/10 p-4">
         <p class="section-label">Included in the import</p>
-        <AeroplaneLogo class="size-5 text-zinc-500" />
+        <orizonCPLogo class="size-5 text-zinc-500" />
       </header>
       <div class="divide-y divide-white/10 p-4">
         {importDetails.map((detail, index) => (

@@ -1,9 +1,9 @@
 ---
-title: Aeroplane Docs
-description: Install Aeroplane, connect your server, and run apps and databases from a self-hosted control plane.
+title: orizonCP Docs
+description: Install orizonCP, connect your server, and run apps and databases from a self-hosted control plane.
 template: splash
 hero:
-  title: Aeroplane Docs
+  title: orizonCP Docs
   tagline: Install the control plane, wire DNS, GitHub, R2, migrations, databases, and concurrent deployments from your own server.
   actions:
     - text: Start install
@@ -17,16 +17,16 @@ hero:
 import { Aside, CardGrid, LinkCard } from "@astrojs/starlight/components";
 
 <Aside type="tip" title="Start with a fresh server">
-  Aeroplane is designed to own the deployment stack on a clean Ubuntu or Debian server. Have DNS, GitHub, and backup storage decisions ready before onboarding if you want generated service URLs, push deploys, and off-server backups on day one.
+  orizonCP is designed to own the deployment stack on a clean Ubuntu or Debian server. Have DNS, GitHub, and backup storage decisions ready before onboarding if you want generated service URLs, push deploys, and off-server backups on day one.
 </Aside>
 
 ## Choose Your Path
 
 <CardGrid>
   <LinkCard
-    title="Install Aeroplane"
+    title="Install orizonCP"
     href="/docs/getting-started/install/"
-    description="Run the installer, see what gets created under /opt/aeroplane, and learn the first host commands to keep nearby."
+    description="Run the installer, see what gets created under /opt/orizoncp, and learn the first host commands to keep nearby."
   />
   <LinkCard
     title="Finish browser onboarding"
@@ -55,8 +55,8 @@ import { Aside, CardGrid, LinkCard } from "@astrojs/starlight/components";
   />
   <LinkCard
     title="Open the source"
-    href="https://github.com/xt42io/aeroplane"
-    description="Review the application code, installer, Docker setup, and server runtime that power Aeroplane."
+    href="https://github.com/learnwithrichuncle/orizoncp"
+    description="Review the application code, installer, Docker setup, and server runtime that power orizonCP."
   />
 </CardGrid>
 
@@ -68,11 +68,11 @@ import { Aside, CardGrid, LinkCard } from "@astrojs/starlight/components";
 - Decide the wildcard service root, for example `*.pilot.example.com`.
 - Create a GitHub App when you want repository-based deployments and push webhooks.
 - Create a Cloudflare R2 bucket or token when you want off-server database backups.
-- Export a `.aeroplane` bundle first if you are moving from another Aeroplane instance.
+- Export a `.aeroplane` bundle first if you are moving from another orizonCP instance.
 
 ## Common Sequences
 
-For a new server, read [Install Aeroplane](/docs/getting-started/install/) first, then [Browser Onboarding](/docs/getting-started/onboarding/), then [First Project](/docs/getting-started/first-project/).
+For a new server, read [Install orizonCP](/docs/getting-started/install/) first, then [Browser Onboarding](/docs/getting-started/onboarding/), then [First Project](/docs/getting-started/first-project/).
 
 For a first app, start with [Source Services](/docs/deployments/source-services/), then wire its hostname with [Domains](/docs/operations/domains/).
 
@@ -80,6 +80,6 @@ For a Railway move, start with [Railway Import](/docs/migration/railway-import/)
 
 For resilience, connect [R2 Storage](/docs/storage-and-backups/r2-storage/), choose [Database Backups](/docs/storage-and-backups/database-backups/), and review [Restore and Download](/docs/storage-and-backups/restore-and-download/).
 
-## What Aeroplane Manages
+## What orizonCP Manages
 
-Aeroplane runs a self-hosted control plane on your server. It coordinates GitHub-connected app services, direct Git URL services, prebuilt Docker images, Railpack and BuildKit builds, Docker workloads, Caddy routes, generated service domains, custom domains, environment variables, deployment logs, runtime logs, database access, database backups, Railway imports, encrypted migration bundles, R2 storage, DNS provider automation, system maintenance, updates, and deployment concurrency.
+orizonCP runs a self-hosted control plane on your server. It coordinates GitHub-connected app services, direct Git URL services, prebuilt Docker images, Railpack and BuildKit builds, Docker workloads, Caddy routes, generated service domains, custom domains, environment variables, deployment logs, runtime logs, database access, database backups, Railway imports, encrypted migration bundles, R2 storage, DNS provider automation, system maintenance, updates, and deployment concurrency.

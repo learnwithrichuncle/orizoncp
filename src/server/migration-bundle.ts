@@ -68,14 +68,14 @@ export type MigrationImportResult = {
 };
 
 type MigrationManifest = {
-  format: "aeroplane-migration";
+  format: "orizoncp-migration" | "aeroplane-migration";
   version: 1;
   createdAt: string;
   source: {
     dataDir: string;
     publicUrl: string;
     controlPlaneHostname: string;
-    aeroplaneVersion: string;
+    orizoncpVersion: string;
   };
   databaseDumps: MigrationDatabaseDump[];
   files: {
@@ -92,7 +92,7 @@ function currentDataDir() {
 
 function currentRuntimeEnv() {
   return {
-    AEROPLANE_SECRET_KEY: process.env.AEROPLANE_SECRET_KEY ?? config.secretKey,
+    AEROPLANE_SECRET_KEY: process.env.ORIZONCP_SECRET_KEY ?? process.env.AEROPLANE_SECRET_KEY ?? config.secretKey,
     DATA_DIR: process.env.DATA_DIR ?? config.dataDir,
     DEPLOY_DRY_RUN: process.env.DEPLOY_DRY_RUN ?? String(config.deployDryRun),
     CADDY_CONFIG_PATH: process.env.CADDY_CONFIG_PATH ?? config.caddyConfigPath,
@@ -103,7 +103,7 @@ function currentRuntimeEnv() {
     PUBLIC_URL: process.env.PUBLIC_URL ?? config.publicUrl,
     CONTROL_PLANE_HOSTNAME: process.env.CONTROL_PLANE_HOSTNAME ?? config.controlPlaneHostname,
     BUILDKIT_HOST: process.env.BUILDKIT_HOST ?? config.buildkitHost,
-    AEROPLANE_RUNTIME_NETWORK: process.env.AEROPLANE_RUNTIME_NETWORK ?? config.runtimeNetworkName,
+    AEROPLANE_RUNTIME_NETWORK: process.env.ORIZONCP_RUNTIME_NETWORK ?? process.env.AEROPLANE_RUNTIME_NETWORK ?? config.runtimeNetworkName,
     GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN ?? config.githubAccessToken,
     GITHUB_APP_ID: process.env.GITHUB_APP_ID ?? config.githubAppId,
     GITHUB_APP_CLIENT_ID: process.env.GITHUB_APP_CLIENT_ID ?? config.githubAppClientId,
@@ -274,14 +274,14 @@ async function writePayload(payloadDir: string) {
   };
 
   const manifest: MigrationManifest = {
-    format: "aeroplane-migration",
+    format: "orizoncp-migration",
     version: 1,
     createdAt: nowIso(),
     source: {
       dataDir,
       publicUrl: process.env.PUBLIC_URL ?? config.publicUrl,
       controlPlaneHostname: systemSettings.controlPlaneHostname,
-      aeroplaneVersion: process.env.npm_package_version ?? "unknown"
+      orizoncpVersion: process.env.npm_package_version ?? "unknown"
     },
     databaseDumps,
     files
@@ -357,10 +357,10 @@ export async function createMigrationBundle(passphrase: string) {
     throw new Error("Use a migration passphrase with at least 8 characters.");
   }
 
-  const workDir = await mkdtemp(join(tmpdir(), "aeroplane-export-"));
+  const workDir = await mkdtemp(join(tmpdir(), "orizoncp-export-"));
   const payloadDir = join(workDir, "payload");
   const archivePath = join(workDir, "payload.tar.gz");
-  const bundlePath = join(workDir, `aeroplane-${new Date().toISOString().slice(0, 10)}-${nanoid(6)}.aeroplane`);
+  const bundlePath = join(workDir, `orizoncp-${new Date().toISOString().slice(0, 10)}-${nanoid(6)}.aeroplane`);
 
   try {
     await writePayload(payloadDir);
@@ -383,7 +383,7 @@ export async function importMigrationBundle(bundlePath: string, passphrase: stri
     throw new Error("Migration passphrase is required.");
   }
 
-  const workDir = await mkdtemp(join(tmpdir(), "aeroplane-import-"));
+  const workDir = await mkdtemp(join(tmpdir(), "orizoncp-import-"));
   const archivePath = join(workDir, "payload.tar.gz");
   const payloadDir = join(workDir, "payload");
 
@@ -392,7 +392,7 @@ export async function importMigrationBundle(bundlePath: string, passphrase: stri
     await extractTarGz(archivePath, payloadDir);
 
     const manifest = readJsonFile<MigrationManifest>(join(payloadDir, "manifest.json"));
-    if (manifest.format !== "aeroplane-migration" || manifest.version !== 1) {
+    if ((manifest.format !== "orizoncp-migration" && manifest.format !== "aeroplane-migration") || manifest.version !== 1) {
       throw new Error("Migration bundle format is not supported");
     }
 

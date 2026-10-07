@@ -1,26 +1,26 @@
 ---
 title: Projects and Services
-description: Understand how Aeroplane groups deployable apps, databases, domains, and runtime settings.
+description: Understand how orizonCP groups deployable apps, databases, domains, and runtime settings.
 sidebar:
   order: 1
 ---
 
-Aeroplane uses projects to group services that belong to the same application stack. A project can contain source-built apps, Docker image services, background workers, static sites, and databases.
+orizonCP uses projects to group services that belong to the same application stack. A project can contain source-built apps, Docker image services, background workers, static sites, and databases.
 
 ## Projects
 
 Use a project as the operational boundary for a stack. It gives you one place to scan services, create resources, follow deployments, wire domains, manage variables, browse data, and configure backups.
 
-Projects are also the boundary for database variable suggestions. When you add an app service, Aeroplane can suggest variables that reference database services in the same project.
+Projects are also the boundary for database variable suggestions. When you add an app service, orizonCP can suggest variables that reference database services in the same project.
 
 ## Source Services
 
-Source services are connected to code. Aeroplane can read from:
+Source services are connected to code. orizonCP can read from:
 
 - GitHub repositories through the GitHub App connection.
 - Direct Git URLs such as `https://github.com/owner/repo.git` or `git@github.com:owner/repo.git`.
 
-Aeroplane builds source services with Railpack and BuildKit, then runs them with Docker.
+orizonCP builds source services with Railpack and BuildKit, then runs them with Docker.
 
 Typical service work includes:
 
@@ -44,7 +44,7 @@ Docker image services can be `web` or `worker` services. Web services need an in
 
 ## Database Services
 
-Aeroplane can create these database engines:
+orizonCP can create these database engines:
 
 - PostgreSQL
 - TimescaleDB
@@ -71,10 +71,10 @@ Services expose tabs based on their type:
 
 ## Status and URLs
 
-Aeroplane tracks service status separately from deployment status. A service can be active while a newer deployment is queued or building.
+orizonCP tracks service status separately from deployment status. A service can be active while a newer deployment is queued or building.
 
 Web and static services get a preferred URL. Database services can get public hostnames when database public access is enabled and the root domain is configured.
 
 ## Runtime Shape
 
-Aeroplane keeps the runtime pieces visible: Docker containers, persistent database volumes, Caddy routes, BuildKit builds, generated service domains, variables, logs, backups, and maintenance all stay close to the service they affect.
+orizonCP keeps the runtime pieces visible: Docker containers, persistent database volumes, Caddy routes, BuildKit builds, generated service domains, variables, logs, backups, and maintenance all stay close to the service they affect.

@@ -243,7 +243,7 @@ function classifyRailwayServiceSource(serviceName: string, sourceInfo?: RailwayS
     return {
       kind: "unsupported",
       sourceLabel: `Unsupported Railway source${sourceType}`,
-      unsupportedReason: "This Railway service is not backed by a Git repository or Docker image source Aeroplane can import yet."
+      unsupportedReason: "This Railway service is not backed by a Git repository or Docker image source orizonCP can import yet."
     };
   }
 
@@ -262,7 +262,7 @@ function classifyRailwayServiceSource(serviceName: string, sourceInfo?: RailwayS
   return {
     kind: "unsupported",
     sourceLabel: "Unsupported source",
-    unsupportedReason: "This Railway service does not expose a Git repository or Docker image source Aeroplane can import yet."
+    unsupportedReason: "This Railway service does not expose a Git repository or Docker image source orizonCP can import yet."
   };
 }
 
@@ -645,7 +645,7 @@ ${serviceInstanceCommandSelection}
       }
     }
 
-    // Database imports are recreated with fresh Aeroplane-managed credentials.
+    // Database imports are recreated with fresh orizonCP-managed credentials.
     // Railway variables often point at Railway-only hosts and should not be copied.
     let fetchedVars: Record<string, string> = isDatabase
       ? generatedDatabaseEnvVars(repoFullName.split(":")[1] || "postgres")

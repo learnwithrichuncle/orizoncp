@@ -3,15 +3,15 @@ title: System Maintenance
 description: Watch disk pressure, Docker growth, build artifacts, logs, and cleanup actions.
 ---
 
-System Maintenance is the server health view inside Aeroplane. It helps you catch disk pressure before deployments, backups, or database volumes run the server out of space.
+System Maintenance is the server health view inside orizonCP. It helps you catch disk pressure before deployments, backups, or database volumes run the server out of space.
 
-## What Aeroplane Measures
+## What orizonCP Measures
 
-Aeroplane records:
+orizonCP records:
 
 - Root filesystem usage from `df`.
 - Docker storage and reclaimable data from Docker system data.
-- Aeroplane data directory usage.
+- orizonCP data directory usage.
 - Build artifact usage.
 - Database backup usage.
 - APT cache usage.
@@ -21,7 +21,7 @@ Maintenance history keeps the last 48 points for disk usage, Docker reclaimable 
 
 ## Alerts
 
-Aeroplane raises maintenance alerts when:
+orizonCP raises maintenance alerts when:
 
 - Disk usage crosses warning or critical thresholds.
 - Docker reclaimable data grows large.
@@ -38,7 +38,7 @@ Safe cleanup can run these cleanup targets:
 - Docker build cache.
 - APT cache.
 - System journals down to about `100M`.
-- Aeroplane build artifacts older than 24 hours.
+- orizonCP build artifacts older than 24 hours.
 
 Safe cleanup avoids Docker volume pruning because old database data can live in unattached volumes.
 
@@ -51,7 +51,7 @@ Do not use volume cleanup as a casual disk fix. Create backups first and make su
 ## When to Use Maintenance
 
 - Before a large Railway import.
-- Before exporting an Aeroplane migration bundle.
+- Before exporting an orizonCP migration bundle.
 - Before enabling `disk+r2` backups on many databases.
 - After repeated failed builds.
 - When deploys fail with Docker or disk space errors.

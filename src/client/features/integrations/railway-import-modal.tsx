@@ -249,7 +249,7 @@ export function RailwayImportModal({
       {step === "auth" && (
         <div className="space-y-5">
           <div className="text-sm text-zinc-300 leading-relaxed">
-            Migrate your Railway stack to your self-hosted Aeroplane control plane. App variables and command overrides are imported, while database engines are recreated with fresh Aeroplane-managed credentials.
+            Migrate your Railway stack to your self-hosted orizonCP control plane. App variables and command overrides are imported, while database engines are recreated with fresh orizonCP-managed credentials.
           </div>
 
           <div>

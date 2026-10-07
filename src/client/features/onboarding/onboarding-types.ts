@@ -46,7 +46,7 @@ export const defaultOnboardingForm: OnboardingForm = {
   publicUrl: "http://localhost:5173",
   controlPlaneHostname: "",
   buildkitHost: "tcp://127.0.0.1:1234",
-  runtimeNetworkName: "aeroplane-runtime",
+  runtimeNetworkName: "orizoncp-runtime",
   githubAccessToken: "",
   githubAppId: "",
   githubAppClientId: "",

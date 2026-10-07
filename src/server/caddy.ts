@@ -138,17 +138,17 @@ ${caddyTlsConfig(row.hostname)}  encode zstd gzip
     if (controlPlaneHostname && row.hostname === controlPlaneHostname) continue;
 
     addHostnameBlock(row.hostname, `${row.hostname} {
-${caddyTlsConfig(row.hostname)}  respond "Aeroplane ${dbType === "timescale" ? "TimescaleDB" : "Postgres"} is available on TCP ${row.hostPort}." 200
+${caddyTlsConfig(row.hostname)}  respond "orizonCP ${dbType === "timescale" ? "TimescaleDB" : "Postgres"} is available on TCP ${row.hostPort}." 200
 }`);
   }
 
   if (blocks.length === 0) {
     blocks.push(`http://127.0.0.1:65535 {
-  respond "No active Aeroplane routes." 404
+  respond "No active orizonCP routes." 404
 }`);
   }
 
-  return [`# Managed by Aeroplane. Manual changes may be overwritten.`, ...blocks].join("\n\n") + "\n";
+  return [`# Managed by orizonCP. Manual changes may be overwritten.`, ...blocks].join("\n\n") + "\n";
 }
 
 export async function writeAndReloadCaddy() {

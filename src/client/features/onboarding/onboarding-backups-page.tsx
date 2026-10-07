@@ -1,4 +1,3 @@
-import { CloudUploadIcon } from "@hugeicons/core-free-icons";
 import type { FormEvent } from "react";
 import { BackupConfiguration } from "./backup-configuration";
 import { OnboardingStepForm } from "./onboarding-step-form";
@@ -31,16 +30,11 @@ export function OnboardingBackupsPage({
       onStepChange={onStepChange}
     >
       <OnboardingStepForm
-        icon={CloudUploadIcon}
-        eyebrow="Step 05 · Resilience"
         title="Plan your backups"
         badge="Final step"
-        description="Choose default backup schedules for new databases and optionally connect Cloudflare R2 for remote storage."
         error={error}
         submitting={submitting}
-        nextLabel="Finish onboarding"
         actionLabel="Save setup"
-        finish
         onSubmit={onSubmit}
         onBack={onBack}
       >

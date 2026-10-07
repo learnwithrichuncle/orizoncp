@@ -291,7 +291,7 @@ export async function getSystemMaintenanceInfo(): Promise<SystemMaintenanceInfo>
     runCommand("df", ["-P", "-B1", "/"], 20000),
     getDockerMetrics(),
     Promise.all([
-      getPathMetric("data", "Aeroplane data", config.dataDir),
+      getPathMetric("data", "orizonCP data", config.dataDir),
       getPathMetric("build-artifacts", "Build artifacts", resolve(config.dataDir, "builds")),
       getPathMetric("backups", "Database backups", resolve(config.dataDir, "backups")),
       getPathMetric("apt-cache", "APT cache", "/var/cache/apt"),

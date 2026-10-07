@@ -4,13 +4,13 @@ import { config } from "./config.js";
 const encryptedPrefix = "enc:v1:";
 
 function activeSecretKey() {
-  return process.env.AEROPLANE_SECRET_KEY || config.secretKey;
+  return process.env.ORIZONCP_SECRET_KEY || process.env.AEROPLANE_SECRET_KEY || config.secretKey;
 }
 
 function encryptionKey() {
   const secret = activeSecretKey();
   if (!secret) {
-    throw new Error("AEROPLANE_SECRET_KEY is required to encrypt secrets");
+    throw new Error("ORIZONCP_SECRET_KEY is required to encrypt secrets");
   }
   return createHash("sha256").update(secret).digest();
 }

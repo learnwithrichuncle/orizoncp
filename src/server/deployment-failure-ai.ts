@@ -64,7 +64,7 @@ function formatLogs(logs: DeploymentLog[]) {
 }
 
 function buildPrompt(deployment: Deployment, service: Service, logs: DeploymentLog[]) {
-  return `You are helping diagnose a failed Aeroplane deployment.
+  return `You are helping diagnose a failed orizonCP deployment.
 
 Explain the failure in plain, specific language for the app owner. Focus on what happened and the smallest likely fix.
 

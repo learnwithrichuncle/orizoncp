@@ -38,7 +38,7 @@ deployments-tests/
 | Example | Command |
 | --- | --- |
 | .NET ASP.NET Core | `cd dotnet/aspnet-core && dotnet run` |
-| Dockerfile basic | `cd dockerfile/basic && docker build -t aeroplane-dockerfile-basic . && docker run --rm -p 8080:8080 -p 5432:5432 aeroplane-dockerfile-basic` |
+| Dockerfile basic | `cd dockerfile/basic && docker build -t orizoncp-dockerfile-basic . && docker run --rm -p 8080:8080 -p 5432:5432 orizoncp-dockerfile-basic` |
 | Go vanilla | `cd go/vanilla && go run .` |
 | Go Fiber | `cd go/fiber && go run .` |
 | Java vanilla | `cd java/vanilla && java server.java` |

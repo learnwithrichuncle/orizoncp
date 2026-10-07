@@ -203,9 +203,9 @@ function publicBackupSettings(row?: DatabaseBackupSettings | null): PublicDataba
 async function createPostgresBackup(ctx: DatabaseContext, backupId: string) {
   const user = ctx.envMap.get("POSTGRES_USER") || "postgres";
   const password = ctx.envMap.get("POSTGRES_PASSWORD") || "";
-  const dbName = ctx.envMap.get("POSTGRES_DB") || "aeroplane";
+  const dbName = ctx.envMap.get("POSTGRES_DB") || "orizoncp";
   const localPath = resolve(localBackupDir(ctx.service.id), backupBaseName(ctx, backupId, "dump"));
-  const remotePath = `/tmp/aeroplane-backup-${backupId}.dump`;
+  const remotePath = `/tmp/orizoncp-backup-${backupId}.dump`;
 
   await runDockerExec(
     ctx.containerName,
@@ -232,9 +232,9 @@ async function createPostgresBackup(ctx: DatabaseContext, backupId: string) {
 async function createMysqlBackup(ctx: DatabaseContext, backupId: string) {
   const user = ctx.envMap.get("MYSQL_USER") || "root";
   const password = ctx.envMap.get("MYSQL_PASSWORD") || ctx.envMap.get("MYSQL_ROOT_PASSWORD") || "";
-  const dbName = ctx.envMap.get("MYSQL_DATABASE") || "aeroplane";
+  const dbName = ctx.envMap.get("MYSQL_DATABASE") || "orizoncp";
   const localPath = resolve(localBackupDir(ctx.service.id), backupBaseName(ctx, backupId, "sql"));
-  const remotePath = `/tmp/aeroplane-backup-${backupId}.sql`;
+  const remotePath = `/tmp/orizoncp-backup-${backupId}.sql`;
 
   await runDockerExec(
     ctx.containerName,
@@ -255,7 +255,7 @@ async function createMongoBackup(ctx: DatabaseContext, backupId: string) {
   const auth = password ? `${encodeURIComponent(user)}:${encodeURIComponent(password)}@` : "";
   const uri = `mongodb://${auth}127.0.0.1:${ctx.service.internalPort}/?authSource=admin`;
   const localPath = resolve(localBackupDir(ctx.service.id), backupBaseName(ctx, backupId, "archive.gz"));
-  const remotePath = `/tmp/aeroplane-backup-${backupId}.archive.gz`;
+  const remotePath = `/tmp/orizoncp-backup-${backupId}.archive.gz`;
 
   await runDockerExec(ctx.containerName, ["mongodump", `--archive=${remotePath}`, "--gzip", "--uri", uri]);
   await copyBackupFromContainer(ctx, remotePath, localPath);
@@ -265,7 +265,7 @@ async function createMongoBackup(ctx: DatabaseContext, backupId: string) {
 async function createRedisBackup(ctx: DatabaseContext, backupId: string) {
   const password = ctx.envMap.get("REDIS_PASSWORD") || "";
   const localPath = resolve(localBackupDir(ctx.service.id), backupBaseName(ctx, backupId, "rdb"));
-  const remotePath = `/tmp/aeroplane-backup-${backupId}.rdb`;
+  const remotePath = `/tmp/orizoncp-backup-${backupId}.rdb`;
   const command = (includePassword: boolean) => [
     "redis-cli",
     "-h",
@@ -540,7 +540,7 @@ export function getDatabaseBackupFile(serviceId: string, backupId: string) {
     throw new Error("Backup file not found");
   }
 
-  const tempDir = mkdtempSync(join(tmpdir(), "aeroplane-backup-download-"));
+  const tempDir = mkdtempSync(join(tmpdir(), "orizoncp-backup-download-"));
   const localPath = join(tempDir, basename(backup.r2Key));
   return {
     backup: publicBackup(backup),

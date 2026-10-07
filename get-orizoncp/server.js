@@ -73,7 +73,7 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(port, "0.0.0.0", () => {
-  console.log(`get-aeroplane listening on http://0.0.0.0:${port}`);
+  console.log(`get-orizoncp listening on http://0.0.0.0:${port}`);
 });
 
 let shuttingDown = false;

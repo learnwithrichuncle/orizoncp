@@ -3,7 +3,7 @@ title: Docker Image Services
 description: Run prebuilt Docker images as web services or workers.
 ---
 
-Docker image services skip the source build. Aeroplane pulls the configured image and runs it directly on the server.
+Docker image services skip the source build. orizonCP pulls the configured image and runs it directly on the server.
 
 ## When to Use Them
 
@@ -12,7 +12,7 @@ Use Docker image services when:
 - CI already builds and publishes images.
 - You want to deploy a service from GHCR, Docker Hub, or another registry.
 - You are running third-party software.
-- You need full control over the image build outside Aeroplane.
+- You need full control over the image build outside orizonCP.
 
 Private images use the host Docker daemon's registry login. Sign in on the server with Docker before deploying private image references.
 
@@ -26,23 +26,23 @@ Each Docker image service stores:
 - Internal port for `web` services.
 - Environment variables.
 
-Aeroplane validates the image reference before creating the service.
+orizonCP validates the image reference before creating the service.
 
 ## Web Images
 
-For a web image, set the internal port the container listens on. Aeroplane starts a temporary container, probes the port, and only switches traffic after the container is reachable.
+For a web image, set the internal port the container listens on. orizonCP starts a temporary container, probes the port, and only switches traffic after the container is reachable.
 
-If the container starts but the port never responds, check the image logs. Aeroplane attempts to detect port mismatch hints from container output.
+If the container starts but the port never responds, check the image logs. orizonCP attempts to detect port mismatch hints from container output.
 
 ## Worker Images
 
-For a worker image, choose `worker` runtime mode. Aeroplane starts the container without a public port and checks that the process stays running.
+For a worker image, choose `worker` runtime mode. orizonCP starts the container without a public port and checks that the process stays running.
 
 Worker image deployments reload Caddy only to keep routing state in sync with the rest of the project.
 
 ## Hot Swaps
 
-For web Docker image services, Aeroplane uses a temporary container and an active port swap:
+For web Docker image services, orizonCP uses a temporary container and an active port swap:
 
 1. Pull the image.
 2. Start a temporary container on an available host port.

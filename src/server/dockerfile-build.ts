@@ -7,7 +7,8 @@ export type ServiceBuildMethod = (typeof serviceBuildMethods)[number];
 export type DetectedBuildMethod = "railpack" | "dockerfile";
 
 // Mirrors Railway's RAILWAY_DOCKERFILE_PATH escape hatch.
-export const DOCKERFILE_PATH_ENV_KEY = "AEROPLANE_DOCKERFILE_PATH";
+export const DOCKERFILE_PATH_ENV_KEY = "ORIZONCP_DOCKERFILE_PATH";
+export const LEGACY_DOCKERFILE_PATH_ENV_KEY = "AEROPLANE_DOCKERFILE_PATH";
 
 export function normalizeServiceBuildMethod(value: string | null | undefined): ServiceBuildMethod {
   return value === "railpack" || value === "dockerfile" ? value : "auto";
@@ -44,7 +45,12 @@ export function detectDockerfileBuild(options: {
   const { service, appDir, env } = options;
   const warnings: string[] = [];
   const method = normalizeServiceBuildMethod(service.buildMethod);
-  const customPath = (env[DOCKERFILE_PATH_ENV_KEY] ?? service.dockerfilePath ?? "").trim();
+  const customPath = (
+    env[DOCKERFILE_PATH_ENV_KEY] ??
+    env[LEGACY_DOCKERFILE_PATH_ENV_KEY] ??
+    service.dockerfilePath ??
+    ""
+  ).trim();
   const relativePath = customPath || "Dockerfile";
 
   const railpack = (extraWarnings: string[] = []): DockerfileDetection => ({

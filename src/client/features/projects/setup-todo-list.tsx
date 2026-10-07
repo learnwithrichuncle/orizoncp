@@ -59,7 +59,7 @@ export function SetupTodoList({
       key: "dashboard-domain",
       icon: Globe02Icon,
       title: "Add dashboard domain",
-      detail: "Serve Aeroplane from a hostname instead of only the server IP.",
+      detail: "Serve orizonCP from a hostname instead of only the server IP.",
       tone: "cyan",
       actionLabel: "Set domain",
       onAction: () => onOpenSettings("root-domain")
@@ -121,7 +121,7 @@ export function SetupTodoList({
       key: "r2",
       icon: CloudUploadIcon,
       title: "Connect R2 backups",
-      detail: "Store R2 credentials in Aeroplane so database backups can upload.",
+      detail: "Store R2 credentials in orizonCP so database backups can upload.",
       tone: "cyan",
       actionLabel: "Set storage",
       onAction: () => onOpenSettings("storage")

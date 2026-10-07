@@ -9,7 +9,7 @@ import { authSessions, projectGroups, users, type User } from "./schema.js";
 import { configuredControlPlaneHostname } from "./system-settings.js";
 import { apiKeyTokenFromRequest, authenticateApiKeyToken, type AuthenticatedApiKey } from "./api-keys.js";
 
-const sessionCookie = "aeroplane_session";
+const sessionCookie = "orizoncp_session";
 const sessionDays = 30;
 const sessionMaxAgeSeconds = sessionDays * 24 * 60 * 60;
 

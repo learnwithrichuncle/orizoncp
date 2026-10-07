@@ -1,6 +1,5 @@
-import { Cancel01Icon } from "@hugeicons/core-free-icons";
+import { XIcon } from "lucide-react";
 import { type FormEvent, useEffect, useState } from "react";
-import { AppIcon } from "../../components/ui/primitives";
 
 export function CreateProjectModal({
   open,
@@ -52,12 +51,12 @@ export function CreateProjectModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="create-project-title"
-          className="w-full max-w-xl border border-white/15 bg-zinc-950 p-6 text-white shadow-[0_30px_100px_rgba(0,0,0,0.65)] sm:p-8"
+          className="w-full max-w-xl rounded-lg border border-line bg-surface p-8 text-ink shadow-2xl"
         >
           <header className="flex items-start justify-between gap-5">
             <h2
               id="create-project-title"
-              className="pb-1 font-hero text-xl leading-[1.3] tracking-[-0.04em]"
+              className="text-2xl font-bold text-ink"
             >
               Create a new project
             </h2>
@@ -65,17 +64,17 @@ export function CreateProjectModal({
               type="button"
               onClick={onClose}
               disabled={busy}
-              className="grid h-9 w-9 flex-none place-items-center border border-white/10 text-zinc-500 transition hover:border-white/25 hover:text-white disabled:opacity-50"
+              className="grid h-9 w-9 flex-none place-items-center rounded-md text-ink-dim transition hover:bg-hover hover:text-ink disabled:opacity-50"
               aria-label="Close create project modal"
             >
-              <AppIcon icon={Cancel01Icon} size={15} />
+              <XIcon size={20} />
             </button>
           </header>
 
-          <form onSubmit={submit} className="mt-7">
+          <form onSubmit={submit} className="mt-8">
             <div className="grid gap-y-5">
               <label className="block">
-                <span className="mb-2 block font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-zinc-400">
+                <span className="mb-2 block text-xs font-medium text-ink-muted">
                   Project name
                 </span>
                 <input
@@ -90,16 +89,16 @@ export function CreateProjectModal({
                   autoComplete="off"
                   required
                   autoFocus
-                  className="h-12 w-full border border-white/15 bg-white/5 px-3.5 text-[15px] text-white outline-none transition placeholder:text-zinc-600 hover:border-white/30 focus:border-white focus:bg-white/10 focus:ring-2 focus:ring-white/10"
+                  className="h-9 w-full rounded-md border border-line bg-elevated px-3 text-sm text-ink outline-none transition placeholder:text-ink-dim hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft"
                 />
               </label>
 
               <label className="block">
                 <span className="mb-2 flex items-center justify-between gap-3">
-                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-zinc-400">
+                  <span className="text-xs font-medium text-ink-muted">
                     Description
                   </span>
-                  <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-zinc-600">
+                  <span className="text-xs text-ink-dim">
                     Optional
                   </span>
                 </span>
@@ -113,7 +112,7 @@ export function CreateProjectModal({
                   }
                   placeholder="Internal tools and APIs"
                   rows={4}
-                  className="w-full resize-y border border-white/15 bg-white/5 px-3.5 py-3 text-sm leading-6 text-white outline-none transition placeholder:text-zinc-600 hover:border-white/30 focus:border-white focus:bg-white/10 focus:ring-2 focus:ring-white/10"
+                  className="w-full resize-y rounded-md border border-line bg-elevated p-3 text-sm text-ink outline-none transition placeholder:text-ink-dim hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft"
                 />
               </label>
             </div>
@@ -121,17 +120,25 @@ export function CreateProjectModal({
             {error ? (
               <div
                 role="alert"
-                className="mt-5 border-l-2 border-white bg-white/10 px-4 py-3 text-sm text-white"
+                className="mt-5 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad"
               >
                 {error}
               </div>
             ) : null}
 
-            <div className="mt-7">
+            <div className="mt-8 flex justify-end gap-4">
+              <button
+                type="button"
+                onClick={onClose}
+                disabled={busy}
+                className="rounded-md border border-line bg-elevated px-4 py-2 text-sm font-medium text-ink-muted transition hover:border-line-strong hover:bg-hover hover:text-ink disabled:opacity-50"
+              >
+                Cancel
+              </button>
               <button
                 type="submit"
                 disabled={busy}
-                className="flex h-12 w-full items-center justify-center bg-white px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-60"
+                className="rounded-md border border-brand-edge bg-brand px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-hover disabled:cursor-wait disabled:opacity-60"
               >
                 {busy ? "Creating…" : "Create project"}
               </button>

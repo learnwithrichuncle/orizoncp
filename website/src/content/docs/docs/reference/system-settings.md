@@ -1,13 +1,13 @@
 ---
 title: System Settings
-description: Reference for Aeroplane system-wide settings and what they affect.
+description: Reference for orizonCP system-wide settings and what they affect.
 ---
 
 System Settings controls server-wide behavior. Service settings control one service.
 
 ## Domains
 
-`Control plane hostname` serves the Aeroplane dashboard through Caddy.
+`Control plane hostname` serves the orizonCP dashboard through Caddy.
 
 `Root domain` enables generated service hostnames and generated database public hostnames.
 
@@ -30,7 +30,7 @@ The GitHub App path enables repository discovery and push webhooks.
 
 ## API Access
 
-API Access creates scoped API keys for programmatic requests to Aeroplane.
+API Access creates scoped API keys for programmatic requests to orizonCP.
 
 Keys can be read-only or read/write, scoped to all projects or selected projects, and configured to expire after `7`, `30`, or `90` days, or never expire.
 
@@ -50,7 +50,7 @@ Bundle import is available during onboarding.
 
 ## Maintenance
 
-Maintenance settings show disk, Docker, Aeroplane data paths, build artifacts, database backup storage, APT cache, system logs, cleanup actions, and recent history.
+Maintenance settings show disk, Docker, orizonCP data paths, build artifacts, database backup storage, APT cache, system logs, cleanup actions, and recent history.
 
 Safe cleanup avoids Docker volumes. Volume cleanup is separate and destructive for detached volumes.
 
@@ -70,7 +70,7 @@ Default:
 3
 ```
 
-Aeroplane also enforces one active deployment per service.
+orizonCP also enforces one active deployment per service.
 
 ## Updates
 

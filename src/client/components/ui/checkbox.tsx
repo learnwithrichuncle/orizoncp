@@ -1,3 +1,4 @@
+import { CheckIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
 export function Checkbox({
@@ -8,7 +9,7 @@ export function Checkbox({
   children,
   className = "",
   boxClassName = "",
-  variant = "default"
+  variant: _variant = "default",
 }: {
   checked: boolean;
   label: string;
@@ -19,15 +20,6 @@ export function Checkbox({
   boxClassName?: string;
   variant?: "default" | "monochrome";
 }) {
-  const checkedClass =
-    variant === "monochrome"
-      ? "border-white bg-white text-black"
-      : "border-[#4FB8B2] bg-[#4FB8B2] text-zinc-950";
-  const focusClass =
-    variant === "monochrome"
-      ? "peer-focus-visible:ring-white/40"
-      : "peer-focus-visible:ring-[#4FB8B2]/50";
-
   return (
     <label className={`group inline-flex select-none items-center gap-2 ${disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"} ${className}`}>
       <input
@@ -40,13 +32,13 @@ export function Checkbox({
       />
       <span
         aria-hidden="true"
-        className={`grid h-4 w-4 place-items-center border transition peer-focus-visible:ring-2 ${focusClass} ${
+        className={`grid h-4 w-4 place-items-center rounded-sm border transition peer-focus-visible:ring-2 peer-focus-visible:ring-accent-soft ${
           checked
-            ? checkedClass
-            : "border-zinc-700 bg-zinc-950 text-transparent group-hover:border-zinc-500 group-hover:bg-zinc-900"
+            ? "border-brand bg-brand text-white"
+            : "border-line bg-elevated text-transparent group-hover:border-line-strong"
         } ${boxClassName}`}
       >
-        <span className={`h-1.5 w-2.5 -rotate-45 border-b-2 border-l-2 border-current transition ${checked ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
+        <CheckIcon size={12} strokeWidth={3} />
       </span>
       {children}
     </label>

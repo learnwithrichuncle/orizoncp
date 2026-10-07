@@ -184,7 +184,7 @@ export function BackupConfiguration({
             label="Bucket"
             value={form.r2Bucket}
             onChange={(r2Bucket) => update({ r2Bucket })}
-            placeholder="aeroplane-backups"
+            placeholder="orizoncp-backups"
           />
           <BackupField
             label="Access key ID"

@@ -1,8 +1,7 @@
-import { Cancel01Icon } from "@hugeicons/core-free-icons";
+import { XIcon } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { RailwayLogo } from "../../components/icons/railway-logo";
 import { VercelLogo } from "../../components/icons/vercel-logo";
-import { AppIcon } from "../../components/ui/primitives";
 
 export type ProjectImportSource = "railway" | "vercel";
 
@@ -41,26 +40,23 @@ export function ProjectImportModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="project-import-title"
-          className="w-full max-w-2xl border border-white/15 bg-zinc-950 p-6 text-white shadow-[0_30px_100px_rgba(0,0,0,0.65)] sm:p-8"
+          className="w-full max-w-2xl rounded-lg border border-line bg-surface p-8 text-ink shadow-2xl"
         >
           <header className="flex items-start justify-between gap-5">
-            <h2
-              id="project-import-title"
-              className="pb-1 font-hero text-xl leading-[1.3] tracking-[-0.04em]"
-            >
+            <h2 id="project-import-title" className="text-2xl font-bold text-ink">
               Import from…
             </h2>
             <button
               type="button"
               onClick={onClose}
-              className="grid h-9 w-9 flex-none place-items-center border border-white/10 text-zinc-500 transition hover:border-white/25 hover:text-white"
+              className="grid h-9 w-9 flex-none place-items-center rounded-md text-ink-dim transition hover:bg-hover hover:text-ink"
               aria-label="Close project import modal"
             >
-              <AppIcon icon={Cancel01Icon} size={15} />
+              <XIcon size={20} />
             </button>
           </header>
 
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {providers.map((provider) => {
               const Logo = provider.logo;
               return (
@@ -68,10 +64,10 @@ export function ProjectImportModal({
                   key={provider.id}
                   type="button"
                   onClick={() => onSelect(provider.id)}
-                  className="group border border-white/15 bg-black/20 p-5 text-left transition hover:border-white/40 hover:bg-white/5"
+                  className="group rounded-lg border border-line bg-elevated p-6 text-left transition hover:border-line-strong hover:bg-hover"
                 >
-                  <Logo aria-hidden className="h-9 w-9" />
-                  <span className="mt-6 block text-base font-medium text-white">
+                  <Logo aria-hidden className="h-8 w-8" />
+                  <span className="mt-6 block font-semibold text-ink">
                     {provider.name}
                   </span>
                 </button>

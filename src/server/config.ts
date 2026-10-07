@@ -39,36 +39,72 @@ function applyEnvFile(filePath: string, { override = false } = {}) {
 
 applyEnvFile(resolve(process.cwd(), ".env"));
 applyEnvFile(resolve(process.cwd(), ".env.local"), { override: true });
-if (process.env.AEROPLANE_ENV_PATH) {
-  applyEnvFile(resolve(process.env.AEROPLANE_ENV_PATH), { override: true });
+const envPath = process.env.ORIZONCP_ENV_PATH ?? process.env.AEROPLANE_ENV_PATH;
+if (envPath) {
+  applyEnvFile(resolve(envPath), { override: true });
 }
 
-const aeroplaneRepoUrl = "https://github.com/xt42io/aeroplane.git";
-const legacyAeroplaneRepoUrls = new Set([
+function pickEnv(primary: string, legacy: string | undefined, fallback: string): string {
+  if (process.env[primary] !== undefined) return process.env[primary] as string;
+  if (legacy && process.env[legacy] !== undefined) return process.env[legacy] as string;
+  return fallback;
+}
+
+const appName = process.env.APP_NAME ?? "orizonCP";
+const repoUrl = "https://github.com/learnwithrichuncle/orizoncp.git";
+// Previously-published repo URLs are normalized to the current repo so in-place
+// installs keep pulling updates after the rename.
+const legacyRepoUrls = new Set([
   "https://github.com/akinloluwami/aeroplane",
   "https://github.com/akinloluwami/aeroplane.git",
   "git@github.com:akinloluwami/aeroplane",
-  "git@github.com:akinloluwami/aeroplane.git"
+  "git@github.com:akinloluwami/aeroplane.git",
+  "https://github.com/xt42io/aeroplane",
+  "https://github.com/xt42io/aeroplane.git",
+  "git@github.com:xt42io/aeroplane",
+  "git@github.com:xt42io/aeroplane.git"
 ]);
 
-function normalizeAeroplaneRepoUrl(repoUrl: string) {
-  return legacyAeroplaneRepoUrls.has(repoUrl.trim()) ? aeroplaneRepoUrl : repoUrl;
+function normalizeRepoUrl(value: string) {
+  return legacyRepoUrls.has(value.trim()) ? repoUrl : value;
 }
 
-function normalizeAeroplaneImage(image: string) {
-  return image.trim().replace(/^ghcr\.io\/akinloluwami\/aeroplane(?=[:@]|$)/, "ghcr.io/xt42io/aeroplane");
+const imageRegistry =
+  process.env.IMAGE_REPO ?? "ghcr.io/learnwithrichuncle/orizoncp";
+
+function normalizeImage(image: string) {
+  return image
+    .trim()
+    .replace(/^ghcr\.io\/akinloluwami\/aeroplane(?=[:@]|$)/, imageRegistry)
+    .replace(/^ghcr\.io\/xt42io\/aeroplane(?=[:@]|$)/, imageRegistry)
+    .replace(/^ghcr\.io\/learnwithrichuncle\/orizoncp(?=[:@]|$)/, imageRegistry);
 }
 
-const defaultAeroplaneImage = normalizeAeroplaneImage(process.env.AEROPLANE_IMAGE ?? "ghcr.io/xt42io/aeroplane:latest");
-const aeroplaneInstallDir = process.env.AEROPLANE_INSTALL_DIR ?? "/opt/aeroplane";
-const defaultImageUpdateCmd = `docker rm -f aeroplane-self-updater >/dev/null 2>&1 || true; docker run -d --name aeroplane-self-updater -v /var/run/docker.sock:/var/run/docker.sock -v ${aeroplaneInstallDir}:${aeroplaneInstallDir} -w ${aeroplaneInstallDir} ${defaultAeroplaneImage} sh -lc 'docker compose pull aeroplane && docker compose up -d --no-deps aeroplane'`;
+const defaultImage = normalizeImage(
+  pickEnv("ORIZONCP_IMAGE", "AEROPLANE_IMAGE", `${imageRegistry}:latest`)
+);
+const installDir = pickEnv(
+  "ORIZONCP_INSTALL_DIR",
+  "AEROPLANE_INSTALL_DIR",
+  "/opt/orizoncp"
+);
+const defaultImageUpdateCmd = `docker rm -f orizoncp-self-updater >/dev/null 2>&1 || true; docker run -d --name orizoncp-self-updater -v /var/run/docker.sock:/var/run/docker.sock -v ${installDir}:${installDir} -w ${installDir} ${defaultImage} sh -lc 'docker compose pull orizoncp && docker compose up -d --no-deps orizoncp'`;
 const dataDir = resolve(process.env.DATA_DIR ?? "data");
-const caddyDataDir = process.env.CADDY_DATA_DIR ?? (process.env.CADDY_RELOAD_CMD === "true" ? "/data" : dataDir);
+const caddyDataDir =
+  process.env.CADDY_DATA_DIR ??
+  (process.env.CADDY_RELOAD_CMD === "true" ? "/data" : dataDir);
 
 export const config = {
+  appName,
   port: Number(process.env.PORT ?? 4310),
   host: process.env.HOST ?? "0.0.0.0",
   publicUrl: process.env.PUBLIC_URL ?? "http://localhost:5173",
+  baseDomain: process.env.BASE_DOMAIN ?? "cp.orzn.io",
+  appUrl: process.env.APP_URL ?? "https://cp.orzn.io",
+  mailFromAddress: process.env.MAIL_FROM_ADDRESS ?? "no-reply@orzn.io",
+  mailFromName: process.env.MAIL_FROM_NAME ?? "orizonCP",
+  supportEmail: process.env.SUPPORT_EMAIL ?? "support@orzn.io",
+  imageRepo: imageRegistry,
   controlPlaneHostname: process.env.CONTROL_PLANE_HOSTNAME?.trim().toLowerCase() ?? "",
   dataDir,
   deployDryRun: process.env.DEPLOY_DRY_RUN === "true",
@@ -79,14 +115,20 @@ export const config = {
   githubAppPrivateKey: (process.env.GITHUB_APP_PRIVATE_KEY ?? "").replace(/\\n/g, "\n"),
   githubWebhookSecret: process.env.GITHUB_WEBHOOK_SECRET ?? "",
   buildkitHost: process.env.BUILDKIT_HOST ?? "tcp://127.0.0.1:1234",
-  runtimeNetworkName: process.env.AEROPLANE_RUNTIME_NETWORK ?? "aeroplane-runtime",
-  secretKey: process.env.AEROPLANE_SECRET_KEY ?? "",
+  runtimeNetworkName: pickEnv(
+    "ORIZONCP_RUNTIME_NETWORK",
+    "AEROPLANE_RUNTIME_NETWORK",
+    "orizoncp-runtime"
+  ),
+  secretKey: pickEnv("ORIZONCP_SECRET_KEY", "AEROPLANE_SECRET_KEY", ""),
   caddyConfigPath: resolve(process.env.CADDY_CONFIG_PATH ?? "data/Caddyfile"),
   caddyDataDir,
   caddyReloadCmd: process.env.CADDY_RELOAD_CMD ?? "caddy reload --config ./data/Caddyfile",
-  updateRepoUrl: normalizeAeroplaneRepoUrl(process.env.AEROPLANE_UPDATE_REPO_URL ?? aeroplaneRepoUrl),
-  updateRepoBranch: process.env.AEROPLANE_UPDATE_BRANCH ?? "main",
-  updateRestartCmd: process.env.AEROPLANE_UPDATE_RESTART_CMD ?? "",
-  imageCommitSha: process.env.AEROPLANE_COMMIT_SHA ?? "",
-  imageUpdateCmd: process.env.AEROPLANE_IMAGE_UPDATE_CMD ?? defaultImageUpdateCmd
+  updateRepoUrl: normalizeRepoUrl(
+    pickEnv("ORIZONCP_UPDATE_REPO_URL", "AEROPLANE_UPDATE_REPO_URL", repoUrl)
+  ),
+  updateRepoBranch: pickEnv("ORIZONCP_UPDATE_BRANCH", "AEROPLANE_UPDATE_BRANCH", "main"),
+  updateRestartCmd: pickEnv("ORIZONCP_UPDATE_RESTART_CMD", "AEROPLANE_UPDATE_RESTART_CMD", ""),
+  imageCommitSha: pickEnv("ORIZONCP_COMMIT_SHA", "AEROPLANE_COMMIT_SHA", ""),
+  imageUpdateCmd: pickEnv("ORIZONCP_IMAGE_UPDATE_CMD", "AEROPLANE_IMAGE_UPDATE_CMD", defaultImageUpdateCmd)
 };
