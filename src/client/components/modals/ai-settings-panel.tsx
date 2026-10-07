@@ -166,62 +166,58 @@ export function AiSettingsPanel() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
-      <div className="grid min-h-[640px] lg:grid-cols-[260px_minmax(0,1fr)]">
-        <aside className="border-b border-line bg-glass lg:border-b-0 lg:border-r">
-          <div className="flex items-center justify-between border-b border-line px-4 py-4">
-            <span className="text-sm text-white">Providers</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
-              {connectedProviderCount} connected
-            </span>
+    <section className="mx-auto max-w-5xl overflow-hidden rounded-[14px] border border-line bg-glass backdrop-blur-xl">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4">
+        <span className="text-sm text-ink">Providers</span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted">
+          {connectedProviderCount} connected
+        </span>
+      </div>
+
+      <div className="flex gap-2 overflow-x-auto px-5 py-3">
+        {aiProviders.map((provider) => (
+          <AiProviderCard
+            key={provider.id}
+            provider={provider}
+            selected={provider.id === selectedProvider.id}
+            connected={connections[provider.id].connected}
+            isDefaultModel={
+              provider.id === defaultProviderId &&
+              connections[provider.id].selectedModel === defaultModel
+            }
+            onSelect={() => selectProvider(provider.id)}
+          />
+        ))}
+      </div>
+
+      <div className="min-w-0 border-t border-line p-5 sm:p-7 lg:p-8">
+        {credentialError ? (
+          <div className="mb-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+            {credentialError}
           </div>
+        ) : null}
 
-          <div className="p-2">
-            {aiProviders.map((provider) => (
-              <AiProviderCard
-                key={provider.id}
-                provider={provider}
-                selected={provider.id === selectedProvider.id}
-                connected={connections[provider.id].connected}
-                isDefaultModel={
-                  provider.id === defaultProviderId &&
-                  connections[provider.id].selectedModel === defaultModel
-                }
-                onSelect={() => selectProvider(provider.id)}
-              />
-            ))}
+        {loading ? (
+          <div className="space-y-7" aria-label="Loading AI providers">
+            <div className="h-14 w-48 animate-pulse bg-glass" />
+            <div className="grid max-w-xl gap-5">
+              <div className="h-11 animate-pulse border border-line bg-glass" />
+              <div className="h-11 animate-pulse border border-line bg-glass" />
+            </div>
           </div>
-        </aside>
-
-        <div className="min-w-0 p-5 sm:p-7 lg:p-8">
-          {credentialError ? (
-            <div className="mb-5 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
-              {credentialError}
-            </div>
-          ) : null}
-
-          {loading ? (
-            <div className="space-y-7" aria-label="Loading AI providers">
-              <div className="h-14 w-48 animate-pulse bg-glass" />
-              <div className="grid max-w-xl gap-5">
-                <div className="h-11 animate-pulse border border-line bg-glass" />
-                <div className="h-11 animate-pulse border border-line bg-glass" />
-              </div>
-            </div>
-          ) : (
-            <AiProviderDetails
-              provider={selectedProvider}
-              model={selectedConnection.selectedModel}
-              connected={selectedConnection.connected}
-              keySuffix={selectedConnection.keySuffix}
-              isDefaultModel={selectedProviderIsDefault}
-              updating={busyProviderId === selectedProvider.id}
-              onSelectModel={(modelId) => void updateProviderModel(selectedProvider.id, modelId)}
-              onSaveApiKey={(apiKey) => updateProviderApiKey(selectedProvider.id, apiKey)}
-              onSetDefaultModel={() => void updateDefaultModel(selectedProvider.id)}
-            />
-          )}
-        </div>
+        ) : (
+          <AiProviderDetails
+            provider={selectedProvider}
+            model={selectedConnection.selectedModel}
+            connected={selectedConnection.connected}
+            keySuffix={selectedConnection.keySuffix}
+            isDefaultModel={selectedProviderIsDefault}
+            updating={busyProviderId === selectedProvider.id}
+            onSelectModel={(modelId) => void updateProviderModel(selectedProvider.id, modelId)}
+            onSaveApiKey={(apiKey) => updateProviderApiKey(selectedProvider.id, apiKey)}
+            onSetDefaultModel={() => void updateDefaultModel(selectedProvider.id)}
+          />
+        )}
       </div>
     </section>
   );

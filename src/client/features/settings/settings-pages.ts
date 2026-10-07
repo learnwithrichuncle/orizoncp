@@ -55,15 +55,15 @@ export type SettingsPageDefinition = {
 export const settingsPages: SettingsPageDefinition[] = [
   { slug: "domains", tab: "root-domain", label: "Domains", icon: Globe02Icon, ownerOnly: true },
   { slug: "dns", tab: "dns", label: "DNS", icon: ApiIcon, ownerOnly: true },
-  { slug: "github", tab: "github", label: "GitHub", icon: GithubIcon, ownerOnly: true },
-  { slug: "ai", tab: "ai", label: "AI", icon: AiBrain01Icon, ownerOnly: false },
-  { slug: "api-access", tab: "api-access", label: "API access", icon: Key02Icon, ownerOnly: false },
-  { slug: "users", tab: "users", label: "Users", icon: UserGroupIcon, ownerOnly: true },
+  { slug: "deployments", tab: "deployments", label: "Deployments", icon: Queue02Icon, ownerOnly: true },
   { slug: "storage", tab: "storage", label: "Storage", icon: CloudUploadIcon, ownerOnly: false },
   { slug: "migration", tab: "migration", label: "Migration", icon: DatabaseExportIcon, ownerOnly: true },
   { slug: "maintenance", tab: "maintenance", label: "Maintenance", icon: HardDriveIcon, ownerOnly: true },
-  { slug: "deployments", tab: "deployments", label: "Deployments", icon: Queue02Icon, ownerOnly: true },
-  { slug: "updates", tab: "updates", label: "Updates", icon: Refresh03Icon, ownerOnly: true }
+  { slug: "updates", tab: "updates", label: "Updates", icon: Refresh03Icon, ownerOnly: true },
+  { slug: "github", tab: "github", label: "GitHub", icon: GithubIcon, ownerOnly: true },
+  { slug: "ai", tab: "ai", label: "AI", icon: AiBrain01Icon, ownerOnly: false },
+  { slug: "api-access", tab: "api-access", label: "API access", icon: Key02Icon, ownerOnly: false },
+  { slug: "users", tab: "users", label: "Users", icon: UserGroupIcon, ownerOnly: true }
 ];
 
 export function isSettingsPageSlug(value: unknown): value is SettingsPageSlug {
