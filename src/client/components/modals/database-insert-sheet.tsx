@@ -157,7 +157,7 @@ export function DatabaseInsertSheet({
                 <textarea
                   value={draft.document ?? ""}
                   onChange={(event) => onDraftChange({ ...draft, document: event.target.value })}
-                  className="min-h-56 w-full resize-none border border-line bg-base px-3 py-2 font-mono text-xs text-zinc-100 outline-none transition focus:border-white"
+                  className="min-h-56 w-full resize-none border border-line bg-base px-3 py-2 font-mono text-xs text-ink outline-none transition focus:border-white"
                   spellCheck={false}
                 />
               </label>

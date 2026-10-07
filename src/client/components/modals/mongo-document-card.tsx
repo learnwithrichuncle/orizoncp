@@ -68,7 +68,7 @@ function iconButtonClass(tone: "neutral" | "danger" | "success" = "neutral") {
     ? "text-rose-300 hover:border-rose-500/40 hover:bg-rose-500/10"
     : tone === "success"
       ? "text-emerald-300 hover:border-emerald-500/40 hover:bg-emerald-500/10"
-      : "text-ink-muted hover:border-zinc-600 hover:bg-base hover:text-zinc-100";
+      : "text-ink-muted hover:border-zinc-600 hover:bg-base hover:text-ink";
   return `grid h-8 w-8 place-items-center border border-line bg-base transition disabled:opacity-50 ${toneClass}`;
 }
 
@@ -126,7 +126,7 @@ export function MongoDocumentCard({
         const value = row[key];
         return (
           <div key={key} className="grid min-w-0 grid-cols-[max-content_minmax(0,1fr)] gap-3">
-            <div className="min-w-0 truncate text-zinc-100">{key}:</div>
+            <div className="min-w-0 truncate text-ink">{key}:</div>
             <div className={`min-w-0 truncate ${valueClass(value, type)}`} title={formatMongoValue(value, type)}>
               {formatMongoValue(value, type)}
             </div>

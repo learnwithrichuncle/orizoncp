@@ -47,7 +47,7 @@ function highlightedSql(sql: string) {
       return <span key={index} className="text-emerald-300">{token}</span>;
     }
     if (sqlKeywords.has(lower)) {
-      return <span key={index} className="text-[#7fe3dd]">{token}</span>;
+      return <span key={index} className="text-[#FF8A5C]">{token}</span>;
     }
     if (/^\d+(\.\d+)?$/.test(token)) {
       return <span key={index} className="text-amber-300">{token}</span>;
@@ -87,7 +87,7 @@ export function SqlEditor({
           highlightRef.current.scrollTop = event.currentTarget.scrollTop;
           highlightRef.current.scrollLeft = event.currentTarget.scrollLeft;
         }}
-        className="relative h-[180px] w-full resize-none overflow-auto border-0 bg-transparent p-4 font-mono text-sm leading-6 text-transparent caret-[#7fe3dd] outline-none selection:bg-[#4FB8B2]/30 disabled:opacity-60"
+        className="relative h-[180px] w-full resize-none overflow-auto border-0 bg-transparent p-4 font-mono text-sm leading-6 text-transparent caret-[#FF8A5C] outline-none selection:bg-[#FF6B35]/30 disabled:opacity-60"
       />
     </div>
   );

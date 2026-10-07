@@ -27,7 +27,7 @@ export function DeploymentLogsPanel({
   }, [logs]);
 
   return (
-    <div className={`flex h-full min-h-0 min-w-0 flex-col bg-base text-zinc-100 ${embedded ? "" : "border border-line"}`}>
+    <div className={`flex h-full min-h-0 min-w-0 flex-col bg-base text-ink ${embedded ? "" : "border border-line"}`}>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-5">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
@@ -54,7 +54,7 @@ export function RuntimeLogsPanel({ logs, emptyLabel, title }: { logs: RuntimeLog
   }, [logs]);
 
   return (
-    <div className="flex h-full min-h-0 min-w-0 flex-col border border-line bg-base text-zinc-100">
+    <div className="flex h-full min-h-0 min-w-0 flex-col border border-line bg-base text-ink">
       <div className="flex items-center gap-2 border-b border-line px-4 py-3 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim sm:px-5">
         <AppIcon icon={LeftToRightListStarIcon} size={14} />
         {title}

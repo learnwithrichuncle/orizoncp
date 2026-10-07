@@ -31,7 +31,7 @@ export function MaintenanceCleanupCard({
       <div className="flex items-center gap-3 border-b border-line px-4 py-3.5">
         <AppIcon icon={HardDriveIcon} size={16} className="text-ink-dim" />
         <div>
-          <h3 className="text-sm text-zinc-100">Cleanup</h3>
+          <h3 className="text-sm text-ink">Cleanup</h3>
           <p className="mt-0.5 text-xs text-ink-dim">Disk and Docker candidates</p>
         </div>
       </div>

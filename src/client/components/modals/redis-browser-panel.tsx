@@ -89,7 +89,7 @@ function redisEditDraft(type: string, row: DatabaseRow): Record<string, string> 
   return { value: redisItemValue(type, row) };
 }
 
-const redisInlineInputClass = "h-8 min-w-0 border border-line bg-base px-2 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-white";
+const redisInlineInputClass = "h-8 min-w-0 border border-line bg-base px-2 font-mono text-xs text-ink outline-none transition placeholder:text-zinc-700 focus:border-white";
 
 function RedisItems({
   type,
@@ -133,7 +133,7 @@ function RedisItems({
             <textarea
               value={editDraft.value ?? ""}
               onChange={(event) => setEditDraft((current) => ({ ...current, value: event.target.value }))}
-              className="min-h-0 flex-1 resize-none border border-line bg-base px-3 py-2 font-mono text-xs leading-6 text-zinc-100 outline-none transition focus:border-white"
+              className="min-h-0 flex-1 resize-none border border-line bg-base px-3 py-2 font-mono text-xs leading-6 text-ink outline-none transition focus:border-white"
               spellCheck={false}
             />
             <div className="flex justify-end gap-2">

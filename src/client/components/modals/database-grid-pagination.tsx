@@ -40,7 +40,7 @@ export function DatabaseGridPagination({
             type="button"
             className={`inline-flex h-7 items-center justify-center border px-2.5 font-mono text-[11px] font-semibold transition ${
               pagination.limit === size
-                ? "border-[#4FB8B2]/45 bg-[#4FB8B2]/12 text-[#9af4ee]"
+                ? "border-[#FF6B35]/45 bg-[#FF6B35]/12 text-[#FF8A5C]"
                 : "border-line-strong bg-base text-ink-muted hover:border-zinc-500 hover:text-white"
             }`}
             onClick={() => pagination.onPageSizeChange(size)}

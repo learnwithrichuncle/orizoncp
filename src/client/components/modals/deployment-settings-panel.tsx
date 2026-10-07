@@ -81,7 +81,7 @@ export function DeploymentSettingsPanel({ open }: { open: boolean }) {
             >
               -
             </button>
-            <div className="grid h-9 place-items-center border-y border-line bg-glass font-mono text-sm text-zinc-100">
+            <div className="grid h-9 place-items-center border-y border-line bg-glass font-mono text-sm text-ink">
               {deploymentConcurrency}
             </div>
             <button

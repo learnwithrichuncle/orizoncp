@@ -151,7 +151,7 @@ export function PostgresDataImportModal({
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-dim">Source</div>
-                <div className="mt-1 text-sm text-zinc-100">{sourceLabel}</div>
+                <div className="mt-1 text-sm text-ink">{sourceLabel}</div>
               </div>
               <span className={`px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${statusClass(progressStatus)}`}>
                 {progressLabel}
@@ -159,7 +159,7 @@ export function PostgresDataImportModal({
             </div>
             <div className="mt-5 h-2 overflow-hidden border border-line bg-base">
               <div
-                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : "bg-[#4FB8B2]"}`}
+                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : "bg-[#FF6B35]"}`}
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -212,13 +212,13 @@ export function PostgresDataImportModal({
             type="button"
             className={`border px-4 py-3 text-left transition ${
               mode === "railway"
-                ? "border-[#4FB8B2]/45 bg-[#4FB8B2]/10 text-zinc-100"
+                ? "border-[#FF6B35]/45 bg-[#FF6B35]/10 text-ink"
                 : "border-line bg-base/35 text-ink-muted hover:border-zinc-600"
             } ${!railwaySource && !loadingSources ? "opacity-60" : ""}`}
             onClick={() => setMode("railway")}
             disabled={!railwaySource && !loadingSources}
           >
-            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7fe3dd]">Railway</span>
+            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF8A5C]">Railway</span>
             <span className="mt-2 block text-sm text-ink-muted">
               {railwaySource ? railwaySource.externalServiceName ?? "Saved Railway service" : loadingSources ? "Checking saved source..." : "No saved Railway source"}
             </span>
@@ -228,12 +228,12 @@ export function PostgresDataImportModal({
             type="button"
             className={`border px-4 py-3 text-left transition ${
               mode === "postgres-url"
-                ? "border-[#4FB8B2]/45 bg-[#4FB8B2]/10 text-zinc-100"
+                ? "border-[#FF6B35]/45 bg-[#FF6B35]/10 text-ink"
                 : "border-line bg-base/35 text-ink-muted hover:border-zinc-600"
             }`}
             onClick={() => setMode("postgres-url")}
           >
-            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7fe3dd]">Postgres URL</span>
+            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF8A5C]">Postgres URL</span>
             <span className="mt-2 block text-sm text-ink-muted">Use a direct source connection string</span>
           </button>
         </div>
@@ -244,11 +244,11 @@ export function PostgresDataImportModal({
               <div className="grid gap-3 text-sm text-ink-muted sm:grid-cols-2">
                 <div>
                   <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">Project</div>
-                  <div className="mt-1 truncate text-zinc-100">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
+                  <div className="mt-1 truncate text-ink">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
                 </div>
                 <div>
                   <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">Environment</div>
-                  <div className="mt-1 truncate text-zinc-100">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
+                  <div className="mt-1 truncate text-ink">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
                 </div>
               </div>
             ) : (

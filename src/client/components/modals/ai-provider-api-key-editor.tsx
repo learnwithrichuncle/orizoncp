@@ -76,7 +76,7 @@ export function AiProviderApiKeyEditor({
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         placeholder={provider.apiKeyPlaceholder}
-        className="h-11 w-full border border-line bg-glass px-3 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
+        className="h-11 w-full border border-line bg-glass px-3 font-mono text-xs text-ink outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
         disabled={busy}
         autoComplete="new-password"
         autoCapitalize="none"

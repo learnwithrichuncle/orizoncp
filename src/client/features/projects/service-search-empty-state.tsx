@@ -11,7 +11,7 @@ export function ServiceSearchEmptyState({
   return (
     <section className="flex min-h-64 flex-col items-center justify-center border border-dashed border-line bg-base/20 px-6 text-center">
       <AppIcon icon={Search01Icon} size={20} className="text-ink-dim" />
-      <h2 className="mt-4 text-lg text-zinc-100">No matching services</h2>
+      <h2 className="mt-4 text-lg text-ink">No matching services</h2>
       <p className="mt-1.5 text-sm text-ink-dim">
         Nothing matched “{query}”.
       </p>

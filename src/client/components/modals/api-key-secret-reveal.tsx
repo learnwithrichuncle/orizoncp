@@ -19,7 +19,7 @@ export function ApiKeySecretReveal({ token, onDismiss }: { token: string; onDism
       </div>
 
       <div className="mt-5 flex min-w-0 items-stretch border border-line bg-glass">
-        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap px-3 py-3 font-mono text-xs text-zinc-100">
+        <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap px-3 py-3 font-mono text-xs text-ink">
           {token}
         </code>
         <button

@@ -111,7 +111,7 @@ export function MongoDocumentModal({
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-base/55 px-6 py-8">
       <form onSubmit={onSubmit} className="flex max-h-full w-full max-w-3xl flex-col border border-line-strong bg-base shadow-[0_24px_90px_rgba(0,0,0,0.5)]">
         <div className="border-b border-line px-5 py-4">
-          <div className="font-hero text-lg text-zinc-100">{title}</div>
+          <div className="font-hero text-lg text-ink">{title}</div>
           <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">{subtitle}</div>
         </div>
 

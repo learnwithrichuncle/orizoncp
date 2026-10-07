@@ -86,11 +86,11 @@ export function FunctionSourcePanel({
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center border border-line bg-base text-[#7fe3dd]">
+              <span className="grid h-10 w-10 place-items-center border border-line bg-base text-[#FF8A5C]">
                 <AppIcon icon={FileCodeIcon} size={20} />
               </span>
               <div className="min-w-0">
-                <h2 className="truncate font-hero text-xl font-bold tracking-tight text-zinc-100">{serviceName}</h2>
+                <h2 className="truncate font-hero text-xl font-bold tracking-tight text-ink">{serviceName}</h2>
                 <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
                   {functionRuntimeFileNames[draft.runtime]}
                 </div>

@@ -196,7 +196,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       {info?.installType === "image" ? (
         <section className="border border-line bg-base">
           <header className="border-b border-line px-5 py-3.5">
-            <h3 className="text-sm text-zinc-100">{info.canApplyUpdate ? "Docker image updates" : "Update from server"}</h3>
+            <h3 className="text-sm text-ink">{info.canApplyUpdate ? "Docker image updates" : "Update from server"}</h3>
           </header>
           <p className="px-5 py-4 text-sm leading-relaxed text-ink-dim">
             {!info.currentCommit
@@ -217,7 +217,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
         <section className="flex items-center gap-3 border border-emerald-400/20 bg-emerald-400/[0.06] px-5 py-4">
           <AppIcon icon={CheckmarkCircle02Icon} size={18} className="text-emerald-300" />
           <div>
-            <h3 className="text-sm text-zinc-100">orizonCP is up to date</h3>
+            <h3 className="text-sm text-ink">orizonCP is up to date</h3>
             <p className="mt-0.5 text-xs text-ink-dim">Installed commit matches GitHub.</p>
           </div>
         </section>
@@ -227,7 +227,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
         <section className="border border-line bg-base">
           <header className="flex flex-col gap-3 border-b border-line px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h3 className="text-sm text-zinc-100">Pending commits</h3>
+              <h3 className="text-sm text-ink">Pending commits</h3>
               <p className="mt-1 text-xs text-ink-dim">{info.commits.length} ready to apply</p>
             </div>
             <button
@@ -246,7 +246,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
               const content = (
                 <>
                   <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{commit.shortSha}</div>
-                  <div className="mt-1 text-sm text-zinc-100">{commit.title}</div>
+                  <div className="mt-1 text-sm text-ink">{commit.title}</div>
                   <div className="mt-1 font-mono text-[10px] text-ink-dim">
                     {commit.author} · {formatCommitDate(commit.date)}
                   </div>
@@ -284,7 +284,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       {run && run.status !== "idle" ? (
         <section className="border border-line bg-base">
           <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5">
-            <h3 className="text-sm text-zinc-100">Update activity</h3>
+            <h3 className="text-sm text-ink">Update activity</h3>
             <span className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${
               run.status === "failed" ? "text-rose-300" : run.status === "running" ? "text-amber-300" : "text-emerald-300"
             }`}>

@@ -28,7 +28,7 @@ export function MaintenanceUsageBar({
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{label}</div>
-          <div className="mt-2 text-lg text-zinc-100">{value}</div>
+          <div className="mt-2 text-lg text-ink">{value}</div>
         </div>
         <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{percentLabel ?? `${Math.round(clampedPercent)}%`}</div>
       </div>

@@ -235,11 +235,11 @@ export function RedisDataImportModal({
               <div className="grid gap-3 text-xs text-ink-muted sm:grid-cols-2">
                 <div>
                   <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Project</div>
-                  <div className="mt-1 truncate text-zinc-100">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
+                  <div className="mt-1 truncate text-ink">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
                 </div>
                 <div>
                   <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Environment</div>
-                  <div className="mt-1 truncate text-zinc-100">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
+                  <div className="mt-1 truncate text-ink">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
                 </div>
               </div>
             ) : (

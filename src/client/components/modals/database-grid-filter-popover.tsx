@@ -10,7 +10,7 @@ type OpenMenu = {
 } | null;
 
 function pillClass(extra = "") {
-  return `inline-flex h-8 items-center justify-between gap-2 bg-elevated px-2.5 text-[13px] text-zinc-100 ${extra}`.trim();
+  return `inline-flex h-8 items-center justify-between gap-2 bg-elevated px-2.5 text-[13px] text-ink ${extra}`.trim();
 }
 
 export function DatabaseGridFilterPopover({
@@ -101,7 +101,7 @@ export function DatabaseGridFilterPopover({
                           value={columnSearch}
                           onChange={(event) => setColumnSearch(event.target.value)}
                           placeholder="Search column..."
-                          className="h-8 min-w-0 flex-1 bg-transparent text-[13px] text-zinc-100 outline-none placeholder:text-ink-dim"
+                          className="h-8 min-w-0 flex-1 bg-transparent text-[13px] text-ink outline-none placeholder:text-ink-dim"
                         />
                       </div>
                       <div className="max-h-64 overflow-y-auto p-1.5">
@@ -145,7 +145,7 @@ export function DatabaseGridFilterPopover({
                   value={filter.value}
                   onChange={(event) => updateFilter(filter.id, { value: event.target.value })}
                   disabled={!operator.requiresValue}
-                  className="h-8 min-w-0 bg-elevated px-2.5 text-[13px] text-zinc-100 outline-none placeholder:text-ink-dim disabled:text-ink-dim"
+                  className="h-8 min-w-0 bg-elevated px-2.5 text-[13px] text-ink outline-none placeholder:text-ink-dim disabled:text-ink-dim"
                   placeholder={operator.requiresValue ? "Value" : "No value needed"}
                 />
               </div>
@@ -155,14 +155,14 @@ export function DatabaseGridFilterPopover({
 
         <div className="border-line md:border-l md:pl-3">
           <div className="flex flex-wrap gap-2">
-            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 bg-elevated px-2.5 text-[13px] text-zinc-100 hover:bg-zinc-700" onClick={addFilter}>
+            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 bg-elevated px-2.5 text-[13px] text-ink hover:bg-zinc-700" onClick={addFilter}>
               <AppIcon icon={Add01Icon} size={15} />
               Add filter
             </button>
             {canClear ? (
               <button
                 type="button"
-                className="inline-flex h-8 items-center justify-center bg-elevated px-2.5 text-[13px] text-zinc-100 transition hover:bg-zinc-700 disabled:opacity-50"
+                className="inline-flex h-8 items-center justify-center bg-elevated px-2.5 text-[13px] text-ink transition hover:bg-zinc-700 disabled:opacity-50"
                 onClick={onClear}
                 disabled={applying}
               >

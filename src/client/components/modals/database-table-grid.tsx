@@ -248,7 +248,7 @@ export function DatabaseTableGrid({
         {editable ? (
           <button
             type="button"
-            className="ml-auto inline-flex h-8 items-center justify-center gap-2 border border-zinc-600 bg-elevated px-3 text-[13px] font-medium text-zinc-100 transition hover:bg-zinc-700"
+            className="ml-auto inline-flex h-8 items-center justify-center gap-2 border border-zinc-600 bg-elevated px-3 text-[13px] font-medium text-ink transition hover:bg-zinc-700"
             onClick={onAddRecord}
           >
             <AppIcon icon={Add01Icon} size={15} />
@@ -335,7 +335,7 @@ export function DatabaseTableGrid({
                             onChange={(event) => onDraftChange(column.name, event.target.value)}
                             onFocus={(event) => event.currentTarget.select()}
                             onKeyDown={(event) => handleEditKeyDown(event, row)}
-                            className="h-8 w-full border border-zinc-600 bg-base px-2 text-zinc-100 outline-none focus:border-zinc-400"
+                            className="h-8 w-full border border-zinc-600 bg-base px-2 text-ink outline-none focus:border-zinc-400"
                           />
                         ) : (
                           <span className={`block truncate ${empty ? "text-ink-dim" : ""}`} title={displayDatabaseValue(value)}>

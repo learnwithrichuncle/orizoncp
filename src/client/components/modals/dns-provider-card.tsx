@@ -28,7 +28,7 @@ export function DnsProviderCard({
           <DnsProviderLogo provider={provider} className="max-h-6 max-w-8" />
         </span>
         <span className="min-w-0">
-          <span className="block text-sm text-zinc-100">{provider.name}</span>
+          <span className="block text-sm text-ink">{provider.name}</span>
         </span>
       </span>
 

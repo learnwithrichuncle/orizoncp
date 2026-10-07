@@ -27,10 +27,10 @@ export function DatabaseGridSortPopover({
   return (
     <div className="absolute left-0 top-full z-30 mt-2 w-[360px] border border-line-strong bg-base shadow-[0_22px_70px_rgba(0,0,0,0.45)]">
       <div className="flex items-center justify-between border-b border-line px-4 py-3">
-        <div className="text-[13px] font-semibold text-zinc-100">Sort by</div>
+        <div className="text-[13px] font-semibold text-ink">Sort by</div>
         <button
           type="button"
-          className="inline-flex items-center gap-3 text-[13px] text-zinc-100 disabled:opacity-50"
+          className="inline-flex items-center gap-3 text-[13px] text-ink disabled:opacity-50"
           onClick={() => setDirection(direction === "asc" ? "desc" : "asc")}
           disabled={!selectedColumn}
         >

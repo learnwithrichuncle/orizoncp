@@ -31,7 +31,7 @@ export function DatabaseSqlConsolePanel({ serviceId }: { serviceId: string }) {
     <form className="flex h-full min-h-0 flex-col gap-4" onSubmit={runQuery}>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
         <div>
-          <h3 className="font-hero text-xl text-zinc-100">Console</h3>
+          <h3 className="font-hero text-xl text-ink">Console</h3>
           <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
             Run SQL against the selected database container
           </div>

@@ -98,13 +98,13 @@ export function RedisTtlPopover({
             <input
               value={value}
               onChange={(event) => setValue(event.target.value)}
-              className="h-8 min-w-0 border border-line bg-base px-2 font-mono text-xs text-zinc-100 outline-none transition focus:border-white"
+              className="h-8 min-w-0 border border-line bg-base px-2 font-mono text-xs text-ink outline-none transition focus:border-white"
               inputMode="numeric"
             />
             <div className="relative">
               <button
                 type="button"
-                className="flex h-8 w-full items-center justify-between gap-1 border border-l-0 border-line bg-base px-2 text-left text-xs text-zinc-100 outline-none transition hover:border-line"
+                className="flex h-8 w-full items-center justify-between gap-1 border border-l-0 border-line bg-base px-2 text-left text-xs text-ink outline-none transition hover:border-line"
                 onClick={() => setUnitOpen((current) => !current)}
                 aria-haspopup="listbox"
                 aria-expanded={unitOpen}

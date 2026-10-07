@@ -5,7 +5,7 @@ import { AppIcon } from "../ui/primitives";
 
 const hashGridClass = "grid grid-cols-[minmax(160px,0.36fr)_minmax(240px,1fr)_168px]";
 const hashCellClass = "min-w-0 border-r border-line px-3 py-2.5";
-const hashInputClass = "h-8 w-full min-w-0 border border-line bg-base px-2 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-white";
+const hashInputClass = "h-8 w-full min-w-0 border border-line bg-base px-2 font-mono text-xs text-ink outline-none transition placeholder:text-zinc-700 focus:border-white";
 
 function valueText(value: unknown) {
   if (value === null || value === undefined) return "";
@@ -141,7 +141,7 @@ export function RedisHashTable({
                       <span className="block truncate font-mono text-ink-muted">{valueText(row.field)}</span>
                     </div>
                     <div className={hashCellClass}>
-                      <span className="block break-words font-mono text-zinc-100">{valueText(row.value)}</span>
+                      <span className="block break-words font-mono text-ink">{valueText(row.value)}</span>
                     </div>
                     <div className="flex items-center justify-end gap-2 px-3 py-2.5">
                       <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-rose-300">Confirm?</span>
@@ -164,7 +164,7 @@ export function RedisHashTable({
                       <span className="block truncate font-mono text-ink-muted">{valueText(row.field)}</span>
                     </div>
                     <div className={hashCellClass}>
-                      <span className="block break-words font-mono text-zinc-100">{valueText(row.value)}</span>
+                      <span className="block break-words font-mono text-ink">{valueText(row.value)}</span>
                     </div>
                     <div className="flex items-center justify-end gap-2 px-3 py-2.5">
                       <HashActionButton

@@ -429,7 +429,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
   if (!supported) {
     return (
       <div className="border border-line bg-base/45 p-6">
-        <h3 className="font-hero text-lg text-zinc-100">Database browser unavailable</h3>
+        <h3 className="font-hero text-lg text-ink">Database browser unavailable</h3>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">{message}</p>
       </div>
     );
@@ -442,7 +442,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
       <aside className="flex min-h-0 w-64 flex-none flex-col overflow-hidden border border-line bg-base/45">
         <div className="flex items-center justify-between border-b border-line px-4 py-3">
           <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">{nouns.list}</div>
-          <button type="button" className="text-ink-muted hover:text-zinc-100" onClick={() => void loadTables()} disabled={busy === "tables"} aria-label="Refresh tables">
+          <button type="button" className="text-ink-muted hover:text-ink" onClick={() => void loadTables()} disabled={busy === "tables"} aria-label="Refresh tables">
             <AppIcon icon={Refresh03Icon} size={15} className={busy === "tables" ? "animate-spin" : ""} />
           </button>
         </div>
@@ -469,7 +469,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             <button
               key={table.id}
               type="button"
-              className={`block w-full border-b border-zinc-900 px-4 py-3 text-left text-sm ${selectedTable === table.id ? "bg-elevated text-zinc-100" : "text-ink-muted hover:bg-base"}`}
+              className={`block w-full border-b border-zinc-900 px-4 py-3 text-left text-sm ${selectedTable === table.id ? "bg-elevated text-ink" : "text-ink-muted hover:bg-base"}`}
               onClick={() => setSelectedTable(table.id)}
             >
               <span className="block truncate font-medium">{table.name}</span>
@@ -485,7 +485,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
       <section className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
           <div>
-            <h3 className="font-hero text-xl text-zinc-100">{selectedTableName || "Data"}</h3>
+            <h3 className="font-hero text-xl text-ink">{selectedTableName || "Data"}</h3>
             <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
               {rowsResult
                 ? `${rowCountFormatter.format(rowsResult.totalRows)} total ${nouns.record}${rowsResult.totalRows === 1 ? "" : "s"}`
@@ -507,7 +507,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
               <div className="relative">
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-line bg-base/70 text-ink-muted transition hover:border-zinc-600 hover:text-zinc-100"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-line bg-base/70 text-ink-muted transition hover:border-zinc-600 hover:text-ink"
                   onClick={() => setOptionsOpen((current) => !current)}
                   aria-label="Data options"
                 >

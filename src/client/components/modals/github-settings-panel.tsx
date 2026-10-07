@@ -409,7 +409,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     value={form.githubAppPrivateKey}
                     onChange={(event) => setForm({ ...form, githubAppPrivateKey: event.target.value })}
                     placeholder={github.settings.githubAppPrivateKeyConfigured ? "Leave blank to keep current private key" : "-----BEGIN PRIVATE KEY-----"}
-                    className="min-h-32 w-full resize-y border border-line bg-glass px-3 py-3 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
+                    className="min-h-32 w-full resize-y border border-line bg-glass px-3 py-3 font-mono text-xs text-ink outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
                     spellCheck={false}
                     autoComplete="off"
                   />

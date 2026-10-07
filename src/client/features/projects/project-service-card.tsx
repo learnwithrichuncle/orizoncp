@@ -118,7 +118,7 @@ export function ProjectServiceCard({
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
-            <h2 className="truncate text-base text-zinc-100">{service.name}</h2>
+            <h2 className="truncate text-base text-ink">{service.name}</h2>
             <span className={`inline-flex shrink-0 items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] ${status.text}`}>
               <span className={`h-1.5 w-1.5 ${status.dot}`} />
               {service.status}

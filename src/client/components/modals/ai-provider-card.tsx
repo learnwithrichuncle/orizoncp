@@ -30,7 +30,7 @@ export function AiProviderCard({
         <span className="grid h-9 w-9 shrink-0 place-items-center">
           <img src={provider.logoUrl} alt="" className="max-h-6 max-w-7 object-contain" loading="lazy" />
         </span>
-        <span className="truncate text-sm text-zinc-100">{provider.name}</span>
+        <span className="truncate text-sm text-ink">{provider.name}</span>
       </span>
 
       <span className="flex shrink-0 items-center gap-2">

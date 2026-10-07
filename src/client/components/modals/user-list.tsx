@@ -55,7 +55,7 @@ export function UserList({ users, loading }: { users: ManagedUser[]; loading: bo
               {initial(user)}
             </div>
             <div className="min-w-0">
-              <h3 className="truncate text-sm text-zinc-100">{user.name || user.email}</h3>
+              <h3 className="truncate text-sm text-ink">{user.name || user.email}</h3>
               <p className="mt-0.5 truncate text-xs text-ink-dim">{user.email}</p>
             </div>
           </div>

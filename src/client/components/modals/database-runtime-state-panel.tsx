@@ -45,7 +45,7 @@ export function DatabaseRuntimeStatePanel({ state, message, busy = false, onRefr
         <div className={`mb-4 grid h-10 w-10 place-items-center border ${copy.accent}`}>
           <AppIcon icon={copy.icon} size={19} className={state === "deploying" ? "animate-pulse" : ""} />
         </div>
-        <h3 className="text-sm text-zinc-100">{copy.title}</h3>
+        <h3 className="text-sm text-ink">{copy.title}</h3>
         <p className="mt-2 text-xs leading-5 text-ink-dim">{message || copy.fallback}</p>
         <button
           type="button"

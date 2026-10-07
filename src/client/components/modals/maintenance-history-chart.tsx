@@ -84,7 +84,7 @@ export function MaintenanceHistoryChart({
       <header className="flex items-start justify-between gap-4 border-b border-line px-4 py-3">
         <div>
           <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{label}</div>
-          <div className="mt-1.5 text-lg text-zinc-100">
+          <div className="mt-1.5 text-lg text-ink">
             {latest === null ? "No data" : metricValue(latest, metric)}
           </div>
         </div>

@@ -142,7 +142,7 @@ export function ServicePage({
           <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
           <section className="grid min-h-dvh place-items-center bg-base px-5 py-12">
             <div className="w-full max-w-lg border border-line bg-base p-5">
-              <h1 className="text-lg text-zinc-100">Could not load service</h1>
+              <h1 className="text-lg text-ink">Could not load service</h1>
               <p className="mt-2 text-sm text-rose-200">{error}</p>
               <button
                 type="button"
@@ -171,7 +171,7 @@ export function ServicePage({
           <section className="grid min-h-dvh place-items-center bg-base px-5 py-12">
             <div className="w-full max-w-lg border border-line bg-base p-5">
               <AppIcon icon={CloudServerIcon} size={20} className="text-ink-dim" />
-              <h1 className="mt-4 text-lg text-zinc-100">Service not found</h1>
+              <h1 className="mt-4 text-lg text-ink">Service not found</h1>
               <p className="mt-2 text-sm leading-6 text-ink-dim">
                 There is no service named <span className="font-mono text-ink-muted">{serviceSlug}</span> in this project.
               </p>

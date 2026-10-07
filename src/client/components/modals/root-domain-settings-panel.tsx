@@ -153,7 +153,7 @@ export function RootDomainSettingsPanel({ open }: { open: boolean }) {
           </p>
           {hasSavedDomain && !editingDomain ? (
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <span className="text-lg text-zinc-100">{wildcardRootDomain(savedRootDomain)}</span>
+              <span className="text-lg text-ink">{wildcardRootDomain(savedRootDomain)}</span>
               <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
                 <span className={`h-1.5 w-1.5 ${dnsStatus === "active" ? "bg-accent" : "border border-zinc-600"}`} />
                 {dnsStatus === "active" ? "DNS active" : "DNS pending"}

@@ -73,7 +73,7 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="truncate text-lg text-zinc-100">{apiKey.name}</h3>
+                  <h3 className="truncate text-lg text-ink">{apiKey.name}</h3>
                   <span className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${statusTone.text}`}>
                     <span className={`h-1.5 w-1.5 ${statusTone.dot}`} />
                     {status}

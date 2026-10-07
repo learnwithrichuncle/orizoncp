@@ -349,7 +349,7 @@ export function RailwayImportModal({
                     className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5 last:border-b-0"
                   >
                     <div className="min-w-0">
-                      <div className="text-sm font-semibold text-zinc-100">{project.name}</div>
+                      <div className="text-sm font-semibold text-ink">{project.name}</div>
                       <div className="text-[11px] text-ink-muted truncate max-w-sm mt-0.5">
                         {project.description || "No description"}
                       </div>
@@ -459,7 +459,7 @@ export function RailwayImportModal({
                         label={`Select ${service.name}`}
                       >
                         <span className="grid min-w-0 gap-1">
-                          <span className="text-xs font-semibold text-zinc-100 font-mono">{service.name}</span>
+                          <span className="text-xs font-semibold text-ink font-mono">{service.name}</span>
                           <span className={`max-w-[260px] truncate text-[10px] font-mono ${isUnsupported ? "text-ink-dim" : "text-ink-dim"}`}>
                             {preview.unsupportedReason || preview.sourceLabel}
                           </span>
@@ -512,7 +512,7 @@ export function RailwayImportModal({
             <AppIcon icon={WorkflowSquare07Icon} size={18} className="absolute text-white" />
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-100 text-base">Migrating Project Stacks</h3>
+            <h3 className="font-semibold text-ink text-base">Migrating Project Stacks</h3>
             <p className="text-xs text-ink-muted font-mono mt-1">
               Importing services from "{selectedProject?.name}"...
             </p>
@@ -534,7 +534,7 @@ export function RailwayImportModal({
             <AppIcon icon={CheckmarkCircle02Icon} size={30} />
           </div>
           <div>
-            <h3 className="font-hero text-xl font-bold text-zinc-100">Migration Completed!</h3>
+            <h3 className="font-hero text-xl font-bold text-ink">Migration Completed!</h3>
             <p className="text-sm text-ink-muted max-w-sm mt-2">
               Successfully migrated services, command overrides, app variables, and recreated databases from "{selectedProject?.name}" into your local stack.
             </p>

@@ -427,7 +427,7 @@ export function VercelImportModal({
                       className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5 last:border-b-0"
                     >
                       <div className="min-w-0">
-                        <div className="text-sm font-semibold text-zinc-100">
+                        <div className="text-sm font-semibold text-ink">
                           {project.name}
                         </div>
                         <div className="flex items-center gap-1.5 text-[11px] text-ink-muted truncate max-w-sm mt-0.5 font-mono">
@@ -581,11 +581,11 @@ export function VercelImportModal({
             <AppIcon
               icon={WorkflowSquare07Icon}
               size={18}
-              className="absolute text-zinc-100"
+              className="absolute text-ink"
             />
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-100 text-base">
+            <h3 className="font-semibold text-ink text-base">
               Migrating Project
             </h3>
             <p className="text-xs text-ink-muted font-mono mt-1">
@@ -609,7 +609,7 @@ export function VercelImportModal({
             <AppIcon icon={CheckmarkCircle02Icon} size={30} />
           </div>
           <div>
-            <h3 className="font-hero text-xl font-bold text-zinc-100">
+            <h3 className="font-hero text-xl font-bold text-ink">
               Migration Completed!
             </h3>
             <p className="text-sm text-ink-muted max-w-sm mt-2">
@@ -686,7 +686,7 @@ function SummaryRow({
         {icon && <AppIcon icon={icon} size={12} />}
         {label}
       </span>
-      <span className="truncate text-zinc-100">{value}</span>
+      <span className="truncate text-ink">{value}</span>
     </div>
   );
 }

@@ -10,7 +10,7 @@ export function MaintenanceCommandLog({ commands }: { commands: MaintenanceComma
   return (
     <section className="border border-line bg-base">
       <div className="flex items-center justify-between border-b border-line px-4 py-3.5">
-        <h3 className="text-sm text-zinc-100">Cleanup activity</h3>
+        <h3 className="text-sm text-ink">Cleanup activity</h3>
         <span className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${complete ? "text-emerald-300" : "text-rose-300"}`}>
           <span className={`h-1.5 w-1.5 ${complete ? "bg-emerald-400" : "bg-rose-400"}`} />
           {complete ? "Complete" : "Check output"}

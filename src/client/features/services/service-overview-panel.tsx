@@ -215,7 +215,7 @@ export function ServiceOverviewPanel({
             </div>
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-3">
-                <h2 className="truncate text-xl tracking-[-0.03em] text-zinc-100">{service.name}</h2>
+                <h2 className="truncate text-xl tracking-[-0.03em] text-ink">{service.name}</h2>
                 <StatusIndicator status={displayDeploymentStatus(service.status)} />
               </div>
               {link.href ? (

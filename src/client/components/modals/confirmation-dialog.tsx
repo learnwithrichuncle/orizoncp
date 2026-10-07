@@ -54,7 +54,7 @@ export function ConfirmationDialog({
               <AppIcon icon={icon} size={16} className={`shrink-0 ${iconToneClass}`} />
               <div className="min-w-0">
                 <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-ink-dim">{eyebrow}</div>
-                <h2 id={titleId} className="truncate text-lg tracking-[-0.03em] text-zinc-100">
+                <h2 id={titleId} className="truncate text-lg tracking-[-0.03em] text-ink">
               {title}
                 </h2>
               </div>

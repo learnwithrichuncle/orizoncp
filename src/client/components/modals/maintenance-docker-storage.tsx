@@ -19,7 +19,7 @@ export function MaintenanceDockerStorage({
     <div className="border border-line bg-base">
       <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line px-4 py-3.5">
         <div>
-          <h3 className="text-sm text-zinc-100">Docker storage</h3>
+          <h3 className="text-sm text-ink">Docker storage</h3>
           <p className="mt-1 text-xs text-ink-dim">
             {available ? `${formatBytes(totalSize)} tracked across ${rows.length} categories` : "Docker metrics are not available"}
           </p>

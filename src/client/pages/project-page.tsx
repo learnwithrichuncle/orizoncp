@@ -374,7 +374,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                           <section className="flex min-h-72 items-center justify-center border border-line bg-base px-6 py-12 text-center">
                             <div>
                               <AppIcon icon={CloudServerIcon} size={22} className="mx-auto text-ink-dim" />
-                              <h2 className="mt-4 text-lg text-zinc-100">No services in {selectedEnvironment.name}</h2>
+                              <h2 className="mt-4 text-lg text-ink">No services in {selectedEnvironment.name}</h2>
                               <p className="mt-1.5 text-sm text-ink-dim">Add a service here or move one from another environment.</p>
                               <button
                                 type="button"

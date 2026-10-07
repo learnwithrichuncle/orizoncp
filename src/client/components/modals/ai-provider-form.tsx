@@ -15,7 +15,7 @@ function savedKeyLabel(keySuffix: string) {
 }
 
 const selectClass =
-  "h-11 w-full border border-line-strong bg-base px-3 text-sm text-zinc-100 outline-none transition focus:border-[#4FB8B2]/60";
+  "h-11 w-full border border-line-strong bg-base px-3 text-sm text-ink outline-none transition focus:border-[#FF6B35]/60";
 
 export function AiProviderForm({
   provider,
@@ -72,7 +72,7 @@ export function AiProviderForm({
           <img src={provider.logoUrl} alt="" className="max-h-7 max-w-8 object-contain" />
         </div>
         <div>
-          <h3 className="font-hero text-lg tracking-tight text-zinc-100">{connection.connected ? `Edit ${provider.name}` : `Connect ${provider.name}`}</h3>
+          <h3 className="font-hero text-lg tracking-tight text-ink">{connection.connected ? `Edit ${provider.name}` : `Connect ${provider.name}`}</h3>
         </div>
       </div>
 
