@@ -44,7 +44,7 @@ R2 must be connected before database services can select `r2` or `disk+r2` backu
 
 ## Migration
 
-Migration settings export encrypted `.aeroplane` bundles. The export requires a passphrase with at least 8 characters.
+Migration settings export encrypted `.ORIZONCP` bundles. The export requires a passphrase with at least 8 characters.
 
 Bundle import is available during onboarding.
 

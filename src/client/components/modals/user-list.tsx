@@ -4,7 +4,7 @@ import { formatTime } from "../../lib/format";
 import { AppIcon } from "../ui/primitives";
 
 function roleTone(role: string) {
-  if (role === "owner") return "text-amber-300";
+  if (role === "owner") return "text-warn";
   return "text-ink-muted";
 }
 
@@ -64,7 +64,7 @@ export function UserList({ users, loading }: { users: ManagedUser[]; loading: bo
             <div>
               <span className="mb-1 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim md:hidden">Role</span>
               <span className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${roleTone(user.role)}`}>
-                <span className={`h-1.5 w-1.5 ${user.role === "owner" ? "bg-amber-400" : "bg-zinc-500"}`} />
+                <span className={`h-1.5 w-1.5 ${user.role === "owner" ? "bg-warn" : "bg-zinc-500"}`} />
                 {user.role}
               </span>
             </div>

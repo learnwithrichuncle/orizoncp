@@ -102,7 +102,7 @@ export function ApiAccessSettingsPanel({ open }: { open: boolean }) {
 
       {error ? (
         <div className="border-t border-line px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
-          <div className="mt-5 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
+          <div className="mt-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
             {error}
           </div>
         </div>

@@ -1,7 +1,5 @@
-import { Add01Icon, Layers01Icon } from "@hugeicons/core-free-icons";
 import { useMemo, useState, type DragEvent } from "react";
 import type { ProjectEnvironment, Service } from "../../api";
-import { AppIcon } from "../../components/ui/primitives";
 
 function environmentTabTone({
   selected,
@@ -14,11 +12,11 @@ function environmentTabTone({
   validTarget: boolean;
   activeTarget: boolean;
 }) {
-  if (activeTarget) return "scale-[1.04] border-accent bg-accent-soft text-ink";
-  if (validTarget) return "animate-pulse border-dashed border-accent/60 bg-accent-soft text-ink-muted";
-  if (source) return "border-line bg-glass text-muted opacity-50";
-  if (selected) return "border-accent bg-accent text-white";
-  return "border-line text-muted hover:border-line-strong hover:text-ink";
+  if (activeTarget) return "scale-[1.04] border border-accent bg-accent-soft text-ink";
+  if (validTarget) return "animate-pulse border border-dashed border-accent/60 bg-accent-soft text-ink-muted";
+  if (source) return "bg-glass text-muted opacity-50";
+  if (selected) return "bg-accent text-white";
+  return "text-muted hover:bg-hover hover:text-ink";
 }
 
 export function ProjectEnvironmentTabs({
@@ -61,7 +59,7 @@ export function ProjectEnvironmentTabs({
       <div className={`overflow-hidden font-mono text-[9px] uppercase tracking-[0.14em] text-accent transition-all ${draggingService ? "mb-2 max-h-8 opacity-100" : "max-h-0 opacity-0"}`}>
         Drop {draggingService?.name ?? "the service"} onto another environment
       </div>
-      <div className="flex items-center gap-2 overflow-x-auto border-b border-line pb-3">
+      <div className="inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-line bg-glass p-1">
         {environments.map((environment) => {
           const selected = environment.id === selectedEnvironmentId;
           const serviceCount = serviceCounts.get(environment.id) ?? 0;
@@ -74,7 +72,7 @@ export function ProjectEnvironmentTabs({
             <button
               key={environment.id}
               type="button"
-              className={`inline-flex h-9 shrink-0 items-center gap-2 rounded-[10px] border px-3 text-sm transition-all ${environmentTabTone({ selected, source, validTarget: validDropTarget, activeTarget: activeDropTarget })}`}
+              className={`inline-flex h-8 shrink-0 items-center gap-2 rounded-full px-3 text-sm transition-all ${environmentTabTone({ selected, source, validTarget: validDropTarget, activeTarget: activeDropTarget })}`}
               onClick={() => onSelect(environment.id)}
               onDragEnter={(event) => dragOver(event, environment.id)}
               onDragOver={(event) => dragOver(event, environment.id)}
@@ -89,14 +87,17 @@ export function ProjectEnvironmentTabs({
               }}
               aria-pressed={selected}
             >
-              <AppIcon icon={Layers01Icon} size={14} />
               {movingHere ? "Moving…" : activeDropTarget ? `Move to ${environment.name}` : environment.name}
               {environment.isDefault ? (
-                <span className={`font-mono text-[8px] uppercase tracking-[0.12em] ${selected ? "text-ink-dim" : "text-ink-dim"}`}>
+                <span className="font-mono text-[8px] uppercase tracking-[0.12em] opacity-70">
                   default
                 </span>
               ) : null}
-              <span className={`font-mono text-[9px] ${selected ? "text-ink-dim" : "text-ink-dim"}`}>
+              <span
+                className={`grid h-5 min-w-5 place-items-center rounded-full px-1 font-mono text-[10px] ${
+                  selected ? "bg-white/20" : "bg-hover"
+                }`}
+              >
                 {serviceCount}
               </span>
             </button>
@@ -105,11 +106,10 @@ export function ProjectEnvironmentTabs({
 
         <button
           type="button"
-          className="inline-flex h-9 shrink-0 items-center gap-2 rounded-[10px] border border-dashed border-line px-3 text-sm text-muted transition hover:border-line-strong hover:text-ink"
+          className="inline-flex h-8 shrink-0 items-center rounded-full px-3 text-sm text-muted transition hover:bg-hover hover:text-ink"
           onClick={onCreate}
         >
-          <AppIcon icon={Add01Icon} size={14} />
-          New environment
+          New
         </button>
       </div>
     </div>

@@ -57,17 +57,17 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
   const healthTone = !info
     ? "text-ink-dim"
     : info.alerts.some((alert) => alert.includes("90%"))
-      ? "text-rose-300"
+      ? "text-bad"
       : info.alerts.length > 0
-        ? "text-amber-300"
-        : "text-emerald-300";
+        ? "text-warn"
+        : "text-ok";
   const healthDot = !info
-    ? "bg-zinc-600"
+    ? "bg-ink-dim"
     : info.alerts.some((alert) => alert.includes("90%"))
-      ? "bg-rose-400"
+      ? "bg-bad"
       : info.alerts.length > 0
-        ? "bg-amber-400"
-        : "bg-emerald-400";
+        ? "bg-warn"
+        : "bg-ok";
   const checkedAt = info
     ? new Date(info.checkedAt).toLocaleString([], {
         month: "short",
@@ -79,10 +79,10 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
 
   return (
     <div className="mx-auto max-w-6xl space-y-4">
-      <section className="overflow-hidden border border-line bg-base">
+      <section className="overflow-hidden rounded-[14px] border border-line bg-glass backdrop-blur-xl">
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-7">
           <div>
-            <h2 className="text-xl tracking-[-0.03em] text-white">Host health</h2>
+            <h2 className="text-xl tracking-[-0.03em] text-ink">Host health</h2>
             <p className="mt-1.5 text-sm text-ink-dim">
               {checkedAt
                 ? `Checked ${checkedAt} · ${info?.history.length ?? 0} history samples`
@@ -96,7 +96,7 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
             </span>
             <button
               type="button"
-              className="inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
+              className="inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-muted transition hover:border-line-strong hover:bg-hover hover:text-ink disabled:opacity-50"
               onClick={() => void loadMaintenance()}
               disabled={loading || Boolean(cleanupMode)}
             >
@@ -108,14 +108,14 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
 
         {error ? (
           <div className="px-5 py-4 sm:px-7">
-            <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div>
+            <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div>
           </div>
         ) : null}
 
         {info?.alerts.length ? (
-          <div className="divide-y divide-amber-400/15 border-t border-amber-400/20 bg-amber-400/[0.06]">
+          <div className="divide-y divide-warn/15 border-t border-warn/20 bg-warn/[0.06]">
             {info.alerts.map((alert) => (
-              <div key={alert} className="flex items-center gap-2 px-5 py-3 text-sm text-amber-200 sm:px-7">
+              <div key={alert} className="flex items-center gap-2 px-5 py-3 text-sm text-warn sm:px-7">
                 <AppIcon icon={Alert02Icon} size={15} />
                 {alert}
               </div>

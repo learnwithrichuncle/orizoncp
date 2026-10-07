@@ -116,7 +116,7 @@ export function ServiceDeploymentsPanel({
               <div className="flex flex-wrap justify-end gap-2">
                 <button
                   type="button"
-                  className="inline-flex h-8 items-center justify-center gap-2 border border-rose-400/40 px-3 text-xs text-rose-300 transition hover:bg-rose-400/10 disabled:opacity-40"
+                  className="inline-flex h-8 items-center justify-center gap-2 border border-bad/40 px-3 text-xs text-bad transition hover:bg-bad/10 disabled:opacity-40"
                   onClick={onAbortActiveDeployment}
                   disabled={busy === "abort"}
                 >

@@ -42,7 +42,7 @@ export function DeploymentFailureCommand({ command }: { command: string }) {
         type="button"
         className={`inline-flex h-9 w-9 shrink-0 items-center justify-center border transition ${
           copied
-            ? "border-emerald-400/40 bg-emerald-400/10 text-emerald-300"
+            ? "border-ok/40 bg-ok/10 text-ok"
             : "border-line text-ink-dim hover:border-line hover:bg-hover hover:text-white"
         }`}
         onClick={() => void copyCommand()}

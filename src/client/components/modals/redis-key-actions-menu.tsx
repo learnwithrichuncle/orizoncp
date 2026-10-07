@@ -64,7 +64,7 @@ export function RedisKeyActionsMenu({
           </button>
           <button
             type="button"
-            className="block w-full px-3 py-2 text-left text-xs text-rose-300 transition hover:bg-rose-400/10"
+            className="block w-full px-3 py-2 text-left text-xs text-bad transition hover:bg-bad/10"
             onClick={() => void runAction(onDelete)}
             role="menuitem"
           >

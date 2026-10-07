@@ -63,10 +63,10 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
         const revoking = revokingId === apiKey.id;
         const statusTone =
           status === "active"
-            ? { dot: "bg-emerald-400", text: "text-emerald-300" }
+            ? { dot: "bg-ok", text: "text-ok" }
             : status === "expired"
-              ? { dot: "bg-amber-400", text: "text-amber-300" }
-              : { dot: "bg-rose-400", text: "text-rose-300" };
+              ? { dot: "bg-warn", text: "text-warn" }
+              : { dot: "bg-bad", text: "text-bad" };
 
         return (
           <article key={apiKey.id} className="px-5 py-5 sm:px-7 lg:px-8">
@@ -87,7 +87,7 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
                   <>
                     <button
                       type="button"
-                      className="grid h-9 w-9 place-items-center border border-rose-400/50 text-rose-200 transition hover:bg-rose-400/10 disabled:opacity-50"
+                      className="grid h-9 w-9 place-items-center border border-bad/50 text-bad transition hover:bg-bad/10 disabled:opacity-50"
                       onClick={() => void onRevoke(apiKey.id)}
                       disabled={revoking}
                       title="Revoke"
@@ -109,7 +109,7 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
                 ) : (
                   <button
                     type="button"
-                    className="grid h-9 w-9 place-items-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300"
+                    className="grid h-9 w-9 place-items-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad"
                     onClick={() => setConfirmingId(apiKey.id)}
                     title="Revoke"
                     aria-label="Revoke API key"

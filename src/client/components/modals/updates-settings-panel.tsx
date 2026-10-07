@@ -14,9 +14,9 @@ function formatCommitDate(value: string) {
 }
 
 function updateStatusTone(status: SystemUpdateInfo["status"]) {
-  if (status === "current") return { text: "text-emerald-300", dot: "bg-emerald-400" };
-  if (status === "available") return { text: "text-amber-300", dot: "bg-amber-400" };
-  if (status === "diverged") return { text: "text-rose-300", dot: "bg-rose-400" };
+  if (status === "current") return { text: "text-ok", dot: "bg-ok" };
+  if (status === "available") return { text: "text-warn", dot: "bg-warn" };
+  if (status === "diverged") return { text: "text-bad", dot: "bg-bad" };
   return { text: "text-ink-dim", dot: "bg-zinc-600" };
 }
 
@@ -188,7 +188,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       </section>
 
       {info?.dirty ? (
-        <div className="border-l-2 border-amber-400 bg-amber-400/10 px-4 py-3 text-sm leading-relaxed text-amber-200">
+        <div className="border-l-2 border-warn bg-warn/10 px-4 py-3 text-sm leading-relaxed text-warn">
           The orizonCP checkout has local changes. Commit, deploy, or discard those changes before using the updater.
         </div>
       ) : null}
@@ -214,8 +214,8 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {info?.status === "current" && !updateRunning ? (
-        <section className="flex items-center gap-3 border border-emerald-400/20 bg-emerald-400/[0.06] px-5 py-4">
-          <AppIcon icon={CheckmarkCircle02Icon} size={18} className="text-emerald-300" />
+        <section className="flex items-center gap-3 border border-ok/20 bg-ok/[0.06] px-5 py-4">
+          <AppIcon icon={CheckmarkCircle02Icon} size={18} className="text-ok" />
           <div>
             <h3 className="text-sm text-ink">orizonCP is up to date</h3>
             <p className="mt-0.5 text-xs text-ink-dim">Installed commit matches GitHub.</p>
@@ -274,7 +274,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {info?.status === "diverged" ? (
-        <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm leading-relaxed text-rose-200">
+        <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm leading-relaxed text-bad">
           {info.installType === "image"
             ? "The running image commit is not an ancestor of GitHub main, so orizonCP will not update automatically. Publish a fresh image manually."
             : "This checkout has diverged from GitHub, so orizonCP will not update automatically. Pull or reconcile the repository manually."}
@@ -286,10 +286,10 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
           <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5">
             <h3 className="text-sm text-ink">Update activity</h3>
             <span className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${
-              run.status === "failed" ? "text-rose-300" : run.status === "running" ? "text-amber-300" : "text-emerald-300"
+              run.status === "failed" ? "text-bad" : run.status === "running" ? "text-warn" : "text-ok"
             }`}>
               <span className={`h-1.5 w-1.5 ${
-                run.status === "failed" ? "bg-rose-400" : run.status === "running" ? "animate-pulse bg-amber-400" : "bg-emerald-400"
+                run.status === "failed" ? "bg-bad" : run.status === "running" ? "animate-pulse bg-warn" : "bg-ok"
               }`} />
               {runStatusLabel(run)}
             </span>
@@ -300,10 +300,10 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
         </section>
       ) : null}
 
-      {error ? <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+      {error ? <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
       {success ? (
-        <div className="flex items-center gap-2 border-l-2 border-emerald-400 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
+        <div className="flex items-center gap-2 border-l-2 border-ok bg-ok/10 px-4 py-3 text-sm text-ok">
           <AppIcon icon={CheckmarkCircle02Icon} size={13} />
           {success}
         </div>

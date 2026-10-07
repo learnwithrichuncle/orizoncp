@@ -39,7 +39,7 @@ function applyEnvFile(filePath: string, { override = false } = {}) {
 
 applyEnvFile(resolve(process.cwd(), ".env"));
 applyEnvFile(resolve(process.cwd(), ".env.local"), { override: true });
-const envPath = process.env.ORIZONCP_ENV_PATH ?? process.env.AEROPLANE_ENV_PATH;
+const envPath = process.env.ORIZONCP_ENV_PATH ?? process.env.ORIZONCP_ENV_PATH;
 if (envPath) {
   applyEnvFile(resolve(envPath), { override: true });
 }
@@ -55,14 +55,14 @@ const repoUrl = "https://github.com/learnwithrichuncle/orizoncp.git";
 // Previously-published repo URLs are normalized to the current repo so in-place
 // installs keep pulling updates after the rename.
 const legacyRepoUrls = new Set([
-  "https://github.com/akinloluwami/aeroplane",
-  "https://github.com/akinloluwami/aeroplane.git",
-  "git@github.com:akinloluwami/aeroplane",
-  "git@github.com:akinloluwami/aeroplane.git",
-  "https://github.com/xt42io/aeroplane",
-  "https://github.com/xt42io/aeroplane.git",
-  "git@github.com:xt42io/aeroplane",
-  "git@github.com:xt42io/aeroplane.git"
+  "https://github.com/akinloluwami/ORIZONCP",
+  "https://github.com/akinloluwami/ORIZONCP.git",
+  "git@github.com:akinloluwami/ORIZONCP",
+  "git@github.com:akinloluwami/ORIZONCP.git",
+  "https://github.com/learnwithrichuncle/orizoncp",
+  "https://github.com/learnwithrichuncle/orizoncp.git",
+  "git@github.com:/ORIZONCP",
+  "git@github.com:/ORIZONCP.git"
 ]);
 
 function normalizeRepoUrl(value: string) {
@@ -75,17 +75,17 @@ const imageRegistry =
 function normalizeImage(image: string) {
   return image
     .trim()
-    .replace(/^ghcr\.io\/akinloluwami\/aeroplane(?=[:@]|$)/, imageRegistry)
-    .replace(/^ghcr\.io\/xt42io\/aeroplane(?=[:@]|$)/, imageRegistry)
+    .replace(/^ghcr\.io\/akinloluwami\/ORIZONCP(?=[:@]|$)/, imageRegistry)
+    .replace(/^ghcr\.io\/\/ORIZONCP(?=[:@]|$)/, imageRegistry)
     .replace(/^ghcr\.io\/learnwithrichuncle\/orizoncp(?=[:@]|$)/, imageRegistry);
 }
 
 const defaultImage = normalizeImage(
-  pickEnv("ORIZONCP_IMAGE", "AEROPLANE_IMAGE", `${imageRegistry}:latest`)
+  pickEnv("ORIZONCP_IMAGE", "ORIZONCP_IMAGE", `${imageRegistry}:latest`)
 );
 const installDir = pickEnv(
   "ORIZONCP_INSTALL_DIR",
-  "AEROPLANE_INSTALL_DIR",
+  "ORIZONCP_INSTALL_DIR",
   "/opt/orizoncp"
 );
 const defaultImageUpdateCmd = `docker rm -f orizoncp-self-updater >/dev/null 2>&1 || true; docker run -d --name orizoncp-self-updater -v /var/run/docker.sock:/var/run/docker.sock -v ${installDir}:${installDir} -w ${installDir} ${defaultImage} sh -lc 'docker compose pull orizoncp && docker compose up -d --no-deps orizoncp'`;
@@ -117,18 +117,18 @@ export const config = {
   buildkitHost: process.env.BUILDKIT_HOST ?? "tcp://127.0.0.1:1234",
   runtimeNetworkName: pickEnv(
     "ORIZONCP_RUNTIME_NETWORK",
-    "AEROPLANE_RUNTIME_NETWORK",
+    "ORIZONCP_RUNTIME_NETWORK",
     "orizoncp-runtime"
   ),
-  secretKey: pickEnv("ORIZONCP_SECRET_KEY", "AEROPLANE_SECRET_KEY", ""),
+  secretKey: pickEnv("ORIZONCP_SECRET_KEY", "ORIZONCP_SECRET_KEY", ""),
   caddyConfigPath: resolve(process.env.CADDY_CONFIG_PATH ?? "data/Caddyfile"),
   caddyDataDir,
   caddyReloadCmd: process.env.CADDY_RELOAD_CMD ?? "caddy reload --config ./data/Caddyfile",
   updateRepoUrl: normalizeRepoUrl(
-    pickEnv("ORIZONCP_UPDATE_REPO_URL", "AEROPLANE_UPDATE_REPO_URL", repoUrl)
+    pickEnv("ORIZONCP_UPDATE_REPO_URL", "ORIZONCP_UPDATE_REPO_URL", repoUrl)
   ),
-  updateRepoBranch: pickEnv("ORIZONCP_UPDATE_BRANCH", "AEROPLANE_UPDATE_BRANCH", "main"),
-  updateRestartCmd: pickEnv("ORIZONCP_UPDATE_RESTART_CMD", "AEROPLANE_UPDATE_RESTART_CMD", ""),
-  imageCommitSha: pickEnv("ORIZONCP_COMMIT_SHA", "AEROPLANE_COMMIT_SHA", ""),
-  imageUpdateCmd: pickEnv("ORIZONCP_IMAGE_UPDATE_CMD", "AEROPLANE_IMAGE_UPDATE_CMD", defaultImageUpdateCmd)
+  updateRepoBranch: pickEnv("ORIZONCP_UPDATE_BRANCH", "ORIZONCP_UPDATE_BRANCH", "main"),
+  updateRestartCmd: pickEnv("ORIZONCP_UPDATE_RESTART_CMD", "ORIZONCP_UPDATE_RESTART_CMD", ""),
+  imageCommitSha: pickEnv("ORIZONCP_COMMIT_SHA", "ORIZONCP_COMMIT_SHA", ""),
+  imageUpdateCmd: pickEnv("ORIZONCP_IMAGE_UPDATE_CMD", "ORIZONCP_IMAGE_UPDATE_CMD", defaultImageUpdateCmd)
 };

@@ -161,11 +161,11 @@ function DefinitionRow({ label, value }: { label: string; value: string }) {
 function StatusIndicator({ status }: { status: string }) {
   const tone =
     status === "active" || status === "running" || status === "deployed" || status === "success"
-      ? { text: "text-emerald-300", dot: "bg-emerald-400" }
+      ? { text: "text-ok", dot: "bg-ok" }
       : status === "building" || status === "queued"
-        ? { text: "text-amber-300", dot: "animate-pulse bg-amber-400" }
+        ? { text: "text-warn", dot: "animate-pulse bg-warn" }
         : status === "failed" || status === "crashed"
-          ? { text: "text-rose-300", dot: "bg-rose-400" }
+          ? { text: "text-bad", dot: "bg-bad" }
           : { text: "text-ink-dim", dot: "bg-zinc-600" };
 
   return (
@@ -251,20 +251,20 @@ export function ServiceOverviewPanel({
       </section>
 
       {warnings.length > 0 ? (
-        <section className="border-l-2 border-amber-400 bg-amber-400/[0.08] px-4 py-3">
+        <section className="border-l-2 border-warn bg-warn/[0.08] px-4 py-3">
           <div className="grid gap-2 md:grid-cols-2">
             {warnings.map((warning) => (
-              <div key={warning} className="flex items-center gap-2 text-sm text-amber-200">
-                <AppIcon icon={Alert02Icon} size={14} className="shrink-0 text-amber-300" />
+              <div key={warning} className="flex items-center gap-2 text-sm text-warn">
+                <AppIcon icon={Alert02Icon} size={14} className="shrink-0 text-warn" />
                 <span>{warning}</span>
               </div>
             ))}
           </div>
         </section>
       ) : (
-        <section className="border-l-2 border-emerald-400 bg-emerald-400/[0.07] px-4 py-3">
-          <div className="flex items-center gap-2 text-sm text-emerald-200">
-            <AppIcon icon={CheckmarkCircle02Icon} size={15} className="text-emerald-300" />
+        <section className="border-l-2 border-ok bg-ok/[0.07] px-4 py-3">
+          <div className="flex items-center gap-2 text-sm text-ok">
+            <AppIcon icon={CheckmarkCircle02Icon} size={15} className="text-ok" />
             <span>Service health looks good.</span>
           </div>
         </section>

@@ -32,7 +32,7 @@ export function AiProviderCard({
       <span className="truncate text-sm">{provider.name}</span>
 
       <span className="flex shrink-0 items-center gap-2">
-        {isDefaultModel ? <AppIcon icon={StarIcon} size={12} className="fill-amber-300 text-amber-300" /> : null}
+        {isDefaultModel ? <AppIcon icon={StarIcon} size={12} className="fill-warn text-warn" /> : null}
         <span className={`h-1.5 w-1.5 rounded-full ${connected ? "bg-ok" : "bg-ink-dim"}`} />
         <span className="sr-only">
           {connected ? "Connected" : "Not connected"}

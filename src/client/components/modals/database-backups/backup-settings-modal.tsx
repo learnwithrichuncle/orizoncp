@@ -86,12 +86,12 @@ export function BackupSettingsModal({
             ))}
           </div>
           {showRemoteStorageOptions && !r2Connected ? (
-            <p className="mt-2 border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
+            <p className="mt-2 border border-warn/30 bg-warn/10 px-3 py-2 text-xs text-warn">
               Connect R2 in{" "}
               <Link
                 to="/settings/$settingsPage"
                 params={{ settingsPage: "storage" }}
-                className="underline underline-offset-2 hover:text-amber-100"
+                className="underline underline-offset-2 hover:text-warn"
               >
                 Storage settings
               </Link>{" "}

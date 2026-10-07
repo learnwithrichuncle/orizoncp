@@ -155,7 +155,7 @@ export function DeploymentFailureExplanationModal({
         ) : null}
 
         {error ? (
-          <div className="flex items-start gap-3 border border-rose-500/35 bg-rose-500/10 px-3 py-2.5 text-xs leading-5 text-rose-200">
+          <div className="flex items-start gap-3 border border-bad/35 bg-bad/10 px-3 py-2.5 text-xs leading-5 text-bad">
             <AppIcon icon={AlertCircleIcon} size={17} className="mt-0.5 shrink-0" />
             <div>{error}</div>
           </div>
@@ -182,12 +182,12 @@ export function DeploymentFailureExplanationModal({
             <p className="mt-2 text-sm leading-6 text-ink-muted">{explanation.cause}</p>
           </section>
 
-          <section className="border border-emerald-500/30 bg-emerald-500/10 p-4">
-            <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-300">
+          <section className="border border-ok/30 bg-ok/10 p-4">
+            <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ok">
               <AppIcon icon={CheckmarkCircle02Icon} size={13} />
               Suggested fix
             </div>
-            <p className="mt-2 text-sm leading-6 text-emerald-100">{explanation.suggestedFix}</p>
+            <p className="mt-2 text-sm leading-6 text-ok">{explanation.suggestedFix}</p>
           </section>
 
           {explanation.commands.length > 0 ? (

@@ -95,7 +95,7 @@ export function DockerImageConfigureStep({
               className="!h-9 border-line bg-base font-mono text-xs"
             />
             {image.trim() && !imageValidation.ok ? (
-              <p className="mt-2 text-xs text-rose-300">{imageValidation.error}</p>
+              <p className="mt-2 text-xs text-bad">{imageValidation.error}</p>
             ) : (
               <p className="mt-2 text-xs text-ink-dim">Private images use the host Docker registry login.</p>
             )}
@@ -143,7 +143,7 @@ export function DockerImageConfigureStep({
                     <div className="truncate font-mono text-xs text-ink-dim">{entry.value || "empty"}</div>
                     <button
                       type="button"
-                      className="grid h-7 w-7 place-items-center text-ink-dim transition hover:bg-rose-500/10 hover:text-rose-300"
+                      className="grid h-7 w-7 place-items-center text-ink-dim transition hover:bg-bad/10 hover:text-bad"
                       onClick={() => setEnvEntries((current) => current.filter((item) => item.key !== entry.key))}
                       aria-label={`Remove ${entry.key}`}
                     >

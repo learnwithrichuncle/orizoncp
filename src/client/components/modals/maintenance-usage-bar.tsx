@@ -16,9 +16,9 @@ export function MaintenanceUsageBar({
   const clampedPercent = Math.max(0, Math.min(100, percent));
   const color =
     tone === "rose"
-      ? "bg-rose-400"
+      ? "bg-bad"
       : tone === "amber"
-        ? "bg-amber-300"
+        ? "bg-warn"
         : tone === "zinc"
           ? "bg-zinc-400"
           : "bg-accent";

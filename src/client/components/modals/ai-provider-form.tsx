@@ -112,7 +112,7 @@ export function AiProviderForm({
         </div>
       </div>
 
-      {error ? <div className="border border-rose-500/35 bg-rose-950/25 px-3 py-2 font-mono text-[10px] text-rose-200">{error}</div> : null}
+      {error ? <div className="border border-bad/35 bg-bad/25 px-3 py-2 font-mono text-[10px] text-bad">{error}</div> : null}
 
       <div className="flex flex-wrap items-center gap-2">
         <button type="submit" className={shellButton("primary")} disabled={busy}>

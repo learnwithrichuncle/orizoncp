@@ -1,11 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
 import {
-  Add01Icon,
-  CloudServerIcon,
-  Delete02Icon,
-  PencilEdit02Icon
-} from "@hugeicons/core-free-icons";
-import {
   startTransition,
   useCallback,
   useEffect,
@@ -13,7 +7,6 @@ import {
   useState,
 } from "react";
 import { api, type ProjectCard, type ProjectDetail, type Service } from "../api";
-import { AppIcon } from "../components/ui/primitives";
 import { CreateServiceModal } from "../components/modals/create-service-modal";
 import { DeleteProjectModal } from "../components/modals/delete-project-modal";
 import { EditProjectModal } from "../features/projects/edit-project-modal";
@@ -272,51 +265,25 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                       onProjectSelect={navigateToProject}
                     />
 
-                    <div className="mt-5 flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
-                      <div className="min-w-0">
-                        <div className="flex min-w-0 items-center gap-3">
-                          <h1 className="truncate text-3xl tracking-[-0.04em] text-ink sm:text-4xl">
-                            {currentProject?.name ?? projectSlug}
-                          </h1>
-                          <button
-                            type="button"
-                            className="grid h-9 w-9 shrink-0 place-items-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-ink"
-                            onClick={() => {
-                              setProjectEditError("");
-                              setEditingProject(true);
-                            }}
-                            aria-label="Edit project"
-                            disabled={!currentProject}
-                          >
-                            <AppIcon icon={PencilEdit02Icon} size={15} />
-                          </button>
-                        </div>
-                        <p className="mt-2 text-sm text-ink-dim">
-                          {currentProject?.description || `${currentProject?.serviceCount ?? 0} service${currentProject?.serviceCount === 1 ? "" : "s"}`}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-2">
+                    <div className="mt-5 flex items-center justify-end gap-2">
                         <button
                           type="button"
-                          className="inline-flex h-10 items-center justify-center gap-2 bg-accent px-4 text-sm text-white transition hover:bg-brand-hover disabled:opacity-50"
+                          className="inline-flex h-10 items-center justify-center bg-accent px-4 text-sm text-white transition hover:bg-brand-hover disabled:opacity-50"
                           onClick={() => setCreateServiceOpen(true)}
                           disabled={!currentProject || !selectedEnvironment}
                         >
-                          <AppIcon icon={Add01Icon} size={15} />
                           New service
                         </button>
                         <button
                           type="button"
-                          className="grid h-10 w-10 place-items-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad disabled:opacity-50"
+                          className="h-10 rounded-[10px] border border-line px-3 text-sm text-muted transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad disabled:opacity-50"
                           onClick={() => setDeleteProjectOpen(true)}
                           aria-label="Delete project"
                           disabled={!currentProject}
                         >
-                          <AppIcon icon={Delete02Icon} size={15} />
+                          Delete
                         </button>
                       </div>
-                    </div>
                   </header>
 
                   {error ? (
@@ -340,19 +307,19 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         />
 
                         {environmentServices.length === 0 ? (
-                          <section className="flex min-h-72 items-center justify-center rounded-[14px] border border-line bg-glass px-6 py-14 text-center backdrop-blur-xl">
+                          <section className="flex min-h-[400px] items-center justify-center rounded-[14px] border border-line bg-glass px-6 py-16 text-center backdrop-blur-xl">
                             <div>
-                              <span className="mx-auto grid h-12 w-12 place-items-center rounded-full border border-line bg-hover text-muted">
-                                <AppIcon icon={CloudServerIcon} size={22} />
-                              </span>
-                              <h2 className="mt-5 text-lg font-medium text-ink">No services in {selectedEnvironment.name}</h2>
-                              <p className="mt-1.5 text-sm text-muted">Add a service here or move one from another environment.</p>
+                              <h2 className="font-hero text-2xl tracking-[-0.03em] text-ink">
+                                No services in {selectedEnvironment.name}
+                              </h2>
+                              <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-muted">
+                                Add a service here or move one from another environment.
+                              </p>
                               <button
                                 type="button"
-                                className="mt-6 inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-accent px-4 text-sm font-medium text-white transition hover:bg-brand-hover"
+                                className="mt-7 inline-flex h-12 items-center justify-center rounded-[10px] bg-accent px-6 text-sm font-medium text-white transition hover:bg-brand-hover"
                                 onClick={() => setCreateServiceOpen(true)}
                               >
-                                <AppIcon icon={Add01Icon} size={14} />
                                 Add service
                               </button>
                             </div>

@@ -9,7 +9,7 @@ orizonCP bundles move an orizonCP instance from one server to another. They are 
 
 Open System Settings, choose Migration, and export the instance. You must enter a passphrase with at least 8 characters.
 
-orizonCP creates a `.aeroplane` file. The file is an encrypted archive, so keep the passphrase with the same care you would give a database backup key.
+orizonCP creates a `.ORIZONCP` file. The file is an encrypted archive, so keep the passphrase with the same care you would give a database backup key.
 
 ## What the Bundle Includes
 
@@ -35,7 +35,7 @@ The bundle records each dump's service ID, engine, format, size, and checksum. I
 
 ## Import a Bundle
 
-During onboarding on the target server, choose the `.aeroplane` file and enter the passphrase from the source server.
+During onboarding on the target server, choose the `.ORIZONCP` file and enter the passphrase from the source server.
 
 orizonCP decrypts the bundle, validates the manifest, writes managed runtime env, saves system settings, replaces logical data, restores optional files, restores database dumps, reloads Caddy, restores users, and clears auth sessions.
 

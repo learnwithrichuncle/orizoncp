@@ -100,7 +100,7 @@ export function DeploymentSettingsPanel({ open }: { open: boolean }) {
       {saving ? <div className="border-t border-line px-5 py-3 text-xs text-ink-dim sm:px-7">Saving…</div> : null}
       {error ? (
         <div className="border-t border-line px-5 py-4 sm:px-7">
-          <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div>
+          <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div>
         </div>
       ) : null}
     </section>

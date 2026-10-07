@@ -8,7 +8,7 @@ export type DetectedBuildMethod = "railpack" | "dockerfile";
 
 // Mirrors Railway's RAILWAY_DOCKERFILE_PATH escape hatch.
 export const DOCKERFILE_PATH_ENV_KEY = "ORIZONCP_DOCKERFILE_PATH";
-export const LEGACY_DOCKERFILE_PATH_ENV_KEY = "AEROPLANE_DOCKERFILE_PATH";
+export const LEGACY_DOCKERFILE_PATH_ENV_KEY = "ORIZONCP_DOCKERFILE_PATH";
 
 export function normalizeServiceBuildMethod(value: string | null | undefined): ServiceBuildMethod {
   return value === "railpack" || value === "dockerfile" ? value : "auto";

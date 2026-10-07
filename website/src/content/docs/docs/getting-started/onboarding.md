@@ -78,7 +78,7 @@ You can change the destination per database service later.
 
 ## Import an orizonCP Bundle
 
-If you are moving from another orizonCP server, use the migration import option during onboarding. Choose the `.aeroplane` file and enter the passphrase from the source server.
+If you are moving from another orizonCP server, use the migration import option during onboarding. Choose the `.ORIZONCP` file and enter the passphrase from the source server.
 
 The import restores projects, services, users, domains, environment variables, static output, backup records, backup files, database dumps, Caddy config, and system settings. orizonCP clears auth sessions after import, then sends you through the success path so the restored owner account can sign in cleanly.
 

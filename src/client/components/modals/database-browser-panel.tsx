@@ -539,9 +539,9 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             onDismiss={() => setDismissedDataImportIds((current) => new Set(current).add(visibleDataImport.id))}
           />
         ) : null}
-        {error ? <div className="mb-4 border border-rose-500/30 bg-rose-950/25 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+        {error ? <div className="mb-4 border border-bad/30 bg-bad/25 px-4 py-3 text-sm text-bad">{error}</div> : null}
         {!hasPrimaryKey && editable && rows.length > 0 ? (
-          <div className="mb-4 border border-amber-500/30 bg-amber-950/20 px-4 py-3 text-xs text-amber-200">
+          <div className="mb-4 border border-warn/30 bg-warn/20 px-4 py-3 text-xs text-warn">
             Editing and deleting require a primary key on this table.
           </div>
         ) : null}

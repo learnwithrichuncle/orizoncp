@@ -35,20 +35,20 @@ export function ConfirmationDialog({
 }: ConfirmationDialogProps) {
   const titleId = useId();
   const descriptionId = useId();
-  const iconToneClass = tone === "warning" ? "text-amber-300" : "text-rose-300";
+  const iconToneClass = tone === "warning" ? "text-warn" : "text-bad";
   const descriptionToneClass = tone === "warning"
-    ? "border-amber-400 bg-amber-400/10 text-amber-100"
-    : "border-rose-400 bg-rose-400/10 text-rose-100";
+    ? "border-warn bg-warn/10 text-warn"
+    : "border-bad bg-bad/10 text-bad";
   const confirmToneClass = tone === "warning"
-    ? "border-amber-400/50 text-amber-200 hover:bg-amber-400/10"
-    : "border-rose-400/50 text-rose-200 hover:bg-rose-400/10";
+    ? "border-warn/50 text-warn hover:bg-warn/10"
+    : "border-bad/50 text-bad hover:bg-bad/10";
 
   if (!open) return null;
 
   return (
     <div className={`fixed inset-0 ${zIndexClassName} overflow-y-auto bg-base/75 p-4`}>
       <div className="mx-auto flex min-h-full items-center justify-center">
-        <section role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} className="w-full max-w-md border border-line bg-base">
+        <section role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} className="w-full max-w-md rounded-[14px] border border-line bg-glass backdrop-blur-xl">
           <header className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5">
             <div className="flex min-w-0 items-center gap-2.5">
               <AppIcon icon={icon} size={16} className={`shrink-0 ${iconToneClass}`} />

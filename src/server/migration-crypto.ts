@@ -4,7 +4,7 @@ import { pipeline } from "node:stream/promises";
 import { promisify } from "node:util";
 
 const scrypt = promisify(scryptCallback);
-const bundleMagic = "AEROPLANE-BUNDLE-V1";
+const bundleMagic = "orizoncp-BUNDLE-V1";
 
 type EncryptedBundleHeader = {
   algorithm: "aes-256-gcm";

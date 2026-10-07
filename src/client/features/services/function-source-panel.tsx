@@ -77,7 +77,7 @@ export function FunctionSourcePanel({
   }
 
   if (error) {
-    return <div className="border border-rose-500/25 bg-rose-950/20 px-4 py-3 text-sm text-rose-200">{error}</div>;
+    return <div className="border border-bad/25 bg-bad/20 px-4 py-3 text-sm text-bad">{error}</div>;
   }
 
   return (

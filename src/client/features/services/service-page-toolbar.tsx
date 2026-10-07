@@ -87,11 +87,11 @@ export function ServicePageToolbar({
                         <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-ink-dim">
                           <span className={`h-1.5 w-1.5 ${
                             service.status === "active" || service.status === "running"
-                              ? "bg-emerald-400"
+                              ? "bg-ok"
                               : service.status === "building" || service.status === "queued"
-                                ? "bg-amber-400"
+                                ? "bg-warn"
                                 : service.status === "failed" || service.status === "crashed"
-                                  ? "bg-rose-400"
+                                  ? "bg-bad"
                                   : "bg-zinc-600"
                           }`} />
                           {service.status}

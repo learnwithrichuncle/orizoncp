@@ -44,7 +44,7 @@ export function DatabaseSqlConsolePanel({ serviceId }: { serviceId: string }) {
 
       <SqlEditor value={sql} onChange={setSql} disabled={busy} />
 
-      {error ? <div className="border border-rose-500/30 bg-rose-950/25 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+      {error ? <div className="border border-bad/30 bg-bad/25 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
       {result ? (
         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">

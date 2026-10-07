@@ -36,9 +36,9 @@ function valueClass(value: unknown, type: string) {
   if (type === "objectId") return "text-orange-400";
   if (type === "date") return "text-sky-400";
   if (type === "array" || type === "object") return "text-violet-300";
-  if (typeof value === "number") return "text-amber-300";
+  if (typeof value === "number") return "text-warn";
   if (typeof value === "boolean") return "text-fuchsia-300";
-  return "text-emerald-400";
+  return "text-ok";
 }
 
 function sourceValue(value: unknown, type: string) {
@@ -65,9 +65,9 @@ export function mongoDocumentSource(columns: DatabaseColumn[], row: DatabaseRow)
 
 function iconButtonClass(tone: "neutral" | "danger" | "success" = "neutral") {
   const toneClass = tone === "danger"
-    ? "text-rose-300 hover:border-rose-500/40 hover:bg-rose-500/10"
+    ? "text-bad hover:border-bad/40 hover:bg-bad/10"
     : tone === "success"
-      ? "text-emerald-300 hover:border-emerald-500/40 hover:bg-emerald-500/10"
+      ? "text-ok hover:border-ok/40 hover:bg-ok/10"
       : "text-ink-muted hover:border-zinc-600 hover:bg-base hover:text-ink";
   return `grid h-8 w-8 place-items-center border border-line bg-base transition disabled:opacity-50 ${toneClass}`;
 }

@@ -268,7 +268,7 @@ export function MongoQueryBar({
     <div ref={rootRef} className="relative mb-3">
       <form
         className={`flex h-11 items-center border bg-base text-ink ${
-          syntaxError ? "border-rose-500/70" : "border-line-strong"
+          syntaxError ? "border-bad/70" : "border-line-strong"
         }`}
         onSubmit={runFind}
       >
@@ -305,7 +305,7 @@ export function MongoQueryBar({
               type="button"
               className={`mr-2 inline-flex h-7 w-7 items-center justify-center border transition ${
                 favoriteTexts.has(trimmedQuery)
-                  ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
+                  ? "border-warn/40 bg-warn/10 text-warn"
                   : "border-line-strong bg-base/80 text-ink-muted hover:border-zinc-500 hover:text-white"
               }`}
               onClick={() => toggleFavorite(trimmedQuery)}
@@ -336,7 +336,7 @@ export function MongoQueryBar({
         </button>
       </form>
 
-      {syntaxError ? <div className="mt-1 font-mono text-[10px] text-rose-300">{syntaxError}</div> : null}
+      {syntaxError ? <div className="mt-1 font-mono text-[10px] text-bad">{syntaxError}</div> : null}
 
       {menuOpen ? (
         <div className="absolute left-0 top-full z-50 mt-2 w-[460px] border border-line-strong bg-base p-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
@@ -375,7 +375,7 @@ export function MongoQueryBar({
                   type="button"
                   className={`inline-flex h-7 w-7 items-center justify-center border transition ${
                     favoriteTexts.has(item.text)
-                      ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
+                      ? "border-warn/40 bg-warn/10 text-warn"
                       : "border-line bg-base/70 text-ink-dim hover:border-zinc-600 hover:text-ink"
                   }`}
                   onClick={() => toggleFavorite(item.text)}

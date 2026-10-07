@@ -222,7 +222,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
               type="button"
               className={`inline-flex h-8 w-8 items-center justify-center border transition ${
                 copied
-                  ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-300"
+                  ? "border-ok/50 bg-ok/10 text-ok"
                   : "border-line text-ink-dim hover:border-line-strong hover:bg-hover hover:text-white"
               }`}
               onClick={handleCopy}
@@ -247,7 +247,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
 
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300"
+              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-bad/50 hover:bg-bad/10 hover:text-bad"
               onClick={() => setDeleteDialogOpen(true)}
               title="Delete"
               disabled={busy}

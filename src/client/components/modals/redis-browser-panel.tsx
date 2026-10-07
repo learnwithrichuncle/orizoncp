@@ -278,10 +278,10 @@ function RedisItems({
                   <span className="min-w-0 break-words font-mono text-xs text-ink-muted">{redisItemValue(type, row)}</span>
                 </div>
                 <div className="flex shrink-0 items-center justify-end gap-2">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-rose-300">Confirm delete?</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-bad">Confirm delete?</span>
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center border border-rose-500/35 bg-rose-500/10 text-rose-200 transition hover:bg-rose-500/15 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center border border-bad/35 bg-bad/10 text-bad transition hover:bg-bad/15 disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => {
                       setConfirmingDeleteId("");
                       onDeleteItem(row);
@@ -331,7 +331,7 @@ function RedisItems({
                   </button>
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-bad/50 hover:bg-bad/10 hover:text-bad disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => setConfirmingDeleteId(itemId)}
                     disabled={deleting}
                     title="Delete item"
@@ -682,7 +682,7 @@ export function RedisBrowserPanel({ serviceId }: { serviceId: string }) {
 
       {error || visibleDataImport ? (
         <div className="border-b border-line px-4 pt-4 sm:px-5">
-          {error ? <div className="mb-4 border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+          {error ? <div className="mb-4 border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
           {visibleDataImport ? (
             <DatabaseImportStatusBanner
               dataImport={visibleDataImport}

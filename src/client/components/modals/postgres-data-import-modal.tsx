@@ -159,7 +159,7 @@ export function PostgresDataImportModal({
             </div>
             <div className="mt-5 h-2 overflow-hidden border border-line bg-base">
               <div
-                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : "bg-[#FF6B35]"}`}
+                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-bad" : "bg-[#FF6B35]"}`}
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -172,10 +172,10 @@ export function PostgresDataImportModal({
             </p>
           </div>
 
-          {error ? <div className="border border-rose-500/35 bg-rose-950/20 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+          {error ? <div className="border border-bad/35 bg-bad/20 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
           {result ? (
-            <div className="border border-emerald-500/25 bg-emerald-950/20 px-4 py-3 text-sm text-emerald-100">
+            <div className="border border-ok/25 bg-ok/20 px-4 py-3 text-sm text-ok">
               Imported {formatBytes(result.dumpSizeBytes)} from {result.sourceLabel}
               {result.sourceVariableKey ? ` using ${result.sourceVariableKey}` : ""}.
             </div>
@@ -252,7 +252,7 @@ export function PostgresDataImportModal({
                 </div>
               </div>
             ) : (
-              <div className="border border-amber-500/30 bg-amber-950/20 px-4 py-3 text-sm text-amber-100">
+              <div className="border border-warn/30 bg-warn/20 px-4 py-3 text-sm text-warn">
                 This database was not imported from Railway, so there is no saved Railway service ID.
               </div>
             )}
@@ -283,16 +283,16 @@ export function PostgresDataImportModal({
           </div>
         )}
 
-        <div className="border border-rose-500/30 bg-rose-950/20 px-4 py-3">
+        <div className="border border-bad/30 bg-bad/20 px-4 py-3">
           <Checkbox checked={confirmed} onChange={setConfirmed} disabled={busy} label="Replace existing Postgres data">
-            <span className="text-sm text-rose-100">Replace existing data in this orizonCP Postgres database.</span>
+            <span className="text-sm text-bad">Replace existing data in this orizonCP Postgres database.</span>
           </Checkbox>
         </div>
 
-        {error ? <div className="border border-rose-500/35 bg-rose-950/20 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+        {error ? <div className="border border-bad/35 bg-bad/20 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
         {result ? (
-          <div className="border border-emerald-500/25 bg-emerald-950/20 px-4 py-3 text-sm text-emerald-100">
+          <div className="border border-ok/25 bg-ok/20 px-4 py-3 text-sm text-ok">
             Imported {formatBytes(result.dumpSizeBytes)} from {result.sourceLabel}
             {result.sourceVariableKey ? ` using ${result.sourceVariableKey}` : ""}.
           </div>

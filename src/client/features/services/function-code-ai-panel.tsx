@@ -151,7 +151,7 @@ export function FunctionCodeAiPanel({
         </div>
       ) : null}
       {error ? (
-        <div className="mx-4 mb-4 flex items-start gap-2 border border-rose-500/25 bg-rose-950/20 px-3 py-2 text-sm text-rose-200">
+        <div className="mx-4 mb-4 flex items-start gap-2 border border-bad/25 bg-bad/20 px-3 py-2 text-sm text-bad">
           <AppIcon icon={AlertCircleIcon} size={16} className="mt-0.5 shrink-0" />
           <div>{error}</div>
         </div>

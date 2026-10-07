@@ -34,8 +34,8 @@ export function AiProviderDetails({
         <div>
           <h2 className="text-2xl tracking-[-0.03em] text-white">{provider.name}</h2>
           <div className="mt-2 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em]">
-            <span className={`h-1.5 w-1.5 ${connected ? "bg-emerald-400" : "border border-zinc-600"}`} />
-            <span className={connected ? "text-emerald-300" : "text-ink-dim"}>
+            <span className={`h-1.5 w-1.5 ${connected ? "bg-ok" : "border border-zinc-600"}`} />
+            <span className={connected ? "text-ok" : "text-ink-dim"}>
               {connected ? "Connected" : "Not connected"}
             </span>
           </div>
@@ -81,13 +81,13 @@ export function AiProviderDetails({
             type="button"
             className={
               isDefaultModel
-                ? "inline-flex min-h-10 w-fit items-center justify-center gap-2 border border-amber-400/40 bg-amber-400/10 px-4 text-sm text-amber-200"
+                ? "inline-flex min-h-10 w-fit items-center justify-center gap-2 border border-warn/40 bg-warn/10 px-4 text-sm text-warn"
                 : "inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
             }
             onClick={onSetDefaultModel}
             disabled={updating || isDefaultModel}
           >
-            <AppIcon icon={StarIcon} size={14} className={isDefaultModel ? "fill-amber-300" : ""} />
+            <AppIcon icon={StarIcon} size={14} className={isDefaultModel ? "fill-warn" : ""} />
             {isDefaultModel ? "Default" : "Set as default"}
           </button>
         </div>

@@ -59,7 +59,7 @@ export function DockerImageServiceSettingsPanel({
         <label htmlFor="docker-image-reference" className={settingsLabelClass}>Image reference</label>
         <FormInput id="docker-image-reference" name="dockerImage" value={settings.dockerImage} onChange={(event) => onChange({ dockerImage: event.target.value })} placeholder="ghcr.io/org/app:latest" required variant="monochrome" className={`${settingsInputClass} font-mono`} />
         {settings.dockerImage.trim() && !imageValidation.ok ? (
-          <p className="mt-2 text-xs text-rose-300">{imageValidation.error}</p>
+          <p className="mt-2 text-xs text-bad">{imageValidation.error}</p>
         ) : (
           <p className="mt-2 text-xs text-ink-dim">Private images use the host Docker daemon's registry login.</p>
         )}

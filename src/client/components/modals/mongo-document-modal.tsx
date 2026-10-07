@@ -116,7 +116,7 @@ export function MongoDocumentModal({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-          {error ? <div className="mb-4 border border-rose-500/30 bg-rose-950/25 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+          {error ? <div className="mb-4 border border-bad/30 bg-bad/25 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
           {showTargetFields ? (
             <div className="grid gap-4 sm:grid-cols-2">
@@ -133,7 +133,7 @@ export function MongoDocumentModal({
 
           <div className={showTargetFields ? "mt-4" : ""}>
             <FieldLabel>Document JSON</FieldLabel>
-            <div className={`overflow-hidden border ${documentError ? "border-rose-500/70" : "border-line-strong"}`}>
+            <div className={`overflow-hidden border ${documentError ? "border-bad/70" : "border-line-strong"}`}>
               <CodeMirror
                 value={draft.document ?? ""}
                 height="280px"
@@ -155,7 +155,7 @@ export function MongoDocumentModal({
                 className="bg-base [&_.cm-content]:bg-base [&_.cm-editor]:bg-base [&_.cm-scroller]:bg-base"
               />
             </div>
-            {documentError ? <div className="mt-2 font-mono text-[10px] text-rose-300">{documentError}</div> : null}
+            {documentError ? <div className="mt-2 font-mono text-[10px] text-bad">{documentError}</div> : null}
           </div>
         </div>
 

@@ -161,7 +161,7 @@ export function RedisDataImportModal({
             </div>
             <div className="mt-4 h-1 overflow-hidden bg-hover">
               <div
-                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : result ? "bg-emerald-400" : "bg-accent"}`}
+                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-bad" : result ? "bg-ok" : "bg-accent"}`}
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -174,10 +174,10 @@ export function RedisDataImportModal({
             </p>
           </div>
 
-          {error ? <div className="border border-rose-500/35 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+          {error ? <div className="border border-bad/35 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
 
           {result ? (
-            <div className="border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-xs text-emerald-200">
+            <div className="border border-ok/30 bg-ok/10 px-3 py-2.5 text-xs text-ok">
               Imported {formatBytes(result.dumpSizeBytes)} from {result.sourceLabel}
               {result.sourceVariableKey ? ` using ${result.sourceVariableKey}` : ""}.
             </div>
@@ -243,7 +243,7 @@ export function RedisDataImportModal({
                 </div>
               </div>
             ) : (
-              <div className="border border-amber-500/30 bg-amber-500/10 px-3 py-2.5 text-xs text-amber-200">
+              <div className="border border-warn/30 bg-warn/10 px-3 py-2.5 text-xs text-warn">
                 No saved Railway source is available.
               </div>
             )}
@@ -280,9 +280,9 @@ export function RedisDataImportModal({
           </div>
         )}
 
-        <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5">
+        <div className="border border-bad/30 bg-bad/10 px-3 py-2.5">
           <Checkbox checked={confirmed} onChange={setConfirmed} disabled={busy} label="Replace existing Redis data" variant="monochrome">
-            <span className="text-xs text-rose-200">Replace all existing keys</span>
+            <span className="text-xs text-bad">Replace all existing keys</span>
           </Checkbox>
         </div>
 

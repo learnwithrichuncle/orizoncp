@@ -87,7 +87,7 @@ export function DirectoryTree({
         </div>
         {renderRows("", 0)}
       </div>
-      <div className={`border-t border-line px-3 py-2 font-mono text-[9px] tracking-[0.08em] ${errorMessage ? "text-rose-300" : "text-ink-dim"}`}>{errorMessage || footerMessage}</div>
+      <div className={`border-t border-line px-3 py-2 font-mono text-[9px] tracking-[0.08em] ${errorMessage ? "text-bad" : "text-ink-dim"}`}>{errorMessage || footerMessage}</div>
     </div>
   );
 }

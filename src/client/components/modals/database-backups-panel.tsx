@@ -194,9 +194,9 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
 
         {error || success ? (
           <div className="border-b border-line px-4 py-3 sm:px-5">
-            {error ? <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+            {error ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
             {success ? (
-              <div className="flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-xs text-emerald-200">
+              <div className="flex items-center gap-2 border border-ok/30 bg-ok/10 px-3 py-2.5 text-xs text-ok">
                 <AppIcon icon={CheckmarkCircle02Icon} size={13} />
                 {success}
               </div>

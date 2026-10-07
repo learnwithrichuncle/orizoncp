@@ -18,16 +18,16 @@ import { ServiceCardActions } from "./service-card-actions";
 
 function statusTone(status: string) {
   if (status === "active" || status === "running") {
-    return { text: "text-emerald-300", dot: "bg-emerald-400" };
+    return { text: "text-ok", dot: "bg-ok" };
   }
   if (status === "building" || status === "queued") {
-    return { text: "text-amber-300", dot: "animate-pulse bg-amber-400" };
+    return { text: "text-warn", dot: "animate-pulse bg-warn" };
   }
   if (status === "crashed") {
     return { text: "text-orange-300", dot: "bg-orange-400" };
   }
   if (status === "failed") {
-    return { text: "text-rose-300", dot: "bg-rose-400" };
+    return { text: "text-bad", dot: "bg-bad" };
   }
   return { text: "text-ink-dim", dot: "bg-zinc-600" };
 }
@@ -85,7 +85,7 @@ export function ProjectServiceCard({
       draggable={canMoveEnvironment}
       className={`group relative flex min-h-52 flex-col border bg-base p-4 text-left transition-all ${
         isDragging
-          ? "scale-[0.98] cursor-grabbing border-cyan-300/70 opacity-35 shadow-[0_0_36px_rgba(103,232,249,0.16)]"
+          ? "scale-[0.98] cursor-grabbing border-accent/70 opacity-35 shadow-[0_0_36px_rgba(103,232,249,0.16)]"
           : "cursor-grab border-line hover:border-line-strong hover:bg-glass active:cursor-grabbing"
       }`}
       onClick={onOpen}

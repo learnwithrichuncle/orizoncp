@@ -135,66 +135,62 @@ export function DnsManagementPanel() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
-      <div className="grid min-h-[560px] lg:grid-cols-[260px_minmax(0,1fr)]">
-        <aside className="border-b border-line bg-glass lg:border-b-0 lg:border-r">
-          <div className="flex items-center justify-between border-b border-line px-4 py-4">
-            <span className="text-sm text-white">Providers</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
-              {connectedProviderCount} connected
-            </span>
-          </div>
+    <section className="mx-auto max-w-5xl overflow-hidden rounded-[14px] border border-line bg-glass backdrop-blur-xl">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4">
+        <span className="text-sm text-ink">Providers</span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted">
+          {connectedProviderCount} connected
+        </span>
+      </div>
 
-          <div className="p-2">
-            {dnsProviders.map((provider) => (
-              <DnsProviderCard
-                key={provider.id}
-                provider={provider}
-                selected={provider.id === selectedProvider.id}
-                connected={connections[provider.id].connected}
-                onSelect={() => selectProvider(provider.id)}
-              />
-            ))}
-          </div>
-        </aside>
+      <div className="flex gap-2 overflow-x-auto px-5 py-3">
+        {dnsProviders.map((provider) => (
+          <DnsProviderCard
+            key={provider.id}
+            provider={provider}
+            selected={provider.id === selectedProvider.id}
+            connected={connections[provider.id].connected}
+            onSelect={() => selectProvider(provider.id)}
+          />
+        ))}
+      </div>
 
-        <div className="min-w-0 p-5 sm:p-7 lg:p-8">
-          {loading ? (
-            <div className="space-y-5" aria-label="Loading DNS providers">
-              <div className="h-14 w-52 animate-pulse bg-glass" />
-              <div className="grid max-w-xl gap-4">
-                {selectedProvider.fields.map((field) => (
-                  <div key={field.key} className="space-y-2">
-                    <div className="h-3 w-20 animate-pulse bg-glass" />
-                    <div className="h-11 animate-pulse border border-line bg-glass" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <>
-              {credentialError && !editingSelectedProvider ? (
-                <div className="mb-5 border-l-2 border-white bg-hover px-4 py-3 text-sm text-ink">
-                  {credentialError}
+      <div className="min-w-0 border-t border-line p-5 sm:p-7 lg:p-8">
+        {loading ? (
+          <div className="space-y-5" aria-label="Loading DNS providers">
+            <div className="h-14 w-52 animate-pulse bg-glass" />
+            <div className="grid max-w-xl gap-4">
+              {selectedProvider.fields.map((field) => (
+                <div key={field.key} className="space-y-2">
+                  <div className="h-3 w-20 animate-pulse bg-glass" />
+                  <div className="h-11 animate-pulse border border-line bg-glass" />
                 </div>
-              ) : null}
+              ))}
+            </div>
+          </div>
+        ) : (
+          <>
+            {credentialError && !editingSelectedProvider ? (
+              <div className="mb-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+                {credentialError}
+              </div>
+            ) : null}
 
-              <DnsCredentialsForm
-                provider={selectedProvider}
-                values={selectedCredentials}
-                connection={selectedConnection}
-                editing={editingSelectedProvider}
-                error={credentialError}
-                busy={selectedProviderBusy}
-                onChange={updateSelectedCredentials}
-                onSave={() => void saveSelectedCredentials()}
-                onEdit={() => setEditingProviderId(selectedProvider.id)}
-                onCancel={() => setEditingProviderId(null)}
-                onDisconnect={() => void disconnectSelectedProvider()}
-              />
-            </>
-          )}
-        </div>
+            <DnsCredentialsForm
+              provider={selectedProvider}
+              values={selectedCredentials}
+              connection={selectedConnection}
+              editing={editingSelectedProvider}
+              error={credentialError}
+              busy={selectedProviderBusy}
+              onChange={updateSelectedCredentials}
+              onSave={() => void saveSelectedCredentials()}
+              onEdit={() => setEditingProviderId(selectedProvider.id)}
+              onCancel={() => setEditingProviderId(null)}
+              onDisconnect={() => void disconnectSelectedProvider()}
+            />
+          </>
+        )}
       </div>
     </section>
   );

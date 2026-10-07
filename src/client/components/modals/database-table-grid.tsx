@@ -236,7 +236,7 @@ export function DatabaseTableGrid({
         {canSelectRows && selectedItems.length > 0 ? (
           <button
             type="button"
-            className="inline-flex h-8 items-center justify-center gap-2 border border-rose-500/35 bg-rose-500/10 px-2.5 text-[13px] font-medium text-rose-200 transition hover:bg-rose-500/15 disabled:opacity-50"
+            className="inline-flex h-8 items-center justify-center gap-2 border border-bad/35 bg-bad/10 px-2.5 text-[13px] font-medium text-bad transition hover:bg-bad/15 disabled:opacity-50"
             onClick={deleteSelectedRows}
             disabled={!hasPrimaryKey || busy === "delete"}
           >

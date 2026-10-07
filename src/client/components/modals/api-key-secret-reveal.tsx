@@ -14,7 +14,7 @@ export function ApiKeySecretReveal({ token, onDismiss }: { token: string; onDism
 
   return (
     <section>
-      <div className="border-l-2 border-emerald-400 bg-emerald-400/10 px-4 py-3 text-sm leading-6 text-emerald-200">
+      <div className="border-l-2 border-ok bg-ok/10 px-4 py-3 text-sm leading-6 text-ok">
         This key is shown only once. Copy it and store it somewhere secure.
       </div>
 

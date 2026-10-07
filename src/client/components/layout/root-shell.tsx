@@ -25,7 +25,7 @@ export function RootShell() {
       <div className="flex min-w-0 flex-1 flex-col">
         <RootHeader />
         <main className="min-w-0 flex-1 overflow-y-auto">
-          <div className="mx-auto w-full max-w-[1400px] px-8 py-8">
+          <div className="mx-auto h-full w-full max-w-[1400px] px-8 py-8">
             <AuthGate>
               <Outlet />
             </AuthGate>

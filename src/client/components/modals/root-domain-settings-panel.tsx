@@ -313,8 +313,8 @@ export function RootDomainSettingsPanel({ open }: { open: boolean }) {
         <div
           className={
             waitingForDns
-              ? "mt-5 flex items-center gap-2 border-l-2 border-amber-400 bg-amber-400/10 px-4 py-3 text-sm text-amber-200"
-              : "mt-5 flex items-center gap-2 border-l-2 border-emerald-400 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200"
+              ? "mt-5 flex items-center gap-2 border-l-2 border-warn bg-warn/10 px-4 py-3 text-sm text-warn"
+              : "mt-5 flex items-center gap-2 border-l-2 border-ok bg-ok/10 px-4 py-3 text-sm text-ok"
           }
         >
           <AppIcon icon={waitingForDns ? AlertCircleIcon : CheckmarkCircle02Icon} size={14} />

@@ -95,7 +95,7 @@ export function EnvironmentVariableSuggestions({
               />
               <button
                 type="button"
-                className="inline-flex h-9 w-9 items-center justify-center text-ink-dim transition hover:bg-rose-500/10 hover:text-rose-300"
+                className="inline-flex h-9 w-9 items-center justify-center text-ink-dim transition hover:bg-bad/10 hover:text-bad"
                 onClick={() => removeRow(row.id)}
                 aria-label={`Remove ${row.key || "suggested variable"}`}
               >

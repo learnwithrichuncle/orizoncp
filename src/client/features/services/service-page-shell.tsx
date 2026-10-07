@@ -15,14 +15,12 @@ import {
 import { FormEvent, startTransition, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   api,
-  type AuthUser,
   type DeploymentLog,
   type GitHubDirectory,
   type GitHubRepo,
   type RuntimeLog,
   type Service,
-  type ServiceOverview,
-  type ToolCheck
+  type ServiceOverview
 } from "../../api";
 import { AppIcon, BrowserIconFallback } from "../../components/ui/primitives";
 import { githubBranchesCache, githubDirectoriesCache, githubReposCache } from "../../lib/github-cache";
@@ -47,7 +45,6 @@ import { ServiceOverviewPanel } from "./service-overview-panel";
 import { FunctionSourcePanel } from "./function-source-panel";
 import { ProjectRouteLoader } from "../projects/project-route-loader";
 import { RedeployRequiredToast } from "./redeploy-required-toast";
-import { ProjectsDashboardSidebar } from "../projects/projects-dashboard-sidebar";
 import type { ServiceTab } from "./service-tabs";
 import { ApplicationServiceSettingsPanel } from "./application-service-settings-panel";
 import type { ServiceSettingsState } from "./service-settings-state";
@@ -120,10 +117,7 @@ export function ServicePageShell({
   onDeleted,
   pageServices = [],
   onServiceSelect,
-  onTransferred,
-  currentUser,
-  tools,
-  owner
+  onTransferred
 }: {
   selectedTab: ServiceTab;
   serviceId: string;
@@ -134,9 +128,6 @@ export function ServicePageShell({
   pageServices?: Service[];
   onServiceSelect?: (serviceSlug: string) => void;
   onTransferred: (projectSlug: string, serviceSlug: string) => void;
-  currentUser: AuthUser | null;
-  tools: ToolCheck[];
-  owner: boolean;
 }) {
   const [overview, setOverview] = useState<null | ServiceOverview>(null);
   const [activeDeploymentId, setActiveDeploymentId] = useState<null | string>(null);
@@ -631,8 +622,8 @@ export function ServicePageShell({
   const panelClass = "flex min-h-0 w-full flex-1 flex-col";
   const tabButtonClass = (tab: ServiceTab) =>
     selectedTab === tab
-      ? "relative inline-flex h-10 shrink-0 items-center gap-2 border-b border-white px-2 text-xs text-white"
-      : "relative inline-flex h-10 shrink-0 items-center gap-2 border-b border-transparent px-2 text-xs text-ink-dim transition hover:text-white";
+      ? "relative inline-flex h-10 shrink-0 items-center gap-2 border-b-2 border-accent px-2 text-xs text-ink"
+      : "relative inline-flex h-10 shrink-0 items-center gap-2 border-b-2 border-transparent px-2 text-xs text-muted transition hover:text-ink";
   const tabUsesContainedScroll = selectedTab === "deployments" || selectedTab === "logs" || selectedTab === "source" || selectedTab === "data" || selectedTab === "sql" || selectedTab === "backups";
   const contentClass = `min-h-0 flex-1 pt-5 ${tabUsesContainedScroll ? "overflow-hidden" : "overflow-y-auto"}`;
 
@@ -655,40 +646,22 @@ export function ServicePageShell({
 
   return (
     <>
-      <main className="h-dvh overflow-hidden bg-base text-white">
-        <div className="grid h-full grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[260px_minmax(0,1fr)] lg:grid-rows-1">
-          <ProjectsDashboardSidebar
-            currentUser={currentUser}
-            tools={tools}
-            owner={owner}
-            contextLabel={service?.name ?? "Service"}
-            contextItems={visibleTabs.map(([tab, icon]) => ({
-              id: tab,
-              label: serviceTabLabels[tab],
-              icon,
-              active: selectedTab === tab,
-              attention: tab === "deployments" && hasPendingDeployment,
-              onSelect: () => onTabChange(tab)
-            }))}
+      <div className={viewportClass}>
+        <div className={panelClass}>
+          <ServicePageToolbar
+            services={pageServices}
+            currentService={service ?? null}
+            onBack={onClose}
+            onServiceSelect={onServiceSelect ?? (() => undefined)}
           />
 
-          <section className="min-h-0 min-w-0 overflow-hidden bg-base">
-            <div className={viewportClass}>
-              <div className={panelClass}>
-            <ServicePageToolbar
-              services={pageServices}
-              currentService={service ?? null}
-              onBack={onClose}
-              onServiceSelect={onServiceSelect ?? (() => undefined)}
-            />
-
-            <nav aria-label="Service" className="flex shrink-0 gap-3 overflow-x-auto border-b border-line lg:hidden">
+          <nav aria-label="Service" className="flex shrink-0 gap-3 overflow-x-auto border-b border-line">
               {visibleTabs.map(([tab, icon]) => (
                 <button key={tab} type="button" className={tabButtonClass(tab)} onClick={() => onTabChange(tab)}>
                   <AppIcon icon={icon} size={14} />
                   <span>{serviceTabLabels[tab]}</span>
                   {tab === "deployments" && hasPendingDeployment ? (
-                    <span className="h-1.5 w-1.5 bg-amber-400">
+                    <span className="h-1.5 w-1.5 bg-warn">
                       <span className="sr-only">Deployment in progress</span>
                     </span>
                   ) : null}
@@ -696,7 +669,7 @@ export function ServicePageShell({
               ))}
             </nav>
 
-            {error ? <div className="mt-3 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
+            {error ? <div className="mt-3 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
             <div className={contentClass}>
               {selectedTab === "overview" ? (
@@ -773,17 +746,17 @@ export function ServicePageShell({
               ) : null}
 
               {selectedTab === "settings" ? (
-                <form onSubmit={saveSettings} className="mx-auto w-full max-w-[1100px] overflow-visible border border-line bg-base">
+                <form onSubmit={saveSettings} className="mx-auto w-full max-w-[1100px] overflow-visible border border-line bg-glass backdrop-blur-xl">
                   <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
                     <div>
-                      <h2 className="text-lg tracking-[-0.03em] text-white">Settings</h2>
+                      <h2 className="text-lg tracking-[-0.03em] text-ink">Settings</h2>
                       <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
                         {isDatabase ? "Database service" : isDockerImage ? "Container service" : isFunction ? "Function service" : "Application service"}
                       </p>
                     </div>
                     <button
                       type="submit"
-                      className="inline-flex h-8 items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
+                      className="inline-flex h-8 items-center justify-center bg-accent px-3 text-xs text-white transition hover:bg-brand-hover disabled:opacity-40"
                       disabled={busy === "settings"}
                     >
                       {busy === "settings" ? "Saving…" : "Save settings"}
@@ -864,12 +837,12 @@ export function ServicePageShell({
                           <span className="truncate">{service.primaryUrl.replace("127.0.0.1", window.location.hostname).replace(/^https?:\/\//, "")}</span>
                         </a>
                       ) : service?.status === "queued" || service?.status === "building" ? (
-                        <div className="flex h-8 items-center gap-2 text-xs text-amber-300">
+                        <div className="flex h-8 items-center gap-2 text-xs text-warn">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">Deployment in progress</span>
                         </div>
                       ) : (
-                        <div className="flex h-8 items-center gap-2 text-xs text-rose-300">
+                        <div className="flex h-8 items-center gap-2 text-xs text-bad">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">Service crashed</span>
                         </div>
@@ -887,7 +860,7 @@ export function ServicePageShell({
                       </button>
                       <button
                         type="button"
-                        className="inline-flex h-8 items-center justify-center gap-2 border border-rose-400/40 px-3 text-xs text-rose-300 transition hover:bg-rose-400/10 disabled:opacity-40"
+                        className="inline-flex h-8 items-center justify-center gap-2 border border-bad/40 px-3 text-xs text-bad transition hover:bg-bad/10 disabled:opacity-40"
                         onClick={() => setDeleteDialogOpen(true)}
                         disabled={busy === "delete"}
                       >
@@ -901,9 +874,6 @@ export function ServicePageShell({
               </div>
               </div>
             </div>
-          </section>
-        </div>
-      </main>
       <SourcePickerModal
         open={sourcePickerOpen}
         query={sourceQuery}

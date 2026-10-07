@@ -27,22 +27,22 @@ function statusTone(status: string) {
 function bannerTone(status: string) {
   if (status === "succeeded") {
     return {
-      container: "border-emerald-500/30 bg-emerald-500/10",
-      icon: "border-emerald-500/30 text-emerald-300",
-      label: "text-emerald-300"
+      container: "border-ok/30 bg-ok/10",
+      icon: "border-ok/30 text-ok",
+      label: "text-ok"
     };
   }
   if (status === "failed") {
     return {
-      container: "border-rose-500/30 bg-rose-500/10",
-      icon: "border-rose-500/30 text-rose-300",
-      label: "text-rose-300"
+      container: "border-bad/30 bg-bad/10",
+      icon: "border-bad/30 text-bad",
+      label: "text-bad"
     };
   }
   return {
-    container: "border-amber-500/30 bg-amber-500/10",
-    icon: "border-amber-500/30 text-amber-300",
-    label: "text-amber-300"
+    container: "border-warn/30 bg-warn/10",
+    icon: "border-warn/30 text-warn",
+    label: "text-warn"
   };
 }
 

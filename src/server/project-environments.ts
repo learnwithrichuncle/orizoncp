@@ -4,7 +4,10 @@ import { createUniqueSlug } from "../shared/slug.js";
 import { db, nowIso } from "./db.js";
 import { projectEnvironments, type ProjectEnvironment } from "./schema.js";
 
-const defaultEnvironmentNames = ["Production", "Development"] as const;
+const defaultEnvironments = [
+  { name: "Prod", slug: "production", isDefault: true },
+  { name: "Dev", slug: "development", isDefault: false }
+] as const;
 
 export function getProjectEnvironments(projectId: string) {
   return db
@@ -29,8 +32,8 @@ export function createDefaultProjectEnvironments(projectId: string, timestamp = 
   const existing = getProjectEnvironments(projectId);
   const bySlug = new Map(existing.map((environment) => [environment.slug, environment]));
 
-  for (const name of defaultEnvironmentNames) {
-    const slug = name.toLowerCase();
+  for (const definition of defaultEnvironments) {
+    const { name, slug } = definition;
     if (bySlug.has(slug)) continue;
 
     const environment: ProjectEnvironment = {
@@ -38,7 +41,7 @@ export function createDefaultProjectEnvironments(projectId: string, timestamp = 
       projectId,
       name,
       slug,
-      isDefault: slug === "production",
+      isDefault: definition.isDefault,
       createdAt: timestamp,
       updatedAt: timestamp
     };

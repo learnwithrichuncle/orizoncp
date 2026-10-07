@@ -168,7 +168,7 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
         >
           {creating ? "Creating..." : "Create key"}
         </button>
-        {error ? <span className="text-sm text-rose-300">{error}</span> : null}
+        {error ? <span className="text-sm text-bad">{error}</span> : null}
       </div>
     </form>
   );

@@ -118,7 +118,7 @@ export function DatabaseInsertSheet({
           </header>
           <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
           {error ? (
-            <div className="mb-4 border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div>
+            <div className="mb-4 border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div>
           ) : null}
           {isRedis ? (
             <div className="space-y-3">

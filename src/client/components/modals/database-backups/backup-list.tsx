@@ -80,7 +80,7 @@ export function BackupList({
                     <span>{backup.format}</span>
                     <span>{triggerLabel(backup.trigger)}</span>
                   </div>
-                  {backup.error ? <p className="mt-2 text-xs leading-5 text-rose-300">{backup.error}</p> : null}
+                  {backup.error ? <p className="mt-2 text-xs leading-5 text-bad">{backup.error}</p> : null}
                 </div>
 
                 <div className="text-xs text-ink-dim">
@@ -110,7 +110,7 @@ export function BackupList({
                       </a>
                       <button
                         type="button"
-                        className={`${backupActionClass} hover:border-amber-400/50 hover:bg-amber-400/10 hover:text-amber-300`}
+                        className={`${backupActionClass} hover:border-warn/50 hover:bg-warn/10 hover:text-warn`}
                         onClick={() => onRestorePrompt(backup.id)}
                         disabled={restoring}
                         title="Restore backup"
@@ -122,7 +122,7 @@ export function BackupList({
                   ) : null}
                   <button
                     type="button"
-                    className={`${backupActionClass} hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300`}
+                    className={`${backupActionClass} hover:border-bad/50 hover:bg-bad/10 hover:text-bad`}
                     onClick={() => onDeletePrompt(backup.id)}
                     disabled={deleting}
                     title="Delete backup"

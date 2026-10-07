@@ -11,7 +11,7 @@ type RailpackConfig = {
   [key: string]: unknown;
 };
 
-const generatedConfigName = ".aeroplane-railpack.generated.json";
+const generatedConfigName = ".orizoncp-railpack.generated.json";
 
 function safeRelativeConfigPath(configFile: string) {
   const normalized = normalize(configFile.trim());

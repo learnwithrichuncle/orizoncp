@@ -81,7 +81,7 @@ export function EditProjectModal({
         </div>
 
         {error ? (
-          <div role="alert" className="mt-5 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-100">
+          <div role="alert" className="mt-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
             {error}
           </div>
         ) : null}

@@ -43,7 +43,7 @@ export function SourcePickerModal({ open, query, repos, loading, error, onClose,
           />
         </div>
 
-        {error ? <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+        {error ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
 
         <div className="max-h-[380px] overflow-auto border border-line bg-base">
           {repos.length === 0 ? (

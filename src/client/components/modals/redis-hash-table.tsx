@@ -37,7 +37,7 @@ function HashActionButton({
     tone === "primary"
       ? "border-white bg-accent text-ink hover:bg-zinc-200"
       : tone === "danger"
-        ? "border-rose-500/35 bg-rose-500/10 text-rose-200 hover:bg-rose-500/15"
+        ? "border-bad/35 bg-bad/10 text-bad hover:bg-bad/15"
         : "border-line text-ink-dim hover:border-line hover:bg-hover hover:text-white";
 
   return (
@@ -144,7 +144,7 @@ export function RedisHashTable({
                       <span className="block break-words font-mono text-ink">{valueText(row.value)}</span>
                     </div>
                     <div className="flex items-center justify-end gap-2 px-3 py-2.5">
-                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-rose-300">Confirm?</span>
+                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-bad">Confirm?</span>
                       <HashActionButton
                         title="Yes, delete field"
                         tone="danger"

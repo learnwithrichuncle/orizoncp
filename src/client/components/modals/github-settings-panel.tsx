@@ -182,13 +182,13 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                   <span
                     className={`h-1.5 w-1.5 ${
                       connected
-                        ? "bg-emerald-400"
+                        ? "bg-ok"
                         : appConfigured
-                          ? "bg-amber-400"
+                          ? "bg-warn"
                           : "border border-zinc-600"
                     }`}
                   />
-                  <span className={connected ? "text-emerald-300" : appConfigured ? "text-amber-300" : "text-ink-dim"}>
+                  <span className={connected ? "text-ok" : appConfigured ? "text-warn" : "text-ink-dim"}>
                     {connected ? "Connected" : appConfigured ? "Needs install" : "Not configured"}
                   </span>
                 </div>
@@ -211,7 +211,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               {connected || appConfigured ? (
                 <button
                   type="button"
-                  className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300"
+                  className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad"
                   onClick={() => setDisconnecting(true)}
                   title="Disconnect GitHub"
                   aria-label="Disconnect GitHub"
@@ -250,15 +250,15 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
           ) : null}
 
           {disconnecting ? (
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-l-2 border-bad bg-bad/10 px-4 py-3">
               <div>
-                <div className="text-sm text-rose-100">Disconnect GitHub?</div>
-                <div className="mt-1 text-xs text-rose-200/70">Repository browsing and webhooks will stop.</div>
+                <div className="text-sm text-bad">Disconnect GitHub?</div>
+                <div className="mt-1 text-xs text-bad/70">Repository browsing and webhooks will stop.</div>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-rose-400/50 text-rose-200 transition hover:bg-rose-400/10"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-bad/50 text-bad transition hover:bg-bad/10"
                   onClick={() => void disconnect()}
                   disabled={busy}
                   title="Confirm disconnect"
@@ -437,17 +437,17 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
       {github.statusError || error || success ? (
         <div className="border-t border-line px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
           {github.statusError ? (
-            <div className="mt-5 border-l-2 border-amber-400 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
+            <div className="mt-5 border-l-2 border-warn bg-warn/10 px-4 py-3 text-sm text-warn">
               {github.statusError}
             </div>
           ) : null}
           {error ? (
-            <div className="mt-5 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
+            <div className="mt-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
               {error}
             </div>
           ) : null}
           {success ? (
-            <div className="mt-5 flex items-center gap-2 border-l-2 border-emerald-400 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
+            <div className="mt-5 flex items-center gap-2 border-l-2 border-ok bg-ok/10 px-4 py-3 text-sm text-ok">
               <AppIcon icon={CheckmarkCircle02Icon} size={14} />
               {success}
             </div>

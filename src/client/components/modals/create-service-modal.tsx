@@ -704,7 +704,7 @@ export function CreateServiceModal({
         </div>
       )}
 
-      {error ? <div className="mb-3 shrink-0 border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+      {error ? <div className="mb-3 shrink-0 border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
 
       {step === "type" ? (
         <ImportTypeStep
@@ -819,7 +819,7 @@ export function CreateServiceModal({
                       className="!h-9 border-line bg-base font-mono text-xs"
                     />
                     {form.repoUrl?.trim() && !gitUrlValid ? (
-                      <p className="mt-2 text-xs text-rose-300">Use an HTTPS Git URL or SSH URL like git@github.com:owner/repo.git.</p>
+                      <p className="mt-2 text-xs text-bad">Use an HTTPS Git URL or SSH URL like git@github.com:owner/repo.git.</p>
                     ) : (
                       <p className="mt-2 text-xs text-ink-dim">Use this for public repos, SSH repos, or providers outside the GitHub App flow.</p>
                     )}
@@ -950,7 +950,7 @@ export function CreateServiceModal({
                     </div>
                   </div>
 
-                  {repoError ? <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">GitHub is configured, but repo lookup failed: {repoError}</div> : null}
+                  {repoError ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">GitHub is configured, but repo lookup failed: {repoError}</div> : null}
 
                   <div className="overflow-hidden border border-line">
                     <div className="max-h-[280px] overflow-auto">
@@ -1229,7 +1229,7 @@ export function CreateServiceModal({
                         <div className="font-mono text-xs text-ink-dim">••••••••</div>
                         <button
                           type="button"
-                          className="ml-auto inline-flex h-7 w-7 items-center justify-center text-ink-dim transition hover:bg-rose-500/10 hover:text-rose-300"
+                          className="ml-auto inline-flex h-7 w-7 items-center justify-center text-ink-dim transition hover:bg-bad/10 hover:text-bad"
                           aria-label={`Delete ${item.key}`}
                           onClick={() => setEnvEntries((current) => current.filter((entry) => entry.key !== item.key))}
                         >

@@ -4,7 +4,7 @@ import { config } from "./config.js";
 const encryptedPrefix = "enc:v1:";
 
 function activeSecretKey() {
-  return process.env.ORIZONCP_SECRET_KEY || process.env.AEROPLANE_SECRET_KEY || config.secretKey;
+  return process.env.ORIZONCP_SECRET_KEY || process.env.ORIZONCP_SECRET_KEY || config.secretKey;
 }
 
 function encryptionKey() {

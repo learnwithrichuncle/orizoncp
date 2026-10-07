@@ -163,14 +163,14 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
               <p className="mt-1.5 text-sm text-ink-dim">{r2.bucket}</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 pr-2 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-300">
-                <span className="h-1.5 w-1.5 bg-emerald-400" />
+              <span className="inline-flex items-center gap-2 pr-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ok">
+                <span className="h-1.5 w-1.5 bg-ok" />
                 Connected
               </span>
               <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white" onClick={() => setEditing(true)} title="Edit R2 connection" aria-label="Edit R2 connection">
                 <AppIcon icon={PencilEdit02Icon} size={15} />
               </button>
-              <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300" onClick={() => setDisconnecting(true)} title="Disconnect R2" aria-label="Disconnect R2">
+              <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad" onClick={() => setDisconnecting(true)} title="Disconnect R2" aria-label="Disconnect R2">
                 <AppIcon icon={Delete02Icon} size={15} />
               </button>
             </div>
@@ -192,13 +192,13 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
           </dl>
 
           {disconnecting ? (
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-rose-400/30 bg-rose-400/10 px-5 py-4 sm:px-7">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-bad/30 bg-bad/10 px-5 py-4 sm:px-7">
               <div>
-                <div className="text-sm text-rose-100">Disconnect R2?</div>
-                <div className="mt-1 text-xs text-rose-200/70">Future uploads to this bucket will stop.</div>
+                <div className="text-sm text-bad">Disconnect R2?</div>
+                <div className="mt-1 text-xs text-bad/70">Future uploads to this bucket will stop.</div>
               </div>
               <div className="flex items-center gap-2">
-                <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-rose-400/50 text-rose-200 transition hover:bg-rose-400/10 disabled:opacity-50" onClick={() => void disconnect()} disabled={busy} title="Disconnect" aria-label="Confirm disconnect">
+                <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-bad/50 text-bad transition hover:bg-bad/10 disabled:opacity-50" onClick={() => void disconnect()} disabled={busy} title="Disconnect" aria-label="Confirm disconnect">
                   <AppIcon icon={CheckmarkCircle02Icon} size={16} />
                 </button>
                 <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50" onClick={() => setDisconnecting(false)} disabled={busy} title="Cancel" aria-label="Cancel disconnect">
@@ -276,11 +276,11 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
 
       {error ? (
         <div className="border-t border-line px-5 py-4 sm:px-7">
-          <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div>
+          <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div>
         </div>
       ) : null}
       {success ? (
-        <div className="flex items-center gap-2 border-t border-emerald-400/20 bg-emerald-400/10 px-5 py-3 text-xs text-emerald-300 sm:px-7">
+        <div className="flex items-center gap-2 border-t border-ok/20 bg-ok/10 px-5 py-3 text-xs text-ok sm:px-7">
           <AppIcon icon={CheckmarkCircle02Icon} size={13} />
           {success}
         </div>

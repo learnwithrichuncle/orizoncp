@@ -46,10 +46,10 @@ export function MigrationSettingsPanel() {
         </div>
         <span
           className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${
-            exporting ? "text-amber-300" : lastExport ? "text-emerald-300" : "text-ink-dim"
+            exporting ? "text-warn" : lastExport ? "text-ok" : "text-ink-dim"
           }`}
         >
-          <span className={`h-1.5 w-1.5 ${exporting ? "animate-pulse bg-amber-400" : lastExport ? "bg-emerald-400" : "bg-zinc-600"}`} />
+          <span className={`h-1.5 w-1.5 ${exporting ? "animate-pulse bg-warn" : lastExport ? "bg-ok" : "bg-zinc-600"}`} />
           {exporting ? "Exporting" : lastExport ? "Ready" : "Encrypted"}
         </span>
       </header>
@@ -86,15 +86,15 @@ export function MigrationSettingsPanel() {
 
         {error ? (
           <div className="border-t border-line px-5 py-4 sm:px-7">
-            <div className="border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">{error}</div>
+            <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div>
           </div>
         ) : null}
 
         {lastExport ? (
-          <div className="flex items-center gap-2 border-t border-emerald-400/20 bg-emerald-400/10 px-5 py-3 text-xs text-emerald-300 sm:px-7">
+          <div className="flex items-center gap-2 border-t border-ok/20 bg-ok/10 px-5 py-3 text-xs text-ok sm:px-7">
             <AppIcon icon={CheckmarkCircle02Icon} size={14} />
             <span className="min-w-0 truncate">{lastExport.fileName}</span>
-            <span className="ml-auto shrink-0 font-mono text-[10px] text-emerald-200/70">{formatBytes(lastExport.sizeBytes)}</span>
+            <span className="ml-auto shrink-0 font-mono text-[10px] text-ok/70">{formatBytes(lastExport.sizeBytes)}</span>
           </div>
         ) : null}
 

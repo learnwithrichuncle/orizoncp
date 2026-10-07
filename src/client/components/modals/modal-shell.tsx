@@ -69,7 +69,7 @@ export function ModalShell({
   }
 
   const panelClassName = monochrome
-    ? `flex max-h-[min(720px,calc(100vh-2rem))] ${minHeight} w-full ${width} flex-col border border-line bg-base shadow-[0_24px_80px_rgba(0,0,0,0.6)]`
+    ? `flex max-h-[min(720px,calc(100vh-2rem))] ${minHeight} w-full ${width} flex-col rounded-[14px] border border-line bg-glass backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.6)]`
     : surfaceClass(`flex max-h-[min(720px,calc(100vh-2rem))] ${minHeight} w-full ${width} flex-col p-6 md:p-7`);
 
   return (

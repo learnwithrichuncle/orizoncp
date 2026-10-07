@@ -132,7 +132,7 @@ export function ServiceDomainRow({
               <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white" onClick={onStartEdit} title="Edit domain" aria-label="Edit domain">
                 <AppIcon icon={PencilEdit02Icon} size={13} />
               </button>
-              <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300" onClick={onRemove} title="Remove domain" aria-label="Remove domain">
+              <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-bad/50 hover:bg-bad/10 hover:text-bad" onClick={onRemove} title="Remove domain" aria-label="Remove domain">
                 <AppIcon icon={Delete02Icon} size={13} />
               </button>
               {!local ? (
@@ -147,7 +147,7 @@ export function ServiceDomainRow({
 
       {expanded && !local ? (
         <div className="border-t border-line bg-glass p-4 sm:p-5">
-          <div className={`flex items-center gap-2 text-xs ${active ? "text-emerald-300" : "text-amber-300"}`}>
+          <div className={`flex items-center gap-2 text-xs ${active ? "text-ok" : "text-warn"}`}>
             <AppIcon icon={active ? CheckmarkBadge01Icon : Alert02Icon} size={14} className={active ? "" : "animate-pulse"} />
             {active ? "DNS configured" : "Waiting for DNS"}
           </div>
@@ -168,14 +168,14 @@ export function ServiceDomainRow({
                   <button
                     type="button"
                     onClick={() => onCopyIp(targetIp)}
-                    className={`shrink-0 transition ${copied ? "text-emerald-300" : "text-ink-dim hover:text-white"}`}
+                    className={`shrink-0 transition ${copied ? "text-ok" : "text-ink-dim hover:text-white"}`}
                     title={copied ? "Copied" : "Copy IP address"}
                     aria-label={copied ? "Copied IP address" : "Copy IP address"}
                   >
                     <AppIcon icon={copied ? CopyCheckIcon : CopyIcon} size={13} />
                   </button>
                 </span>
-                <span className={`text-right ${active ? "text-emerald-300" : "text-amber-300"}`}>
+                <span className={`text-right ${active ? "text-ok" : "text-warn"}`}>
                   {active ? "Active" : "Pending"}
                 </span>
               </div>
@@ -194,8 +194,8 @@ export function ServiceDomainRow({
               {notice?.domainId === domain.id ? (
                 <div className={`w-fit border px-2.5 py-1.5 text-xs ${
                   notice.tone === "success"
-                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
-                    : "border-rose-500/30 bg-rose-500/10 text-rose-300"
+                    ? "border-ok/30 bg-ok/10 text-ok"
+                    : "border-bad/30 bg-bad/10 text-bad"
                 }`}>
                   {notice.text}
                 </div>

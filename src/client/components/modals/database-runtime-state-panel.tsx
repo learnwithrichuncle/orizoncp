@@ -14,7 +14,7 @@ const runtimeStateCopy: Record<Exclude<DatabaseRuntimeState, "ready">, { title: 
     title: "Database is deploying",
     fallback: "Data will be available once the container is running.",
     icon: DatabaseSync01Icon,
-    accent: "border-amber-500/35 bg-amber-500/10 text-amber-200"
+    accent: "border-warn/35 bg-warn/10 text-warn"
   },
   idle: {
     title: "Database is idle",
@@ -26,7 +26,7 @@ const runtimeStateCopy: Record<Exclude<DatabaseRuntimeState, "ready">, { title: 
     title: "Database deployment failed",
     fallback: "Check the deployment logs, then retry the deployment.",
     icon: Alert02Icon,
-    accent: "border-rose-500/35 bg-rose-500/10 text-rose-200"
+    accent: "border-bad/35 bg-bad/10 text-bad"
   },
   unavailable: {
     title: "Database runtime unavailable",

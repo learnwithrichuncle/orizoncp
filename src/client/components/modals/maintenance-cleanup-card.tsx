@@ -71,10 +71,10 @@ export function MaintenanceCleanupCard({
         </button>
 
         {confirmVolumes ? (
-          <div className="border-l-2 border-rose-400 bg-rose-400/10 p-3">
-            <p className="text-xs leading-relaxed text-rose-100">Delete unused Docker volumes? This will not remove attached volumes, but it can delete persistent service or database data left behind by removed containers.</p>
+          <div className="border-l-2 border-bad bg-bad/10 p-3">
+            <p className="text-xs leading-relaxed text-bad">Delete unused Docker volumes? This will not remove attached volumes, but it can delete persistent service or database data left behind by removed containers.</p>
             <div className="mt-3 flex gap-2">
-              <button type="button" className="inline-flex h-9 items-center justify-center gap-2 border border-rose-400/50 px-3 text-sm text-rose-200 transition hover:bg-rose-400/10 disabled:opacity-50" onClick={() => onRunCleanup("volumes", ["docker-volumes"])} disabled={Boolean(cleanupMode)}>
+              <button type="button" className="inline-flex h-9 items-center justify-center gap-2 border border-bad/50 px-3 text-sm text-bad transition hover:bg-bad/10 disabled:opacity-50" onClick={() => onRunCleanup("volumes", ["docker-volumes"])} disabled={Boolean(cleanupMode)}>
                 <AppIcon icon={Delete02Icon} size={14} className={cleanupMode === "volumes" ? "animate-spin" : ""} />
                 Delete volumes
               </button>
@@ -84,7 +84,7 @@ export function MaintenanceCleanupCard({
             </div>
           </div>
         ) : (
-          <button type="button" className="inline-flex h-9 items-center justify-center gap-2 border border-rose-400/40 px-3.5 text-sm text-rose-300 transition hover:bg-rose-400/10 disabled:opacity-50" onClick={() => onConfirmVolumesChange(true)} disabled={Boolean(cleanupMode) || loading}>
+          <button type="button" className="inline-flex h-9 items-center justify-center gap-2 border border-bad/40 px-3.5 text-sm text-bad transition hover:bg-bad/10 disabled:opacity-50" onClick={() => onConfirmVolumesChange(true)} disabled={Boolean(cleanupMode) || loading}>
             <AppIcon icon={Delete02Icon} size={14} />
             Clean volumes
           </button>

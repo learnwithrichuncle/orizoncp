@@ -114,7 +114,7 @@ export function TransferServiceModal({
           The service lands in the destination project's production environment. Deployments, variables, domains, backups, and runtime state stay with it.
         </div>
 
-        {error ? <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+        {error ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
 
         <div className="flex flex-wrap justify-end gap-2 border-t border-line pt-4">
           <button type="button" className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40" onClick={onClose} disabled={busy}>

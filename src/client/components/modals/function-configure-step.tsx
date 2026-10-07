@@ -101,7 +101,7 @@ export function FunctionConfigureStep({
               </span>
             </div>
             <FunctionSourceEditor runtime={runtime} value={sourceCode} onChange={setSourceCode} height="420px" disabled={busy} />
-            {error ? <div className="mt-2 border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-200">{error}</div> : null}
+            {error ? <div className="mt-2 border border-bad/30 bg-bad/10 px-3 py-2 text-xs text-bad">{error}</div> : null}
           </div>
         </div>
       </div>

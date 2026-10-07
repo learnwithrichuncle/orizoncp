@@ -25,7 +25,7 @@ export function MaintenanceDockerStorage({
           </p>
         </div>
         <div className="text-right">
-          <div className={`font-mono text-[9px] uppercase tracking-[0.16em] ${reclaimableSize > 0 ? "text-amber-300" : available ? "text-emerald-300" : "text-rose-300"}`}>
+          <div className={`font-mono text-[9px] uppercase tracking-[0.16em] ${reclaimableSize > 0 ? "text-warn" : available ? "text-ok" : "text-bad"}`}>
             {available ? `${formatBytes(reclaimableSize)} reclaimable` : "Unavailable"}
           </div>
           <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-700">
@@ -64,7 +64,7 @@ export function MaintenanceDockerStorage({
                 <div className="text-left font-mono text-[10px] text-ink-muted md:text-right">
                   {formatBytes(row.sizeBytes)}
                 </div>
-                <div className={`text-left font-mono text-[10px] md:text-right ${reclaimable > 0 ? "text-amber-200" : "text-ink-dim"}`}>
+                <div className={`text-left font-mono text-[10px] md:text-right ${reclaimable > 0 ? "text-warn" : "text-ink-dim"}`}>
                   {formatBytes(row.reclaimableBytes)}
                 </div>
               </div>

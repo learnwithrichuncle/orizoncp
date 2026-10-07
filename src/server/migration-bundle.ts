@@ -68,7 +68,7 @@ export type MigrationImportResult = {
 };
 
 type MigrationManifest = {
-  format: "orizoncp-migration" | "aeroplane-migration";
+  format: "orizoncp-migration" | "orizoncp-migration";
   version: 1;
   createdAt: string;
   source: {
@@ -92,7 +92,7 @@ function currentDataDir() {
 
 function currentRuntimeEnv() {
   return {
-    AEROPLANE_SECRET_KEY: process.env.ORIZONCP_SECRET_KEY ?? process.env.AEROPLANE_SECRET_KEY ?? config.secretKey,
+    ORIZONCP_SECRET_KEY: process.env.ORIZONCP_SECRET_KEY ?? process.env.ORIZONCP_SECRET_KEY ?? config.secretKey,
     DATA_DIR: process.env.DATA_DIR ?? config.dataDir,
     DEPLOY_DRY_RUN: process.env.DEPLOY_DRY_RUN ?? String(config.deployDryRun),
     CADDY_CONFIG_PATH: process.env.CADDY_CONFIG_PATH ?? config.caddyConfigPath,
@@ -103,7 +103,7 @@ function currentRuntimeEnv() {
     PUBLIC_URL: process.env.PUBLIC_URL ?? config.publicUrl,
     CONTROL_PLANE_HOSTNAME: process.env.CONTROL_PLANE_HOSTNAME ?? config.controlPlaneHostname,
     BUILDKIT_HOST: process.env.BUILDKIT_HOST ?? config.buildkitHost,
-    AEROPLANE_RUNTIME_NETWORK: process.env.ORIZONCP_RUNTIME_NETWORK ?? process.env.AEROPLANE_RUNTIME_NETWORK ?? config.runtimeNetworkName,
+    ORIZONCP_RUNTIME_NETWORK: process.env.ORIZONCP_RUNTIME_NETWORK ?? process.env.ORIZONCP_RUNTIME_NETWORK ?? config.runtimeNetworkName,
     GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN ?? config.githubAccessToken,
     GITHUB_APP_ID: process.env.GITHUB_APP_ID ?? config.githubAppId,
     GITHUB_APP_CLIENT_ID: process.env.GITHUB_APP_CLIENT_ID ?? config.githubAppClientId,
@@ -318,7 +318,7 @@ function importedRuntimeEnv(bundleEnv: Record<string, string>): Record<string, s
     HOST: current.HOST,
     PUBLIC_URL: current.PUBLIC_URL,
     BUILDKIT_HOST: current.BUILDKIT_HOST,
-    AEROPLANE_RUNTIME_NETWORK: current.AEROPLANE_RUNTIME_NETWORK
+    ORIZONCP_RUNTIME_NETWORK: current.ORIZONCP_RUNTIME_NETWORK
   };
 }
 
@@ -360,7 +360,7 @@ export async function createMigrationBundle(passphrase: string) {
   const workDir = await mkdtemp(join(tmpdir(), "orizoncp-export-"));
   const payloadDir = join(workDir, "payload");
   const archivePath = join(workDir, "payload.tar.gz");
-  const bundlePath = join(workDir, `orizoncp-${new Date().toISOString().slice(0, 10)}-${nanoid(6)}.aeroplane`);
+  const bundlePath = join(workDir, `orizoncp-${new Date().toISOString().slice(0, 10)}-${nanoid(6)}.ORIZONCP`);
 
   try {
     await writePayload(payloadDir);
@@ -392,13 +392,13 @@ export async function importMigrationBundle(bundlePath: string, passphrase: stri
     await extractTarGz(archivePath, payloadDir);
 
     const manifest = readJsonFile<MigrationManifest>(join(payloadDir, "manifest.json"));
-    if ((manifest.format !== "orizoncp-migration" && manifest.format !== "aeroplane-migration") || manifest.version !== 1) {
+    if ((manifest.format !== "orizoncp-migration" && manifest.format !== "orizoncp-migration") || manifest.version !== 1) {
       throw new Error("Migration bundle format is not supported");
     }
 
     const runtimeEnv = importedRuntimeEnv(readJsonFile<Record<string, string>>(join(payloadDir, "runtime-env.json")));
     writeManagedEnv(runtimeEnv);
-    config.secretKey = runtimeEnv.AEROPLANE_SECRET_KEY ?? "";
+    config.secretKey = runtimeEnv.ORIZONCP_SECRET_KEY ?? "";
     config.controlPlaneHostname = runtimeEnv.CONTROL_PLANE_HOSTNAME ?? "";
 
     const systemSettings = readJsonFile<SystemSettings>(join(payloadDir, "system-settings.json"));

@@ -594,7 +594,7 @@ function currentRuntimeConfig() {
     publicUrl: process.env.PUBLIC_URL ?? config.publicUrl,
     controlPlaneHostname: configuredControlPlaneHostname(),
     buildkitHost: process.env.BUILDKIT_HOST ?? config.buildkitHost,
-    runtimeNetworkName: process.env.ORIZONCP_RUNTIME_NETWORK ?? process.env.AEROPLANE_RUNTIME_NETWORK ?? config.runtimeNetworkName
+    runtimeNetworkName: process.env.ORIZONCP_RUNTIME_NETWORK ?? process.env.ORIZONCP_RUNTIME_NETWORK ?? config.runtimeNetworkName
   };
 }
 
@@ -1157,7 +1157,7 @@ async function saveUploadedMigrationBundle(c: Context) {
   }
 
   const uploadDir = mkdtempSync(join(tmpdir(), "orizoncp-upload-"));
-  const uploadPath = join(uploadDir, "bundle.aeroplane");
+  const uploadPath = join(uploadDir, "bundle.ORIZONCP");
   writeFileSync(uploadPath, Buffer.from(await bundle.arrayBuffer()));
   return { passphrase, uploadDir, uploadPath };
 }
@@ -1268,7 +1268,7 @@ function onboardingSettingsError(error: unknown) {
 }
 
 async function applyOnboardingSettings(input: z.infer<typeof restartOnboardingSchema>, options: { generateSecretKeyIfMissing: boolean }) {
-  const secretKey = input.env.secretKey || process.env.ORIZONCP_SECRET_KEY || process.env.AEROPLANE_SECRET_KEY || config.secretKey || (options.generateSecretKeyIfMissing ? generateSecretKey() : "");
+  const secretKey = input.env.secretKey || process.env.ORIZONCP_SECRET_KEY || process.env.ORIZONCP_SECRET_KEY || config.secretKey || (options.generateSecretKeyIfMissing ? generateSecretKey() : "");
   const managedEnv = {
     ORIZONCP_SECRET_KEY: secretKey,
     DATA_DIR: input.env.dataDir,

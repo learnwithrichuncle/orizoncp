@@ -26,7 +26,7 @@ export function DeleteProjectModal({
     >
       <div>
         <p className="truncate font-mono text-[10px] uppercase tracking-[0.14em] text-ink-dim">{projectName}</p>
-        <p className="mt-4 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm leading-relaxed text-rose-100">
+        <p className="mt-4 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm leading-relaxed text-bad">
           This will permanently remove this project and every service inside it.
         </p>
 
@@ -41,7 +41,7 @@ export function DeleteProjectModal({
           </button>
           <button
             type="button"
-            className="inline-flex h-9 items-center justify-center gap-2 border border-rose-400/50 px-3.5 text-sm text-rose-200 transition hover:bg-rose-400/10 disabled:opacity-50"
+            className="inline-flex h-9 items-center justify-center gap-2 border border-bad/50 px-3.5 text-sm text-bad transition hover:bg-bad/10 disabled:opacity-50"
             onClick={onConfirm}
             disabled={busy}
           >

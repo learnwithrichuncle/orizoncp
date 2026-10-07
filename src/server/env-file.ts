@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const envPath = resolve(process.env.ORIZONCP_ENV_PATH ?? process.env.AEROPLANE_ENV_PATH ?? resolve(process.cwd(), ".env.local"));
+const envPath = resolve(process.env.ORIZONCP_ENV_PATH ?? process.env.ORIZONCP_ENV_PATH ?? resolve(process.cwd(), ".env.local"));
 const blockStart = "# --- orizonCP managed settings ---";
 const blockEnd = "# --- End orizonCP managed settings ---";
 

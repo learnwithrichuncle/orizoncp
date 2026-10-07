@@ -7,11 +7,9 @@ import {
   useMemo,
   useState,
 } from "react";
-import { api, type ProjectDetail, type ToolCheck } from "../api";
-import { useAuthStatus } from "../components/auth/auth-context";
+import { api, type ProjectDetail } from "../api";
 import { ServicePageShell } from "../features/services/service-page-shell";
 import { ProjectRouteLoader } from "../features/projects/project-route-loader";
-import { ProjectsDashboardSidebar } from "../features/projects/projects-dashboard-sidebar";
 import {
   routeSegmentToServiceTab,
   serviceTabToRouteSegment,
@@ -30,17 +28,13 @@ export function ServicePage({
   serviceTab?: string;
 }) {
   const navigate = useNavigate();
-  const authStatus = useAuthStatus();
   const [project, setProject] = useState<ProjectDetail | null>(null);
-  const [tools, setTools] = useState<ToolCheck[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const selectedTab = useMemo<ServiceTab>(
     () => routeSegmentToServiceTab(serviceTab),
     [serviceTab],
   );
-  const currentUser = authStatus?.user ?? null;
-  const owner = currentUser?.role === "owner";
 
   const loadProject = useCallback(async (options: { showLoading?: boolean } = {}) => {
     const showLoading = options.showLoading ?? true;
@@ -68,26 +62,6 @@ export function ServicePage({
     setLoading(true);
     void loadProject();
   }, [loadProject]);
-
-  useEffect(() => {
-    if (!owner) {
-      setTools([]);
-      return;
-    }
-
-    let cancelled = false;
-    void api.system()
-      .then((result) => {
-        if (!cancelled) setTools(result.tools);
-      })
-      .catch(() => {
-        if (!cancelled) setTools([]);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [owner]);
 
   const currentProject = project?.slug === projectSlug ? project : null;
   const service =
@@ -137,25 +111,20 @@ export function ServicePage({
 
   if (error) {
     return (
-      <main className="min-h-dvh bg-base text-white">
-        <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
-          <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
-          <section className="grid min-h-dvh place-items-center bg-base px-5 py-12">
-            <div className="w-full max-w-lg border border-line bg-base p-5">
-              <h1 className="text-lg text-ink">Could not load service</h1>
-              <p className="mt-2 text-sm text-rose-200">{error}</p>
-              <button
-                type="button"
-                className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover"
-                onClick={navigateToProject}
-              >
-                <AppIcon icon={ArrowLeft01Icon} size={15} />
-                Back to project
-              </button>
-            </div>
-          </section>
+      <section className="grid min-h-dvh place-items-center px-5 py-12">
+        <div className="w-full max-w-lg rounded-[14px] border border-line bg-glass p-5 backdrop-blur-xl">
+          <h1 className="text-lg text-ink">Could not load service</h1>
+          <p className="mt-2 text-sm text-bad">{error}</p>
+          <button
+            type="button"
+            className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-muted transition hover:border-line hover:bg-hover"
+            onClick={navigateToProject}
+          >
+            <AppIcon icon={ArrowLeft01Icon} size={15} />
+            Back to project
+          </button>
         </div>
-      </main>
+      </section>
     );
   }
 
@@ -165,28 +134,23 @@ export function ServicePage({
 
   if (!service) {
     return (
-      <main className="min-h-dvh bg-base text-white">
-        <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
-          <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
-          <section className="grid min-h-dvh place-items-center bg-base px-5 py-12">
-            <div className="w-full max-w-lg border border-line bg-base p-5">
-              <AppIcon icon={CloudServerIcon} size={20} className="text-ink-dim" />
-              <h1 className="mt-4 text-lg text-ink">Service not found</h1>
-              <p className="mt-2 text-sm leading-6 text-ink-dim">
-                There is no service named <span className="font-mono text-ink-muted">{serviceSlug}</span> in this project.
-              </p>
-              <Link
-                to="/$projectSlug"
-                params={{ projectSlug }}
-                className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover"
-              >
-                <AppIcon icon={ArrowLeft01Icon} size={15} />
-                Back to project
-              </Link>
-            </div>
-          </section>
+      <section className="grid min-h-dvh place-items-center px-5 py-12">
+        <div className="w-full max-w-lg rounded-[14px] border border-line bg-glass p-5 backdrop-blur-xl">
+          <AppIcon icon={CloudServerIcon} size={20} className="text-ink-dim" />
+          <h1 className="mt-4 text-lg text-ink">Service not found</h1>
+          <p className="mt-2 text-sm leading-6 text-ink-dim">
+            There is no service named <span className="font-mono text-ink-muted">{serviceSlug}</span> in this project.
+          </p>
+          <Link
+            to="/$projectSlug"
+            params={{ projectSlug }}
+            className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-muted transition hover:border-line hover:bg-hover"
+          >
+            <AppIcon icon={ArrowLeft01Icon} size={15} />
+            Back to project
+          </Link>
         </div>
-      </main>
+      </section>
     );
   }
 
@@ -202,9 +166,6 @@ export function ServicePage({
       pageServices={currentProject.services}
       onServiceSelect={navigateToService}
       onTransferred={navigateToTransferredService}
-      currentUser={currentUser}
-      tools={tools}
-      owner={owner}
     />
   );
 }

@@ -70,7 +70,7 @@ export function UserCreateForm({ creating, onCreate }: UserCreateFormProps) {
         />
       </div>
 
-      {error ? <div className="border-l-2 border-rose-400 bg-rose-400/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
+      {error ? <div className="border-l-2 border-bad bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
 
       <div className="flex justify-end border-t border-line pt-4">
         <button

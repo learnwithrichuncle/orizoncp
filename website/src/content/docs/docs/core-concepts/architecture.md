@@ -45,6 +45,6 @@ Enabled automatic schedules run in the background for daily, weekly, or monthly 
 orizonCP supports two migration paths:
 
 - Railway import, which reads Railway projects and recreates supported services in orizonCP.
-- orizonCP migration bundles, which export a whole orizonCP instance into an encrypted `.aeroplane` file and restore it into another server.
+- orizonCP migration bundles, which export a whole orizonCP instance into an encrypted `.ORIZONCP` file and restore it into another server.
 
 Those paths solve different problems. Railway import translates a Railway project into orizonCP services. orizonCP bundles move an orizonCP instance between servers.

@@ -25,8 +25,8 @@ export function RedeployRequiredToast({
       <div className="flex items-start justify-between gap-4 border-b border-line px-4 py-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className={`h-1.5 w-1.5 bg-amber-300 ${busy ? "animate-pulse" : ""}`} />
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-amber-300">
+            <span className={`h-1.5 w-1.5 bg-warn ${busy ? "animate-pulse" : ""}`} />
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-warn">
               {busy ? "Deploying" : "Redeploy required"}
             </span>
           </div>

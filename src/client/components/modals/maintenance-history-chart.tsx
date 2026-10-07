@@ -89,7 +89,7 @@ export function MaintenanceHistoryChart({
           </div>
         </div>
         {latest !== null && values.length > 1 ? (
-          <span className={`font-mono text-[9px] uppercase tracking-[0.12em] ${delta > 0 ? "text-amber-300" : delta < 0 ? "text-emerald-300" : "text-ink-dim"}`}>
+          <span className={`font-mono text-[9px] uppercase tracking-[0.12em] ${delta > 0 ? "text-warn" : delta < 0 ? "text-ok" : "text-ink-dim"}`}>
             {metricDelta(delta, metric)}
           </span>
         ) : null}

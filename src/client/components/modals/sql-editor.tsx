@@ -44,13 +44,13 @@ function highlightedSql(sql: string) {
       return <span key={index} className="text-ink-dim">{token}</span>;
     }
     if (token.startsWith("'") || token.startsWith("\"")) {
-      return <span key={index} className="text-emerald-300">{token}</span>;
+      return <span key={index} className="text-ok">{token}</span>;
     }
     if (sqlKeywords.has(lower)) {
       return <span key={index} className="text-[#FF8A5C]">{token}</span>;
     }
     if (/^\d+(\.\d+)?$/.test(token)) {
-      return <span key={index} className="text-amber-300">{token}</span>;
+      return <span key={index} className="text-warn">{token}</span>;
     }
     return <span key={index}>{token}</span>;
   });
