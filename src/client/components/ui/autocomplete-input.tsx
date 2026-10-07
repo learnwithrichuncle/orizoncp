@@ -138,27 +138,27 @@ export function AutocompleteInput({
       {isOpen && filtered.length > 0 && (
         <div
           ref={dropdownRef}
-          className="absolute left-0 top-[calc(100%+0.25rem)] z-[70] max-h-56 w-full overflow-y-auto border border-white/15 bg-black shadow-[0_18px_50px_rgba(0,0,0,0.5)]"
+          className="absolute left-0 top-[calc(100%+0.25rem)] z-[70] max-h-56 w-full overflow-y-auto rounded-md border border-line bg-surface shadow-2xl backdrop-blur-xl"
         >
           <div className="flex flex-col">
             {filtered.map((item, index) => (
               <button
                 key={item.key}
                 type="button"
-                className={`flex w-full items-center gap-3 border-b border-white/10 px-3 py-2.5 text-left transition last:border-b-0 ${
+                className={`flex w-full items-center gap-3 border-b border-line px-3 py-2.5 text-left transition last:border-b-0 ${
                   index === activeIndex
-                    ? "bg-white text-black"
-                    : "text-zinc-300 hover:bg-white/[0.06] hover:text-white"
+                    ? "bg-accent text-white"
+                    : "text-ink-muted hover:bg-hover hover:text-ink"
                 }`}
                 onClick={() => selectSuggestion(item)}
                 onMouseEnter={() => setActiveIndex(index)}
               >
-                <span className={`font-mono text-xs ${index === activeIndex ? "text-black/50" : "text-zinc-600"}`}>{`{ }`}</span>
+                <span className={`font-mono text-xs ${index === activeIndex ? "text-white/60" : "text-ink-dim"}`}>{`{ }`}</span>
                 <div className="flex min-w-0 flex-col">
                   <span className="truncate font-mono text-xs">
                     {"${" + item.key + "}"}
                   </span>
-                  <span className={`mt-0.5 truncate text-[10px] ${index === activeIndex ? "text-black/60" : "text-zinc-500"}`}>
+                  <span className={`mt-0.5 truncate text-[10px] ${index === activeIndex ? "text-white/60" : "text-ink-dim"}`}>
                     {item.label}
                   </span>
                 </div>

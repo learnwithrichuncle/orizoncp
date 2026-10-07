@@ -18,15 +18,15 @@ export function SquareSwitch({
       aria-checked={checked}
       aria-label={label}
       disabled={disabled}
-      className={`h-5 w-9 shrink-0 border p-0.5 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 disabled:cursor-not-allowed disabled:opacity-40 ${
-        checked ? "border-white bg-white" : "border-white/20 bg-black"
+      className={`h-5 w-9 shrink-0 rounded-md border p-0.5 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-soft disabled:cursor-not-allowed disabled:opacity-40 ${
+        checked ? "border-accent bg-accent" : "border-line bg-glass"
       } ${className}`}
       onClick={() => onCheckedChange(!checked)}
     >
       <span
         aria-hidden="true"
-        className={`block h-3.5 w-3.5 transition ${
-          checked ? "translate-x-4 bg-black" : "translate-x-0 bg-zinc-500"
+        className={`block h-3.5 w-3.5 rounded-sm transition ${
+          checked ? "translate-x-4 bg-white" : "translate-x-0 bg-muted"
         }`}
       />
     </button>

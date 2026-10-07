@@ -18,8 +18,8 @@ export function BuildMethodControl({ value, onChange, disabled = false }: { valu
           type="button"
           className={`inline-flex h-9 min-w-0 items-center justify-center gap-2 px-3 text-xs transition disabled:opacity-40 ${
             value === method.value
-              ? "bg-white text-black"
-              : "border border-white/15 text-zinc-400 hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+              ? "bg-accent text-white"
+              : "border border-line text-muted hover:border-line-strong hover:bg-hover hover:text-ink"
           }`}
           disabled={disabled}
           onClick={() => onChange(method.value)}

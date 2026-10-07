@@ -3,17 +3,17 @@ import { Globe02Icon } from "@hugeicons/core-free-icons";
 import { ReactNode, forwardRef } from "react";
 import type { Framework } from "../../api";
 
-export function AppIcon({ icon, className = "", size = 18 }: { icon: unknown; className?: string; size?: number }) {
-  return <HugeiconsIcon icon={icon as never} size={size} strokeWidth={1.5} className={className} />;
+export function AppIcon({ icon, className = "", size = 20 }: { icon: unknown; className?: string; size?: number }) {
+  return <HugeiconsIcon icon={icon as never} size={size} strokeWidth={2} className={className} />;
 }
 
 export function surfaceClass(extra = "") {
-  return `rounded-lg border border-line bg-surface ${extra}`.trim();
+  return `rounded-lg border border-line bg-surface backdrop-blur-xl ${extra}`.trim();
 }
 
 export function shellButton(variant: "primary" | "secondary" | "ghost" | "danger" = "secondary") {
   const base =
-    "inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-sm px-3 text-[13px] font-medium leading-none transition disabled:opacity-60";
+    "inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md px-3 text-[13px] font-medium leading-none transition disabled:opacity-60";
 
   if (variant === "primary") {
     return `${base} bg-brand font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white hover:bg-brand-hover`;
@@ -74,7 +74,7 @@ export const FormInput = forwardRef<
     <input
       {...props}
       ref={ref}
-      className={`h-9 w-full rounded-md border border-line bg-elevated px-3 text-sm text-ink outline-none transition placeholder:text-ink-dim hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft ${className}`}
+      className={`h-10 w-full rounded-md border border-line bg-elevated px-3 text-sm text-ink outline-none transition placeholder:text-ink-dim hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft ${className}`}
     />
   );
 });

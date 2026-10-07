@@ -59,7 +59,7 @@ export function Dropdown({
       </button>
       {open ? (
         <div
-          className={`absolute left-0 right-0 z-40 max-h-64 overflow-y-auto rounded-md border border-line bg-surface p-1 shadow-2xl ${
+          className={`absolute left-0 right-0 z-40 max-h-64 overflow-y-auto rounded-md border border-line bg-surface p-1 shadow-2xl backdrop-blur-xl ${
             placement === "top" ? "bottom-full mb-2" : "top-full mt-2"
           }`}
           role="listbox"
