@@ -684,10 +684,9 @@ export function CreateServiceModal({
       icon={modalIcon}
       title={modalTitle}
       meta={modalMeta}
-      width={step === "type" ? "max-w-xl" : "max-w-3xl"}
-      minHeight={step === "type" ? "min-h-0" : "min-h-[520px]"}
-      bodyClassName="min-h-0 flex flex-1 flex-col overflow-hidden"
-      variant="monochrome"
+      width={step === "type" ? "max-w-md" : "max-w-2xl"}
+      bodyClassName="flex flex-col"
+      side
     >
       {step !== "type" && (
         <div className="mb-4 flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-line pb-3">

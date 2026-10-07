@@ -15,34 +15,41 @@ export function ProjectOverviewCard({
   onTogglePin: () => void;
 }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-line bg-surface text-left transition hover:border-line-strong">
+    <article className="group relative flex flex-col overflow-hidden rounded-[14px] border border-line bg-glass backdrop-blur-xl transition hover:border-accent/40">
       <button
         type="button"
         onClick={onOpen}
-        className="relative z-10 flex min-w-0 flex-1 flex-col p-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-edge"
+        className="relative z-10 flex min-w-0 flex-1 flex-col p-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[10px] border border-line bg-hover font-hero text-lg font-semibold text-accent">
+            {project.name.charAt(0).toUpperCase()}
+          </span>
           <div className="min-w-0">
-            <h2 className="truncate text-base font-semibold text-ink">
+            <h2 className="truncate font-hero text-base font-semibold tracking-[-0.02em] text-ink">
               {project.name}
             </h2>
-            {project.description ? (
-              <p className="mt-1 line-clamp-2 text-sm text-ink-muted">
-                {project.description}
-              </p>
-            ) : null}
+            <p className="truncate font-mono text-[11px] text-muted">
+              {project.slug}
+            </p>
           </div>
         </div>
 
-        <div className="mb-3 mt-4">
+        {project.description ? (
+          <p className="mt-3 line-clamp-2 text-sm text-muted">
+            {project.description}
+          </p>
+        ) : null}
+
+        <div className="mb-3 mt-5">
           <ServiceCluster project={project} />
         </div>
 
-        <div className="mt-auto flex items-center justify-between gap-4 border-t border-line-subtle pt-3">
-          <span className="text-xs text-ink-muted">
+        <div className="mt-auto flex items-center justify-between gap-4 border-t border-line pt-3">
+          <span className="font-mono text-xs text-muted">
             {project.serviceCount} service{project.serviceCount === 1 ? "" : "s"}
           </span>
-          <span className="text-xs text-ink-dim">
+          <span className="text-xs text-muted">
             Updated {formatRelativeTime(project.lastUpdatedAt)}
           </span>
         </div>
@@ -53,7 +60,7 @@ export function ProjectOverviewCard({
         onClick={onTogglePin}
         aria-label={pinned ? `Remove ${project.name} from favorites` : `Add ${project.name} to favorites`}
         title={pinned ? "Remove from favorites" : "Add to favorites"}
-        className={`absolute bottom-2.5 right-2.5 z-20 grid h-8 w-8 place-items-center rounded-md transition ${pinned ? "text-warn" : "text-ink-dim hover:text-ink"}`}
+        className={`absolute bottom-2.5 right-2.5 z-20 grid h-8 w-8 place-items-center rounded-[10px] transition ${pinned ? "text-warn" : "text-muted hover:text-ink"}`}
       >
         <StarIcon size={16} className={pinned ? "fill-current" : ""} />
       </button>

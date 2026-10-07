@@ -12,8 +12,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { api, type ProjectCard, type ProjectDetail, type Service, type ToolCheck } from "../api";
-import { useAuthStatus } from "../components/auth/auth-context";
+import { api, type ProjectCard, type ProjectDetail, type Service } from "../api";
 import { AppIcon } from "../components/ui/primitives";
 import { CreateServiceModal } from "../components/modals/create-service-modal";
 import { DeleteProjectModal } from "../components/modals/delete-project-modal";
@@ -24,7 +23,6 @@ import { ProjectEnvironmentTabs } from "../features/projects/project-environment
 import { ProjectPageToolbar } from "../features/projects/project-page-toolbar";
 import { ProjectRouteLoader } from "../features/projects/project-route-loader";
 import { ProjectServiceCard } from "../features/projects/project-service-card";
-import { ProjectsDashboardSidebar } from "../features/projects/projects-dashboard-sidebar";
 import { ServiceSearch } from "../features/projects/service-search";
 import { ServiceSearchEmptyState } from "../features/projects/service-search-empty-state";
 import type { ServiceFormPayload } from "../features/services/service-form-types";
@@ -33,10 +31,8 @@ import { usePageTitle } from "../lib/page-title";
 
 export function ProjectPage({ projectSlug }: { projectSlug: string }) {
   const navigate = useNavigate();
-  const authStatus = useAuthStatus();
   const [project, setProject] = useState<null | ProjectDetail>(null);
   const [projects, setProjects] = useState<ProjectCard[]>([]);
-  const [tools, setTools] = useState<ToolCheck[]>([]);
   const [createServiceOpen, setCreateServiceOpen] = useState(false);
   const [createEnvironmentOpen, setCreateEnvironmentOpen] = useState(false);
   const [movingService, setMovingService] = useState<Service | null>(null);
@@ -53,8 +49,6 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
   const [error, setError] = useState("");
   const [serviceSearch, setServiceSearch] = useState("");
   const currentProject = project?.slug === projectSlug ? project : null;
-  const currentUser = authStatus?.user ?? null;
-  const owner = currentUser?.role === "owner";
   const selectedEnvironment = useMemo(() => {
     if (!currentProject) return null;
     return currentProject.environments.find((environment) => environment.id === selectedEnvironmentId)
@@ -95,26 +89,6 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
     setLoading(true);
     void loadProject();
   }, [loadProject, projectSlug]);
-
-  useEffect(() => {
-    if (!owner) {
-      setTools([]);
-      return;
-    }
-
-    let cancelled = false;
-    void api.system()
-      .then((result) => {
-        if (!cancelled) setTools(result.tools);
-      })
-      .catch(() => {
-        if (!cancelled) setTools([]);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [owner]);
 
   useEffect(() => {
     if (!currentProject) return;
@@ -284,17 +258,12 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
 
   return (
     <>
-      <main className="min-h-dvh bg-base text-white">
-        <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
-          <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
-
-          <section className="min-w-0 bg-base">
-            <div className="mx-auto w-full max-w-[1680px] px-5 pb-20 pt-6 sm:px-8 lg:px-10">
-              {loading || (!currentProject && !error) ? (
-                <ProjectRouteLoader label="Loading project" />
-              ) : (
-                <>
-                  <header className="border-b border-line pb-6">
+      <div className="mx-auto w-full max-w-[1680px] px-5 pb-20 pt-6 sm:px-8 lg:px-10">
+        {loading || (!currentProject && !error) ? (
+          <ProjectRouteLoader label="Loading project" />
+        ) : (
+          <>
+            <header className="border-b border-line pb-6">
                     <ProjectPageToolbar
                       projects={projects}
                       currentProject={currentProject}
@@ -306,12 +275,12 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                     <div className="mt-5 flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
                       <div className="min-w-0">
                         <div className="flex min-w-0 items-center gap-3">
-                          <h1 className="truncate text-3xl tracking-[-0.04em] text-white sm:text-4xl">
+                          <h1 className="truncate text-3xl tracking-[-0.04em] text-ink sm:text-4xl">
                             {currentProject?.name ?? projectSlug}
                           </h1>
                           <button
                             type="button"
-                            className="grid h-9 w-9 shrink-0 place-items-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
+                            className="grid h-9 w-9 shrink-0 place-items-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-ink"
                             onClick={() => {
                               setProjectEditError("");
                               setEditingProject(true);
@@ -330,7 +299,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
-                          className="inline-flex h-10 items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-50"
+                          className="inline-flex h-10 items-center justify-center gap-2 bg-accent px-4 text-sm text-white transition hover:bg-brand-hover disabled:opacity-50"
                           onClick={() => setCreateServiceOpen(true)}
                           disabled={!currentProject || !selectedEnvironment}
                         >
@@ -339,7 +308,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         </button>
                         <button
                           type="button"
-                          className="grid h-10 w-10 place-items-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300 disabled:opacity-50"
+                          className="grid h-10 w-10 place-items-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad disabled:opacity-50"
                           onClick={() => setDeleteProjectOpen(true)}
                           aria-label="Delete project"
                           disabled={!currentProject}
@@ -351,7 +320,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                   </header>
 
                   {error ? (
-                    <div className="mt-6 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
+                    <div className="mt-6 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
                       {error}
                     </div>
                   ) : null}
@@ -371,14 +340,16 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         />
 
                         {environmentServices.length === 0 ? (
-                          <section className="flex min-h-72 items-center justify-center border border-line bg-base px-6 py-12 text-center">
+                          <section className="flex min-h-72 items-center justify-center rounded-[14px] border border-line bg-glass px-6 py-14 text-center backdrop-blur-xl">
                             <div>
-                              <AppIcon icon={CloudServerIcon} size={22} className="mx-auto text-ink-dim" />
-                              <h2 className="mt-4 text-lg text-ink">No services in {selectedEnvironment.name}</h2>
-                              <p className="mt-1.5 text-sm text-ink-dim">Add a service here or move one from another environment.</p>
+                              <span className="mx-auto grid h-12 w-12 place-items-center rounded-full border border-line bg-hover text-muted">
+                                <AppIcon icon={CloudServerIcon} size={22} />
+                              </span>
+                              <h2 className="mt-5 text-lg font-medium text-ink">No services in {selectedEnvironment.name}</h2>
+                              <p className="mt-1.5 text-sm text-muted">Add a service here or move one from another environment.</p>
                               <button
                                 type="button"
-                                className="mt-5 inline-flex h-9 items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200"
+                                className="mt-6 inline-flex h-10 items-center justify-center gap-2 rounded-[10px] bg-accent px-4 text-sm font-medium text-white transition hover:bg-brand-hover"
                                 onClick={() => setCreateServiceOpen(true)}
                               >
                                 <AppIcon icon={Add01Icon} size={14} />
@@ -424,10 +395,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                   </div>
                 </>
               )}
-            </div>
-          </section>
-        </div>
-      </main>
+          </div>
 
       <CreateServiceModal
         projectId={currentProject?.id ?? ""}

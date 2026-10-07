@@ -14,11 +14,11 @@ function environmentTabTone({
   validTarget: boolean;
   activeTarget: boolean;
 }) {
-  if (activeTarget) return "scale-[1.04] border-cyan-300 bg-cyan-300 text-ink shadow-[0_0_28px_rgba(103,232,249,0.28)]";
-  if (validTarget) return "animate-pulse border-dashed border-cyan-300/60 bg-cyan-300/[0.06] text-cyan-100";
-  if (source) return "border-line bg-glass text-ink-dim opacity-50";
-  if (selected) return "border-white bg-accent text-ink";
-  return "border-line text-ink-muted hover:border-line hover:bg-hover hover:text-white";
+  if (activeTarget) return "scale-[1.04] border-accent bg-accent-soft text-ink";
+  if (validTarget) return "animate-pulse border-dashed border-accent/60 bg-accent-soft text-ink-muted";
+  if (source) return "border-line bg-glass text-muted opacity-50";
+  if (selected) return "border-accent bg-accent text-white";
+  return "border-line text-muted hover:border-line-strong hover:text-ink";
 }
 
 export function ProjectEnvironmentTabs({
@@ -58,7 +58,7 @@ export function ProjectEnvironmentTabs({
 
   return (
     <div className="mb-5">
-      <div className={`overflow-hidden font-mono text-[9px] uppercase tracking-[0.14em] text-cyan-300 transition-all ${draggingService ? "mb-2 max-h-8 opacity-100" : "max-h-0 opacity-0"}`}>
+      <div className={`overflow-hidden font-mono text-[9px] uppercase tracking-[0.14em] text-accent transition-all ${draggingService ? "mb-2 max-h-8 opacity-100" : "max-h-0 opacity-0"}`}>
         Drop {draggingService?.name ?? "the service"} onto another environment
       </div>
       <div className="flex items-center gap-2 overflow-x-auto border-b border-line pb-3">
@@ -74,7 +74,7 @@ export function ProjectEnvironmentTabs({
             <button
               key={environment.id}
               type="button"
-              className={`inline-flex h-9 shrink-0 items-center gap-2 border px-3 text-sm transition-all ${environmentTabTone({ selected, source, validTarget: validDropTarget, activeTarget: activeDropTarget })}`}
+              className={`inline-flex h-9 shrink-0 items-center gap-2 rounded-[10px] border px-3 text-sm transition-all ${environmentTabTone({ selected, source, validTarget: validDropTarget, activeTarget: activeDropTarget })}`}
               onClick={() => onSelect(environment.id)}
               onDragEnter={(event) => dragOver(event, environment.id)}
               onDragOver={(event) => dragOver(event, environment.id)}
@@ -105,7 +105,7 @@ export function ProjectEnvironmentTabs({
 
         <button
           type="button"
-          className="inline-flex h-9 shrink-0 items-center gap-2 border border-dashed border-line px-3 text-sm text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
+          className="inline-flex h-9 shrink-0 items-center gap-2 rounded-[10px] border border-dashed border-line px-3 text-sm text-muted transition hover:border-line-strong hover:text-ink"
           onClick={onCreate}
         >
           <AppIcon icon={Add01Icon} size={14} />

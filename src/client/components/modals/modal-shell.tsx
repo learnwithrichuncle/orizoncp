@@ -12,7 +12,8 @@ export function ModalShell({
   width = "max-w-3xl",
   minHeight = "min-h-[420px]",
   bodyClassName = "min-h-0 flex-1 overflow-y-auto pr-1",
-  variant = "default"
+  variant = "default",
+  side = false
 }: {
   open: boolean;
   title: string;
@@ -24,10 +25,49 @@ export function ModalShell({
   minHeight?: string;
   bodyClassName?: string;
   variant?: "default" | "monochrome";
+  side?: boolean;
 }) {
   if (!open) return null;
 
-  const monochrome = variant === "monochrome";
+  const monochrome = variant === "monochrome" || side;
+
+  if (side) {
+    return (
+      <div className="fixed inset-0 z-50">
+        <div
+          className="absolute inset-0 bg-base/60 backdrop-blur-sm"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+        <div
+          className={`slide-in-right absolute right-0 top-0 flex h-full w-full ${width} flex-col border-l border-line bg-base shadow-2xl`}
+        >
+          <div className="flex shrink-0 items-center justify-between gap-4 border-b border-line px-5 py-4">
+            <div className="flex min-w-0 items-center gap-3">
+              <AppIcon icon={icon} size={16} className="shrink-0 text-muted" />
+              <div className="min-w-0">
+                <h2 className="truncate text-lg tracking-[-0.03em] text-ink">{title}</h2>
+                {meta ? <p className="mt-0.5 truncate text-xs text-muted">{meta}</p> : null}
+              </div>
+            </div>
+            <button
+              type="button"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-[10px] border border-line text-muted transition hover:border-line hover:bg-hover hover:text-ink"
+              onClick={onClose}
+              aria-label="Close"
+              title="Close"
+            >
+              <AppIcon icon={Cancel01Icon} size={15} />
+            </button>
+          </div>
+          <div className={`${bodyClassName} min-h-0 flex-1 overflow-y-auto px-5 pb-5 pt-4`}>
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const panelClassName = monochrome
     ? `flex max-h-[min(720px,calc(100vh-2rem))] ${minHeight} w-full ${width} flex-col border border-line bg-base shadow-[0_24px_80px_rgba(0,0,0,0.6)]`
     : surfaceClass(`flex max-h-[min(720px,calc(100vh-2rem))] ${minHeight} w-full ${width} flex-col p-6 md:p-7`);

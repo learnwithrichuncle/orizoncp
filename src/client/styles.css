@@ -112,6 +112,19 @@ input {
   box-shadow: 0 0 32px rgba(255, 107, 53, 0.35);
 }
 
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 180ms ease;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

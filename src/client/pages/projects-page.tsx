@@ -188,6 +188,13 @@ export function ProjectsPage() {
     (total, project) => total + project.serviceCount,
     0,
   );
+  const deployingCount = projects.reduce(
+    (total, project) =>
+      total +
+      project.services.filter((service) => serviceIsDeploying(service.status))
+        .length,
+    0,
+  );
   const visibleProjects = useMemo(() => {
     const needle = projectSearch.trim().toLowerCase();
     const filtered = needle
@@ -237,6 +244,34 @@ export function ProjectsPage() {
         onCreate={() => setCreateOpen(true)}
         onImport={() => setProjectImportView("choose")}
       />
+
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div className="rounded-[14px] border border-line bg-glass px-4 py-3 backdrop-blur-xl">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+            Projects
+          </div>
+          <div className="mt-1 font-hero text-2xl tracking-[-0.03em] text-ink">
+            {projects.length}
+          </div>
+        </div>
+        <div className="rounded-[14px] border border-line bg-glass px-4 py-3 backdrop-blur-xl">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+            Services
+          </div>
+          <div className="mt-1 font-hero text-2xl tracking-[-0.03em] text-ink">
+            {serviceCount}
+          </div>
+        </div>
+        <div className="rounded-[14px] border border-line bg-glass px-4 py-3 backdrop-blur-xl">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
+            Deploying
+          </div>
+          <div className="mt-1 font-hero text-2xl tracking-[-0.03em] text-ink">
+            {deployingCount}
+          </div>
+        </div>
+      </div>
+
       <div className="mt-7">
         {error ? (
           <div className="mt-6 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad">
@@ -279,7 +314,7 @@ export function ProjectsPage() {
               onClear={() => setProjectSearch("")}
             />
           ) : (
-            <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {visibleProjects.map((project, index) => (
                 <ProjectOverviewCard
                   key={project.id}
