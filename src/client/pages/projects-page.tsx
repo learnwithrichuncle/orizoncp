@@ -17,6 +17,7 @@ import { RailwayImportModal } from "../features/integrations/railway-import-moda
 import { VercelImportModal } from "../features/integrations/vercel-import-modal";
 import { CreateProjectModal } from "../features/projects/create-project-modal";
 import { ProjectOverviewCard } from "../features/projects/project-overview-card";
+import { ProjectsDashboardHeader } from "../features/projects/projects-dashboard-header";
 import { ProjectSearch } from "../features/projects/project-search";
 import { ProjectSearchEmptyState } from "../features/projects/project-search-empty-state";
 import {
@@ -230,8 +231,13 @@ export function ProjectsPage() {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold tracking-tight">Projects</h1>
-      <div className="mt-4">
+      <ProjectsDashboardHeader
+        projectCount={projects.length}
+        serviceCount={serviceCount}
+        onCreate={() => setCreateOpen(true)}
+        onImport={() => setProjectImportView("choose")}
+      />
+      <div className="mt-7">
         {error ? (
           <div className="mt-6 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad">
             {error}

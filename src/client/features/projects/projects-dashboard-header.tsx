@@ -16,12 +16,12 @@ export function ProjectsDashboardHeader({
     <header className="border-b border-line pb-7">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <h1 className="font-hero text-3xl tracking-[-0.05em] text-white sm:text-4xl">
+          <h1 className="font-hero text-3xl tracking-[-0.05em] text-ink sm:text-4xl">
             Projects
           </h1>
           <p className="mt-3 text-sm text-ink-dim">
             {projectCount} project{projectCount === 1 ? "" : "s"}
-            <span className="mx-2 text-zinc-700">/</span>
+            <span className="mx-2 text-ink-off">/</span>
             {serviceCount} service{serviceCount === 1 ? "" : "s"}
           </p>
         </div>
@@ -30,7 +30,7 @@ export function ProjectsDashboardHeader({
           <button
             type="button"
             onClick={onImport}
-            className="flex h-10 items-center gap-2 border border-line px-3.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted transition hover:border-line-strong hover:text-white"
+            className="flex h-10 items-center gap-2 rounded-[10px] border border-line px-3.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted transition hover:border-line-strong hover:text-ink"
           >
             <AppIcon icon={DatabaseImportIcon} size={14} />
             Import from…
@@ -38,7 +38,7 @@ export function ProjectsDashboardHeader({
           <button
             type="button"
             onClick={onCreate}
-            className="flex h-10 items-center gap-2 bg-accent px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200"
+            className="flex h-10 items-center gap-2 rounded-[10px] bg-accent px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-brand-hover"
           >
             <AppIcon icon={Add01Icon} size={14} />
             New project
