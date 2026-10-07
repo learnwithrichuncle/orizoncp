@@ -96,18 +96,18 @@ export function ServiceDomainsPanel({
 
   return (
     <>
-      <section className="mx-auto w-full max-w-[1100px] overflow-hidden border border-white/10 bg-black">
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
+      <section className="mx-auto w-full max-w-[1100px] overflow-hidden border border-line bg-base">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
           <div>
             <h2 className="text-lg tracking-[-0.03em] text-white">Domains</h2>
-            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">
+            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
               {domains.length} custom {domains.length === 1 ? "domain" : "domains"}
             </p>
           </div>
           {!showAddForm ? (
             <button
               type="button"
-              className="inline-flex h-8 items-center justify-center gap-2 bg-white px-3 text-xs text-black transition hover:bg-zinc-200"
+              className="inline-flex h-8 items-center justify-center gap-2 bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200"
               onClick={() => {
                 setShowAddForm(true);
                 setDomainForm({ hostname: "" });
@@ -121,7 +121,7 @@ export function ServiceDomainsPanel({
 
         {showAddForm ? (
           <form
-            className="flex flex-wrap items-end gap-2 border-b border-white/10 bg-white/[0.02] px-4 py-4 sm:px-5"
+            className="flex flex-wrap items-end gap-2 border-b border-line bg-glass px-4 py-4 sm:px-5"
             onSubmit={(event) => {
               event.preventDefault();
               void doAction("domain", async () => {
@@ -132,20 +132,20 @@ export function ServiceDomainsPanel({
             }}
           >
             <label className="min-w-56 flex-1">
-              <span className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Hostname</span>
+              <span className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Hostname</span>
               <FormInput
                 value={domainForm.hostname}
                 onChange={(event) => setDomainForm({ hostname: event.target.value })}
                 placeholder="app.example.com"
                 required
                 variant="monochrome"
-                className="!h-9 border-white/15 bg-black font-mono text-xs"
+                className="!h-9 border-line bg-base font-mono text-xs"
               />
             </label>
-            <button type="button" className="inline-flex h-9 items-center justify-center border border-white/15 px-3 text-xs text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white" onClick={() => setShowAddForm(false)}>
+            <button type="button" className="inline-flex h-9 items-center justify-center border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white" onClick={() => setShowAddForm(false)}>
               Cancel
             </button>
-            <button type="submit" className="inline-flex h-9 items-center justify-center bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy === "domain"}>
+            <button type="submit" className="inline-flex h-9 items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy === "domain"}>
               Save domain
             </button>
           </form>
@@ -155,8 +155,8 @@ export function ServiceDomainsPanel({
           <div className="flex min-h-56 items-center justify-center p-8 text-center">
             <div>
               <AppIcon icon={Globe02Icon} size={22} className="mx-auto text-zinc-700" />
-              <h3 className="mt-4 text-sm text-zinc-300">No custom domains</h3>
-              <p className="mt-2 text-xs text-zinc-600">Add a hostname to route traffic to this service.</p>
+              <h3 className="mt-4 text-sm text-ink-muted">No custom domains</h3>
+              <p className="mt-2 text-xs text-ink-dim">Add a hostname to route traffic to this service.</p>
             </div>
           </div>
         ) : (

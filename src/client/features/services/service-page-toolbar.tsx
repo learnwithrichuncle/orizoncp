@@ -39,7 +39,7 @@ export function ServicePageToolbar({
       <div className="flex min-w-0 flex-wrap items-center gap-2">
         <button
           type="button"
-          className="inline-flex h-9 w-9 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+          className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
           onClick={onBack}
           aria-label="Back to project"
         >
@@ -49,7 +49,7 @@ export function ServicePageToolbar({
         <div ref={menuRef} className="relative min-w-0">
           <button
             type="button"
-            className="inline-flex h-9 max-w-[340px] items-center justify-center gap-2 border border-white/15 px-3 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+            className="inline-flex h-9 max-w-[340px] items-center justify-center gap-2 border border-line px-3 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
             onClick={() => setOpen((current) => !current)}
           >
             <span className="grid h-5 w-5 flex-none place-items-center overflow-hidden">
@@ -60,11 +60,11 @@ export function ServicePageToolbar({
           </button>
 
           {open ? (
-            <div className="absolute left-0 top-full z-30 mt-1 w-[320px] max-w-[calc(100vw-2rem)] border border-white/15 bg-black shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-              <div className="border-b border-white/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Switch service</div>
+            <div className="absolute left-0 top-full z-30 mt-1 w-[320px] max-w-[calc(100vw-2rem)] border border-line bg-base shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+              <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Switch service</div>
               <div className="max-h-80 overflow-y-auto p-1">
                 {otherServices.length === 0 ? (
-                  <div className="px-3 py-4 text-sm text-zinc-500">No other services in this project.</div>
+                  <div className="px-3 py-4 text-sm text-ink-dim">No other services in this project.</div>
                 ) : (
                   otherServices.map((service) => {
                     const isDatabase = isDatabaseService(service);
@@ -74,7 +74,7 @@ export function ServicePageToolbar({
                       <button
                         key={service.id}
                         type="button"
-                        className="flex w-full min-w-0 items-center gap-3 px-3 py-2.5 text-left text-sm text-zinc-300 transition hover:bg-white/[0.06] hover:text-white"
+                        className="flex w-full min-w-0 items-center gap-3 px-3 py-2.5 text-left text-sm text-ink-muted transition hover:bg-hover hover:text-white"
                         onClick={() => {
                           setOpen(false);
                           onServiceSelect(service.slug);
@@ -84,7 +84,7 @@ export function ServicePageToolbar({
                           <FrameworkMark framework={service.framework} size={16} fallback={<AppIcon icon={isDatabase ? CloudServerIcon : isFunction ? FunctionIcon : isDockerImage ? PackageIcon : GithubIcon} size={14} />} />
                         </span>
                         <span className="min-w-0 flex-1 truncate">{service.name}</span>
-                        <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-zinc-500">
+                        <span className="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-ink-dim">
                           <span className={`h-1.5 w-1.5 ${
                             service.status === "active" || service.status === "running"
                               ? "bg-emerald-400"

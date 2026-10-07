@@ -21,7 +21,7 @@ type ApplicationServiceSettingsPanelProps = {
   onOpenDirectoryPicker: () => void;
 };
 
-const inputClass = "!h-9 border-white/15 bg-black text-xs";
+const inputClass = "!h-9 border-line bg-base text-xs";
 
 export function ApplicationServiceSettingsPanel({
   settings,
@@ -39,15 +39,15 @@ export function ApplicationServiceSettingsPanel({
     <>
       <div className="xl:col-span-2">
         <FieldLabel>Repository</FieldLabel>
-        <div className="border border-white/10 p-3">
+        <div className="border border-line p-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="min-w-0 break-all font-mono text-xs text-zinc-300">
+            <div className="min-w-0 break-all font-mono text-xs text-ink-muted">
               {settings.repoFullName || settings.repoUrl || "Disconnected"}
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="inline-flex h-8 items-center justify-center gap-2 border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
                 onClick={onOpenSourcePicker}
               >
                 <AppIcon icon={PencilEdit02Icon} size={13} />
@@ -55,7 +55,7 @@ export function ApplicationServiceSettingsPanel({
               </button>
               <button
                 type="button"
-                className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white"
+                className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white"
                 onClick={onDisconnectSource}
               >
                 <AppIcon icon={Cancel01Icon} size={13} />
@@ -82,7 +82,7 @@ export function ApplicationServiceSettingsPanel({
             <input type="hidden" name="branch" value={settings.branch} />
             <button
               type="button"
-              className="flex h-9 w-full items-center justify-between border border-white/15 bg-black px-3 text-left text-xs text-zinc-300 disabled:opacity-40"
+              className="flex h-9 w-full items-center justify-between border border-line bg-base px-3 text-left text-xs text-ink-muted disabled:opacity-40"
               onClick={onToggleBranchMenu}
               disabled={!settings.repoFullName}
             >
@@ -92,17 +92,17 @@ export function ApplicationServiceSettingsPanel({
           </>
         )}
         {!isGitUrlSource && branchMenuOpen ? (
-          <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 max-h-64 overflow-auto border border-white/15 bg-black p-1 shadow-[0_20px_40px_rgba(0,0,0,0.55)]">
+          <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 max-h-64 overflow-auto border border-line bg-base p-1 shadow-[0_20px_40px_rgba(0,0,0,0.55)]">
             {(branches.length ? branches : [settings.branch]).map((branch) => (
               <button
                 key={branch}
                 type="button"
-                className="flex w-full items-center justify-between px-3 py-2 text-left text-xs text-zinc-300 hover:bg-white/[0.05] hover:text-white"
+                className="flex w-full items-center justify-between px-3 py-2 text-left text-xs text-ink-muted hover:bg-hover hover:text-white"
                 onClick={() => onSelectBranch(branch)}
               >
                 <span>{branch}</span>
                 {settings.branch === branch ? (
-                  <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-500">Current</span>
+                  <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-ink-dim">Current</span>
                 ) : null}
               </button>
             ))}
@@ -124,11 +124,11 @@ export function ApplicationServiceSettingsPanel({
         ) : (
           <>
             <input type="hidden" name="rootDir" value={settings.rootDir} />
-            <div className="flex h-9 items-center justify-between gap-3 border border-white/15 bg-black px-3">
-              <div className="truncate font-mono text-xs text-zinc-300">{settings.rootDir || "."}</div>
+            <div className="flex h-9 items-center justify-between gap-3 border border-line bg-base px-3">
+              <div className="truncate font-mono text-xs text-ink-muted">{settings.rootDir || "."}</div>
               <button
                 type="button"
-                className="inline-flex h-7 items-center justify-center gap-2 border border-white/15 px-2.5 text-xs text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+                className="inline-flex h-7 items-center justify-center gap-2 border border-line px-2.5 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
                 onClick={onOpenDirectoryPicker}
                 disabled={!settings.repoFullName}
               >
@@ -187,7 +187,7 @@ export function ApplicationServiceSettingsPanel({
             variant="monochrome"
             className={`${inputClass} font-mono`}
           />
-          <p className="mt-2 text-xs leading-5 text-zinc-500">
+          <p className="mt-2 text-xs leading-5 text-ink-dim">
             Mounts a service-specific Docker volume at this absolute container path. Stateful redeployments briefly stop the previous container to protect writable data.
           </p>
         </div>
@@ -198,7 +198,7 @@ export function ApplicationServiceSettingsPanel({
       <div className="xl:col-span-2">
         <FieldLabel>Build method</FieldLabel>
         <BuildMethodControl value={settings.buildMethod} onChange={(buildMethod) => onChange({ buildMethod })} />
-        <p className="mt-2 text-xs leading-5 text-zinc-500">
+        <p className="mt-2 text-xs leading-5 text-ink-dim">
           Auto uses your repository’s Dockerfile when one exists, otherwise Railpack builds the project.
         </p>
       </div>

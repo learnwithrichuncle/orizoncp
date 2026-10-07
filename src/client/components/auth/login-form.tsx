@@ -1,38 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { api } from "../../api";
-
-function LoginField({
-  label,
-  type,
-  value,
-  onChange,
-  autoComplete,
-  placeholder,
-}: {
-  label: string;
-  type: "email" | "password";
-  value: string;
-  onChange: (value: string) => void;
-  autoComplete: string;
-  placeholder: string;
-}) {
-  return (
-    <label className="block">
-      <span className="mb-2 block text-xs font-medium text-ink-muted">
-        {label}
-      </span>
-      <input
-        type={type}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        autoComplete={autoComplete}
-        placeholder={placeholder}
-        required
-        className="h-9 w-full rounded-md border border-line bg-elevated px-3 text-sm text-ink outline-none transition placeholder:text-ink-dim hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft"
-      />
-    </label>
-  );
-}
+import { FieldLabel, FormInput } from "../ui/primitives";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -57,28 +25,34 @@ export function LoginForm() {
   return (
     <form
       onSubmit={submit}
-      className="w-full max-w-sm rounded-lg border border-line bg-surface p-8"
+      className="rounded-lg border border-line bg-surface p-8"
       aria-label="Sign in to orizonCP"
     >
       <h1 className="text-2xl font-bold text-ink">Welcome back</h1>
 
       <div className="mt-8 grid gap-y-5">
-        <LoginField
-          label="Email"
-          type="email"
-          value={email}
-          onChange={setEmail}
-          autoComplete="email"
-          placeholder="you@example.com"
-        />
-        <LoginField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={setPassword}
-          autoComplete="current-password"
-          placeholder="Enter your password"
-        />
+        <div>
+          <FieldLabel>Email</FieldLabel>
+          <FormInput
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            autoComplete="email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+        <div>
+          <FieldLabel>Password</FieldLabel>
+          <FormInput
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            autoComplete="current-password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
       </div>
 
       {error ? (
@@ -93,7 +67,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-8 flex h-9 w-full items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-hover disabled:cursor-wait disabled:opacity-60"
+        className="mt-8 flex h-12 w-full items-center justify-center rounded-sm bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-hover disabled:cursor-wait disabled:opacity-60"
       >
         {submitting ? "Signing in…" : "Sign in"}
       </button>

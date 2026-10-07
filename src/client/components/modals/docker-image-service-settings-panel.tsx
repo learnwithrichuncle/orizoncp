@@ -3,8 +3,8 @@ import { validateDockerImageReference } from "../../../shared/service-source";
 import { FormInput } from "../ui/primitives";
 import { RuntimeModeControl } from "../ui/runtime-mode-control";
 
-const settingsLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600";
-const settingsInputClass = "!h-9 border-white/15 bg-black text-xs";
+const settingsLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim";
+const settingsInputClass = "!h-9 border-line bg-base text-xs";
 
 type DockerImageServiceSettings = {
   name: string;
@@ -50,7 +50,7 @@ export function DockerImageServiceSettingsPanel({
             variant="monochrome"
             className={settingsInputClass}
           />
-          {hostPort ? <p className="mt-2 text-xs text-zinc-500">Traffic is routed through host port {hostPort}.</p> : null}
+          {hostPort ? <p className="mt-2 text-xs text-ink-dim">Traffic is routed through host port {hostPort}.</p> : null}
         </div>
       ) : (
         <input type="hidden" name="internalPort" value={settings.internalPort} />
@@ -61,7 +61,7 @@ export function DockerImageServiceSettingsPanel({
         {settings.dockerImage.trim() && !imageValidation.ok ? (
           <p className="mt-2 text-xs text-rose-300">{imageValidation.error}</p>
         ) : (
-          <p className="mt-2 text-xs text-zinc-500">Private images use the host Docker daemon's registry login.</p>
+          <p className="mt-2 text-xs text-ink-dim">Private images use the host Docker daemon's registry login.</p>
         )}
       </div>
       <div className="xl:col-span-2">
@@ -75,7 +75,7 @@ export function DockerImageServiceSettingsPanel({
           variant="monochrome"
           className={`${settingsInputClass} font-mono`}
         />
-        <p className="mt-2 text-xs leading-5 text-zinc-500">
+        <p className="mt-2 text-xs leading-5 text-ink-dim">
           Mounts a service-specific Docker volume at this absolute container path. Stateful redeployments briefly stop the previous container to protect writable data.
         </p>
       </div>

@@ -55,7 +55,7 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
   }
 
   const healthTone = !info
-    ? "text-zinc-500"
+    ? "text-ink-dim"
     : info.alerts.some((alert) => alert.includes("90%"))
       ? "text-rose-300"
       : info.alerts.length > 0
@@ -79,11 +79,11 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
 
   return (
     <div className="mx-auto max-w-6xl space-y-4">
-      <section className="overflow-hidden border border-white/10 bg-black">
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-5 sm:px-7">
+      <section className="overflow-hidden border border-line bg-base">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-7">
           <div>
             <h2 className="text-xl tracking-[-0.03em] text-white">Host health</h2>
-            <p className="mt-1.5 text-sm text-zinc-500">
+            <p className="mt-1.5 text-sm text-ink-dim">
               {checkedAt
                 ? `Checked ${checkedAt} · ${info?.history.length ?? 0} history samples`
                 : "Disk, Docker, logs, and build artifacts."}
@@ -96,7 +96,7 @@ export function MaintenanceSettingsPanel({ open }: { open: boolean }) {
             </span>
             <button
               type="button"
-              className="inline-flex h-9 items-center justify-center gap-2 border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-50"
+              className="inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
               onClick={() => void loadMaintenance()}
               disabled={loading || Boolean(cleanupMode)}
             >

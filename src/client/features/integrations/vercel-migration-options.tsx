@@ -24,7 +24,7 @@ export function VercelMigrationOptions({
         disabled={busy}
         label="Exclude VERCEL_* variables"
       >
-        <span className="text-xs text-zinc-300 font-semibold font-mono uppercase tracking-wider">
+        <span className="text-xs text-ink-muted font-semibold font-mono uppercase tracking-wider">
           Exclude VERCEL_* variables
         </span>
       </Checkbox>
@@ -36,7 +36,7 @@ export function VercelMigrationOptions({
         disabled={busy}
         label="Auto-deploy service"
       >
-        <span className="text-xs text-zinc-300 font-semibold font-mono uppercase tracking-wider">
+        <span className="text-xs text-ink-muted font-semibold font-mono uppercase tracking-wider">
           Auto-deploy service
         </span>
       </Checkbox>

@@ -31,10 +31,10 @@ export function OnboardingDomainPage({
     >
       <OnboardingStepForm
         title="Set up your domains"
-        badge="Optional"
+        badge="Final step"
         error={error}
         submitting={submitting}
-        actionLabel="Continue to backups"
+        actionLabel="Save setup"
         onSubmit={onSubmit}
         onBack={onBack}
       >

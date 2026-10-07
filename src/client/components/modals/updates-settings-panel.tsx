@@ -17,7 +17,7 @@ function updateStatusTone(status: SystemUpdateInfo["status"]) {
   if (status === "current") return { text: "text-emerald-300", dot: "bg-emerald-400" };
   if (status === "available") return { text: "text-amber-300", dot: "bg-amber-400" };
   if (status === "diverged") return { text: "text-rose-300", dot: "bg-rose-400" };
-  return { text: "text-zinc-500", dot: "bg-zinc-600" };
+  return { text: "text-ink-dim", dot: "bg-zinc-600" };
 }
 
 function updateStatusLabel(info: SystemUpdateInfo | null) {
@@ -143,11 +143,11 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
 
   return (
     <div className="mx-auto max-w-5xl space-y-4">
-      <section className="overflow-hidden border border-white/10 bg-black">
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-5 sm:px-7">
+      <section className="overflow-hidden border border-line bg-base">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-7">
           <div>
             <h2 className="text-xl tracking-[-0.03em] text-white">Release channel</h2>
-            <p className="mt-1.5 text-sm text-zinc-500">
+            <p className="mt-1.5 text-sm text-ink-dim">
               {info?.installType === "image" ? "Docker image" : "Git checkout"}
             </p>
           </div>
@@ -158,7 +158,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
             </span>
             <button
               type="button"
-              className="inline-flex h-9 items-center justify-center gap-2 border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-50"
+              className="inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
               onClick={() => void loadUpdates()}
               disabled={loading || updateRunning}
             >
@@ -170,18 +170,18 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
 
         <dl className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
           <div className="px-5 py-4 sm:px-7 md:px-5">
-            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Repository</dt>
-            <dd className="mt-1.5 truncate font-mono text-xs text-zinc-300">{info?.repo ?? "learnwithrichuncle/orizonCP"}</dd>
+            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Repository</dt>
+            <dd className="mt-1.5 truncate font-mono text-xs text-ink-muted">{info?.repo ?? "learnwithrichuncle/orizonCP"}</dd>
           </div>
           <div className="px-5 py-4">
-            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Installed</dt>
-            <dd className="mt-1.5 font-mono text-xs text-zinc-300">{info?.currentShortCommit ?? "unknown"}</dd>
+            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Installed</dt>
+            <dd className="mt-1.5 font-mono text-xs text-ink-muted">{info?.currentShortCommit ?? "unknown"}</dd>
           </div>
           <div className="px-5 py-4 sm:px-7 md:px-5">
-            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">GitHub</dt>
-            <dd className="mt-1.5 font-mono text-xs text-zinc-300">
+            <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">GitHub</dt>
+            <dd className="mt-1.5 font-mono text-xs text-ink-muted">
               {info?.remoteShortCommit ?? "unknown"}
-              {info?.branch ? <span className="ml-2 text-zinc-500">/{info.branch}</span> : null}
+              {info?.branch ? <span className="ml-2 text-ink-dim">/{info.branch}</span> : null}
             </dd>
           </div>
         </dl>
@@ -194,11 +194,11 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {info?.installType === "image" ? (
-        <section className="border border-white/10 bg-black">
-          <header className="border-b border-white/10 px-5 py-3.5">
+        <section className="border border-line bg-base">
+          <header className="border-b border-line px-5 py-3.5">
             <h3 className="text-sm text-zinc-100">{info.canApplyUpdate ? "Docker image updates" : "Update from server"}</h3>
           </header>
-          <p className="px-5 py-4 text-sm leading-relaxed text-zinc-500">
+          <p className="px-5 py-4 text-sm leading-relaxed text-ink-dim">
             {!info.currentCommit
               ? "This image was built without commit metadata, so orizonCP cannot compare it with GitHub yet. Publish the image with ORIZONCP_COMMIT_SHA to enable one-click updates."
               : info.canApplyUpdate
@@ -206,7 +206,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
                 : "This container does not include a git checkout, and one-click image updates are not configured for this install. Publish a new GHCR image, then run this on the server."}
           </p>
           {!info.canApplyUpdate || info.status === "unknown" ? (
-            <pre className="overflow-x-auto border-t border-white/10 bg-white/[0.02] px-5 py-3 font-mono text-[11px] leading-relaxed text-zinc-300">
+            <pre className="overflow-x-auto border-t border-line bg-glass px-5 py-3 font-mono text-[11px] leading-relaxed text-ink-muted">
               {info.updateCommand ?? "cd /opt/orizonCP && sudo docker compose pull orizonCP && sudo docker compose up -d orizonCP"}
             </pre>
           ) : null}
@@ -218,21 +218,21 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
           <AppIcon icon={CheckmarkCircle02Icon} size={18} className="text-emerald-300" />
           <div>
             <h3 className="text-sm text-zinc-100">orizonCP is up to date</h3>
-            <p className="mt-0.5 text-xs text-zinc-500">Installed commit matches GitHub.</p>
+            <p className="mt-0.5 text-xs text-ink-dim">Installed commit matches GitHub.</p>
           </div>
         </section>
       ) : null}
 
       {info?.status === "available" ? (
-        <section className="border border-white/10 bg-black">
-          <header className="flex flex-col gap-3 border-b border-white/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <section className="border border-line bg-base">
+          <header className="flex flex-col gap-3 border-b border-line px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h3 className="text-sm text-zinc-100">Pending commits</h3>
-              <p className="mt-1 text-xs text-zinc-600">{info.commits.length} ready to apply</p>
+              <p className="mt-1 text-xs text-ink-dim">{info.commits.length} ready to apply</p>
             </div>
             <button
               type="button"
-              className="inline-flex h-9 items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:opacity-50"
+              className="inline-flex h-9 items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-50"
               onClick={() => setConfirmingUpdate(true)}
               disabled={!canUpdate}
             >
@@ -245,9 +245,9 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
             {info.commits.map((commit) => {
               const content = (
                 <>
-                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">{commit.shortSha}</div>
+                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{commit.shortSha}</div>
                   <div className="mt-1 text-sm text-zinc-100">{commit.title}</div>
-                  <div className="mt-1 font-mono text-[10px] text-zinc-500">
+                  <div className="mt-1 font-mono text-[10px] text-ink-dim">
                     {commit.author} · {formatCommitDate(commit.date)}
                   </div>
                 </>
@@ -259,12 +259,12 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
                   href={commit.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="block border-b border-white/10 px-5 py-3.5 transition hover:bg-white/[0.04]"
+                  className="block border-b border-line px-5 py-3.5 transition hover:bg-glass"
                 >
                   {content}
                 </a>
               ) : (
-                <div key={commit.sha} className="border-b border-white/10 px-5 py-3.5">
+                <div key={commit.sha} className="border-b border-line px-5 py-3.5">
                   {content}
                 </div>
               );
@@ -282,8 +282,8 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {run && run.status !== "idle" ? (
-        <section className="border border-white/10 bg-black">
-          <header className="flex items-center justify-between gap-3 border-b border-white/10 px-5 py-3.5">
+        <section className="border border-line bg-base">
+          <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5">
             <h3 className="text-sm text-zinc-100">Update activity</h3>
             <span className={`inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] ${
               run.status === "failed" ? "text-rose-300" : run.status === "running" ? "text-amber-300" : "text-emerald-300"
@@ -294,7 +294,7 @@ export function UpdatesSettingsPanel({ open }: { open: boolean }) {
               {runStatusLabel(run)}
             </span>
           </header>
-          <pre className="max-h-56 overflow-y-auto whitespace-pre-wrap px-5 py-4 font-mono text-[11px] leading-relaxed text-zinc-400">
+          <pre className="max-h-56 overflow-y-auto whitespace-pre-wrap px-5 py-4 font-mono text-[11px] leading-relaxed text-ink-muted">
             {run.logs.join("\n") || "No update output yet."}
           </pre>
         </section>

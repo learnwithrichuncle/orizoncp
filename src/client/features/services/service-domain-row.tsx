@@ -80,7 +80,7 @@ export function ServiceDomainRow({
   const active = domain.status === "active";
 
   return (
-    <article className="border-b border-white/10 last:border-b-0">
+    <article className="border-b border-line last:border-b-0">
       <div className="flex min-h-16 items-center justify-between gap-4 px-4 py-3 sm:px-5">
         {editing ? (
           <form
@@ -91,20 +91,20 @@ export function ServiceDomainRow({
             }}
           >
             <label className="min-w-56 flex-1">
-              <span className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Hostname</span>
+              <span className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Hostname</span>
               <FormInput
                 value={editingHostname}
                 onChange={(event) => onEditingHostnameChange(event.target.value)}
                 placeholder="app.example.com"
                 required
                 variant="monochrome"
-                className="!h-9 border-white/15 bg-black font-mono text-xs"
+                className="!h-9 border-line bg-base font-mono text-xs"
               />
             </label>
-            <button type="button" className="inline-flex h-9 items-center justify-center border border-white/15 px-3 text-xs text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white" onClick={onCancelEdit}>
+            <button type="button" className="inline-flex h-9 items-center justify-center border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white" onClick={onCancelEdit}>
               Cancel
             </button>
-            <button type="submit" className="inline-flex h-9 items-center justify-center bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy}>
+            <button type="submit" className="inline-flex h-9 items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy}>
               Save
             </button>
           </form>
@@ -115,9 +115,9 @@ export function ServiceDomainRow({
                 href={local ? `http://${domain.hostname}` : `https://${domain.hostname}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-fit max-w-full items-center gap-2 font-mono text-xs text-zinc-200 transition hover:text-white"
+                className="flex w-fit max-w-full items-center gap-2 font-mono text-xs text-ink transition hover:text-white"
               >
-                <AppIcon icon={Globe02Icon} size={13} className="shrink-0 text-zinc-600" />
+                <AppIcon icon={Globe02Icon} size={13} className="shrink-0 text-ink-dim" />
                 <span className="truncate">{domain.hostname}</span>
               </a>
               <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-zinc-700">
@@ -129,14 +129,14 @@ export function ServiceDomainRow({
               <span className={`px-2 py-1 font-mono text-[8px] uppercase tracking-[0.12em] ${domainStatusClass(domain.status)}`}>
                 {domain.status}
               </span>
-              <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white" onClick={onStartEdit} title="Edit domain" aria-label="Edit domain">
+              <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white" onClick={onStartEdit} title="Edit domain" aria-label="Edit domain">
                 <AppIcon icon={PencilEdit02Icon} size={13} />
               </button>
-              <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300" onClick={onRemove} title="Remove domain" aria-label="Remove domain">
+              <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300" onClick={onRemove} title="Remove domain" aria-label="Remove domain">
                 <AppIcon icon={Delete02Icon} size={13} />
               </button>
               {!local ? (
-                <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white" onClick={onToggle} title={expanded ? "Hide DNS details" : "Show DNS details"} aria-label={expanded ? "Hide DNS details" : "Show DNS details"}>
+                <button type="button" className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white" onClick={onToggle} title={expanded ? "Hide DNS details" : "Show DNS details"} aria-label={expanded ? "Hide DNS details" : "Show DNS details"}>
                   <AppIcon icon={ArrowDown01Icon} size={13} className={`transition ${expanded ? "rotate-180" : ""}`} />
                 </button>
               ) : null}
@@ -146,21 +146,21 @@ export function ServiceDomainRow({
       </div>
 
       {expanded && !local ? (
-        <div className="border-t border-white/10 bg-white/[0.015] p-4 sm:p-5">
+        <div className="border-t border-line bg-glass p-4 sm:p-5">
           <div className={`flex items-center gap-2 text-xs ${active ? "text-emerald-300" : "text-amber-300"}`}>
             <AppIcon icon={active ? CheckmarkBadge01Icon : Alert02Icon} size={14} className={active ? "" : "animate-pulse"} />
             {active ? "DNS configured" : "Waiting for DNS"}
           </div>
 
-          <div className="mt-4 overflow-x-auto border border-white/10">
+          <div className="mt-4 overflow-x-auto border border-line">
             <div className="min-w-[560px]">
-              <div className="grid grid-cols-[70px_160px_minmax(180px,1fr)_90px] border-b border-white/10 bg-white/[0.02] px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-600">
+              <div className="grid grid-cols-[70px_160px_minmax(180px,1fr)_90px] border-b border-line bg-glass px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim">
                 <span>Type</span>
                 <span>Host</span>
                 <span>Points to</span>
                 <span className="text-right">Status</span>
               </div>
-              <div className="grid grid-cols-[70px_160px_minmax(180px,1fr)_90px] items-center px-3 py-3 font-mono text-xs text-zinc-300">
+              <div className="grid grid-cols-[70px_160px_minmax(180px,1fr)_90px] items-center px-3 py-3 font-mono text-xs text-ink-muted">
                 <span>A</span>
                 <span className="truncate">{hostName}</span>
                 <span className="flex min-w-0 items-center gap-2">
@@ -168,7 +168,7 @@ export function ServiceDomainRow({
                   <button
                     type="button"
                     onClick={() => onCopyIp(targetIp)}
-                    className={`shrink-0 transition ${copied ? "text-emerald-300" : "text-zinc-600 hover:text-white"}`}
+                    className={`shrink-0 transition ${copied ? "text-emerald-300" : "text-ink-dim hover:text-white"}`}
                     title={copied ? "Copied" : "Copy IP address"}
                     aria-label={copied ? "Copied IP address" : "Copy IP address"}
                   >
@@ -203,7 +203,7 @@ export function ServiceDomainRow({
             </div>
             <button
               type="button"
-              className="inline-flex h-8 items-center justify-center gap-2 border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+              className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
               onClick={onRefreshDns}
               disabled={refreshingDns}
             >

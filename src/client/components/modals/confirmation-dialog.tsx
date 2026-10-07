@@ -46,14 +46,14 @@ export function ConfirmationDialog({
   if (!open) return null;
 
   return (
-    <div className={`fixed inset-0 ${zIndexClassName} overflow-y-auto bg-black/75 p-4`}>
+    <div className={`fixed inset-0 ${zIndexClassName} overflow-y-auto bg-base/75 p-4`}>
       <div className="mx-auto flex min-h-full items-center justify-center">
-        <section role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} className="w-full max-w-md border border-white/15 bg-black">
-          <header className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3.5">
+        <section role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} className="w-full max-w-md border border-line bg-base">
+          <header className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5">
             <div className="flex min-w-0 items-center gap-2.5">
               <AppIcon icon={icon} size={16} className={`shrink-0 ${iconToneClass}`} />
               <div className="min-w-0">
-                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-zinc-600">{eyebrow}</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-ink-dim">{eyebrow}</div>
                 <h2 id={titleId} className="truncate text-lg tracking-[-0.03em] text-zinc-100">
               {title}
                 </h2>
@@ -61,7 +61,7 @@ export function ConfirmationDialog({
             </div>
             <button
               type="button"
-              className="grid h-9 w-9 shrink-0 place-items-center border border-white/15 text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-50"
+              className="grid h-9 w-9 shrink-0 place-items-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
               onClick={onClose}
               disabled={busy}
               aria-label="Close"
@@ -72,15 +72,15 @@ export function ConfirmationDialog({
           </header>
 
           <div className="p-4">
-            {subject ? <p className="truncate font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-500">{subject}</p> : null}
+            {subject ? <p className="truncate font-mono text-[10px] uppercase tracking-[0.14em] text-ink-dim">{subject}</p> : null}
             <p id={descriptionId} className={`mt-4 border-l-2 px-4 py-3 text-sm leading-relaxed ${descriptionToneClass}`}>
               {description}
             </p>
 
-            <div className="mt-5 flex flex-wrap items-center justify-end gap-2 border-t border-white/10 pt-4">
+            <div className="mt-5 flex flex-wrap items-center justify-end gap-2 border-t border-line pt-4">
               <button
                 type="button"
-                className="inline-flex h-9 items-center justify-center border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] disabled:opacity-50"
+                className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50"
                 onClick={onClose}
                 disabled={busy}
               >

@@ -284,17 +284,17 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
 
   return (
     <>
-      <main className="min-h-dvh bg-black text-white">
+      <main className="min-h-dvh bg-base text-white">
         <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
           <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
 
-          <section className="min-w-0 bg-zinc-950">
+          <section className="min-w-0 bg-base">
             <div className="mx-auto w-full max-w-[1680px] px-5 pb-20 pt-6 sm:px-8 lg:px-10">
               {loading || (!currentProject && !error) ? (
                 <ProjectRouteLoader label="Loading project" />
               ) : (
                 <>
-                  <header className="border-b border-white/10 pb-6">
+                  <header className="border-b border-line pb-6">
                     <ProjectPageToolbar
                       projects={projects}
                       currentProject={currentProject}
@@ -311,7 +311,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                           </h1>
                           <button
                             type="button"
-                            className="grid h-9 w-9 shrink-0 place-items-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                            className="grid h-9 w-9 shrink-0 place-items-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
                             onClick={() => {
                               setProjectEditError("");
                               setEditingProject(true);
@@ -322,7 +322,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                             <AppIcon icon={PencilEdit02Icon} size={15} />
                           </button>
                         </div>
-                        <p className="mt-2 text-sm text-zinc-500">
+                        <p className="mt-2 text-sm text-ink-dim">
                           {currentProject?.description || `${currentProject?.serviceCount ?? 0} service${currentProject?.serviceCount === 1 ? "" : "s"}`}
                         </p>
                       </div>
@@ -330,7 +330,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                       <div className="flex items-center gap-2">
                         <button
                           type="button"
-                          className="inline-flex h-10 items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:opacity-50"
+                          className="inline-flex h-10 items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-50"
                           onClick={() => setCreateServiceOpen(true)}
                           disabled={!currentProject || !selectedEnvironment}
                         >
@@ -339,7 +339,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         </button>
                         <button
                           type="button"
-                          className="grid h-10 w-10 place-items-center border border-white/15 text-zinc-500 transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300 disabled:opacity-50"
+                          className="grid h-10 w-10 place-items-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300 disabled:opacity-50"
                           onClick={() => setDeleteProjectOpen(true)}
                           aria-label="Delete project"
                           disabled={!currentProject}
@@ -371,14 +371,14 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         />
 
                         {environmentServices.length === 0 ? (
-                          <section className="flex min-h-72 items-center justify-center border border-white/10 bg-black px-6 py-12 text-center">
+                          <section className="flex min-h-72 items-center justify-center border border-line bg-base px-6 py-12 text-center">
                             <div>
-                              <AppIcon icon={CloudServerIcon} size={22} className="mx-auto text-zinc-600" />
+                              <AppIcon icon={CloudServerIcon} size={22} className="mx-auto text-ink-dim" />
                               <h2 className="mt-4 text-lg text-zinc-100">No services in {selectedEnvironment.name}</h2>
-                              <p className="mt-1.5 text-sm text-zinc-600">Add a service here or move one from another environment.</p>
+                              <p className="mt-1.5 text-sm text-ink-dim">Add a service here or move one from another environment.</p>
                               <button
                                 type="button"
-                                className="mt-5 inline-flex h-9 items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200"
+                                className="mt-5 inline-flex h-9 items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200"
                                 onClick={() => setCreateServiceOpen(true)}
                               >
                                 <AppIcon icon={Add01Icon} size={14} />

@@ -85,7 +85,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
       <span className="relative shrink-0">
         <button
           type="button"
-          className="group inline-flex h-7 w-7 items-center justify-center text-zinc-600 transition hover:text-white focus:text-white focus:outline-none"
+          className="group inline-flex h-7 w-7 items-center justify-center text-ink-dim transition hover:text-white focus:text-white focus:outline-none"
           onClick={() => setHintOpen((current) => !current)}
           onBlur={() => setHintOpen(false)}
           aria-describedby={hintId}
@@ -95,7 +95,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
           <AppIcon icon={InformationCircleIcon} size={15} />
           <span
             id={hintId}
-            className={`pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-40 w-72 -translate-x-1/2 border border-white/15 bg-black px-3 py-2 text-left text-xs normal-case leading-5 tracking-normal text-zinc-300 shadow-[0_16px_40px_rgba(0,0,0,0.5)] ${
+            className={`pointer-events-none absolute left-1/2 top-[calc(100%+0.5rem)] z-40 w-72 -translate-x-1/2 border border-line bg-base px-3 py-2 text-left text-xs normal-case leading-5 tracking-normal text-ink-muted shadow-[0_16px_40px_rgba(0,0,0,0.5)] ${
               hintOpen ? "block" : "hidden group-hover:block group-focus:block"
             }`}
           >
@@ -108,7 +108,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
 
   if (editing) {
     return (
-      <div className="flex w-full flex-col gap-2 border-b border-white/10 bg-white/[0.025] px-5 py-3">
+      <div className="flex w-full flex-col gap-2 border-b border-line bg-glass px-5 py-3">
         <form
           onSubmit={handleSave}
           className="grid w-full gap-3 lg:grid-cols-[minmax(180px,0.8fr)_minmax(260px,1.4fr)_104px] lg:items-center"
@@ -122,7 +122,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
               required
               disabled={busy}
               variant="monochrome"
-              className="!h-9 border-white/15 bg-black font-mono text-xs uppercase tracking-[0.04em]"
+              className="!h-9 border-line bg-base font-mono text-xs uppercase tracking-[0.04em]"
             />
           </div>
           <div className="relative flex min-w-0 items-center">
@@ -135,11 +135,11 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
               autoComplete="off"
               disabled={busy}
               variant="monochrome"
-              className="!h-9 border-white/15 bg-black pr-9 font-mono text-xs"
+              className="!h-9 border-line bg-base pr-9 font-mono text-xs"
             />
             <button
               type="button"
-              className="absolute right-2 text-zinc-600 transition hover:text-white"
+              className="absolute right-2 text-ink-dim transition hover:text-white"
               onClick={() => setHidden(!hidden)}
               disabled={busy}
             >
@@ -149,7 +149,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
           <div className="flex items-center justify-end gap-1.5">
             <button
               type="submit"
-              className="inline-flex h-9 w-9 items-center justify-center bg-white text-black transition hover:bg-zinc-200 disabled:opacity-50"
+              className="inline-flex h-9 w-9 items-center justify-center bg-accent text-ink transition hover:bg-zinc-200 disabled:opacity-50"
               disabled={busy}
               title="Save"
               aria-label="Save variable"
@@ -158,7 +158,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
             </button>
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center border border-white/15 text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-50"
+              className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
               onClick={() => {
                 setEditKey(item.key);
                 setEditValue(item.value ?? "");
@@ -173,12 +173,12 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
           </div>
         </form>
         {hasReference && (
-          <div className="flex select-none items-center gap-2 font-mono text-[10px] text-zinc-500">
-            <span className="border border-white/10 px-1.5 py-0.5 text-[8px] uppercase tracking-[0.08em] text-zinc-400">
+          <div className="flex select-none items-center gap-2 font-mono text-[10px] text-ink-dim">
+            <span className="border border-line px-1.5 py-0.5 text-[8px] uppercase tracking-[0.08em] text-ink-muted">
               Reference
             </span>
             <span>resolves to</span>
-            <span className={hidden ? "select-none tracking-widest text-zinc-600" : "select-all text-zinc-300"}>
+            <span className={hidden ? "select-none tracking-widest text-ink-dim" : "select-all text-ink-muted"}>
               {hidden ? "••••••••••••••••" : item.resolvedValue}
             </span>
           </div>
@@ -189,10 +189,10 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
 
   return (
     <>
-      <div className="flex w-full flex-col gap-2 border-b border-white/10 px-5 py-3 transition last:border-b-0 hover:bg-white/[0.025]">
+      <div className="flex w-full flex-col gap-2 border-b border-line px-5 py-3 transition last:border-b-0 hover:bg-glass">
         <div className="grid w-full gap-3 lg:grid-cols-[minmax(180px,0.8fr)_minmax(260px,1.4fr)_104px] lg:items-center">
           <div className="flex min-w-0 items-center gap-2">
-            <span className="truncate font-mono text-xs uppercase tracking-[0.04em] text-zinc-200">
+            <span className="truncate font-mono text-xs uppercase tracking-[0.04em] text-ink">
               {item.key}
             </span>
             <PublicDatabaseUrlHint />
@@ -204,11 +204,11 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
               value={item.value ?? ""}
               readOnly
               variant="monochrome"
-              className="!h-9 cursor-text select-all border-white/10 bg-white/[0.02] pr-9 font-mono text-xs"
+              className="!h-9 cursor-text select-all border-line bg-glass pr-9 font-mono text-xs"
             />
             <button
               type="button"
-              className="absolute right-2 text-zinc-600 transition hover:text-white"
+              className="absolute right-2 text-ink-dim transition hover:text-white"
               onClick={() => setHidden(!hidden)}
               disabled={busy}
               title={hidden ? "Show Value" : "Hide Value"}
@@ -223,7 +223,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
               className={`inline-flex h-8 w-8 items-center justify-center border transition ${
                 copied
                   ? "border-emerald-400/50 bg-emerald-400/10 text-emerald-300"
-                  : "border-white/10 text-zinc-500 hover:border-white/30 hover:bg-white/[0.05] hover:text-white"
+                  : "border-line text-ink-dim hover:border-line-strong hover:bg-hover hover:text-white"
               }`}
               onClick={handleCopy}
               title={copied ? "Copied!" : "Copy Value"}
@@ -234,7 +234,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
 
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-white/10 text-zinc-500 transition hover:border-white/30 hover:bg-white/[0.05] hover:text-white"
+              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line-strong hover:bg-hover hover:text-white"
               onClick={() => {
                 setHidden(false);
                 setEditing(true);
@@ -247,7 +247,7 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
 
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-white/10 text-zinc-500 transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300"
+              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300"
               onClick={() => setDeleteDialogOpen(true)}
               title="Delete"
               disabled={busy}
@@ -257,12 +257,12 @@ export function EnvVarRow({ item, onSave, onDelete, busy, suggestions }: EnvVarR
           </div>
         </div>
         {hasReference && (
-          <div className="flex select-none items-center gap-2 font-mono text-[10px] text-zinc-500">
-            <span className="border border-white/10 px-1.5 py-0.5 text-[8px] uppercase tracking-[0.08em] text-zinc-400">
+          <div className="flex select-none items-center gap-2 font-mono text-[10px] text-ink-dim">
+            <span className="border border-line px-1.5 py-0.5 text-[8px] uppercase tracking-[0.08em] text-ink-muted">
               Reference
             </span>
             <span>resolves to</span>
-            <span className={hidden ? "select-none tracking-widest text-zinc-600" : "select-all text-zinc-300"}>
+            <span className={hidden ? "select-none tracking-widest text-ink-dim" : "select-all text-ink-muted"}>
               {hidden ? "••••••••••••••••" : item.resolvedValue}
             </span>
           </div>

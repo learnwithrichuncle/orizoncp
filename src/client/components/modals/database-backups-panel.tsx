@@ -144,18 +144,18 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
 
   return (
     <>
-      <section className="mx-auto flex h-full min-h-0 w-full max-w-[1200px] flex-col overflow-hidden border border-white/10 bg-black">
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
+      <section className="mx-auto flex h-full min-h-0 w-full max-w-[1200px] flex-col overflow-hidden border border-line bg-base">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
           <div>
             <h2 className="text-lg tracking-[-0.03em] text-white">Backups</h2>
-            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">
+            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
               {backups.length} {backups.length === 1 ? "backup" : "backups"} · {storageLabel(activeSettings.storage, r2Available)}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
               onClick={openSettings}
               title="Backup settings"
               aria-label="Backup settings"
@@ -164,7 +164,7 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
             </button>
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
               onClick={() => void loadBackups()}
               disabled={loading || creating}
               title="Refresh backups"
@@ -174,7 +174,7 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
             </button>
             <button
               type="button"
-              className="inline-flex h-8 items-center justify-center gap-2 bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40"
+              className="inline-flex h-8 items-center justify-center gap-2 bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
               onClick={() => void createBackup()}
               disabled={creating || loading}
             >
@@ -185,15 +185,15 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
         </header>
 
         {r2Available ? (
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-white/10 bg-white/[0.02] px-4 py-2.5 font-mono text-[9px] tracking-[0.12em] text-zinc-600 sm:px-5">
-            <span className="uppercase text-zinc-400">R2 connected</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line bg-glass px-4 py-2.5 font-mono text-[9px] tracking-[0.12em] text-ink-dim sm:px-5">
+            <span className="uppercase text-ink-muted">R2 connected</span>
             <span>{r2?.bucket}</span>
             <span className="truncate">{r2?.endpoint}</span>
           </div>
         ) : null}
 
         {error || success ? (
-          <div className="border-b border-white/10 px-4 py-3 sm:px-5">
+          <div className="border-b border-line px-4 py-3 sm:px-5">
             {error ? <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
             {success ? (
               <div className="flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-xs text-emerald-200">

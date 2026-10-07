@@ -690,12 +690,12 @@ export function CreateServiceModal({
       variant="monochrome"
     >
       {step !== "type" && (
-        <div className="mb-4 flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-white/10 pb-3">
+        <div className="mb-4 flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-line pb-3">
           {stepItems.map((item, index) => (
             <div
               key={item.key}
               className={`flex min-w-0 items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] ${
-                index === stepIndex ? "text-white" : index < stepIndex ? "text-zinc-400" : "text-zinc-700"
+                index === stepIndex ? "text-white" : index < stepIndex ? "text-ink-muted" : "text-zinc-700"
               }`}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
@@ -767,8 +767,8 @@ export function CreateServiceModal({
                   type="button"
                   className={`inline-flex h-9 w-full items-center justify-start gap-2 px-3 text-xs transition ${
                     gitSourceMode === "github"
-                      ? "bg-white text-black"
-                      : "border border-white/15 text-zinc-400 hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                      ? "bg-accent text-ink"
+                      : "border border-line text-ink-muted hover:border-line hover:bg-hover hover:text-white"
                   }`}
                   onClick={() => {
                     setGitSourceMode("github");
@@ -782,8 +782,8 @@ export function CreateServiceModal({
                   type="button"
                   className={`inline-flex h-9 w-full items-center justify-start gap-2 px-3 text-xs transition ${
                     gitSourceMode === "url"
-                      ? "bg-white text-black"
-                      : "border border-white/15 text-zinc-400 hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                      ? "bg-accent text-ink"
+                      : "border border-line text-ink-muted hover:border-line hover:bg-hover hover:text-white"
                   }`}
                   onClick={() => {
                     setGitSourceMode("url");
@@ -799,7 +799,7 @@ export function CreateServiceModal({
               </div>
 
               {gitSourceMode === "url" ? (
-                <div className="space-y-4 border border-white/10 p-4">
+                <div className="space-y-4 border border-line p-4">
                   <div>
                     <FieldLabel>Git URL</FieldLabel>
                     <FormInput
@@ -817,12 +817,12 @@ export function CreateServiceModal({
                       autoComplete="off"
                       disabled={busy}
                       variant="monochrome"
-                      className="!h-9 border-white/15 bg-black font-mono text-xs"
+                      className="!h-9 border-line bg-base font-mono text-xs"
                     />
                     {form.repoUrl?.trim() && !gitUrlValid ? (
                       <p className="mt-2 text-xs text-rose-300">Use an HTTPS Git URL or SSH URL like git@github.com:owner/repo.git.</p>
                     ) : (
-                      <p className="mt-2 text-xs text-zinc-500">Use this for public repos, SSH repos, or providers outside the GitHub App flow.</p>
+                      <p className="mt-2 text-xs text-ink-dim">Use this for public repos, SSH repos, or providers outside the GitHub App flow.</p>
                     )}
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -834,7 +834,7 @@ export function CreateServiceModal({
                         placeholder="api"
                         required
                         variant="monochrome"
-                        className="!h-9 border-white/15 bg-black text-xs"
+                        className="!h-9 border-line bg-base text-xs"
                       />
                     </div>
                     <div>
@@ -845,14 +845,14 @@ export function CreateServiceModal({
                         placeholder="main"
                         required
                         variant="monochrome"
-                        className="!h-9 border-white/15 bg-black text-xs"
+                        className="!h-9 border-line bg-base text-xs"
                       />
                     </div>
                   </div>
                   <div className="flex justify-end">
                     <button
                       type="button"
-                      className="inline-flex h-8 items-center justify-center bg-white px-4 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40"
+                      className="inline-flex h-8 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
                       disabled={!gitUrlValid || !form.name.trim() || !form.branch.trim()}
                       onClick={() => setStep("configure")}
                     >
@@ -861,8 +861,8 @@ export function CreateServiceModal({
                   </div>
                 </div>
               ) : connected === false ? (
-                <div className="space-y-3 border border-white/10 p-4">
-                  <div className="text-xs leading-5 text-zinc-500">
+                <div className="space-y-3 border border-line p-4">
+                  <div className="text-xs leading-5 text-ink-dim">
                     {githubStatus?.installUrl ? (
                       <>
                         Install the GitHub App first, or enter <code>owner/repo</code> manually to continue.
@@ -880,22 +880,22 @@ export function CreateServiceModal({
                       placeholder="owner/repo"
                       disabled={busy}
                       variant="monochrome"
-                      className="!h-9 border-white/15 bg-black font-mono text-xs"
+                      className="!h-9 border-line bg-base font-mono text-xs"
                     />
-                    <button type="button" className="inline-flex h-9 items-center justify-center bg-white px-4 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40" onClick={() => setStep("directory")} disabled={!form.repoFullName?.trim()}>
+                    <button type="button" className="inline-flex h-9 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" onClick={() => setStep("directory")} disabled={!form.repoFullName?.trim()}>
                       Continue
                     </button>
                   </div>
                 </div>
               ) : connected === null ? (
-                <div className="border border-white/10 px-4 py-5 text-center font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-600">Checking GitHub connection…</div>
+                <div className="border border-line px-4 py-5 text-center font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim">Checking GitHub connection…</div>
               ) : (
                 <>
                   <div className="grid gap-2 md:grid-cols-[260px_minmax(0,1fr)]">
                     <div className="relative">
                       <button
                         type="button"
-                        className="flex h-9 w-full items-center justify-between border border-white/15 bg-black px-3 text-left text-xs text-zinc-300 disabled:opacity-60"
+                        className="flex h-9 w-full items-center justify-between border border-line bg-base px-3 text-left text-xs text-ink-muted disabled:opacity-60"
                         onClick={() => setOwnerMenuOpen((current) => !current)}
                         disabled={!owners.length}
                       >
@@ -903,36 +903,36 @@ export function CreateServiceModal({
                         <AppIcon icon={ArrowLeft01Icon} size={16} className={ownerMenuOpen ? "rotate-90" : "-rotate-90"} />
                       </button>
                       {ownerMenuOpen ? (
-                        <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 max-h-64 overflow-auto border border-white/15 bg-black p-1 shadow-[0_20px_40px_rgba(0,0,0,0.55)]">
+                        <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 max-h-64 overflow-auto border border-line bg-base p-1 shadow-[0_20px_40px_rgba(0,0,0,0.55)]">
                           <button
                             type="button"
-                            className="flex w-full items-center justify-between px-3 py-2 text-left text-xs text-zinc-300 hover:bg-white/[0.05] hover:text-white"
+                            className="flex w-full items-center justify-between px-3 py-2 text-left text-xs text-ink-muted hover:bg-hover hover:text-white"
                             onClick={() => {
                               setOwnerFilter("all");
                               setOwnerMenuOpen(false);
                             }}
                           >
                             <span className="truncate">All accounts</span>
-                            {ownerFilter === "all" ? <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-500">Current</span> : null}
+                            {ownerFilter === "all" ? <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-ink-dim">Current</span> : null}
                           </button>
                           {owners.map((owner) => (
                             <button
                               key={owner}
                               type="button"
-                              className="flex w-full items-center justify-between px-3 py-2 text-left text-xs text-zinc-300 hover:bg-white/[0.05] hover:text-white"
+                              className="flex w-full items-center justify-between px-3 py-2 text-left text-xs text-ink-muted hover:bg-hover hover:text-white"
                               onClick={() => {
                                 setOwnerFilter(owner);
                                 setOwnerMenuOpen(false);
                               }}
                             >
                               <span className="truncate">{owner}</span>
-                              {ownerFilter === owner ? <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-500">Current</span> : null}
+                              {ownerFilter === owner ? <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-ink-dim">Current</span> : null}
                             </button>
                           ))}
                           {githubStatus?.installUrl ? (
                             <button
                               type="button"
-                              className="flex w-full items-center gap-2 border-t border-white/10 px-3 py-2 text-left font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-500 hover:bg-white/[0.05] hover:text-white"
+                              className="flex w-full items-center gap-2 border-t border-line px-3 py-2 text-left font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim hover:bg-hover hover:text-white"
                               onClick={() => {
                                 window.open(githubStatus.installUrl ?? "", "_blank", "noopener,noreferrer");
                                 setOwnerMenuOpen(false);
@@ -946,35 +946,35 @@ export function CreateServiceModal({
                       ) : null}
                     </div>
                     <div className="relative">
-                      <AppIcon icon={Search01Icon} size={14} className="pointer-events-none absolute left-3 top-[11px] text-zinc-600" />
-                      <FormInput value={repoQuery} onChange={(event) => setRepoQuery(event.target.value)} placeholder="Search repositories" variant="monochrome" className="!h-9 border-white/15 bg-black pl-9 text-xs" />
+                      <AppIcon icon={Search01Icon} size={14} className="pointer-events-none absolute left-3 top-[11px] text-ink-dim" />
+                      <FormInput value={repoQuery} onChange={(event) => setRepoQuery(event.target.value)} placeholder="Search repositories" variant="monochrome" className="!h-9 border-line bg-base pl-9 text-xs" />
                     </div>
                   </div>
 
                   {repoError ? <div className="border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">GitHub is configured, but repo lookup failed: {repoError}</div> : null}
 
-                  <div className="overflow-hidden border border-white/10">
+                  <div className="overflow-hidden border border-line">
                     <div className="max-h-[280px] overflow-auto">
                       {filteredRepos.length === 0 ? (
-                        <div className="px-4 py-6 text-center font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-600">
+                        <div className="px-4 py-6 text-center font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim">
                           {loadingRepos ? "Loading repositories…" : "No repositories found."}
                         </div>
                       ) : (
                         filteredRepos.map((repo) => (
-                          <button key={repo.id} type="button" className="group flex w-full items-center justify-between gap-3 border-b border-white/10 px-3 py-2.5 text-left transition last:border-b-0 hover:bg-white/[0.05]" onClick={() => selectRepo(repo)}>
+                          <button key={repo.id} type="button" className="group flex w-full items-center justify-between gap-3 border-b border-line px-3 py-2.5 text-left transition last:border-b-0 hover:bg-hover" onClick={() => selectRepo(repo)}>
                             <div className="flex min-w-0 items-center gap-2.5">
-                              <div className="grid h-7 w-7 shrink-0 place-items-center text-zinc-600 group-hover:text-white">
+                              <div className="grid h-7 w-7 shrink-0 place-items-center text-ink-dim group-hover:text-white">
                                 <AppIcon icon={GithubIcon} size={15} />
                               </div>
                               <div className="min-w-0">
-                                <div className="truncate text-xs text-zinc-300 group-hover:text-white">{repo.name}</div>
-                                <div className="mt-0.5 truncate font-mono text-[9px] tracking-[0.08em] text-zinc-600">
+                                <div className="truncate text-xs text-ink-muted group-hover:text-white">{repo.name}</div>
+                                <div className="mt-0.5 truncate font-mono text-[9px] tracking-[0.08em] text-ink-dim">
                                   {repo.fullName}
                                   <span className="ml-2">{formatRelativeTime(repoLastPushedAt(repo))}</span>
                                 </div>
                               </div>
                             </div>
-                            <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-600 group-hover:text-zinc-300">Select</span>
+                            <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-ink-dim group-hover:text-ink-muted">Select</span>
                           </button>
                         ))
                       )}
@@ -984,10 +984,10 @@ export function CreateServiceModal({
               )}
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-start gap-3 border-t border-white/10 pt-4">
+          <div className="mt-4 flex items-center justify-start gap-3 border-t border-line pt-4">
             <button
               type="button"
-              className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white"
+              className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white"
               onClick={() => {
                 setServiceType(null);
                 setStep("type");
@@ -1013,7 +1013,7 @@ export function CreateServiceModal({
             />
             <div>
               <FieldLabel>Selected directory</FieldLabel>
-              <div className="flex h-9 items-center border border-white/10 px-3 font-mono text-xs text-zinc-300">
+              <div className="flex h-9 items-center border border-line px-3 font-mono text-xs text-ink-muted">
                 {currentDirectory ? `./${currentDirectory}` : "./"}
               </div>
             </div>
@@ -1032,12 +1032,12 @@ export function CreateServiceModal({
               onSelect={(path) => setForm((current) => ({ ...current, rootDir: path || undefined }))}
             />
           </div>
-          <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
-            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white" onClick={() => setStep("repo")}>
+          <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
+            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white" onClick={() => setStep("repo")}>
               <AppIcon icon={ArrowLeft01Icon} size={16} />
               Back
             </button>
-            <button type="button" className="inline-flex h-8 items-center justify-center bg-white px-4 text-xs text-black transition hover:bg-zinc-200" onClick={() => setStep("configure")}>
+            <button type="button" className="inline-flex h-8 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200" onClick={() => setStep("configure")}>
               Continue
             </button>
           </div>
@@ -1054,10 +1054,10 @@ export function CreateServiceModal({
                 onChange={(event) => setForm((current) => ({ ...current, rootDir: event.target.value || undefined }))}
                 placeholder="."
                 variant="monochrome"
-                className="!h-9 border-white/15 bg-black font-mono text-xs"
+                className="!h-9 border-line bg-base font-mono text-xs"
               />
             ) : (
-              <div className="flex h-9 items-center border border-white/10 px-3 font-mono text-xs text-zinc-300">
+              <div className="flex h-9 items-center border border-line px-3 font-mono text-xs text-ink-muted">
                 {currentDirectory ? `./${currentDirectory}` : "./"}
               </div>
             )}
@@ -1066,18 +1066,18 @@ export function CreateServiceModal({
           <div className="space-y-3">
             <button
               type="button"
-              className="flex h-10 w-full items-center justify-between border border-white/10 px-3 text-left transition hover:bg-white/[0.03]"
+              className="flex h-10 w-full items-center justify-between border border-line px-3 text-left transition hover:bg-glass"
               onClick={() => setBuildOpen((current) => !current)}
             >
-              <span className="text-xs text-zinc-300">Build and output</span>
-              <AppIcon icon={ArrowLeft01Icon} size={14} className={`text-zinc-600 ${buildOpen ? "rotate-90" : "-rotate-90"}`} />
+              <span className="text-xs text-ink-muted">Build and output</span>
+              <AppIcon icon={ArrowLeft01Icon} size={14} className={`text-ink-dim ${buildOpen ? "rotate-90" : "-rotate-90"}`} />
             </button>
             {buildOpen ? (
-              <div className="border border-white/10 p-4">
+              <div className="border border-line p-4">
                 <div className="grid gap-3 md:grid-cols-2">
                   <div>
                     <FieldLabel>Service name</FieldLabel>
-                    <FormInput value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="api" required variant="monochrome" className="!h-9 border-white/15 bg-black text-xs" />
+                    <FormInput value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="api" required variant="monochrome" className="!h-9 border-line bg-base text-xs" />
                   </div>
                   <div className="md:col-span-2">
                     <FieldLabel>Runtime mode</FieldLabel>
@@ -1094,29 +1094,29 @@ export function CreateServiceModal({
                     <>
                       <div>
                         <FieldLabel>App port</FieldLabel>
-                        <FormInput type="number" min={1} max={65535} value={form.internalPort} onChange={(event) => setForm({ ...form, internalPort: Number(event.target.value) })} required variant="monochrome" className="!h-9 border-white/15 bg-black text-xs" />
+                        <FormInput type="number" min={1} max={65535} value={form.internalPort} onChange={(event) => setForm({ ...form, internalPort: Number(event.target.value) })} required variant="monochrome" className="!h-9 border-line bg-base text-xs" />
                       </div>
                       <div>
                         <FieldLabel>Static output</FieldLabel>
-                        <FormInput value={form.staticOutput ?? ""} onChange={(event) => setForm({ ...form, staticOutput: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-white/15 bg-black text-xs" />
+                        <FormInput value={form.staticOutput ?? ""} onChange={(event) => setForm({ ...form, staticOutput: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-line bg-base text-xs" />
                       </div>
                     </>
                   ) : null}
                   <div>
                     <FieldLabel>Install command</FieldLabel>
-                    <FormInput value={form.installCommand ?? ""} onChange={(event) => setForm({ ...form, installCommand: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-white/15 bg-black font-mono text-xs" />
+                    <FormInput value={form.installCommand ?? ""} onChange={(event) => setForm({ ...form, installCommand: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-line bg-base font-mono text-xs" />
                   </div>
                   <div>
                     <FieldLabel>Prebuild command</FieldLabel>
-                    <FormInput value={form.prebuildCommand ?? ""} onChange={(event) => setForm({ ...form, prebuildCommand: event.target.value })} placeholder="none" variant="monochrome" className="!h-9 border-white/15 bg-black font-mono text-xs" />
+                    <FormInput value={form.prebuildCommand ?? ""} onChange={(event) => setForm({ ...form, prebuildCommand: event.target.value })} placeholder="none" variant="monochrome" className="!h-9 border-line bg-base font-mono text-xs" />
                   </div>
                   <div>
                     <FieldLabel>Build command</FieldLabel>
-                    <FormInput value={form.buildCommand ?? ""} onChange={(event) => setForm({ ...form, buildCommand: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-white/15 bg-black font-mono text-xs" />
+                    <FormInput value={form.buildCommand ?? ""} onChange={(event) => setForm({ ...form, buildCommand: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-line bg-base font-mono text-xs" />
                   </div>
                   <div>
                     <FieldLabel>Start command</FieldLabel>
-                    <FormInput value={form.startCommand ?? ""} onChange={(event) => setForm({ ...form, startCommand: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-white/15 bg-black font-mono text-xs" />
+                    <FormInput value={form.startCommand ?? ""} onChange={(event) => setForm({ ...form, startCommand: event.target.value })} placeholder="auto" variant="monochrome" className="!h-9 border-line bg-base font-mono text-xs" />
                   </div>
                 </div>
               </div>
@@ -1124,18 +1124,18 @@ export function CreateServiceModal({
           </div>
 
           <div className="space-y-3">
-            <div className="flex h-10 w-full items-center border border-white/10">
+            <div className="flex h-10 w-full items-center border border-line">
               <button
                 type="button"
                 className="flex min-w-0 flex-1 items-center gap-3 px-3 text-left"
                 onClick={() => setEnvOpen((current) => !current)}
               >
-                <span className="text-xs text-zinc-300">Environment variables</span>
+                <span className="text-xs text-ink-muted">Environment variables</span>
               </button>
               {environmentVariableSuggestionCount > 0 ? (
                 <button
                   type="button"
-                  className="mr-2 inline-flex h-6 shrink-0 items-center border border-white/15 px-2 font-mono text-[8px] uppercase tracking-[0.12em] text-zinc-500 transition hover:border-white/35 hover:text-white"
+                  className="mr-2 inline-flex h-6 shrink-0 items-center border border-line px-2 font-mono text-[8px] uppercase tracking-[0.12em] text-ink-dim transition hover:border-line hover:text-white"
                   onClick={() => {
                     setEnvOpen(true);
                     setEnvSuggestionsOpen((current) => !current);
@@ -1146,7 +1146,7 @@ export function CreateServiceModal({
               ) : null}
               <button
                 type="button"
-                className="grid h-10 w-10 place-items-center text-zinc-600 transition hover:bg-white/[0.05] hover:text-white"
+                className="grid h-10 w-10 place-items-center text-ink-dim transition hover:bg-hover hover:text-white"
                 onClick={() => setEnvOpen((current) => !current)}
                 aria-label={envOpen ? "Collapse environment variables" : "Expand environment variables"}
               >
@@ -1154,9 +1154,9 @@ export function CreateServiceModal({
               </button>
             </div>
             {envOpen ? (
-              <div className="space-y-4 border border-white/10 p-4">
+              <div className="space-y-4 border border-line p-4">
                 <div className="flex items-center justify-end gap-3">
-                  <button type="button" className="inline-flex h-8 items-center justify-center border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white" onClick={() => setNewEnvOpen((current) => !current)}>
+                  <button type="button" className="inline-flex h-8 items-center justify-center border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white" onClick={() => setNewEnvOpen((current) => !current)}>
                     New variable
                   </button>
                 </div>
@@ -1182,7 +1182,7 @@ export function CreateServiceModal({
                         placeholder="KEY"
                         autoComplete="off"
                         variant="monochrome"
-                        className="!h-9 border-white/15 bg-black font-mono text-xs"
+                        className="!h-9 border-line bg-base font-mono text-xs"
                       />
                     </div>
                     <div>
@@ -1197,16 +1197,16 @@ export function CreateServiceModal({
                         placeholder="VALUE"
                         autoComplete="new-password"
                         variant="monochrome"
-                        className="!h-9 border-white/15 bg-black font-mono text-xs"
+                        className="!h-9 border-line bg-base font-mono text-xs"
                       />
                     </div>
                     <div className="flex items-end gap-2">
-                      <button type="button" className="inline-flex h-9 items-center justify-center bg-white px-3 text-xs text-black transition hover:bg-zinc-200" onClick={addEnvEntry}>
+                      <button type="button" className="inline-flex h-9 items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200" onClick={addEnvEntry}>
                         Save
                       </button>
                       <button
                         type="button"
-                        className="inline-flex h-9 items-center justify-center px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white"
+                        className="inline-flex h-9 items-center justify-center px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white"
                         onClick={() => {
                           setNewEnvOpen(false);
                           setEnvForm({ key: "", value: "" });
@@ -1218,19 +1218,19 @@ export function CreateServiceModal({
                   </div>
                 ) : null}
 
-                <div className="overflow-hidden border border-white/10">
+                <div className="overflow-hidden border border-line">
                   {envEntries.length === 0 ? (
-                    <div className="px-3 py-5 text-xs text-zinc-500">No environment variables yet.</div>
+                    <div className="px-3 py-5 text-xs text-ink-dim">No environment variables yet.</div>
                   ) : (
                     envEntries.map((item) => (
-                      <div key={item.key} className="grid grid-cols-[minmax(0,1fr)_120px_36px] items-center gap-3 border-b border-white/10 px-3 py-2.5 last:border-b-0">
+                      <div key={item.key} className="grid grid-cols-[minmax(0,1fr)_120px_36px] items-center gap-3 border-b border-line px-3 py-2.5 last:border-b-0">
                         <div className="flex min-w-0 items-center">
-                          <span className="truncate font-mono text-[10px] tracking-[0.08em] text-zinc-300">{item.key}</span>
+                          <span className="truncate font-mono text-[10px] tracking-[0.08em] text-ink-muted">{item.key}</span>
                         </div>
-                        <div className="font-mono text-xs text-zinc-600">••••••••</div>
+                        <div className="font-mono text-xs text-ink-dim">••••••••</div>
                         <button
                           type="button"
-                          className="ml-auto inline-flex h-7 w-7 items-center justify-center text-zinc-600 transition hover:bg-rose-500/10 hover:text-rose-300"
+                          className="ml-auto inline-flex h-7 w-7 items-center justify-center text-ink-dim transition hover:bg-rose-500/10 hover:text-rose-300"
                           aria-label={`Delete ${item.key}`}
                           onClick={() => setEnvEntries((current) => current.filter((entry) => entry.key !== item.key))}
                         >
@@ -1246,12 +1246,12 @@ export function CreateServiceModal({
 
           </div>
           </div>
-          <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
-            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white" onClick={() => setStep(isUrlSource ? "repo" : "directory")}>
+          <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
+            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white" onClick={() => setStep(isUrlSource ? "repo" : "directory")}>
               <AppIcon icon={ArrowLeft01Icon} size={16} />
               Back
             </button>
-            <button type="submit" className="inline-flex h-8 items-center justify-center bg-white px-4 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy}>
+            <button type="submit" className="inline-flex h-8 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy}>
               {busy ? "Creating…" : "Create service"}
             </button>
           </div>

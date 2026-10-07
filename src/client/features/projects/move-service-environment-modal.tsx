@@ -54,13 +54,13 @@ export function MoveServiceEnvironmentModal({
     <SettingsDialog open={open} title="Move to environment" width="max-w-md" onClose={() => {
       if (!moving) onClose();
     }}>
-      <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-zinc-600">{serviceName}</p>
-      <p className="mt-2 text-sm leading-6 text-zinc-500">
+      <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-ink-dim">{serviceName}</p>
+      <p className="mt-2 text-sm leading-6 text-ink-dim">
         Choose the environment that should contain this service.
       </p>
 
       <div className="mt-5">
-        <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-400">
+        <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
           Destination
         </span>
         <Dropdown
@@ -79,10 +79,10 @@ export function MoveServiceEnvironmentModal({
         </div>
       ) : null}
 
-      <div className="mt-6 flex justify-end gap-2 border-t border-white/10 pt-4">
+      <div className="mt-6 flex justify-end gap-2 border-t border-line pt-4">
         <button
           type="button"
-          className="inline-flex h-10 items-center justify-center border border-white/15 px-4 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-50"
+          className="inline-flex h-10 items-center justify-center border border-line px-4 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
           onClick={onClose}
           disabled={moving}
         >
@@ -90,7 +90,7 @@ export function MoveServiceEnvironmentModal({
         </button>
         <button
           type="button"
-          className="inline-flex h-10 items-center justify-center bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:opacity-50"
+          className="inline-flex h-10 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-50"
           onClick={() => void move()}
           disabled={moving || !environmentId}
         >

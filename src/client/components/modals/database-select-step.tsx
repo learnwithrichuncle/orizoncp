@@ -10,13 +10,13 @@ interface DatabaseSelectStepProps {
 export function DatabaseSelectStep({ onSelect, onBack }: DatabaseSelectStepProps) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="grid flex-1 content-start border border-white/10 sm:grid-cols-2">
+      <div className="grid flex-1 content-start border border-line sm:grid-cols-2">
         {DATABASE_OPTIONS.map((db) => (
           <button
             key={db.key}
             type="button"
             onClick={() => onSelect(db.key)}
-            className="group flex min-h-16 items-center gap-3 border-b border-white/10 px-4 py-3 text-left transition hover:bg-white/[0.05] focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white/30 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0"
+            className="group flex min-h-16 items-center gap-3 border-b border-line px-4 py-3 text-left transition hover:bg-hover focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white/30 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0"
           >
             <span className="grid h-8 w-8 shrink-0 place-items-center">
               {db.logoUrl ? (
@@ -28,21 +28,21 @@ export function DatabaseSelectStep({ onSelect, onBack }: DatabaseSelectStepProps
                   loading="lazy"
                 />
               ) : (
-                <AppIcon icon={DatabaseIcon} size={22} className="text-zinc-400" />
+                <AppIcon icon={DatabaseIcon} size={22} className="text-ink-muted" />
               )}
             </span>
 
-            <span className="min-w-0 flex-1 truncate text-sm text-zinc-300 transition group-hover:text-white">
+            <span className="min-w-0 flex-1 truncate text-sm text-ink-muted transition group-hover:text-white">
               {db.name}
             </span>
 
-            <AppIcon icon={ArrowLeft01Icon} size={14} className="rotate-180 text-zinc-700 transition group-hover:text-zinc-300" />
+            <AppIcon icon={ArrowLeft01Icon} size={14} className="rotate-180 text-zinc-700 transition group-hover:text-ink-muted" />
           </button>
         ))}
       </div>
 
-      <div className="mt-4 flex shrink-0 justify-start border-t border-white/10 pt-4">
-        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white" onClick={onBack}>
+      <div className="mt-4 flex shrink-0 justify-start border-t border-line pt-4">
+        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white" onClick={onBack}>
           <AppIcon icon={ArrowLeft01Icon} size={16} />
           Back
         </button>

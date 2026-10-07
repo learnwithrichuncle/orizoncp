@@ -1046,7 +1046,7 @@ export const api = {
 
     const blob = await response.blob();
     const disposition = response.headers.get("Content-Disposition") ?? "";
-    const fileName = disposition.match(/filename="([^"]+)"/)?.[1] ?? "orizoncp-export.aeroplane";
+    const fileName = disposition.match(/filename="([^"]+)"/)?.[1] ?? "orizoncp-export.ORIZONCP";
     downloadFile(blob, fileName);
     return { fileName, sizeBytes: blob.size };
   },

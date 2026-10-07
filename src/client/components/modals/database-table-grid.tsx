@@ -43,8 +43,8 @@ type DatabaseTableGridProps = {
 function toolbarButton(active: boolean) {
   return `inline-flex h-8 items-center justify-center gap-2 border px-2.5 text-[13px] font-medium transition ${
     active
-      ? "border-zinc-500 bg-zinc-800 text-white"
-      : "border-zinc-700 bg-zinc-950/75 text-zinc-200 hover:border-zinc-500 hover:bg-zinc-900"
+      ? "border-zinc-500 bg-elevated text-white"
+      : "border-line-strong bg-base/75 text-ink hover:border-zinc-500 hover:bg-base"
   }`;
 }
 
@@ -248,7 +248,7 @@ export function DatabaseTableGrid({
         {editable ? (
           <button
             type="button"
-            className="ml-auto inline-flex h-8 items-center justify-center gap-2 border border-zinc-600 bg-zinc-800 px-3 text-[13px] font-medium text-zinc-100 transition hover:bg-zinc-700"
+            className="ml-auto inline-flex h-8 items-center justify-center gap-2 border border-zinc-600 bg-elevated px-3 text-[13px] font-medium text-zinc-100 transition hover:bg-zinc-700"
             onClick={onAddRecord}
           >
             <AppIcon icon={Add01Icon} size={15} />
@@ -271,30 +271,30 @@ export function DatabaseTableGrid({
         />
       ) : null}
 
-      <div className="min-h-0 flex-1 overflow-auto border border-zinc-700 bg-zinc-950">
+      <div className="min-h-0 flex-1 overflow-auto border border-line-strong bg-base">
         <table className="min-w-full border-collapse text-left font-mono text-[13px]">
-          <thead className="sticky top-0 z-10 bg-zinc-950 text-zinc-400">
+          <thead className="sticky top-0 z-10 bg-base text-ink-muted">
             <tr>
               {canSelectRows ? (
-                <th className="w-10 border-b border-r border-zinc-700 px-2.5 py-2">
+                <th className="w-10 border-b border-r border-line-strong px-2.5 py-2">
                   <Checkbox checked={allVisibleSelected} onChange={toggleVisibleRows} label="Select visible records" />
                 </th>
               ) : null}
               {visibleColumns.map((column) => {
                 const sorted = sort?.column === column.name;
                 return (
-                  <th key={column.name} className="min-w-[200px] border-b border-r border-zinc-700 px-3 py-2 font-semibold">
+                  <th key={column.name} className="min-w-[200px] border-b border-r border-line-strong px-3 py-2 font-semibold">
                     <button
                       type="button"
                       className="flex w-full min-w-0 items-center justify-between gap-3 text-left"
                       onClick={() => setSort({ column: column.name, direction: sorted && sort?.direction === "asc" ? "desc" : "asc" })}
                     >
                       <span className="min-w-0 truncate">
-                        <span className="text-zinc-300">{column.name}</span>
-                        <span className="ml-2 text-zinc-500">{column.type}</span>
-                        {column.primaryKey ? <span className="ml-2 text-zinc-500">pk</span> : null}
+                        <span className="text-ink-muted">{column.name}</span>
+                        <span className="ml-2 text-ink-dim">{column.type}</span>
+                        {column.primaryKey ? <span className="ml-2 text-ink-dim">pk</span> : null}
                       </span>
-                      <AppIcon icon={sorted ? (sort?.direction === "asc" ? SortingUpIcon : SortingDownIcon) : Sorting05Icon} size={13} className={sorted ? "text-zinc-300" : "text-zinc-600"} />
+                      <AppIcon icon={sorted ? (sort?.direction === "asc" ? SortingUpIcon : SortingDownIcon) : Sorting05Icon} size={13} className={sorted ? "text-ink-muted" : "text-ink-dim"} />
                     </button>
                   </th>
                 );
@@ -304,16 +304,16 @@ export function DatabaseTableGrid({
           <tbody>
             {visibleRows.length === 0 ? (
               <tr>
-                <td colSpan={visibleColumns.length + (canSelectRows ? 1 : 0)} className="px-3 py-6 text-[13px] text-zinc-500">
+                <td colSpan={visibleColumns.length + (canSelectRows ? 1 : 0)} className="px-3 py-6 text-[13px] text-ink-dim">
                   {appliedFilterCount > 0 ? "No records match these filters." : "No rows returned."}
                 </td>
               </tr>
             ) : visibleRows.map(({ row, index }) => {
               const selected = selectedRows.has(index);
               return (
-                <tr key={index} className={`border-b border-zinc-800 ${selected ? "bg-zinc-800" : "odd:bg-zinc-950 even:bg-zinc-900/45 hover:bg-zinc-800/60"}`}>
+                <tr key={index} className={`border-b border-line ${selected ? "bg-elevated" : "odd:bg-base even:bg-base/45 hover:bg-elevated/60"}`}>
                   {canSelectRows ? (
-                    <td className="w-10 border-r border-zinc-800 px-2.5 py-2">
+                    <td className="w-10 border-r border-line px-2.5 py-2">
                       <Checkbox checked={selected} onChange={() => toggleRow(index)} label={`Select record ${index + 1}`} />
                     </td>
                   ) : null}
@@ -324,7 +324,7 @@ export function DatabaseTableGrid({
                     return (
                       <td
                         key={column.name}
-                        className="min-w-[200px] max-w-[300px] border-r border-zinc-800 px-3 py-2 align-middle text-zinc-200"
+                        className="min-w-[200px] max-w-[300px] border-r border-line px-3 py-2 align-middle text-ink"
                         onDoubleClick={() => startCellEdit(index, column.name)}
                       >
                         {activeCell ? (
@@ -335,10 +335,10 @@ export function DatabaseTableGrid({
                             onChange={(event) => onDraftChange(column.name, event.target.value)}
                             onFocus={(event) => event.currentTarget.select()}
                             onKeyDown={(event) => handleEditKeyDown(event, row)}
-                            className="h-8 w-full border border-zinc-600 bg-zinc-950 px-2 text-zinc-100 outline-none focus:border-zinc-400"
+                            className="h-8 w-full border border-zinc-600 bg-base px-2 text-zinc-100 outline-none focus:border-zinc-400"
                           />
                         ) : (
-                          <span className={`block truncate ${empty ? "text-zinc-600" : ""}`} title={displayDatabaseValue(value)}>
+                          <span className={`block truncate ${empty ? "text-ink-dim" : ""}`} title={displayDatabaseValue(value)}>
                             {displayDatabaseValue(value)}
                           </span>
                         )}

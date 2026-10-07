@@ -15,7 +15,7 @@ function savedKeyLabel(keySuffix: string) {
 }
 
 const selectClass =
-  "h-11 w-full border border-zinc-700 bg-zinc-900 px-3 text-sm text-zinc-100 outline-none transition focus:border-[#4FB8B2]/60";
+  "h-11 w-full border border-line-strong bg-base px-3 text-sm text-zinc-100 outline-none transition focus:border-[#4FB8B2]/60";
 
 export function AiProviderForm({
   provider,
@@ -66,7 +66,7 @@ export function AiProviderForm({
   const selectedModel = values.selectedModel || connection.selectedModel || provider.models[0]?.id || "";
 
   return (
-    <form onSubmit={saveCredentials} className="space-y-4 border border-zinc-800 bg-zinc-950/45 p-5">
+    <form onSubmit={saveCredentials} className="space-y-4 border border-line bg-base/45 p-5">
       <div className="flex items-start gap-3">
         <div className={`grid h-11 w-11 shrink-0 place-items-center border ${provider.logoFrameClass}`}>
           <img src={provider.logoUrl} alt="" className="max-h-7 max-w-8 object-contain" />

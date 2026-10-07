@@ -20,7 +20,7 @@ const runtimeStateCopy: Record<Exclude<DatabaseRuntimeState, "ready">, { title: 
     title: "Database is idle",
     fallback: "Deploy this service before browsing its data.",
     icon: Clock01Icon,
-    accent: "border-zinc-700 bg-zinc-900/80 text-zinc-300"
+    accent: "border-line-strong bg-base/80 text-ink-muted"
   },
   failed: {
     title: "Database deployment failed",
@@ -46,10 +46,10 @@ export function DatabaseRuntimeStatePanel({ state, message, busy = false, onRefr
           <AppIcon icon={copy.icon} size={19} className={state === "deploying" ? "animate-pulse" : ""} />
         </div>
         <h3 className="text-sm text-zinc-100">{copy.title}</h3>
-        <p className="mt-2 text-xs leading-5 text-zinc-500">{message || copy.fallback}</p>
+        <p className="mt-2 text-xs leading-5 text-ink-dim">{message || copy.fallback}</p>
         <button
           type="button"
-          className="mt-5 inline-flex h-8 items-center justify-center gap-2 border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+          className="mt-5 inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
           onClick={onRefresh}
           disabled={busy}
         >

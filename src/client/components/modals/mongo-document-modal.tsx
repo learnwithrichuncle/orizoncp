@@ -108,11 +108,11 @@ export function MongoDocumentModal({
   const canSubmit = !busy && !documentError && hasTarget;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/55 px-6 py-8">
-      <form onSubmit={onSubmit} className="flex max-h-full w-full max-w-3xl flex-col border border-zinc-700 bg-zinc-950 shadow-[0_24px_90px_rgba(0,0,0,0.5)]">
-        <div className="border-b border-zinc-800 px-5 py-4">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-base/55 px-6 py-8">
+      <form onSubmit={onSubmit} className="flex max-h-full w-full max-w-3xl flex-col border border-line-strong bg-base shadow-[0_24px_90px_rgba(0,0,0,0.5)]">
+        <div className="border-b border-line px-5 py-4">
           <div className="font-hero text-lg text-zinc-100">{title}</div>
-          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">{subtitle}</div>
+          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">{subtitle}</div>
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
@@ -133,7 +133,7 @@ export function MongoDocumentModal({
 
           <div className={showTargetFields ? "mt-4" : ""}>
             <FieldLabel>Document JSON</FieldLabel>
-            <div className={`overflow-hidden border ${documentError ? "border-rose-500/70" : "border-zinc-700"}`}>
+            <div className={`overflow-hidden border ${documentError ? "border-rose-500/70" : "border-line-strong"}`}>
               <CodeMirror
                 value={draft.document ?? ""}
                 height="280px"
@@ -152,14 +152,14 @@ export function MongoDocumentModal({
                 onChange={(document) => onDraftChange({ ...draft, document })}
                 placeholder={'{\n  "name": "example"\n}'}
                 theme="dark"
-                className="bg-zinc-950 [&_.cm-content]:bg-zinc-950 [&_.cm-editor]:bg-zinc-950 [&_.cm-scroller]:bg-zinc-950"
+                className="bg-base [&_.cm-content]:bg-base [&_.cm-editor]:bg-base [&_.cm-scroller]:bg-base"
               />
             </div>
             {documentError ? <div className="mt-2 font-mono text-[10px] text-rose-300">{documentError}</div> : null}
           </div>
         </div>
 
-        <div className="flex justify-end gap-2 border-t border-zinc-800 px-5 py-4">
+        <div className="flex justify-end gap-2 border-t border-line px-5 py-4">
           <button type="button" className={shellButton("ghost")} onClick={onClose}>
             Cancel
           </button>

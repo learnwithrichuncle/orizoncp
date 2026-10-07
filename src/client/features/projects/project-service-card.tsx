@@ -29,7 +29,7 @@ function statusTone(status: string) {
   if (status === "failed") {
     return { text: "text-rose-300", dot: "bg-rose-400" };
   }
-  return { text: "text-zinc-500", dot: "bg-zinc-600" };
+  return { text: "text-ink-dim", dot: "bg-zinc-600" };
 }
 
 export function ProjectServiceCard({
@@ -83,10 +83,10 @@ export function ProjectServiceCard({
       role="button"
       tabIndex={0}
       draggable={canMoveEnvironment}
-      className={`group relative flex min-h-52 flex-col border bg-black p-4 text-left transition-all ${
+      className={`group relative flex min-h-52 flex-col border bg-base p-4 text-left transition-all ${
         isDragging
           ? "scale-[0.98] cursor-grabbing border-cyan-300/70 opacity-35 shadow-[0_0_36px_rgba(103,232,249,0.16)]"
-          : "cursor-grab border-white/10 hover:border-white/30 hover:bg-white/[0.025] active:cursor-grabbing"
+          : "cursor-grab border-line hover:border-line-strong hover:bg-glass active:cursor-grabbing"
       }`}
       onClick={onOpen}
       onDragStart={(event: DragEvent<HTMLElement>) => {
@@ -108,11 +108,11 @@ export function ProjectServiceCard({
         </span>
       ) : null}
       <div className="flex items-start gap-3">
-        <div className="grid h-10 w-10 shrink-0 place-items-center border border-white/15 bg-white/[0.03] p-2.5">
+        <div className="grid h-10 w-10 shrink-0 place-items-center border border-line bg-glass p-2.5">
           <FrameworkMark
             framework={service.framework}
             size={20}
-            fallback={<AppIcon icon={fallbackIcon} size={17} className="text-zinc-400" />}
+            fallback={<AppIcon icon={fallbackIcon} size={17} className="text-ink-muted" />}
           />
         </div>
 
@@ -126,7 +126,7 @@ export function ProjectServiceCard({
           </div>
 
           {isDatabase ? (
-            <p className="mt-1 truncate font-mono text-[10px] text-zinc-600">
+            <p className="mt-1 truncate font-mono text-[10px] text-ink-dim">
               {window.location.hostname}:{service.hostPort}
             </p>
           ) : visibleUrl ? (
@@ -134,40 +134,40 @@ export function ProjectServiceCard({
               href={visibleUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 block truncate text-xs text-zinc-500 transition hover:text-white"
+              className="mt-1 block truncate text-xs text-ink-dim transition hover:text-white"
               onClick={(event) => event.stopPropagation()}
             >
               {visibleLabel}
             </a>
           ) : (
-            <p className="mt-1 text-xs text-zinc-600">No public URL</p>
+            <p className="mt-1 text-xs text-ink-dim">No public URL</p>
           )}
         </div>
       </div>
 
       <div className="mt-5 min-w-0">
-        <div className="flex min-w-0 items-center gap-2 text-xs text-zinc-400">
-          <AppIcon icon={sourceIcon} size={14} className="shrink-0 text-zinc-600" />
+        <div className="flex min-w-0 items-center gap-2 text-xs text-ink-muted">
+          <AppIcon icon={sourceIcon} size={14} className="shrink-0 text-ink-dim" />
           <span className="truncate">{isDatabase ? "Database service" : sourceLabel}</span>
         </div>
 
         {!isDatabase && !isDockerImage && !isFunction ? (
-          <div className="mt-3 flex min-w-0 items-center gap-2 text-xs text-zinc-500">
-            <AppIcon icon={FolderOpenIcon} size={14} className="shrink-0 text-zinc-600" />
+          <div className="mt-3 flex min-w-0 items-center gap-2 text-xs text-ink-dim">
+            <AppIcon icon={FolderOpenIcon} size={14} className="shrink-0 text-ink-dim" />
             <span className="truncate">{service.rootDir || "Repository root"}</span>
           </div>
         ) : null}
       </div>
 
-      <div className="mt-auto flex items-end justify-between gap-4 border-t border-white/10 pt-4">
+      <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-4">
         <div className="min-w-0">
           {!isDatabase && !isDockerImage && !isFunction ? (
-            <span className="inline-flex max-w-full items-center gap-1.5 font-mono text-[9px] text-zinc-500">
+            <span className="inline-flex max-w-full items-center gap-1.5 font-mono text-[9px] text-ink-dim">
               <AppIcon icon={GitBranchIcon} size={12} />
               <span className="truncate">{service.branch}</span>
             </span>
           ) : null}
-          <p className="mt-1 font-mono text-[9px] text-zinc-600">
+          <p className="mt-1 font-mono text-[9px] text-ink-dim">
             {formatTime(service.lastDeployedAt ?? service.updatedAt)}
           </p>
         </div>

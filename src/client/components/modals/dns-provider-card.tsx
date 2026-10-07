@@ -17,8 +17,8 @@ export function DnsProviderCard({
       type="button"
       className={`mb-1 flex min-h-20 w-full items-center justify-between gap-3 border-l-2 px-3 py-3 text-left transition ${
         selected
-          ? "border-white bg-white/[0.08]"
-          : "border-transparent bg-transparent hover:bg-white/[0.04]"
+          ? "border-white bg-glass"
+          : "border-transparent bg-transparent hover:bg-glass"
       }`}
       onClick={onSelect}
       aria-pressed={selected}
@@ -33,7 +33,7 @@ export function DnsProviderCard({
       </span>
 
       <span className="flex shrink-0 items-center gap-2">
-        <span className={`h-1.5 w-1.5 ${connected ? "bg-white" : "border border-zinc-600"}`} />
+        <span className={`h-1.5 w-1.5 ${connected ? "bg-accent" : "border border-zinc-600"}`} />
         <span className="sr-only">{connected ? "Connected" : "Not connected"}</span>
       </span>
     </button>

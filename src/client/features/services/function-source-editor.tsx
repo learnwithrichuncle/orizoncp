@@ -98,7 +98,7 @@ export function FunctionSourceEditor({
   }, [disabled, runtime]);
 
   return (
-    <div className="overflow-hidden border border-white/15 bg-zinc-950" style={{ height }}>
+    <div className="overflow-hidden border border-line bg-base" style={{ height }}>
       <CodeMirror
         value={value}
         height="100%"
@@ -106,7 +106,7 @@ export function FunctionSourceEditor({
         extensions={extensions}
         onChange={onChange}
         theme="dark"
-        className="bg-zinc-950 [&_.cm-content]:bg-zinc-950 [&_.cm-editor]:bg-zinc-950 [&_.cm-scroller]:bg-zinc-950"
+        className="bg-base [&_.cm-content]:bg-base [&_.cm-editor]:bg-base [&_.cm-scroller]:bg-base"
       />
     </div>
   );

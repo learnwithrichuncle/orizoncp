@@ -76,7 +76,7 @@ export function AiProviderApiKeyEditor({
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         placeholder={provider.apiKeyPlaceholder}
-        className="h-11 w-full border border-white/15 bg-white/[0.03] px-3 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-white focus:ring-2 focus:ring-white/10"
+        className="h-11 w-full border border-line bg-glass px-3 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
         disabled={busy}
         autoComplete="new-password"
         autoCapitalize="none"
@@ -92,7 +92,7 @@ export function AiProviderApiKeyEditor({
   return (
     <button
       type="button"
-      className="flex h-11 w-full items-center justify-between gap-3 border border-white/15 bg-white/[0.03] px-3 text-left outline-none transition hover:border-white/30 focus:border-white focus:ring-2 focus:ring-white/10 disabled:cursor-wait disabled:opacity-60"
+      className="flex h-11 w-full items-center justify-between gap-3 border border-line bg-glass px-3 text-left outline-none transition hover:border-line-strong focus:border-white focus:ring-2 focus:ring-white/10 disabled:cursor-wait disabled:opacity-60"
       onClick={(event) => {
         event.stopPropagation();
         setEditing(true);
@@ -100,10 +100,10 @@ export function AiProviderApiKeyEditor({
       disabled={busy}
       title={connected ? "Replace API key" : "Set API key"}
     >
-      <span className={`truncate font-mono text-xs ${connected ? "text-zinc-300" : "text-zinc-600"}`}>
+      <span className={`truncate font-mono text-xs ${connected ? "text-ink-muted" : "text-ink-dim"}`}>
         {maskedApiKey(keySuffix)}
       </span>
-      <span className="shrink-0 text-xs text-zinc-500">{connected ? "Replace" : "Add key"}</span>
+      <span className="shrink-0 text-xs text-ink-dim">{connected ? "Replace" : "Add key"}</span>
     </button>
   );
 }

@@ -41,12 +41,12 @@ export function DirectoryPickerModal({
       variant="monochrome"
     >
       <div className="space-y-3">
-        <div className="flex items-center justify-between gap-3 border border-white/10 px-3 py-2.5">
+        <div className="flex items-center justify-between gap-3 border border-line px-3 py-2.5">
           <div>
-            <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Selected path</div>
-            <div className="mt-1 font-mono text-xs text-zinc-300">{selectedPath || "."}</div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Selected path</div>
+            <div className="mt-1 font-mono text-xs text-ink-muted">{selectedPath || "."}</div>
           </div>
-          <button type="button" className="inline-flex h-8 items-center justify-center bg-white px-3 text-xs text-black transition hover:bg-zinc-200" onClick={onClose}>
+          <button type="button" className="inline-flex h-8 items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200" onClick={onClose}>
             Done
           </button>
         </div>

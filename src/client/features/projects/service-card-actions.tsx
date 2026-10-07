@@ -60,7 +60,7 @@ export function ServiceCardActions({
     >
       <button
         type="button"
-        className="grid h-8 w-8 place-items-center border border-white/10 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+        className="grid h-8 w-8 place-items-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
         onClick={() => setOpen((current) => !current)}
         aria-label={`${serviceName} options`}
         aria-haspopup="menu"
@@ -71,40 +71,40 @@ export function ServiceCardActions({
 
       {open ? (
         <div
-          className="absolute bottom-full right-0 z-50 mb-2 w-52 border border-white/15 bg-black p-1 shadow-[0_18px_50px_rgba(0,0,0,0.65)]"
+          className="absolute bottom-full right-0 z-50 mb-2 w-52 border border-line bg-base p-1 shadow-[0_18px_50px_rgba(0,0,0,0.65)]"
           role="menu"
         >
-          <div className="border-b border-white/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-600">
+          <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim">
             {environment.name}
           </div>
           <button
             type="button"
-            className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-xs text-zinc-300 transition hover:bg-white/[0.07] hover:text-white"
+            className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-xs text-ink-muted transition hover:bg-glass hover:text-white"
             onClick={() => runAction(onOpen)}
             role="menuitem"
           >
-            <AppIcon icon={ArrowRight02Icon} size={14} className="text-zinc-500" />
+            <AppIcon icon={ArrowRight02Icon} size={14} className="text-ink-dim" />
             Open service
           </button>
           {canVisit ? (
             <button
               type="button"
-              className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-xs text-zinc-300 transition hover:bg-white/[0.07] hover:text-white"
+              className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-xs text-ink-muted transition hover:bg-glass hover:text-white"
               onClick={() => runAction(onVisit)}
               role="menuitem"
             >
-              <AppIcon icon={ArrowUpRight02Icon} size={14} className="text-zinc-500" />
+              <AppIcon icon={ArrowUpRight02Icon} size={14} className="text-ink-dim" />
               Visit service
             </button>
           ) : null}
           <button
             type="button"
-            className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-xs text-zinc-300 transition hover:bg-white/[0.07] hover:text-white disabled:cursor-not-allowed disabled:text-zinc-700"
+            className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-xs text-ink-muted transition hover:bg-glass hover:text-white disabled:cursor-not-allowed disabled:text-zinc-700"
             onClick={() => runAction(onMoveEnvironment)}
             disabled={!canMoveEnvironment}
             role="menuitem"
           >
-            <AppIcon icon={FolderTransferIcon} size={14} className="text-zinc-500" />
+            <AppIcon icon={FolderTransferIcon} size={14} className="text-ink-dim" />
             Move environment
           </button>
         </div>

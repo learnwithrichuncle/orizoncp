@@ -96,13 +96,13 @@ export function FunctionCodeAiPanel({
   }
 
   return (
-    <form onSubmit={generateCode} className={`flex h-full min-h-0 flex-col overflow-hidden border border-zinc-700 bg-zinc-950/95 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ${className}`}>
-      <div className="space-y-3 border-b border-zinc-800 px-4 py-3">
+    <form onSubmit={generateCode} className={`flex h-full min-h-0 flex-col overflow-hidden border border-line-strong bg-base/95 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ${className}`}>
+      <div className="space-y-3 border-b border-line px-4 py-3">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center border border-zinc-800 bg-zinc-900 text-[#7fe3dd]">
+          <span className="grid h-8 w-8 place-items-center border border-line bg-base text-[#7fe3dd]">
             <AppIcon icon={AiBrain01Icon} size={16} />
           </span>
-          <div className="min-w-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400">AI code generation</div>
+          <div className="min-w-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">AI code generation</div>
         </div>
 
         {aiProviders.length > 0 ? (
@@ -115,7 +115,7 @@ export function FunctionCodeAiPanel({
             onSelect={changeProviderModel}
           />
         ) : (
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
             {loadingProviders ? "Loading AI providers" : "No AI provider connected"}
           </div>
         )}
@@ -132,7 +132,7 @@ export function FunctionCodeAiPanel({
             }}
             disabled={disabled || generating}
             placeholder="Create a JSON API that validates input and returns a response"
-            className="min-h-[180px] flex-1 resize-none border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm leading-6 text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-[#4FB8B2]/60 disabled:opacity-60"
+            className="min-h-[180px] flex-1 resize-none border border-line-strong bg-base px-3 py-2.5 text-sm leading-6 text-zinc-100 outline-none transition placeholder:text-ink-dim focus:border-[#4FB8B2]/60 disabled:opacity-60"
           />
         </div>
         <button

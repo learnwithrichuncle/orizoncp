@@ -18,14 +18,14 @@ export function UpdateConfirmationModal({ applying, installType, open, onCancel,
       if (!applying) onCancel();
     }} width="max-w-md">
       <div>
-        <p className="text-sm leading-relaxed text-zinc-400">
+        <p className="text-sm leading-relaxed text-ink-muted">
           orizonCP may restart after the update. The dashboard can briefly disconnect.
         </p>
 
-        <div className="mt-5 flex items-center justify-end gap-2 border-t border-white/10 pt-4">
+        <div className="mt-5 flex items-center justify-end gap-2 border-t border-line pt-4">
           <button
             type="button"
-            className="inline-flex h-9 items-center justify-center border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] disabled:opacity-50"
+            className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50"
             onClick={onCancel}
             disabled={applying}
           >
@@ -33,7 +33,7 @@ export function UpdateConfirmationModal({ applying, installType, open, onCancel,
           </button>
           <button
             type="button"
-            className="inline-flex h-9 items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:opacity-50"
+            className="inline-flex h-9 items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-50"
             onClick={onConfirm}
             disabled={applying}
           >

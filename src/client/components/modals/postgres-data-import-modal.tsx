@@ -147,23 +147,23 @@ export function PostgresDataImportModal({
     return (
       <ModalShell open={open} onClose={closeModal} icon={progressIcon} title={progressTitle} meta="Postgres data import progress." width="max-w-xl">
         <div className="space-y-5">
-          <div className="border border-zinc-800 bg-zinc-950/35 p-5">
+          <div className="border border-line bg-base/35 p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500">Source</div>
+                <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-dim">Source</div>
                 <div className="mt-1 text-sm text-zinc-100">{sourceLabel}</div>
               </div>
               <span className={`px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${statusClass(progressStatus)}`}>
                 {progressLabel}
               </span>
             </div>
-            <div className="mt-5 h-2 overflow-hidden border border-zinc-800 bg-zinc-950">
+            <div className="mt-5 h-2 overflow-hidden border border-line bg-base">
               <div
                 className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : "bg-[#4FB8B2]"}`}
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <p className="mt-4 text-sm leading-6 text-zinc-400">
+            <p className="mt-4 text-sm leading-6 text-ink-muted">
               {result
                 ? "The source dump was restored into this orizonCP Postgres database."
                 : error
@@ -181,7 +181,7 @@ export function PostgresDataImportModal({
             </div>
           ) : null}
 
-          <div className="flex justify-end gap-2 border-t border-zinc-800 pt-5">
+          <div className="flex justify-end gap-2 border-t border-line pt-5">
             {error ? (
               <button
                 type="button"
@@ -213,13 +213,13 @@ export function PostgresDataImportModal({
             className={`border px-4 py-3 text-left transition ${
               mode === "railway"
                 ? "border-[#4FB8B2]/45 bg-[#4FB8B2]/10 text-zinc-100"
-                : "border-zinc-800 bg-zinc-950/35 text-zinc-300 hover:border-zinc-600"
+                : "border-line bg-base/35 text-ink-muted hover:border-zinc-600"
             } ${!railwaySource && !loadingSources ? "opacity-60" : ""}`}
             onClick={() => setMode("railway")}
             disabled={!railwaySource && !loadingSources}
           >
             <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7fe3dd]">Railway</span>
-            <span className="mt-2 block text-sm text-zinc-300">
+            <span className="mt-2 block text-sm text-ink-muted">
               {railwaySource ? railwaySource.externalServiceName ?? "Saved Railway service" : loadingSources ? "Checking saved source..." : "No saved Railway source"}
             </span>
           </button>
@@ -229,25 +229,25 @@ export function PostgresDataImportModal({
             className={`border px-4 py-3 text-left transition ${
               mode === "postgres-url"
                 ? "border-[#4FB8B2]/45 bg-[#4FB8B2]/10 text-zinc-100"
-                : "border-zinc-800 bg-zinc-950/35 text-zinc-300 hover:border-zinc-600"
+                : "border-line bg-base/35 text-ink-muted hover:border-zinc-600"
             }`}
             onClick={() => setMode("postgres-url")}
           >
             <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7fe3dd]">Postgres URL</span>
-            <span className="mt-2 block text-sm text-zinc-300">Use a direct source connection string</span>
+            <span className="mt-2 block text-sm text-ink-muted">Use a direct source connection string</span>
           </button>
         </div>
 
         {mode === "railway" ? (
-          <div className="space-y-4 border border-zinc-800 bg-zinc-950/35 p-4">
+          <div className="space-y-4 border border-line bg-base/35 p-4">
             {railwaySource ? (
-              <div className="grid gap-3 text-sm text-zinc-300 sm:grid-cols-2">
+              <div className="grid gap-3 text-sm text-ink-muted sm:grid-cols-2">
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">Project</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">Project</div>
                   <div className="mt-1 truncate text-zinc-100">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">Environment</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">Environment</div>
                   <div className="mt-1 truncate text-zinc-100">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
                 </div>
               </div>
@@ -270,7 +270,7 @@ export function PostgresDataImportModal({
             </div>
           </div>
         ) : (
-          <div className="border border-zinc-800 bg-zinc-950/35 p-4">
+          <div className="border border-line bg-base/35 p-4">
             <FieldLabel>Source Postgres URL</FieldLabel>
             <FormInput
               type="password"
@@ -298,7 +298,7 @@ export function PostgresDataImportModal({
           </div>
         ) : null}
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-zinc-800 pt-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
           <span className={`px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${statusClass(busy ? "building" : result ? "active" : "idle")}`}>
             {busy ? "Importing" : result ? "Imported" : "Ready"}
           </span>

@@ -43,12 +43,12 @@ export function CreateEnvironmentModal({
       if (!saving) onClose();
     }}>
       <form onSubmit={(event) => void submit(event)}>
-        <p className="text-sm leading-6 text-zinc-500">
+        <p className="text-sm leading-6 text-ink-dim">
           Create another place to organize this project's services.
         </p>
 
         <label className="mt-5 block">
-          <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-400">
+          <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
             Environment name
           </span>
           <input
@@ -59,7 +59,7 @@ export function CreateEnvironmentModal({
             autoFocus
             maxLength={50}
             required
-            className="h-11 w-full border border-white/15 bg-white/[0.04] px-3.5 text-sm text-white outline-none transition placeholder:text-zinc-700 hover:border-white/30 focus:border-white focus:bg-white/[0.07]"
+            className="h-11 w-full border border-line bg-glass px-3.5 text-sm text-white outline-none transition placeholder:text-zinc-700 hover:border-line-strong focus:border-white focus:bg-glass"
           />
         </label>
 
@@ -69,10 +69,10 @@ export function CreateEnvironmentModal({
           </div>
         ) : null}
 
-        <div className="mt-6 border-t border-white/10 pt-4">
+        <div className="mt-6 border-t border-line pt-4">
           <button
             type="submit"
-            className="flex h-11 w-full items-center justify-center bg-white px-5 text-sm text-black transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+            className="flex h-11 w-full items-center justify-center bg-accent px-5 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
             disabled={saving || !name.trim()}
           >
             {saving ? "Creating…" : "Create environment"}

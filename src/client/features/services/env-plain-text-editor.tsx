@@ -27,7 +27,7 @@ export function EnvPlainTextEditor({
         void onSave(entries);
       }}
     >
-      <label htmlFor="plain-environment-variables" className="block text-xs text-zinc-500">
+      <label htmlFor="plain-environment-variables" className="block text-xs text-ink-dim">
         Environment variables
       </label>
       <EnvCodeEditor
@@ -36,7 +36,7 @@ export function EnvPlainTextEditor({
         disabled={busy}
       />
 
-      <div className="mt-3 flex min-h-5 flex-wrap items-center justify-between gap-2 text-xs text-zinc-500">
+      <div className="mt-3 flex min-h-5 flex-wrap items-center justify-between gap-2 text-xs text-ink-dim">
         <span>
           {invalidLines.length > 0
             ? `Invalid KEY=value syntax on ${invalidLines.length === 1 ? "line" : "lines"} ${invalidLines.join(", ")}`
@@ -45,10 +45,10 @@ export function EnvPlainTextEditor({
         <span>Removing a line deletes that variable when you save.</span>
       </div>
 
-      <div className="mt-5 flex items-center justify-end gap-2 border-t border-white/10 pt-4">
+      <div className="mt-5 flex items-center justify-end gap-2 border-t border-line pt-4">
         <button
           type="button"
-          className="inline-flex h-9 items-center justify-center border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] disabled:opacity-50"
+          className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50"
           onClick={onCancel}
           disabled={busy}
         >
@@ -56,7 +56,7 @@ export function EnvPlainTextEditor({
         </button>
         <button
           type="submit"
-          className="inline-flex h-9 items-center justify-center bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex h-9 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={busy || invalidLines.length > 0}
         >
           {busy ? "Saving…" : "Save variables"}

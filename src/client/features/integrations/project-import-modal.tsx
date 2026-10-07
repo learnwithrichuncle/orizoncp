@@ -34,7 +34,7 @@ export function ProjectImportModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-base/80 p-4 backdrop-blur-sm">
       <div className="mx-auto flex min-h-full items-center justify-center">
         <section
           role="dialog"

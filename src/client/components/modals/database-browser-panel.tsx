@@ -428,9 +428,9 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
 
   if (!supported) {
     return (
-      <div className="border border-zinc-800 bg-zinc-950/45 p-6">
+      <div className="border border-line bg-base/45 p-6">
         <h3 className="font-hero text-lg text-zinc-100">Database browser unavailable</h3>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">{message}</p>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">{message}</p>
       </div>
     );
   }
@@ -439,15 +439,15 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
 
   return (
     <div className="flex h-full min-h-0 gap-4">
-      <aside className="flex min-h-0 w-64 flex-none flex-col overflow-hidden border border-zinc-800 bg-zinc-950/45">
-        <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400">{nouns.list}</div>
-          <button type="button" className="text-zinc-400 hover:text-zinc-100" onClick={() => void loadTables()} disabled={busy === "tables"} aria-label="Refresh tables">
+      <aside className="flex min-h-0 w-64 flex-none flex-col overflow-hidden border border-line bg-base/45">
+        <div className="flex items-center justify-between border-b border-line px-4 py-3">
+          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">{nouns.list}</div>
+          <button type="button" className="text-ink-muted hover:text-zinc-100" onClick={() => void loadTables()} disabled={busy === "tables"} aria-label="Refresh tables">
             <AppIcon icon={Refresh03Icon} size={15} className={busy === "tables" ? "animate-spin" : ""} />
           </button>
         </div>
-        <div className="border-b border-zinc-800 p-3">
-          <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-500">{nouns.group}</div>
+        <div className="border-b border-line p-3">
+          <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-dim">{nouns.group}</div>
           <Dropdown
             value={selectedSchema}
             options={schemaOptions}
@@ -458,24 +458,24 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto">
           {busy === "tables" ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-zinc-500">Loading...</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">Loading...</div>
           ) : hasRuntimeNotice ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-zinc-500">Database not ready.</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">Database not ready.</div>
           ) : schemaOptions.length === 0 ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-zinc-500">{nouns.empty}</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">{nouns.empty}</div>
           ) : visibleTables.length === 0 ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-zinc-500">{nouns.scopedEmpty}</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">{nouns.scopedEmpty}</div>
           ) : visibleTables.map((table) => (
             <button
               key={table.id}
               type="button"
-              className={`block w-full border-b border-zinc-900 px-4 py-3 text-left text-sm ${selectedTable === table.id ? "bg-zinc-800 text-zinc-100" : "text-zinc-300 hover:bg-zinc-900"}`}
+              className={`block w-full border-b border-zinc-900 px-4 py-3 text-left text-sm ${selectedTable === table.id ? "bg-elevated text-zinc-100" : "text-ink-muted hover:bg-base"}`}
               onClick={() => setSelectedTable(table.id)}
             >
               <span className="block truncate font-medium">{table.name}</span>
-              <span className="mt-1 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+              <span className="mt-1 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
                 <span className="min-w-0 truncate">{table.schema}</span>
-                <span className="shrink-0 text-zinc-400">{itemCountLabel(table.rowCount, engine)}</span>
+                <span className="shrink-0 text-ink-muted">{itemCountLabel(table.rowCount, engine)}</span>
               </span>
             </button>
           ))}
@@ -483,10 +483,10 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
       </aside>
 
       <section className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 pb-4">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
           <div>
             <h3 className="font-hero text-xl text-zinc-100">{selectedTableName || "Data"}</h3>
-            <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+            <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
               {rowsResult
                 ? `${rowCountFormatter.format(rowsResult.totalRows)} total ${nouns.record}${rowsResult.totalRows === 1 ? "" : "s"}`
                 : `${rowCountFormatter.format(rows.length)} loaded ${nouns.record}${rows.length === 1 ? "" : "s"}`}
@@ -507,17 +507,17 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
               <div className="relative">
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-zinc-800 bg-zinc-900/70 text-zinc-300 transition hover:border-zinc-600 hover:text-zinc-100"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-line bg-base/70 text-ink-muted transition hover:border-zinc-600 hover:text-zinc-100"
                   onClick={() => setOptionsOpen((current) => !current)}
                   aria-label="Data options"
                 >
                   <AppIcon icon={MoreVerticalIcon} size={17} />
                 </button>
                 {optionsOpen ? (
-                  <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-52 border border-zinc-700 bg-zinc-900 shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
+                  <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-52 border border-line-strong bg-base shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
                     <button
                       type="button"
-                      className="flex w-full items-center gap-2 px-3 py-3 text-left font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-200 transition hover:bg-zinc-800 hover:text-white"
+                      className="flex w-full items-center gap-2 px-3 py-3 text-left font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink transition hover:bg-elevated hover:text-white"
                       onClick={() => {
                         setOptionsOpen(false);
                         setImportOpen(true);
@@ -554,7 +554,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             onRefresh={() => void loadTables()}
           />
         ) : !rowsResult ? (
-          <div className="flex min-h-0 flex-1 items-center justify-center border border-zinc-800 bg-zinc-950/45 px-5 py-8 text-center text-sm text-zinc-500">
+          <div className="flex min-h-0 flex-1 items-center justify-center border border-line bg-base/45 px-5 py-8 text-center text-sm text-ink-dim">
             {busy ? "Loading data..." : `Choose ${engine === "redis" ? "a key" : engine === "mongodb" || engine === "mongo" ? "a collection" : "a table"} to inspect ${nouns.record}s.`}
           </div>
         ) : isMongo ? (
@@ -586,7 +586,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             onDeleteDocument={deleteMongoDocument}
           />
         ) : columns.length === 0 ? (
-          <div className="flex min-h-0 flex-1 items-center justify-center border border-zinc-800 bg-zinc-950/45 px-5 py-8 text-center text-sm text-zinc-500">
+          <div className="flex min-h-0 flex-1 items-center justify-center border border-line bg-base/45 px-5 py-8 text-center text-sm text-ink-dim">
             {busy ? "Loading data..." : `Choose ${engine === "redis" ? "a key" : "a table"} to inspect ${nouns.record}s.`}
           </div>
         ) : (

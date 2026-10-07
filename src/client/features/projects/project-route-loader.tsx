@@ -46,7 +46,7 @@ export function ProjectRouteLoader({
         </div>
       </div>
 
-      <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-500">
+      <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">
         {label}
       </p>
       <span className="sr-only">Please wait</span>
@@ -55,7 +55,7 @@ export function ProjectRouteLoader({
 
   if (fullPage) {
     return (
-      <main className="grid h-dvh place-items-center overflow-hidden bg-zinc-950 text-white">
+      <main className="grid h-dvh place-items-center overflow-hidden bg-base text-white">
         {loader}
       </main>
     );

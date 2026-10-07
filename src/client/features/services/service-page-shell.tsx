@@ -632,7 +632,7 @@ export function ServicePageShell({
   const tabButtonClass = (tab: ServiceTab) =>
     selectedTab === tab
       ? "relative inline-flex h-10 shrink-0 items-center gap-2 border-b border-white px-2 text-xs text-white"
-      : "relative inline-flex h-10 shrink-0 items-center gap-2 border-b border-transparent px-2 text-xs text-zinc-500 transition hover:text-white";
+      : "relative inline-flex h-10 shrink-0 items-center gap-2 border-b border-transparent px-2 text-xs text-ink-dim transition hover:text-white";
   const tabUsesContainedScroll = selectedTab === "deployments" || selectedTab === "logs" || selectedTab === "source" || selectedTab === "data" || selectedTab === "sql" || selectedTab === "backups";
   const contentClass = `min-h-0 flex-1 pt-5 ${tabUsesContainedScroll ? "overflow-hidden" : "overflow-y-auto"}`;
 
@@ -655,7 +655,7 @@ export function ServicePageShell({
 
   return (
     <>
-      <main className="h-dvh overflow-hidden bg-black text-white">
+      <main className="h-dvh overflow-hidden bg-base text-white">
         <div className="grid h-full grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[260px_minmax(0,1fr)] lg:grid-rows-1">
           <ProjectsDashboardSidebar
             currentUser={currentUser}
@@ -672,7 +672,7 @@ export function ServicePageShell({
             }))}
           />
 
-          <section className="min-h-0 min-w-0 overflow-hidden bg-zinc-950">
+          <section className="min-h-0 min-w-0 overflow-hidden bg-base">
             <div className={viewportClass}>
               <div className={panelClass}>
             <ServicePageToolbar
@@ -682,7 +682,7 @@ export function ServicePageShell({
               onServiceSelect={onServiceSelect ?? (() => undefined)}
             />
 
-            <nav aria-label="Service" className="flex shrink-0 gap-3 overflow-x-auto border-b border-white/10 lg:hidden">
+            <nav aria-label="Service" className="flex shrink-0 gap-3 overflow-x-auto border-b border-line lg:hidden">
               {visibleTabs.map(([tab, icon]) => (
                 <button key={tab} type="button" className={tabButtonClass(tab)} onClick={() => onTabChange(tab)}>
                   <AppIcon icon={icon} size={14} />
@@ -773,17 +773,17 @@ export function ServicePageShell({
               ) : null}
 
               {selectedTab === "settings" ? (
-                <form onSubmit={saveSettings} className="mx-auto w-full max-w-[1100px] overflow-visible border border-white/10 bg-black">
-                  <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
+                <form onSubmit={saveSettings} className="mx-auto w-full max-w-[1100px] overflow-visible border border-line bg-base">
+                  <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
                     <div>
                       <h2 className="text-lg tracking-[-0.03em] text-white">Settings</h2>
-                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">
+                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
                         {isDatabase ? "Database service" : isDockerImage ? "Container service" : isFunction ? "Function service" : "Application service"}
                       </p>
                     </div>
                     <button
                       type="submit"
-                      className="inline-flex h-8 items-center justify-center bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40"
+                      className="inline-flex h-8 items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
                       disabled={busy === "settings"}
                     >
                       {busy === "settings" ? "Saving…" : "Save settings"}
@@ -837,10 +837,10 @@ export function ServicePageShell({
                     )}
                   </div>
 
-                  <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 px-4 py-4 sm:px-5">
+                  <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-4 sm:px-5">
                     <div className="flex items-center gap-3">
                       {isDatabase ? (
-                        <div className="flex h-8 items-center gap-2 text-xs text-zinc-500">
+                        <div className="flex h-8 items-center gap-2 text-xs text-ink-dim">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">
                             {service?.databasePublicHostname
@@ -849,7 +849,7 @@ export function ServicePageShell({
                           </span>
                         </div>
                       ) : isWorker && service?.reachable ? (
-                        <div className="flex h-8 items-center gap-2 text-xs text-zinc-500">
+                        <div className="flex h-8 items-center gap-2 text-xs text-ink-dim">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">Worker process running</span>
                         </div>
@@ -858,7 +858,7 @@ export function ServicePageShell({
                           href={service.primaryUrl.replace("127.0.0.1", window.location.hostname)}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex h-8 items-center gap-2 text-xs text-zinc-500 transition hover:text-white"
+                          className="flex h-8 items-center gap-2 text-xs text-ink-dim transition hover:text-white"
                         >
                           <BrowserIconFallback size={14} />
                           <span className="truncate">{service.primaryUrl.replace("127.0.0.1", window.location.hostname).replace(/^https?:\/\//, "")}</span>
@@ -878,7 +878,7 @@ export function ServicePageShell({
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
-                        className="inline-flex h-8 items-center justify-center gap-2 border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+                        className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
                         onClick={() => setTransferOpen(true)}
                         disabled={transferDisabled}
                       >

@@ -1,5 +1,4 @@
 import type { FormEvent, ReactNode } from "react";
-import { BackupConfiguration } from "./backup-configuration";
 import { DomainConfiguration } from "./domain-configuration";
 import { GitHubConfiguration } from "./github-configuration";
 import { OnboardingStepForm } from "./onboarding-step-form";
@@ -10,10 +9,9 @@ import { RuntimeConfigurationFields } from "./runtime-configuration-fields";
 export type RestartOnboardingStep =
   | "runtime"
   | "github"
-  | "root-domain"
-  | "backups";
+  | "root-domain";
 
-const restartSteps = ["Runtime", "GitHub", "Root domain", "Backups"];
+const restartSteps = ["Runtime", "GitHub", "Root domain"];
 
 const stepContent: Record<
   RestartOnboardingStep,
@@ -32,10 +30,6 @@ const stepContent: Record<
   },
   "root-domain": {
     title: "Review your domains",
-    badge: "Optional",
-  },
-  backups: {
-    title: "Review your backups",
     badge: "Final step",
   },
 };
@@ -69,8 +63,6 @@ export function OnboardingRestartPage({
     fields = <GitHubConfiguration form={form} update={update} />;
   } else if (activeStep === "root-domain") {
     fields = <DomainConfiguration form={form} update={update} />;
-  } else {
-    fields = <BackupConfiguration form={form} update={update} />;
   }
 
   return (

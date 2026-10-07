@@ -54,20 +54,20 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
   }, [navigate, owner, requestedDefinition.ownerOnly]);
 
   return (
-    <main className="min-h-dvh bg-black text-white">
+    <main className="min-h-dvh bg-base text-white">
       <div className="grid min-h-dvh lg:grid-cols-[270px_minmax(0,1fr)]">
-        <aside className="relative z-20 flex border-b border-white/10 bg-black lg:sticky lg:top-0 lg:h-dvh lg:flex-col lg:border-b-0 lg:border-r">
+        <aside className="relative z-20 flex border-b border-line bg-base lg:sticky lg:top-0 lg:h-dvh lg:flex-col lg:border-b-0 lg:border-r">
           <div className="flex w-full flex-col px-5 py-5 lg:h-full lg:px-5 lg:py-6">
             <div className="flex items-center justify-between gap-4 lg:block">
               <Link to="/" className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center border border-white/20 bg-white/10">
+                <span className="grid h-10 w-10 place-items-center border border-line bg-hover">
                   <BrandMark className="h-[18px] w-[18px] brightness-0 invert" />
                 </span>
                 <span>
                   <span className="block font-hero text-sm tracking-[-0.02em] text-white">
                     orizoncp
                   </span>
-                  <span className="mt-0.5 block font-mono text-[8px] uppercase tracking-[0.25em] text-zinc-500">
+                  <span className="mt-0.5 block font-mono text-[8px] uppercase tracking-[0.25em] text-ink-dim">
                     Settings
                   </span>
                 </span>
@@ -75,7 +75,7 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
 
               <Link
                 to="/"
-                className="inline-flex h-10 items-center gap-2 border border-white/10 px-3 text-xs text-zinc-400 transition hover:border-white/25 hover:bg-white/5 hover:text-white lg:mt-8 lg:w-full"
+                className="inline-flex h-10 items-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-glass hover:text-white lg:mt-8 lg:w-full"
               >
                 <AppIcon icon={ArrowLeft01Icon} size={15} />
                 Back to projects
@@ -96,8 +96,8 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
                     aria-current={active ? "page" : undefined}
                     className={
                       active
-                        ? "flex h-11 shrink-0 items-center gap-3 border-l-2 border-white bg-white/10 px-3 text-sm text-white"
-                        : "flex h-11 shrink-0 items-center gap-3 border-l-2 border-transparent px-3 text-sm text-zinc-500 transition hover:bg-white/5 hover:text-white"
+                        ? "flex h-11 shrink-0 items-center gap-3 border-l-2 border-white bg-hover px-3 text-sm text-white"
+                        : "flex h-11 shrink-0 items-center gap-3 border-l-2 border-transparent px-3 text-sm text-ink-dim transition hover:bg-glass hover:text-white"
                     }
                   >
                     <AppIcon icon={page.icon} size={16} />
@@ -107,11 +107,11 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
               })}
             </nav>
 
-            <div className="mt-5 hidden border-t border-white/10 pt-5 lg:mt-auto lg:block">
+            <div className="mt-5 hidden border-t border-line pt-5 lg:mt-auto lg:block">
               {owner ? (
                 <Link
                   to="/onboarding"
-                  className="flex h-11 w-full items-center gap-3 px-3 text-sm text-zinc-500 transition hover:bg-white/5 hover:text-white"
+                  className="flex h-11 w-full items-center gap-3 px-3 text-sm text-ink-dim transition hover:bg-glass hover:text-white"
                 >
                   <AppIcon icon={Refresh03Icon} size={16} />
                   Restart onboarding
@@ -119,25 +119,25 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
               ) : null}
             </div>
 
-            <div className="mt-4 hidden items-center gap-3 border-t border-white/10 pt-4 lg:flex">
-              <span className="grid h-9 w-9 flex-none place-items-center bg-white text-xs text-black">
+            <div className="mt-4 hidden items-center gap-3 border-t border-line pt-4 lg:flex">
+              <span className="grid h-9 w-9 flex-none place-items-center bg-accent text-xs text-ink">
                 {userInitials(currentUser)}
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-xs text-white">
                   {currentUser?.name || "orizonCP user"}
                 </span>
-                <span className="mt-0.5 block truncate font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-600">
+                <span className="mt-0.5 block truncate font-mono text-[8px] uppercase tracking-[0.14em] text-ink-dim">
                   {currentUser?.role || "Member"}
                 </span>
               </span>
-              <SignOutButton className="bg-transparent hover:border-white/25 hover:bg-white/5 hover:text-white" />
+              <SignOutButton className="bg-transparent hover:border-line hover:bg-glass hover:text-white" />
             </div>
           </div>
         </aside>
 
-        <section className="min-w-0 bg-zinc-950">
-          <header className="border-b border-white/10 px-5 py-6 sm:px-8 lg:px-10">
+        <section className="min-w-0 bg-base">
+          <header className="border-b border-line px-5 py-6 sm:px-8 lg:px-10">
             <h1 className="text-3xl font-normal tracking-[-0.04em] text-white sm:text-4xl">
               {activePage.label}
             </h1>

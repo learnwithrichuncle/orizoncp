@@ -61,7 +61,7 @@ export function DeploymentFailureModelPicker({
     <div ref={rootRef} className="relative">
       <button
         type="button"
-        className="inline-flex h-8 max-w-full items-center gap-2 border border-white/15 px-2.5 text-left text-xs text-zinc-200 outline-none transition hover:border-white/35 hover:bg-white/[0.05] disabled:cursor-wait disabled:opacity-40"
+        className="inline-flex h-8 max-w-full items-center gap-2 border border-line px-2.5 text-left text-xs text-ink outline-none transition hover:border-line hover:bg-hover disabled:cursor-wait disabled:opacity-40"
         onClick={() => setOpen((current) => !current)}
         onKeyDown={(event) => {
           if (event.key === "Escape") setOpen(false);
@@ -72,16 +72,16 @@ export function DeploymentFailureModelPicker({
       >
         {selectedProviderLogo ? <img src={selectedProviderLogo.logoUrl} alt="" className="h-4 w-4 shrink-0 object-contain" /> : null}
         <span className="min-w-0 truncate">{currentModelName}</span>
-        <AppIcon icon={ArrowDown01Icon} size={13} className={`shrink-0 text-zinc-400 transition ${open ? "rotate-180" : ""}`} />
+        <AppIcon icon={ArrowDown01Icon} size={13} className={`shrink-0 text-ink-muted transition ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open ? (
         <div
-          className={`absolute top-full z-50 mt-2 flex w-[520px] max-w-[calc(100vw-4rem)] overflow-hidden border border-white/15 bg-black shadow-[0_24px_80px_rgba(0,0,0,0.6)] ${
+          className={`absolute top-full z-50 mt-2 flex w-[520px] max-w-[calc(100vw-4rem)] overflow-hidden border border-line bg-base shadow-[0_24px_80px_rgba(0,0,0,0.6)] ${
             menuAlign === "right" ? "right-0" : "left-0"
           }`}
         >
-          <div className="flex w-14 shrink-0 flex-col items-center border-r border-white/10 py-2">
+          <div className="flex w-14 shrink-0 flex-col items-center border-r border-line py-2">
             {providerLogos.map(({ provider, logo }) => {
               const active = provider.id === activeProvider?.id;
               return (
@@ -89,7 +89,7 @@ export function DeploymentFailureModelPicker({
                   key={provider.id}
                   type="button"
                   className={`grid h-11 w-full place-items-center transition ${
-                    active ? "bg-white/[0.1] text-white" : "text-zinc-600 hover:bg-white/[0.05] hover:text-white"
+                    active ? "bg-glass text-white" : "text-ink-dim hover:bg-hover hover:text-white"
                   }`}
                   onClick={() => setActiveProviderId(provider.id)}
                   title={provider.name}
@@ -104,7 +104,7 @@ export function DeploymentFailureModelPicker({
           <div className="min-w-0 flex-1 p-3">
             <div className="mb-2 flex items-center justify-between gap-3">
               <div>
-                <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">{activeProvider?.name ?? "Provider"}</div>
+                <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{activeProvider?.name ?? "Provider"}</div>
               </div>
             </div>
 
@@ -116,7 +116,7 @@ export function DeploymentFailureModelPicker({
                     key={model.id}
                     type="button"
                     className={`flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition ${
-                      active ? "bg-white text-black" : "text-zinc-400 hover:bg-white/[0.05] hover:text-white"
+                      active ? "bg-accent text-ink" : "text-ink-muted hover:bg-hover hover:text-white"
                     }`}
                     onClick={() => {
                       if (activeProvider) onSelect(activeProvider.id, model.id);
@@ -127,7 +127,7 @@ export function DeploymentFailureModelPicker({
                   >
                     <span className="min-w-0">
                       <span className="block truncate text-sm">{model.name}</span>
-                      <span className={`mt-0.5 block truncate font-mono text-[9px] ${active ? "text-black/55" : "text-zinc-600"}`}>{model.id}</span>
+                      <span className={`mt-0.5 block truncate font-mono text-[9px] ${active ? "text-white/60" : "text-ink-dim"}`}>{model.id}</span>
                     </span>
                     {active ? <AppIcon icon={CheckmarkCircle02Icon} size={15} className="shrink-0" /> : null}
                   </button>

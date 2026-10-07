@@ -28,12 +28,12 @@ export function DatabaseGridPagination({
   const recordLabel = pagination.recordLabel ?? "row";
 
   return (
-    <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border border-zinc-800 bg-zinc-950/80 px-3 py-2 text-sm text-zinc-300">
-      <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
+    <div className="mt-2 flex flex-wrap items-center justify-between gap-2 border border-line bg-base/80 px-3 py-2 text-sm text-ink-muted">
+      <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-dim">
         {pageStart}-{pageEnd} of {pagination.totalRows} {recordLabel}{pagination.totalRows === 1 ? "" : "s"}
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">{recordLabel}s</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">{recordLabel}s</span>
         {[25, 50, 100, 200].map((size) => (
           <button
             key={size}
@@ -41,7 +41,7 @@ export function DatabaseGridPagination({
             className={`inline-flex h-7 items-center justify-center border px-2.5 font-mono text-[11px] font-semibold transition ${
               pagination.limit === size
                 ? "border-[#4FB8B2]/45 bg-[#4FB8B2]/12 text-[#9af4ee]"
-                : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-zinc-500 hover:text-white"
+                : "border-line-strong bg-base text-ink-muted hover:border-zinc-500 hover:text-white"
             }`}
             onClick={() => pagination.onPageSizeChange(size)}
             disabled={busy === "rows"}
@@ -51,12 +51,12 @@ export function DatabaseGridPagination({
         ))}
       </div>
       <div className="flex items-center gap-2">
-        <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
+        <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-dim">
           Page {currentPage} of {pagination.totalRows === 0 ? 0 : totalPages}
         </div>
         <button
           type="button"
-          className="inline-flex h-7 w-8 items-center justify-center border border-zinc-700 bg-zinc-900 text-zinc-300 transition hover:border-zinc-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-45"
+          className="inline-flex h-7 w-8 items-center justify-center border border-line-strong bg-base text-ink-muted transition hover:border-zinc-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-45"
           onClick={() => pagination.onPageChange(Math.max(0, pagination.offset - pagination.limit))}
           disabled={!canPageBack || busy === "rows"}
           aria-label="Previous page"
@@ -65,7 +65,7 @@ export function DatabaseGridPagination({
         </button>
         <button
           type="button"
-          className="inline-flex h-7 w-8 items-center justify-center border border-zinc-700 bg-zinc-900 text-zinc-300 transition hover:border-zinc-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-45"
+          className="inline-flex h-7 w-8 items-center justify-center border border-line-strong bg-base text-ink-muted transition hover:border-zinc-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-45"
           onClick={() => pagination.onPageChange(pagination.offset + pagination.limit)}
           disabled={!canPageForward || busy === "rows"}
           aria-label="Next page"

@@ -14,11 +14,11 @@ function environmentTabTone({
   validTarget: boolean;
   activeTarget: boolean;
 }) {
-  if (activeTarget) return "scale-[1.04] border-cyan-300 bg-cyan-300 text-black shadow-[0_0_28px_rgba(103,232,249,0.28)]";
+  if (activeTarget) return "scale-[1.04] border-cyan-300 bg-cyan-300 text-ink shadow-[0_0_28px_rgba(103,232,249,0.28)]";
   if (validTarget) return "animate-pulse border-dashed border-cyan-300/60 bg-cyan-300/[0.06] text-cyan-100";
-  if (source) return "border-white/10 bg-white/[0.02] text-zinc-600 opacity-50";
-  if (selected) return "border-white bg-white text-black";
-  return "border-white/15 text-zinc-400 hover:border-white/35 hover:bg-white/[0.05] hover:text-white";
+  if (source) return "border-line bg-glass text-ink-dim opacity-50";
+  if (selected) return "border-white bg-accent text-ink";
+  return "border-line text-ink-muted hover:border-line hover:bg-hover hover:text-white";
 }
 
 export function ProjectEnvironmentTabs({
@@ -61,7 +61,7 @@ export function ProjectEnvironmentTabs({
       <div className={`overflow-hidden font-mono text-[9px] uppercase tracking-[0.14em] text-cyan-300 transition-all ${draggingService ? "mb-2 max-h-8 opacity-100" : "max-h-0 opacity-0"}`}>
         Drop {draggingService?.name ?? "the service"} onto another environment
       </div>
-      <div className="flex items-center gap-2 overflow-x-auto border-b border-white/10 pb-3">
+      <div className="flex items-center gap-2 overflow-x-auto border-b border-line pb-3">
         {environments.map((environment) => {
           const selected = environment.id === selectedEnvironmentId;
           const serviceCount = serviceCounts.get(environment.id) ?? 0;
@@ -92,11 +92,11 @@ export function ProjectEnvironmentTabs({
               <AppIcon icon={Layers01Icon} size={14} />
               {movingHere ? "Moving…" : activeDropTarget ? `Move to ${environment.name}` : environment.name}
               {environment.isDefault ? (
-                <span className={`font-mono text-[8px] uppercase tracking-[0.12em] ${selected ? "text-zinc-500" : "text-zinc-600"}`}>
+                <span className={`font-mono text-[8px] uppercase tracking-[0.12em] ${selected ? "text-ink-dim" : "text-ink-dim"}`}>
                   default
                 </span>
               ) : null}
-              <span className={`font-mono text-[9px] ${selected ? "text-zinc-500" : "text-zinc-600"}`}>
+              <span className={`font-mono text-[9px] ${selected ? "text-ink-dim" : "text-ink-dim"}`}>
                 {serviceCount}
               </span>
             </button>
@@ -105,7 +105,7 @@ export function ProjectEnvironmentTabs({
 
         <button
           type="button"
-          className="inline-flex h-9 shrink-0 items-center gap-2 border border-dashed border-white/20 px-3 text-sm text-zinc-500 transition hover:border-white/40 hover:bg-white/[0.05] hover:text-white"
+          className="inline-flex h-9 shrink-0 items-center gap-2 border border-dashed border-line px-3 text-sm text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
           onClick={onCreate}
         >
           <AppIcon icon={Add01Icon} size={14} />

@@ -17,14 +17,14 @@ export function RedisImportSourcePicker({
 }: RedisImportSourcePickerProps) {
   return (
     <div>
-      <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Import from</p>
+      <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Import from</p>
       <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
           className={
             value === "railway"
-              ? "flex h-14 items-center gap-3 bg-white px-3 text-left text-black"
-              : "flex h-14 items-center gap-3 border border-white/15 px-3 text-left text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-35"
+              ? "flex h-14 items-center gap-3 bg-accent px-3 text-left text-ink"
+              : "flex h-14 items-center gap-3 border border-line px-3 text-left text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-35"
           }
           onClick={() => onChange("railway")}
           disabled={!railwayAvailable && !loading}
@@ -37,8 +37,8 @@ export function RedisImportSourcePicker({
           type="button"
           className={
             value === "redis-url"
-              ? "flex h-14 items-center gap-3 bg-white px-3 text-left text-black"
-              : "flex h-14 items-center gap-3 border border-white/15 px-3 text-left text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+              ? "flex h-14 items-center gap-3 bg-accent px-3 text-left text-ink"
+              : "flex h-14 items-center gap-3 border border-line px-3 text-left text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
           }
           onClick={() => onChange("redis-url")}
         >

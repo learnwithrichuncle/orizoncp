@@ -79,17 +79,17 @@ export function ApiAccessSettingsPanel({ open }: { open: boolean }) {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-white/10 bg-black">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 py-5 sm:px-7 lg:px-8">
+    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-7 lg:px-8">
         <div>
           <h2 className="text-xl tracking-[-0.03em] text-white">Keys</h2>
-          <p className="mt-1.5 text-sm text-zinc-500">
+          <p className="mt-1.5 text-sm text-ink-dim">
             {loading ? "Loading keys…" : `${apiKeys.length} ${apiKeys.length === 1 ? "key" : "keys"}`}
           </p>
         </div>
         <button
           type="button"
-          className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => setCreateOpen(true)}
           disabled={loading}
         >
@@ -101,7 +101,7 @@ export function ApiAccessSettingsPanel({ open }: { open: boolean }) {
       <ApiKeyList apiKeys={apiKeys} projects={projects} revokingId={revokingId} onRevoke={revokeKey} />
 
       {error ? (
-        <div className="border-t border-white/10 px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
+        <div className="border-t border-line px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
           <div className="mt-5 border-l-2 border-rose-400 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
             {error}
           </div>

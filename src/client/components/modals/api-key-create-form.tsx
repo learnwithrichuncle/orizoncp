@@ -89,13 +89,13 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
           placeholder="Production deploys"
           disabled={creating}
           variant="monochrome"
-          className="!h-9 border-white/15 bg-white/[0.03] text-sm"
+          className="!h-9 border-line bg-glass text-sm"
         />
       </div>
 
-      <div className="border-y border-white/10">
-        <div className="flex items-center justify-between gap-4 border-b border-white/10 py-2.5">
-          <span className="text-xs text-zinc-400">Access</span>
+      <div className="border-y border-line">
+        <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
+          <span className="text-xs text-ink-muted">Access</span>
           <Dropdown
             value={accessLevel}
             options={accessOptions}
@@ -107,8 +107,8 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
           />
         </div>
 
-        <div className="flex items-center justify-between gap-4 border-b border-white/10 py-2.5">
-          <span className="text-xs text-zinc-400">Projects</span>
+        <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
+          <span className="text-xs text-ink-muted">Projects</span>
           <Dropdown
             value={projectScope}
             options={projectScopeOptions}
@@ -121,7 +121,7 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
         </div>
 
         <div className="flex items-center justify-between gap-4 py-2.5">
-          <span className="text-xs text-zinc-400">Expiration</span>
+          <span className="text-xs text-ink-muted">Expiration</span>
           <Dropdown
             value={expiresInDays === null ? "never" : String(expiresInDays)}
             options={expiryOptions}
@@ -140,7 +140,7 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
       {projectScope === "selected" ? (
         <div>
           <FieldLabel>Choose projects</FieldLabel>
-          <div className="grid max-h-40 gap-0.5 overflow-y-auto border border-white/10 bg-white/[0.02] p-1.5">
+          <div className="grid max-h-40 gap-0.5 overflow-y-auto border border-line bg-glass p-1.5">
             {projects.map((project) => (
               <Checkbox
                 key={project.id}
@@ -148,11 +148,11 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
                 label={project.name}
                 onChange={(checked) => toggleProject(project.id, checked)}
                 disabled={creating}
-                className="w-full px-2.5 py-2 transition hover:bg-white/[0.04]"
+                className="w-full px-2.5 py-2 transition hover:bg-glass"
               >
                 <span className="min-w-0">
-                  <span className="block truncate text-sm text-zinc-200">{project.name}</span>
-                  <span className="mt-0.5 block truncate font-mono text-[9px] text-zinc-600">{project.slug}</span>
+                  <span className="block truncate text-sm text-ink">{project.name}</span>
+                  <span className="mt-0.5 block truncate font-mono text-[9px] text-ink-dim">{project.slug}</span>
                 </span>
               </Checkbox>
             ))}
@@ -163,7 +163,7 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
       <div className="flex flex-wrap items-center gap-3 pt-1">
         <button
           type="submit"
-          className="inline-flex min-h-8 w-fit items-center justify-center bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+          className="inline-flex min-h-8 w-fit items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
           disabled={creating}
         >
           {creating ? "Creating..." : "Create key"}

@@ -48,8 +48,8 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
     return (
       <div className="flex min-h-52 items-center justify-center px-5 py-10 text-center">
         <div>
-          <AppIcon icon={Key02Icon} size={22} className="mx-auto text-zinc-600" />
-          <p className="mt-4 text-sm text-zinc-500">No API keys</p>
+          <AppIcon icon={Key02Icon} size={22} className="mx-auto text-ink-dim" />
+          <p className="mt-4 text-sm text-ink-dim">No API keys</p>
         </div>
       </div>
     );
@@ -79,7 +79,7 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
                     {status}
                   </span>
                 </div>
-                <div className="mt-1.5 font-mono text-[10px] text-zinc-600">{apiKey.tokenPrefix}</div>
+                <div className="mt-1.5 font-mono text-[10px] text-ink-dim">{apiKey.tokenPrefix}</div>
               </div>
 
               <div className="flex shrink-0 items-center gap-2">
@@ -97,7 +97,7 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
                     </button>
                     <button
                       type="button"
-                      className="grid h-9 w-9 place-items-center border border-white/15 text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05]"
+                      className="grid h-9 w-9 place-items-center border border-line text-ink-muted transition hover:border-line hover:bg-hover"
                       onClick={() => setConfirmingId("")}
                       disabled={revoking}
                       title="Cancel"
@@ -109,7 +109,7 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
                 ) : (
                   <button
                     type="button"
-                    className="grid h-9 w-9 place-items-center border border-white/15 text-zinc-500 transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300"
+                    className="grid h-9 w-9 place-items-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300"
                     onClick={() => setConfirmingId(apiKey.id)}
                     title="Revoke"
                     aria-label="Revoke API key"
@@ -122,20 +122,20 @@ export function ApiKeyList({ apiKeys, projects, revokingId, onRevoke }: ApiKeyLi
 
             <dl className="mt-5 grid gap-x-6 gap-y-4 sm:grid-cols-2 xl:grid-cols-4">
               <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-600">Access</dt>
-                <dd className="mt-1.5 truncate text-sm text-zinc-300">{accessLabel(apiKey)}</dd>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Access</dt>
+                <dd className="mt-1.5 truncate text-sm text-ink-muted">{accessLabel(apiKey)}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-600">Projects</dt>
-                <dd className="mt-1.5 truncate text-sm text-zinc-300">{projectLabel(apiKey)}</dd>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Projects</dt>
+                <dd className="mt-1.5 truncate text-sm text-ink-muted">{projectLabel(apiKey)}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-600">Expiration</dt>
-                <dd className="mt-1.5 truncate text-sm text-zinc-300">{expirationLabel(apiKey)}</dd>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Expiration</dt>
+                <dd className="mt-1.5 truncate text-sm text-ink-muted">{expirationLabel(apiKey)}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-600">Last used</dt>
-                <dd className="mt-1.5 truncate text-sm text-zinc-300">{formatTime(apiKey.lastUsedAt)}</dd>
+                <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Last used</dt>
+                <dd className="mt-1.5 truncate text-sm text-ink-muted">{formatTime(apiKey.lastUsedAt)}</dd>
               </div>
             </dl>
           </article>

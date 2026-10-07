@@ -32,7 +32,7 @@ function formatMongoValue(value: unknown, type: string) {
 }
 
 function valueClass(value: unknown, type: string) {
-  if (value === null || value === undefined) return "text-zinc-600";
+  if (value === null || value === undefined) return "text-ink-dim";
   if (type === "objectId") return "text-orange-400";
   if (type === "date") return "text-sky-400";
   if (type === "array" || type === "object") return "text-violet-300";
@@ -68,8 +68,8 @@ function iconButtonClass(tone: "neutral" | "danger" | "success" = "neutral") {
     ? "text-rose-300 hover:border-rose-500/40 hover:bg-rose-500/10"
     : tone === "success"
       ? "text-emerald-300 hover:border-emerald-500/40 hover:bg-emerald-500/10"
-      : "text-zinc-400 hover:border-zinc-600 hover:bg-zinc-900 hover:text-zinc-100";
-  return `grid h-8 w-8 place-items-center border border-zinc-800 bg-zinc-950 transition disabled:opacity-50 ${toneClass}`;
+      : "text-ink-muted hover:border-zinc-600 hover:bg-base hover:text-zinc-100";
+  return `grid h-8 w-8 place-items-center border border-line bg-base transition disabled:opacity-50 ${toneClass}`;
 }
 
 export function MongoDocumentCard({
@@ -97,11 +97,11 @@ export function MongoDocumentCard({
   }
 
   return (
-    <div className="relative border border-zinc-700 bg-zinc-950 px-4 py-4 pr-28 font-mono text-sm leading-6">
+    <div className="relative border border-line-strong bg-base px-4 py-4 pr-28 font-mono text-sm leading-6">
       <div className="absolute right-3 top-3 flex items-center gap-2">
         {confirmingDelete ? (
           <>
-            <span className="mr-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-400">Confirm delete?</span>
+            <span className="mr-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-muted">Confirm delete?</span>
             <button type="button" className={iconButtonClass("success")} onClick={() => void confirmDelete()} disabled={busy === "delete"} title="Yes" aria-label="Confirm delete">
               <AppIcon icon={CheckmarkCircle02Icon} size={14} />
             </button>

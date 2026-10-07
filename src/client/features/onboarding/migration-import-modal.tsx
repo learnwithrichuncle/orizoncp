@@ -96,11 +96,11 @@ export function MigrationImportModal({
                 <span className="flex min-h-12 cursor-pointer items-center gap-3 rounded-sm border border-white/15 bg-white/5 px-3.5 font-mono text-xs text-zinc-300 transition hover:border-white/30">
                   <AppIcon icon={CloudUploadIcon} size={15} />
                   <span className="min-w-0 truncate">
-                    {bundle?.name ?? "Choose .aeroplane file"}
+                    {bundle?.name ?? "Choose .ORIZONCP file"}
                   </span>
                   <input
                     type="file"
-                    accept=".aeroplane,application/octet-stream"
+                    accept=".ORIZONCP,application/octet-stream"
                     className="sr-only"
                     onChange={chooseBundle}
                   />

@@ -26,7 +26,7 @@ export function SquareSwitch({
       <span
         aria-hidden="true"
         className={`block h-3.5 w-3.5 rounded-sm transition ${
-          checked ? "translate-x-4 bg-white" : "translate-x-0 bg-muted"
+          checked ? "translate-x-4 bg-accent" : "translate-x-0 bg-muted"
         }`}
       />
     </button>

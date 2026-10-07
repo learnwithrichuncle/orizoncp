@@ -12,8 +12,8 @@ const redisTypeOptions = [
   { value: "zset", label: "Sorted set" }
 ];
 
-const insertLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600";
-const insertInputClass = "!h-9 border-white/15 bg-black text-xs";
+const insertLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim";
+const insertInputClass = "!h-9 border-line bg-base text-xs";
 
 export function validRedisType(value: string) {
   return redisTypeOptions.some((option) => option.value === value);
@@ -98,17 +98,17 @@ export function DatabaseInsertSheet({
   const redisType = draft.type ?? "string";
 
   return (
-    <div className="fixed inset-0 z-[60] bg-black/75">
-      <aside className="absolute inset-y-0 right-0 w-full max-w-md border-l border-white/15 bg-black shadow-[-24px_0_60px_rgba(0,0,0,0.55)]">
+    <div className="fixed inset-0 z-[60] bg-base/75">
+      <aside className="absolute inset-y-0 right-0 w-full max-w-md border-l border-line bg-base shadow-[-24px_0_60px_rgba(0,0,0,0.55)]">
         <form onSubmit={onSubmit} className="flex h-full flex-col">
-          <header className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
+          <header className="flex items-center justify-between gap-4 border-b border-line px-5 py-4">
             <div className="min-w-0">
               <h2 className="truncate text-lg tracking-[-0.03em] text-white">{title}</h2>
-              <p className="mt-0.5 truncate font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">{subtitle}</p>
+              <p className="mt-0.5 truncate font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{subtitle}</p>
             </div>
             <button
               type="button"
-              className="grid h-8 w-8 shrink-0 place-items-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+              className="grid h-8 w-8 shrink-0 place-items-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
               onClick={onClose}
               aria-label="Close"
               title="Close"
@@ -157,7 +157,7 @@ export function DatabaseInsertSheet({
                 <textarea
                   value={draft.document ?? ""}
                   onChange={(event) => onDraftChange({ ...draft, document: event.target.value })}
-                  className="min-h-56 w-full resize-none border border-white/15 bg-black px-3 py-2 font-mono text-xs text-zinc-100 outline-none transition focus:border-white"
+                  className="min-h-56 w-full resize-none border border-line bg-base px-3 py-2 font-mono text-xs text-zinc-100 outline-none transition focus:border-white"
                   spellCheck={false}
                 />
               </label>
@@ -173,10 +173,10 @@ export function DatabaseInsertSheet({
             </div>
           )}
           </div>
-          <footer className="border-t border-white/10 p-5">
+          <footer className="border-t border-line p-5">
             <button
               type="submit"
-              className="inline-flex h-10 w-full items-center justify-center bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:opacity-40"
+              className="inline-flex h-10 w-full items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-40"
               disabled={busy === "insert"}
             >
             {buttonLabel}

@@ -36,17 +36,17 @@ export function ServiceDeploymentsPanel({
   const failedDeploymentSelected = activeDeployment?.status === "failed";
 
   return (
-    <section className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden border border-white/10 bg-black">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
+    <section className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden border border-line bg-base">
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
         <div>
           <h2 className="text-lg tracking-[-0.03em] text-white">Deployments</h2>
-          <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">
+          <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
             {deployments.length} {deployments.length === 1 ? "deployment" : "deployments"}
           </p>
         </div>
         <button
           type="button"
-          className="inline-flex h-8 items-center justify-center gap-2 bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40"
+          className="inline-flex h-8 items-center justify-center gap-2 bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
           onClick={onDeploy}
           disabled={busy === "deploy"}
         >
@@ -56,8 +56,8 @@ export function ServiceDeploymentsPanel({
       </header>
 
       <div className="grid min-h-0 flex-1 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="flex min-h-0 flex-col border-b border-white/10 lg:border-b-0 lg:border-r">
-          <div className="flex h-10 items-center justify-between border-b border-white/10 px-4 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">
+        <aside className="flex min-h-0 flex-col border-b border-line lg:border-b-0 lg:border-r">
+          <div className="flex h-10 items-center justify-between border-b border-line px-4 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
             <span>History</span>
             <span>{deployments.length}</span>
           </div>
@@ -76,14 +76,14 @@ export function ServiceDeploymentsPanel({
                 type="button"
                 className={
                   selected
-                    ? "flex min-h-14 w-full items-center justify-between gap-3 border-b border-white/10 bg-white/[0.08] px-4 py-3 text-left text-white"
-                    : "flex min-h-14 w-full items-center justify-between gap-3 border-b border-white/[0.07] px-4 py-3 text-left text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
+                    ? "flex min-h-14 w-full items-center justify-between gap-3 border-b border-line bg-glass px-4 py-3 text-left text-white"
+                    : "flex min-h-14 w-full items-center justify-between gap-3 border-b border-line-subtle px-4 py-3 text-left text-ink-muted transition hover:bg-glass hover:text-white"
                 }
                 onClick={() => onSelectDeployment(deployment.id)}
               >
                 <div className="min-w-0">
                   <div className="font-mono text-xs">{shortSha(deployment.commitSha)}</div>
-                  <div className={`mt-1 text-[10px] ${selected ? "text-zinc-500" : "text-zinc-600"}`}>
+                  <div className={`mt-1 text-[10px] ${selected ? "text-ink-dim" : "text-ink-dim"}`}>
                     {formatTime(deployment.createdAt)}
                     {buildDuration ? ` · ${buildDuration}` : ""}
                   </div>
@@ -95,7 +95,7 @@ export function ServiceDeploymentsPanel({
             );
           })}
           {deployments.length === 0 ? (
-            <div className="flex min-h-40 items-center justify-center px-4 text-center text-xs text-zinc-600">
+            <div className="flex min-h-40 items-center justify-center px-4 text-center text-xs text-ink-dim">
               No deployments yet.
             </div>
           ) : null}
@@ -128,7 +128,7 @@ export function ServiceDeploymentsPanel({
               <div className="flex flex-wrap justify-end gap-2">
                 <button
                   type="button"
-                  className="inline-flex h-8 items-center justify-center gap-2 border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                  className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
                   onClick={() => setFailureModalOpen(true)}
                 >
                   <AppIcon icon={ChatQuestionIcon} size={13} />

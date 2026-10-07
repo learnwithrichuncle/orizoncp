@@ -43,7 +43,7 @@ function itemCountLabel(table: DatabaseTable | null) {
   return `${numberFormatter.format(table.rowCount)} item${table.rowCount === 1 ? "" : "s"}`;
 }
 
-const redisMetaPillClass = "inline-flex h-7 items-center border border-white/10 bg-white/[0.03] px-2.5 font-mono text-[10px] leading-none tracking-[0.04em] text-zinc-500";
+const redisMetaPillClass = "inline-flex h-7 items-center border border-line bg-glass px-2.5 font-mono text-[10px] leading-none tracking-[0.04em] text-ink-dim";
 
 function redisContentText(type: string, rows: DatabaseRow[]) {
   if (type === "string") return valueText(rows[0]?.value);
@@ -89,7 +89,7 @@ function redisEditDraft(type: string, row: DatabaseRow): Record<string, string> 
   return { value: redisItemValue(type, row) };
 }
 
-const redisInlineInputClass = "h-8 min-w-0 border border-white/15 bg-black px-2 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-white";
+const redisInlineInputClass = "h-8 min-w-0 border border-line bg-base px-2 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-white";
 
 function RedisItems({
   type,
@@ -127,19 +127,19 @@ function RedisItems({
     const editing = editingItemId === "string";
 
     return (
-      <div className="relative min-h-0 flex-1 overflow-auto border border-white/10 bg-white/[0.015] p-4">
+      <div className="relative min-h-0 flex-1 overflow-auto border border-line bg-glass p-4">
         {editing ? (
           <div className="flex h-full min-h-48 flex-col gap-3">
             <textarea
               value={editDraft.value ?? ""}
               onChange={(event) => setEditDraft((current) => ({ ...current, value: event.target.value }))}
-              className="min-h-0 flex-1 resize-none border border-white/15 bg-black px-3 py-2 font-mono text-xs leading-6 text-zinc-100 outline-none transition focus:border-white"
+              className="min-h-0 flex-1 resize-none border border-line bg-base px-3 py-2 font-mono text-xs leading-6 text-zinc-100 outline-none transition focus:border-white"
               spellCheck={false}
             />
             <div className="flex justify-end gap-2">
               <button
                 type="button"
-                className="inline-flex h-8 w-8 items-center justify-center bg-white text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex h-8 w-8 items-center justify-center bg-accent text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
                 onClick={() => void saveItem(stringRow)}
                 disabled={saving}
                 title="Save value"
@@ -149,7 +149,7 @@ function RedisItems({
               </button>
               <button
                 type="button"
-                className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                 onClick={() => {
                   setEditingItemId("");
                   setEditDraft({});
@@ -166,7 +166,7 @@ function RedisItems({
           <>
             <button
               type="button"
-              className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+              className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
               onClick={() => {
                 setEditingItemId("string");
                 setEditDraft(redisEditDraft("string", stringRow));
@@ -176,7 +176,7 @@ function RedisItems({
             >
               <AppIcon icon={PencilEdit02Icon} size={14} />
             </button>
-            <pre className="whitespace-pre-wrap break-words pr-12 font-mono text-xs leading-6 text-zinc-300">{prettyValue(stringRow.value)}</pre>
+            <pre className="whitespace-pre-wrap break-words pr-12 font-mono text-xs leading-6 text-ink-muted">{prettyValue(stringRow.value)}</pre>
           </>
         )}
       </div>
@@ -202,16 +202,16 @@ function RedisItems({
   }
 
   return (
-    <div className="min-h-0 flex-1 overflow-auto border border-white/10 bg-white/[0.015]">
+    <div className="min-h-0 flex-1 overflow-auto border border-line bg-glass">
       {rows.length === 0 ? (
-        <div className="flex h-full min-h-48 items-center justify-center px-5 text-center text-sm text-zinc-500">No items in this key.</div>
+        <div className="flex h-full min-h-48 items-center justify-center px-5 text-center text-sm text-ink-dim">No items in this key.</div>
       ) : rows.map((row, index) => {
         const itemId = redisItemId(type, row, index);
         const confirming = confirmingDeleteId === itemId;
         const editing = editingItemId === itemId;
 
         return (
-          <div key={itemId} className="flex items-center gap-3 border-b border-white/10 px-4 py-3 text-xs text-zinc-300 last:border-b-0">
+          <div key={itemId} className="flex items-center gap-3 border-b border-line px-4 py-3 text-xs text-ink-muted last:border-b-0">
             {editing ? (
               <>
                 <div className="flex min-w-0 flex-1 items-center gap-3">
@@ -230,7 +230,7 @@ function RedisItems({
                       placeholder="member"
                     />
                   ) : type === "list" ? (
-                    <span className="inline-flex max-w-48 shrink-0 items-center border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-zinc-600">
+                    <span className="inline-flex max-w-48 shrink-0 items-center border border-line bg-glass px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-ink-dim">
                       <span className="truncate">{redisItemMeta(type, row)}</span>
                     </span>
                   ) : null}
@@ -244,7 +244,7 @@ function RedisItems({
                 <div className="flex shrink-0 items-center justify-end gap-2">
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center bg-white text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center bg-accent text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => void saveItem(row)}
                     disabled={saving}
                     title="Save item"
@@ -254,7 +254,7 @@ function RedisItems({
                   </button>
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => {
                       setEditingItemId("");
                       setEditDraft({});
@@ -271,11 +271,11 @@ function RedisItems({
               <>
                 <div className="flex min-w-0 flex-1 items-center gap-3">
                   {type !== "set" ? (
-                    <span className="inline-flex max-w-48 shrink-0 items-center border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-zinc-600">
+                    <span className="inline-flex max-w-48 shrink-0 items-center border border-line bg-glass px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-ink-dim">
                       <span className="truncate">{redisItemMeta(type, row)}</span>
                     </span>
                   ) : null}
-                  <span className="min-w-0 break-words font-mono text-xs text-zinc-300">{redisItemValue(type, row)}</span>
+                  <span className="min-w-0 break-words font-mono text-xs text-ink-muted">{redisItemValue(type, row)}</span>
                 </div>
                 <div className="flex shrink-0 items-center justify-end gap-2">
                   <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-rose-300">Confirm delete?</span>
@@ -294,7 +294,7 @@ function RedisItems({
                   </button>
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => setConfirmingDeleteId("")}
                     disabled={deleting}
                     title="No, cancel delete"
@@ -308,16 +308,16 @@ function RedisItems({
               <>
                 <div className="flex min-w-0 flex-1 items-center gap-3">
                   {type !== "set" ? (
-                    <span className="inline-flex max-w-48 shrink-0 items-center border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-zinc-600">
+                    <span className="inline-flex max-w-48 shrink-0 items-center border border-line bg-glass px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-ink-dim">
                       <span className="truncate">{redisItemMeta(type, row)}</span>
                     </span>
                   ) : null}
-                  <span className="min-w-0 break-words font-mono text-xs text-zinc-300">{redisItemValue(type, row)}</span>
+                  <span className="min-w-0 break-words font-mono text-xs text-ink-muted">{redisItemValue(type, row)}</span>
                 </div>
                 <div className="flex shrink-0 items-center justify-end gap-2">
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => {
                       setConfirmingDeleteId("");
                       setEditingItemId(itemId);
@@ -331,7 +331,7 @@ function RedisItems({
                   </button>
                   <button
                     type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/50 hover:bg-rose-400/10 hover:text-rose-300 disabled:cursor-not-allowed disabled:opacity-50"
                     onClick={() => setConfirmingDeleteId(itemId)}
                     disabled={deleting}
                     title="Delete item"
@@ -662,7 +662,7 @@ export function RedisBrowserPanel({ serviceId }: { serviceId: string }) {
   const hasRuntimeNotice = runtimeState !== "ready";
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden border border-white/10 bg-black">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden border border-line bg-base">
       <RedisBrowserToolbar
         selectedDatabase={selectedDatabase}
         databaseOptions={redisDatabaseOptions}
@@ -681,7 +681,7 @@ export function RedisBrowserPanel({ serviceId }: { serviceId: string }) {
       />
 
       {error || visibleDataImport ? (
-        <div className="border-b border-white/10 px-4 pt-4 sm:px-5">
+        <div className="border-b border-line px-4 pt-4 sm:px-5">
           {error ? <div className="mb-4 border border-rose-500/30 bg-rose-500/10 px-3 py-2.5 text-xs text-rose-200">{error}</div> : null}
           {visibleDataImport ? (
             <DatabaseImportStatusBanner
@@ -706,7 +706,7 @@ export function RedisBrowserPanel({ serviceId }: { serviceId: string }) {
           }}
         />
 
-        <div className="flex min-h-0 flex-col bg-black">
+        <div className="flex min-h-0 flex-col bg-base">
           {hasRuntimeNotice ? (
             <DatabaseRuntimeStatePanel
               state={runtimeState}
@@ -715,16 +715,16 @@ export function RedisBrowserPanel({ serviceId }: { serviceId: string }) {
               onRefresh={() => void loadKeys(selectedDatabase)}
             />
           ) : !selectedKeyMeta ? (
-            <div className="flex min-h-0 flex-1 items-center justify-center px-5 text-center text-xs text-zinc-600">Choose a key to inspect its value.</div>
+            <div className="flex min-h-0 flex-1 items-center justify-center px-5 text-center text-xs text-ink-dim">Choose a key to inspect its value.</div>
           ) : busy === "rows" && !rowsBelongToSelectedKey ? (
-            <div className="flex min-h-0 flex-1 items-center justify-center px-5 text-center text-xs text-zinc-600">Loading key…</div>
+            <div className="flex min-h-0 flex-1 items-center justify-center px-5 text-center text-xs text-ink-dim">Loading key…</div>
           ) : (
             <>
-              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-5">
+              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
                 <div className="min-w-0">
                   <h3 className="truncate font-mono text-sm text-white">{selectedKeyMeta.name}</h3>
                   <div className="mt-2.5 flex flex-wrap gap-2">
-                    <span className={`${redisMetaPillClass} uppercase text-zinc-300`}>{selectedType || "unknown"}</span>
+                    <span className={`${redisMetaPillClass} uppercase text-ink-muted`}>{selectedType || "unknown"}</span>
                     {selectedType !== "string" ? (
                       <span className={redisMetaPillClass}>{itemCountLabel(selectedKeyMeta)}</span>
                     ) : null}
@@ -738,7 +738,7 @@ export function RedisBrowserPanel({ serviceId }: { serviceId: string }) {
                   {selectedType && selectedType !== "string" ? (
                     <button
                       type="button"
-                      className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+                      className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
                       onClick={openAddItem}
                       disabled={busy === "insert"}
                       title="Add item"

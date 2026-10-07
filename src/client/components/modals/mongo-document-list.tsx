@@ -60,7 +60,7 @@ export function MongoDocumentList({
 
       <div className="min-h-0 flex-1 overflow-auto">
         {rows.length === 0 ? (
-          <div className="flex h-full min-h-48 items-center justify-center border border-zinc-800 bg-zinc-950/45 px-5 py-8 text-center text-sm text-zinc-500">
+          <div className="flex h-full min-h-48 items-center justify-center border border-line bg-base/45 px-5 py-8 text-center text-sm text-ink-dim">
             {busy === "rows" ? "Loading documents..." : query.trim() ? "No documents match this query." : "No documents in this collection."}
           </div>
         ) : (

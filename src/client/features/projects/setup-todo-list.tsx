@@ -29,9 +29,9 @@ type SetupTodo = {
 };
 
 function todoToneClass(tone: SetupTodo["tone"]) {
-  if (tone === "rose") return "bg-white/[0.07] text-white";
-  if (tone === "amber") return "bg-white/[0.04] text-zinc-200";
-  return "bg-black/20 text-zinc-300";
+  if (tone === "rose") return "bg-glass text-white";
+  if (tone === "amber") return "bg-glass text-ink";
+  return "bg-base/20 text-ink-muted";
 }
 
 export function SetupTodoList({
@@ -143,36 +143,36 @@ export function SetupTodoList({
   if (todos.length === 0) return null;
 
   return (
-    <section className="border border-white/10 bg-black/25">
+    <section className="border border-line bg-base/25">
       <div className="flex flex-wrap items-center justify-between gap-3 p-4">
         <div>
-          <div className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-zinc-500">Setup checklist</div>
-          <div className="mt-1 text-sm text-zinc-300">
+          <div className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-ink-dim">Setup checklist</div>
+          <div className="mt-1 text-sm text-ink-muted">
             {todos.length} item{todos.length === 1 ? "" : "s"} still need attention.
           </div>
         </div>
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/15 px-2.5 py-1.5 font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
+        <div className="inline-flex items-center gap-2 rounded-full border border-line px-2.5 py-1.5 font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
           <AppIcon icon={AlertCircleIcon} size={13} />
           Action needed
         </div>
       </div>
 
-      <ul className="border-t border-white/10">
+      <ul className="border-t border-line">
         {todos.map((todo) => (
-          <li key={todo.key} className={`border-b border-white/10 last:border-b-0 ${todoToneClass(todo.tone)}`}>
+          <li key={todo.key} className={`border-b border-line last:border-b-0 ${todoToneClass(todo.tone)}`}>
             <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex min-w-0 items-start gap-3">
-                <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-current/20 bg-black/20">
+                <div className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-current/20 bg-base/20">
                   <AppIcon icon={todo.icon} size={14} />
                 </div>
                 <div className="min-w-0">
                   <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em]">{todo.title}</div>
-                  <p className="mt-1 text-xs leading-5 text-zinc-400">{todo.detail}</p>
+                  <p className="mt-1 text-xs leading-5 text-ink-muted">{todo.detail}</p>
                 </div>
               </div>
               <button
                 type="button"
-                className="w-fit shrink-0 border border-current/25 bg-black/20 px-2.5 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition hover:bg-white hover:text-black"
+                className="w-fit shrink-0 border border-current/25 bg-base/20 px-2.5 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] transition hover:bg-accent hover:text-ink"
                 onClick={todo.onAction}
               >
                 {todo.actionLabel}

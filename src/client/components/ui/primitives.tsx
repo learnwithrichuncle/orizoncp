@@ -43,12 +43,12 @@ export function statusDotColor(status: string) {
 }
 
 export function statusClass(_status: string) {
-  return "border border-line bg-hover text-neutral-200";
+  return "border border-line bg-hover text-ink-muted";
 }
 
 export function StatusPill({ status }: { status: string }) {
   return (
-    <span className="inline-flex h-6 items-center gap-1.5 rounded-full border border-line bg-hover px-2.5 text-xs font-medium text-neutral-200">
+    <span className="inline-flex h-6 items-center gap-1.5 rounded-full border border-line bg-hover px-2.5 text-xs font-medium text-ink-muted">
       <span className={`h-1.5 w-1.5 rounded-full ${statusDotColor(status)}`} />
       {status}
     </span>
@@ -123,7 +123,7 @@ export function FrameworkMark({
 
 export function FrameworkBadge({ framework, fallbackLabel = "Service" }: { framework: Framework | null; fallbackLabel?: string }) {
   return (
-    <div className="inline-flex h-6 items-center gap-2 rounded-full border border-line bg-hover px-2.5 text-xs font-medium text-neutral-200">
+    <div className="inline-flex h-6 items-center gap-2 rounded-full border border-line bg-hover px-2.5 text-xs font-medium text-ink-muted">
       <div className="grid h-3.5 w-3.5 place-items-center overflow-hidden">
         <FrameworkMark framework={framework} size={14} fallback={<BrowserIconFallback size={14} />} />
       </div>

@@ -73,9 +73,9 @@ function serviceKindIcon(kind: RailwayServiceKind) {
 
 function serviceKindClass(kind: RailwayServiceKind) {
   if (kind === "unsupported") {
-    return "border-white/10 bg-white/5 text-zinc-600";
+    return "border-line bg-glass text-ink-dim";
   }
-  return "border-white/15 bg-black/20 text-zinc-300";
+  return "border-line bg-base/20 text-ink-muted";
 }
 
 export function RailwayImportModal({
@@ -248,7 +248,7 @@ export function RailwayImportModal({
     >
       {step === "auth" && (
         <div className="space-y-5">
-          <div className="text-sm text-zinc-300 leading-relaxed">
+          <div className="text-sm text-ink-muted leading-relaxed">
             Migrate your Railway stack to your self-hosted orizonCP control plane. App variables and command overrides are imported, while database engines are recreated with fresh orizonCP-managed credentials.
           </div>
 
@@ -259,7 +259,7 @@ export function RailwayImportModal({
                 href="https://railway.app/account/tokens"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-400 transition hover:text-white"
+                className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted transition hover:text-white"
               >
                 Get token →
               </a>
@@ -282,7 +282,7 @@ export function RailwayImportModal({
                 disabled={busy}
                 label="Remember my Railway token"
               >
-                <span className="font-mono text-xs uppercase tracking-wider text-zinc-400">
+                <span className="font-mono text-xs uppercase tracking-wider text-ink-muted">
                   Remember my Railway token
                 </span>
               </Checkbox>
@@ -290,12 +290,12 @@ export function RailwayImportModal({
           </div>
 
           {error && (
-            <div className="border-l-2 border-white bg-white/10 px-4 py-3 font-mono text-xs text-zinc-200">
+            <div className="border-l-2 border-white bg-hover px-4 py-3 font-mono text-xs text-ink">
               {error}
             </div>
           )}
 
-          <div className="mt-6 flex justify-between gap-3 border-t border-white/10 pt-5">
+          <div className="mt-6 flex justify-between gap-3 border-t border-line pt-5">
             <button
               type="button"
               className={shellButton("ghost")}
@@ -307,7 +307,7 @@ export function RailwayImportModal({
             </button>
             <button
               type="button"
-              className="inline-flex h-11 items-center justify-center bg-white px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-zinc-200 disabled:opacity-60"
+              className="inline-flex h-11 items-center justify-center bg-accent px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200 disabled:opacity-60"
               onClick={handleConnect}
               disabled={busy || !apiToken.trim()}
             >
@@ -320,7 +320,7 @@ export function RailwayImportModal({
       {step === "select" && (
         <div className="flex flex-col min-h-full">
           <div className="relative mb-4">
-            <AppIcon icon={Search01Icon} size={16} className="pointer-events-none absolute left-3 top-3 text-zinc-500" />
+            <AppIcon icon={Search01Icon} size={16} className="pointer-events-none absolute left-3 top-3 text-ink-dim" />
             <FormInput
               variant="monochrome"
               value={searchQuery}
@@ -331,32 +331,32 @@ export function RailwayImportModal({
           </div>
 
           {error && (
-            <div className="mb-4 border-l-2 border-white bg-white/10 px-4 py-3 font-mono text-xs text-zinc-200">
+            <div className="mb-4 border-l-2 border-white bg-hover px-4 py-3 font-mono text-xs text-ink">
               {error}
             </div>
           )}
 
-          <div className="min-h-0 flex-1 overflow-hidden border border-white/10 bg-black/20">
+          <div className="min-h-0 flex-1 overflow-hidden border border-line bg-base/20">
             <div className="max-h-[300px] overflow-y-auto">
               {filteredProjects.length === 0 ? (
-                <div className="px-5 py-8 text-center font-mono text-xs text-zinc-400">
+                <div className="px-5 py-8 text-center font-mono text-xs text-ink-muted">
                   No Railway projects found.
                 </div>
               ) : (
                 filteredProjects.map((project) => (
                   <div
                     key={project.id}
-                    className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3.5 last:border-b-0"
+                    className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5 last:border-b-0"
                   >
                     <div className="min-w-0">
                       <div className="text-sm font-semibold text-zinc-100">{project.name}</div>
-                      <div className="text-[11px] text-zinc-400 truncate max-w-sm mt-0.5">
+                      <div className="text-[11px] text-ink-muted truncate max-w-sm mt-0.5">
                         {project.description || "No description"}
                       </div>
                     </div>
                     <button
                       type="button"
-                      className="inline-flex h-9 items-center justify-center border border-white/15 px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-zinc-300 transition hover:border-white hover:bg-white hover:text-black"
+                      className="inline-flex h-9 items-center justify-center border border-line px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted transition hover:border-white hover:bg-accent hover:text-ink"
                       onClick={() => void handleSelectProject(project)}
                       disabled={busy}
                     >
@@ -368,7 +368,7 @@ export function RailwayImportModal({
             </div>
           </div>
 
-          <div className="mt-5 flex justify-start border-t border-white/10 pt-5">
+          <div className="mt-5 flex justify-start border-t border-line pt-5">
             <button
               type="button"
               className={shellButton("ghost")}
@@ -384,7 +384,7 @@ export function RailwayImportModal({
 
       {step === "configure" && projectDetails && (
         <div className="flex flex-col min-h-full space-y-4">
-          <div className="text-sm text-zinc-300 leading-relaxed mb-1">
+          <div className="text-sm text-ink-muted leading-relaxed mb-1">
             Customize how <strong>{selectedProject?.name}</strong> is migrated to your self-hosted stack.
           </div>
 
@@ -406,7 +406,7 @@ export function RailwayImportModal({
                 disabled={busy}
                 options={projectDetails.environments.map((env) => ({ value: env.id, label: env.name }))}
               />
-              <div className="text-[10px] text-zinc-500 font-mono mt-1 uppercase tracking-wider">
+              <div className="text-[10px] text-ink-dim font-mono mt-1 uppercase tracking-wider">
                 Pull app variables and commands from this env
               </div>
             </div>
@@ -432,7 +432,7 @@ export function RailwayImportModal({
 
           <div>
             <FieldLabel>Services to Import ({selectedServiceIds.length} selected)</FieldLabel>
-            <div className="overflow-hidden border border-white/10 bg-black/20">
+            <div className="overflow-hidden border border-line bg-base/20">
               <div className="max-h-[160px] divide-y divide-white/10 overflow-y-auto">
                 {projectDetails.services.map((service) => {
                   const preview = servicePreviewForEnvironment(service, selectedEnvironmentId);
@@ -442,7 +442,7 @@ export function RailwayImportModal({
                   return (
                     <div
                       key={service.id}
-                      className={`flex items-center justify-between gap-3 px-4 py-2.5 transition-colors ${isUnsupported ? "bg-white/[0.03]" : "hover:bg-white/5"}`}
+                      className={`flex items-center justify-between gap-3 px-4 py-2.5 transition-colors ${isUnsupported ? "bg-glass" : "hover:bg-glass"}`}
                     >
                       <Checkbox
                         variant="monochrome"
@@ -460,7 +460,7 @@ export function RailwayImportModal({
                       >
                         <span className="grid min-w-0 gap-1">
                           <span className="text-xs font-semibold text-zinc-100 font-mono">{service.name}</span>
-                          <span className={`max-w-[260px] truncate text-[10px] font-mono ${isUnsupported ? "text-zinc-600" : "text-zinc-500"}`}>
+                          <span className={`max-w-[260px] truncate text-[10px] font-mono ${isUnsupported ? "text-ink-dim" : "text-ink-dim"}`}>
                             {preview.unsupportedReason || preview.sourceLabel}
                           </span>
                         </span>
@@ -477,12 +477,12 @@ export function RailwayImportModal({
           </div>
 
           {error && (
-            <div className="border-l-2 border-white bg-white/10 px-4 py-3 font-mono text-xs text-zinc-200">
+            <div className="border-l-2 border-white bg-hover px-4 py-3 font-mono text-xs text-ink">
               {error}
             </div>
           )}
 
-          <div className="mt-5 flex justify-between gap-3 border-t border-white/10 pt-5">
+          <div className="mt-5 flex justify-between gap-3 border-t border-line pt-5">
             <button
               type="button"
               className={shellButton("ghost")}
@@ -494,7 +494,7 @@ export function RailwayImportModal({
             </button>
             <button
               type="button"
-              className="inline-flex h-11 items-center justify-center gap-2 bg-white px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-zinc-200 disabled:opacity-60"
+              className="inline-flex h-11 items-center justify-center gap-2 bg-accent px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200 disabled:opacity-60"
               onClick={handleExecuteImport}
               disabled={busy || selectedServiceIds.length === 0}
             >
@@ -508,19 +508,19 @@ export function RailwayImportModal({
       {step === "importing" && (
         <div className="py-8 flex flex-col items-center justify-center text-center space-y-4">
           <div className="relative flex items-center justify-center">
-            <div className="h-12 w-12 animate-spin rounded-full border-2 border-zinc-700 border-t-white" />
+            <div className="h-12 w-12 animate-spin rounded-full border-2 border-line-strong border-t-white" />
             <AppIcon icon={WorkflowSquare07Icon} size={18} className="absolute text-white" />
           </div>
           <div>
             <h3 className="font-semibold text-zinc-100 text-base">Migrating Project Stacks</h3>
-            <p className="text-xs text-zinc-400 font-mono mt-1">
+            <p className="text-xs text-ink-muted font-mono mt-1">
               Importing services from "{selectedProject?.name}"...
             </p>
           </div>
-          <div className="relative h-1 w-64 overflow-hidden border border-white/10 bg-black">
-            <div className="absolute inset-y-0 w-1/2 animate-marquee bg-white" />
+          <div className="relative h-1 w-64 overflow-hidden border border-line bg-base">
+            <div className="absolute inset-y-0 w-1/2 animate-marquee bg-accent" />
           </div>
-          <div className="text-[10px] text-zinc-500 font-mono space-y-1">
+          <div className="text-[10px] text-ink-dim font-mono space-y-1">
             <div>Fetching services, command overrides, and app variable maps...</div>
             <div>Generating self-hosted database credentials...</div>
             <div>Importing custom domains and queueing deploys...</div>
@@ -530,19 +530,19 @@ export function RailwayImportModal({
 
       {step === "success" && (
         <div className="py-6 flex flex-col items-center justify-center text-center space-y-5">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-ink">
             <AppIcon icon={CheckmarkCircle02Icon} size={30} />
           </div>
           <div>
             <h3 className="font-hero text-xl font-bold text-zinc-100">Migration Completed!</h3>
-            <p className="text-sm text-zinc-300 max-w-sm mt-2">
+            <p className="text-sm text-ink-muted max-w-sm mt-2">
               Successfully migrated services, command overrides, app variables, and recreated databases from "{selectedProject?.name}" into your local stack.
             </p>
           </div>
 
           <button
             type="button"
-            className="inline-flex h-11 items-center justify-center gap-2 bg-white px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-zinc-200"
+            className="inline-flex h-11 items-center justify-center gap-2 bg-accent px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200"
             onClick={() => {
               handleClose();
               void navigate({ to: "/$projectSlug", params: { projectSlug: importedSlug } });

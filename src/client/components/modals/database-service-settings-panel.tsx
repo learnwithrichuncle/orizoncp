@@ -4,8 +4,8 @@ import { FormInput } from "../ui/primitives";
 import { SquareSwitch } from "../ui/square-switch";
 import { generateDatabaseHostname } from "./database-hostname";
 
-const settingsLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600";
-const settingsInputClass = "!h-9 border-white/15 bg-black text-xs";
+const settingsLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim";
+const settingsInputClass = "!h-9 border-line bg-base text-xs";
 
 export type DatabaseSettingsState = {
   name: string;
@@ -65,16 +65,16 @@ export function DatabaseServiceSettingsPanel({ settings, hostPort, supportsLogic
       </div>
       <input type="hidden" name="databasePublicHostname" value={settings.databasePublicHostname || generatedHostname} />
       <div className="xl:col-span-2">
-        <div className="grid border border-white/10 md:grid-cols-2">
+        <div className="grid border border-line md:grid-cols-2">
           <div>
-            <div className="border-b border-white/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600 md:border-b-0 md:border-r">Public hostname</div>
-            <div className="flex h-10 min-w-0 items-center px-3 font-mono text-xs text-zinc-300">
+            <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim md:border-b-0 md:border-r">Public hostname</div>
+            <div className="flex h-10 min-w-0 items-center px-3 font-mono text-xs text-ink-muted">
               <span className="truncate">{settings.databasePublicHostname || generatedHostname || "Set root domain first"}</span>
             </div>
           </div>
           <div>
-            <div className="border-b border-white/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Connection target</div>
-            <div className="flex h-10 min-w-0 items-center px-3 font-mono text-xs text-zinc-300">
+            <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Connection target</div>
+            <div className="flex h-10 min-w-0 items-center px-3 font-mono text-xs text-ink-muted">
               <span className="truncate">
                 {settings.databasePublicHostname || generatedHostname
                   ? `${settings.databasePublicHostname || generatedHostname}:${hostPort ?? "<port>"}`
@@ -86,10 +86,10 @@ export function DatabaseServiceSettingsPanel({ settings, hostPort, supportsLogic
       </div>
       {supportsLogicalReplication ? (
         <div className="xl:col-span-2">
-          <div className="flex items-center justify-between gap-4 border border-white/10 px-3 py-3">
+          <div className="flex items-center justify-between gap-4 border border-line px-3 py-3">
             <span>
-              <span className="block text-xs text-zinc-300">Logical replication</span>
-              <span className="mt-1 block font-mono text-[9px] text-zinc-600">wal_level=logical · 10 slots · 10 senders</span>
+              <span className="block text-xs text-ink-muted">Logical replication</span>
+              <span className="mt-1 block font-mono text-[9px] text-ink-dim">wal_level=logical · 10 slots · 10 senders</span>
             </span>
             <SquareSwitch
               checked={settings.postgresLogicalReplicationEnabled}

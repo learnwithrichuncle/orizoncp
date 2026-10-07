@@ -35,7 +35,7 @@ export function DeploymentFailureCommand({ command }: { command: string }) {
 
   return (
     <div className="flex items-start gap-2">
-      <pre className="min-w-0 flex-1 overflow-x-auto border border-white/10 bg-white/[0.02] px-3 py-2 font-mono text-xs text-zinc-300">
+      <pre className="min-w-0 flex-1 overflow-x-auto border border-line bg-glass px-3 py-2 font-mono text-xs text-ink-muted">
         {command}
       </pre>
       <button
@@ -43,7 +43,7 @@ export function DeploymentFailureCommand({ command }: { command: string }) {
         className={`inline-flex h-9 w-9 shrink-0 items-center justify-center border transition ${
           copied
             ? "border-emerald-400/40 bg-emerald-400/10 text-emerald-300"
-            : "border-white/15 text-zinc-500 hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+            : "border-line text-ink-dim hover:border-line hover:bg-hover hover:text-white"
         }`}
         onClick={() => void copyCommand()}
         title={copied ? "Copied" : "Copy command"}

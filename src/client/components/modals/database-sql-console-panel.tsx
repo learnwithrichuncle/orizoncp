@@ -29,10 +29,10 @@ export function DatabaseSqlConsolePanel({ serviceId }: { serviceId: string }) {
 
   return (
     <form className="flex h-full min-h-0 flex-col gap-4" onSubmit={runQuery}>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
         <div>
           <h3 className="font-hero text-xl text-zinc-100">Console</h3>
-          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
             Run SQL against the selected database container
           </div>
         </div>
@@ -48,13 +48,13 @@ export function DatabaseSqlConsolePanel({ serviceId }: { serviceId: string }) {
 
       {result ? (
         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
-          <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+          <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
             <span>{result.rowCount} rows</span>
             <span>{result.elapsedMs}ms</span>
             <span>{result.engine}</span>
           </div>
           {result.message ? (
-            <pre className="max-h-32 overflow-auto border border-zinc-800 bg-zinc-950/70 p-3 font-mono text-xs whitespace-pre-wrap text-zinc-300">
+            <pre className="max-h-32 overflow-auto border border-line bg-base/70 p-3 font-mono text-xs whitespace-pre-wrap text-ink-muted">
               {result.message}
             </pre>
           ) : null}
@@ -63,7 +63,7 @@ export function DatabaseSqlConsolePanel({ serviceId }: { serviceId: string }) {
           </div>
         </div>
       ) : (
-        <div className="border border-zinc-800 bg-zinc-950/45 px-5 py-8 text-sm text-zinc-500">
+        <div className="border border-line bg-base/45 px-5 py-8 text-sm text-ink-dim">
           Results will appear here after a query runs.
         </div>
       )}

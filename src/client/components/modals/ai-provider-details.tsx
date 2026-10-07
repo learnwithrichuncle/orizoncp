@@ -35,7 +35,7 @@ export function AiProviderDetails({
           <h2 className="text-2xl tracking-[-0.03em] text-white">{provider.name}</h2>
           <div className="mt-2 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em]">
             <span className={`h-1.5 w-1.5 ${connected ? "bg-emerald-400" : "border border-zinc-600"}`} />
-            <span className={connected ? "text-emerald-300" : "text-zinc-500"}>
+            <span className={connected ? "text-emerald-300" : "text-ink-dim"}>
               {connected ? "Connected" : "Not connected"}
             </span>
           </div>
@@ -65,13 +65,13 @@ export function AiProviderDetails({
         </div>
       </div>
 
-      <div className="mt-auto max-w-xl border-t border-white/10 pt-5">
+      <div className="mt-auto max-w-xl border-t border-line pt-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div className="text-sm text-zinc-200">
+            <div className="text-sm text-ink">
               {isDefaultModel ? "Default model" : "Use as default"}
             </div>
-            <div className="mt-1 text-xs text-zinc-500">
+            <div className="mt-1 text-xs text-ink-dim">
               {isDefaultModel
                 ? `${provider.name} ${model} is used by default.`
                 : "Use this provider and model for new AI requests."}
@@ -82,7 +82,7 @@ export function AiProviderDetails({
             className={
               isDefaultModel
                 ? "inline-flex min-h-10 w-fit items-center justify-center gap-2 border border-amber-400/40 bg-amber-400/10 px-4 text-sm text-amber-200"
-                : "inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+                : "inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
             }
             onClick={onSetDefaultModel}
             disabled={updating || isDefaultModel}

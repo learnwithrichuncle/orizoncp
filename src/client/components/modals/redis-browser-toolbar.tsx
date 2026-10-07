@@ -42,11 +42,11 @@ export function RedisBrowserToolbar({
   onAddKey
 }: RedisBrowserToolbarProps) {
   return (
-    <header className="border-b border-white/10">
+    <header className="border-b border-line">
       <div className="flex flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-5">
         <div>
           <h2 className="text-lg tracking-[-0.03em] text-white">Data</h2>
-          <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">
+          <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
             Redis · DB {selectedDatabase} · {keyCount} {keyCount === 1 ? "key" : "keys"}
           </p>
         </div>
@@ -54,7 +54,7 @@ export function RedisBrowserToolbar({
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="inline-flex h-8 items-center justify-center gap-2 border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+            className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
             onClick={onImport}
             disabled={disabled}
           >
@@ -63,7 +63,7 @@ export function RedisBrowserToolbar({
           </button>
           <button
             type="button"
-            className="inline-flex h-8 items-center justify-center gap-2 bg-white px-3 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40"
+            className="inline-flex h-8 items-center justify-center gap-2 bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
             onClick={onAddKey}
             disabled={disabled}
           >
@@ -73,7 +73,7 @@ export function RedisBrowserToolbar({
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 border-t border-white/10 px-4 py-3 sm:px-5">
+      <div className="flex flex-wrap items-center gap-2 border-t border-line px-4 py-3 sm:px-5">
         <Dropdown
           value={selectedDatabase}
           options={databaseOptions}
@@ -94,19 +94,19 @@ export function RedisBrowserToolbar({
           <AppIcon
             icon={Search01Icon}
             size={13}
-            className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-600"
+            className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-ink-dim"
           />
           <FormInput
             value={search}
             onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Search keys"
             variant="monochrome"
-            className="!h-8 border-white/15 bg-white/[0.025] pl-8 text-xs"
+            className="!h-8 border-line bg-glass pl-8 text-xs"
           />
         </div>
         <button
           type="button"
-          className="inline-flex h-8 w-8 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40"
+          className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
           onClick={onRefresh}
           disabled={loading}
           aria-label="Refresh keys"

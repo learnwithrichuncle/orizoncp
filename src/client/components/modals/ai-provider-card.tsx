@@ -20,8 +20,8 @@ export function AiProviderCard({
       type="button"
       className={`mb-1 flex min-h-16 w-full items-center justify-between gap-3 border-l-2 px-3 py-2.5 text-left transition ${
         selected
-          ? "border-white bg-white/[0.08]"
-          : "border-transparent bg-transparent hover:bg-white/[0.04]"
+          ? "border-white bg-glass"
+          : "border-transparent bg-transparent hover:bg-glass"
       }`}
       onClick={onSelect}
       aria-pressed={selected}

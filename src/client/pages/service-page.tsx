@@ -137,16 +137,16 @@ export function ServicePage({
 
   if (error) {
     return (
-      <main className="min-h-dvh bg-black text-white">
+      <main className="min-h-dvh bg-base text-white">
         <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
           <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
-          <section className="grid min-h-dvh place-items-center bg-zinc-950 px-5 py-12">
-            <div className="w-full max-w-lg border border-white/10 bg-black p-5">
+          <section className="grid min-h-dvh place-items-center bg-base px-5 py-12">
+            <div className="w-full max-w-lg border border-line bg-base p-5">
               <h1 className="text-lg text-zinc-100">Could not load service</h1>
               <p className="mt-2 text-sm text-rose-200">{error}</p>
               <button
                 type="button"
-                className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05]"
+                className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover"
                 onClick={navigateToProject}
               >
                 <AppIcon icon={ArrowLeft01Icon} size={15} />
@@ -165,20 +165,20 @@ export function ServicePage({
 
   if (!service) {
     return (
-      <main className="min-h-dvh bg-black text-white">
+      <main className="min-h-dvh bg-base text-white">
         <div className="grid min-h-dvh lg:grid-cols-[260px_minmax(0,1fr)]">
           <ProjectsDashboardSidebar currentUser={currentUser} tools={tools} owner={owner} />
-          <section className="grid min-h-dvh place-items-center bg-zinc-950 px-5 py-12">
-            <div className="w-full max-w-lg border border-white/10 bg-black p-5">
-              <AppIcon icon={CloudServerIcon} size={20} className="text-zinc-600" />
+          <section className="grid min-h-dvh place-items-center bg-base px-5 py-12">
+            <div className="w-full max-w-lg border border-line bg-base p-5">
+              <AppIcon icon={CloudServerIcon} size={20} className="text-ink-dim" />
               <h1 className="mt-4 text-lg text-zinc-100">Service not found</h1>
-              <p className="mt-2 text-sm leading-6 text-zinc-500">
-                There is no service named <span className="font-mono text-zinc-300">{serviceSlug}</span> in this project.
+              <p className="mt-2 text-sm leading-6 text-ink-dim">
+                There is no service named <span className="font-mono text-ink-muted">{serviceSlug}</span> in this project.
               </p>
               <Link
                 to="/$projectSlug"
                 params={{ projectSlug }}
-                className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05]"
+                className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover"
               >
                 <AppIcon icon={ArrowLeft01Icon} size={15} />
                 Back to project

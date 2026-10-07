@@ -41,7 +41,7 @@ function highlightedSql(sql: string) {
   return tokens.map((token, index) => {
     const lower = token.toLowerCase();
     if (token.startsWith("--")) {
-      return <span key={index} className="text-zinc-500">{token}</span>;
+      return <span key={index} className="text-ink-dim">{token}</span>;
     }
     if (token.startsWith("'") || token.startsWith("\"")) {
       return <span key={index} className="text-emerald-300">{token}</span>;
@@ -69,11 +69,11 @@ export function SqlEditor({
   const highlightRef = useRef<HTMLPreElement | null>(null);
 
   return (
-    <div className="relative min-h-[180px] overflow-hidden border border-zinc-700 bg-zinc-950">
+    <div className="relative min-h-[180px] overflow-hidden border border-line-strong bg-base">
       <pre
         ref={highlightRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-auto whitespace-pre-wrap break-words p-4 font-mono text-sm leading-6 text-zinc-200"
+        className="pointer-events-none absolute inset-0 overflow-auto whitespace-pre-wrap break-words p-4 font-mono text-sm leading-6 text-ink"
       >
         {highlighted}
       </pre>

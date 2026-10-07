@@ -10,9 +10,9 @@ import { RedisImportSourcePicker } from "./redis-import-source-picker";
 type ImportMode = "railway" | "redis-url";
 type ImportPhase = "form" | "progress";
 
-const importLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600";
-const importSecondaryButtonClass = "inline-flex h-9 items-center justify-center border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40";
-const importPrimaryButtonClass = "inline-flex h-9 items-center justify-center bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:opacity-40";
+const importLabelClass = "mb-1.5 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim";
+const importSecondaryButtonClass = "inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40";
+const importPrimaryButtonClass = "inline-flex h-9 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-40";
 
 function metadataText(source: ServiceImportSource, key: string) {
   const value = source.metadata?.[key];
@@ -149,23 +149,23 @@ export function RedisDataImportModal({
         variant="monochrome"
       >
         <div className="space-y-4">
-          <div className="border border-white/10 bg-white/[0.02] p-4">
+          <div className="border border-line bg-glass p-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Source</div>
-                <div className="mt-1 text-xs text-zinc-200">{sourceLabel}</div>
+                <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Source</div>
+                <div className="mt-1 text-xs text-ink">{sourceLabel}</div>
               </div>
               <span className={`px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] ${statusClass(progressStatus)}`}>
                 {progressLabel}
               </span>
             </div>
-            <div className="mt-4 h-1 overflow-hidden bg-white/10">
+            <div className="mt-4 h-1 overflow-hidden bg-hover">
               <div
-                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : result ? "bg-emerald-400" : "bg-white"}`}
+                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-rose-400" : result ? "bg-emerald-400" : "bg-accent"}`}
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <p className="mt-3 text-xs leading-5 text-zinc-500">
+            <p className="mt-3 text-xs leading-5 text-ink-dim">
               {result
                 ? "The source RDB snapshot was loaded into this orizonCP Redis service."
                 : error
@@ -183,7 +183,7 @@ export function RedisDataImportModal({
             </div>
           ) : null}
 
-          <div className="flex justify-end gap-2 border-t border-white/10 pt-4">
+          <div className="flex justify-end gap-2 border-t border-line pt-4">
             {error ? (
               <button
                 type="button"
@@ -230,15 +230,15 @@ export function RedisDataImportModal({
         />
 
         {mode === "railway" ? (
-          <div className="space-y-3 border border-white/10 bg-white/[0.02] p-3">
+          <div className="space-y-3 border border-line bg-glass p-3">
             {railwaySource ? (
-              <div className="grid gap-3 text-xs text-zinc-400 sm:grid-cols-2">
+              <div className="grid gap-3 text-xs text-ink-muted sm:grid-cols-2">
                 <div>
-                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Project</div>
+                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Project</div>
                   <div className="mt-1 truncate text-zinc-100">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
                 </div>
                 <div>
-                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-600">Environment</div>
+                  <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Environment</div>
                   <div className="mt-1 truncate text-zinc-100">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
                 </div>
               </div>
@@ -259,12 +259,12 @@ export function RedisDataImportModal({
                 autoComplete="new-password"
                 placeholder="rg_pat_..."
                 variant="monochrome"
-                className="!h-9 border-white/15 bg-black text-xs"
+                className="!h-9 border-line bg-base text-xs"
               />
             </div>
           </div>
         ) : (
-          <div className="border border-white/10 bg-white/[0.02] p-3">
+          <div className="border border-line bg-glass p-3">
             <label htmlFor="redis-import-source-url" className={importLabelClass}>Source Redis URL</label>
             <FormInput
               id="redis-import-source-url"
@@ -275,7 +275,7 @@ export function RedisDataImportModal({
               autoComplete="new-password"
               placeholder="redis://default:password@host:6379"
               variant="monochrome"
-              className="!h-9 border-white/15 bg-black font-mono text-xs"
+              className="!h-9 border-line bg-base font-mono text-xs"
             />
           </div>
         )}
@@ -286,7 +286,7 @@ export function RedisDataImportModal({
           </Checkbox>
         </div>
 
-        <div className="flex items-center justify-end gap-2 border-t border-white/10 pt-4">
+        <div className="flex items-center justify-end gap-2 border-t border-line pt-4">
           <button type="button" className={importSecondaryButtonClass} onClick={closeModal} disabled={busy}>
             Cancel
           </button>

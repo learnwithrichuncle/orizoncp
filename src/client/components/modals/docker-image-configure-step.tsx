@@ -92,19 +92,19 @@ export function DockerImageConfigureStep({
               disabled={busy}
               required
               variant="monochrome"
-              className="!h-9 border-white/15 bg-black font-mono text-xs"
+              className="!h-9 border-line bg-base font-mono text-xs"
             />
             {image.trim() && !imageValidation.ok ? (
               <p className="mt-2 text-xs text-rose-300">{imageValidation.error}</p>
             ) : (
-              <p className="mt-2 text-xs text-zinc-500">Private images use the host Docker registry login.</p>
+              <p className="mt-2 text-xs text-ink-dim">Private images use the host Docker registry login.</p>
             )}
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <FieldLabel>Service name</FieldLabel>
-              <FormInput value={name} onChange={(event) => setName(event.target.value)} placeholder="api" disabled={busy} required variant="monochrome" className="!h-9 border-white/15 bg-black text-xs" />
+              <FormInput value={name} onChange={(event) => setName(event.target.value)} placeholder="api" disabled={busy} required variant="monochrome" className="!h-9 border-line bg-base text-xs" />
             </div>
             <div className="sm:col-span-2">
               <FieldLabel>Runtime mode</FieldLabel>
@@ -122,7 +122,7 @@ export function DockerImageConfigureStep({
                   disabled={busy}
                   required
                   variant="monochrome"
-                  className="!h-9 border-white/15 bg-black text-xs"
+                  className="!h-9 border-line bg-base text-xs"
                 />
               </div>
             ) : null}
@@ -131,19 +131,19 @@ export function DockerImageConfigureStep({
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
               <FieldLabel>Environment variables</FieldLabel>
-              <span className="font-mono text-[9px] text-zinc-600">{envEntries.length} set</span>
+              <span className="font-mono text-[9px] text-ink-dim">{envEntries.length} set</span>
             </div>
-            <div className="border border-white/10">
+            <div className="border border-line">
               {envEntries.length === 0 ? (
-                <div className="px-3 py-4 text-xs text-zinc-500">No variables yet.</div>
+                <div className="px-3 py-4 text-xs text-ink-dim">No variables yet.</div>
               ) : (
                 envEntries.map((entry) => (
-                  <div key={entry.key} className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_auto] items-center gap-3 border-b border-white/10 px-3 py-2 last:border-b-0">
-                    <div className="truncate font-mono text-[10px] tracking-[0.08em] text-zinc-300">{entry.key}</div>
-                    <div className="truncate font-mono text-xs text-zinc-500">{entry.value || "empty"}</div>
+                  <div key={entry.key} className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_auto] items-center gap-3 border-b border-line px-3 py-2 last:border-b-0">
+                    <div className="truncate font-mono text-[10px] tracking-[0.08em] text-ink-muted">{entry.key}</div>
+                    <div className="truncate font-mono text-xs text-ink-dim">{entry.value || "empty"}</div>
                     <button
                       type="button"
-                      className="grid h-7 w-7 place-items-center text-zinc-600 transition hover:bg-rose-500/10 hover:text-rose-300"
+                      className="grid h-7 w-7 place-items-center text-ink-dim transition hover:bg-rose-500/10 hover:text-rose-300"
                       onClick={() => setEnvEntries((current) => current.filter((item) => item.key !== entry.key))}
                       aria-label={`Remove ${entry.key}`}
                     >
@@ -154,9 +154,9 @@ export function DockerImageConfigureStep({
               )}
             </div>
             <div className="grid gap-3 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_auto]">
-              <FormInput value={envForm.key} onChange={(event) => setEnvForm({ ...envForm, key: event.target.value })} placeholder="KEY" disabled={busy} variant="monochrome" className="!h-9 border-white/15 bg-black font-mono text-xs" />
-              <FormInput value={envForm.value} onChange={(event) => setEnvForm({ ...envForm, value: event.target.value })} placeholder="value" disabled={busy} variant="monochrome" className="!h-9 border-white/15 bg-black font-mono text-xs" />
-              <button type="button" className="inline-flex h-9 items-center justify-center border border-white/15 px-3 text-xs text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white disabled:opacity-40" onClick={addEnvEntry} disabled={!envForm.key.trim() || busy}>
+              <FormInput value={envForm.key} onChange={(event) => setEnvForm({ ...envForm, key: event.target.value })} placeholder="KEY" disabled={busy} variant="monochrome" className="!h-9 border-line bg-base font-mono text-xs" />
+              <FormInput value={envForm.value} onChange={(event) => setEnvForm({ ...envForm, value: event.target.value })} placeholder="value" disabled={busy} variant="monochrome" className="!h-9 border-line bg-base font-mono text-xs" />
+              <button type="button" className="inline-flex h-9 items-center justify-center border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40" onClick={addEnvEntry} disabled={!envForm.key.trim() || busy}>
                 Add
               </button>
             </div>
@@ -164,12 +164,12 @@ export function DockerImageConfigureStep({
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
-        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-zinc-500 transition hover:bg-white/[0.05] hover:text-white disabled:opacity-40" onClick={onBack} disabled={busy}>
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
+        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white disabled:opacity-40" onClick={onBack} disabled={busy}>
           <AppIcon icon={ArrowLeft01Icon} size={16} />
           Back
         </button>
-        <button type="submit" className="inline-flex h-8 items-center justify-center bg-white px-4 text-xs text-black transition hover:bg-zinc-200 disabled:opacity-40" disabled={!canSubmit || busy}>
+        <button type="submit" className="inline-flex h-8 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" disabled={!canSubmit || busy}>
           {busy ? "Creating…" : "Create service"}
         </button>
       </div>

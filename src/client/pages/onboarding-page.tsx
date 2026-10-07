@@ -1,7 +1,6 @@
 import { type FormEvent, type ReactNode, useEffect, useMemo, useState } from "react";
 import { api, type AuthStatus, type OnboardingPayload } from "../api";
 import { MigrationImportModal } from "../features/onboarding/migration-import-modal";
-import { OnboardingBackupsPage } from "../features/onboarding/onboarding-backups-page";
 import { OnboardingDomainPage } from "../features/onboarding/onboarding-domain-page";
 import { OnboardingGitHubPage } from "../features/onboarding/onboarding-github-page";
 import { OnboardingOwnerPage } from "../features/onboarding/onboarding-owner-page";
@@ -25,15 +24,13 @@ type OnboardingStepKey =
   | "owner"
   | "runtime"
   | "github"
-  | "root-domain"
-  | "backups";
+  | "root-domain";
 
 const firstRunSteps: OnboardingStepKey[] = [
   "owner",
   "runtime",
   "github",
   "root-domain",
-  "backups",
 ];
 
 const restartSteps = firstRunSteps.filter(
@@ -223,20 +220,6 @@ export function OnboardingPage() {
       return "Root domain must be a wildcard hostname like *.pilot.cp.orzn.io.";
     }
 
-    if (activeStep === "backups") {
-      const r2Fields = [
-        { label: "R2 account ID", value: form.r2AccountId },
-        { label: "R2 bucket", value: form.r2Bucket },
-        { label: "R2 access key ID", value: form.r2AccessKeyId },
-        { label: "R2 secret access key", value: form.r2SecretAccessKey },
-      ];
-      const missingR2Fields = r2Fields.filter((field) => !field.value.trim());
-      const hasR2Fields = missingR2Fields.length < r2Fields.length;
-      if (hasR2Fields && missingR2Fields.length > 0) {
-        return `R2 is optional. Add ${missingR2Fields.map((field) => field.label).join(", ")}, or skip R2 for now.`;
-      }
-    }
-
     return "";
   }, [activeStep, form]);
 
@@ -367,16 +350,5 @@ export function OnboardingPage() {
     );
   }
 
-  return withMigration(
-    <OnboardingBackupsPage
-      form={form}
-      update={update}
-      error={error}
-      submitting={submitting}
-      onSubmit={submit}
-      onBack={() => goToStep(3)}
-      onStepChange={goToStep}
-      onImport={openMigration}
-    />,
-  );
+  return null;
 }

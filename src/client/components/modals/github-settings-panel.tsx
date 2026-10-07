@@ -170,7 +170,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-white/10 bg-black">
+    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
       {!editing ? (
         <div className="p-5 sm:p-7 lg:p-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
@@ -188,7 +188,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                           : "border border-zinc-600"
                     }`}
                   />
-                  <span className={connected ? "text-emerald-300" : appConfigured ? "text-amber-300" : "text-zinc-500"}>
+                  <span className={connected ? "text-emerald-300" : appConfigured ? "text-amber-300" : "text-ink-dim"}>
                     {connected ? "Connected" : appConfigured ? "Needs install" : "Not configured"}
                   </span>
                 </div>
@@ -198,7 +198,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="inline-flex h-10 w-10 items-center justify-center border border-white/15 text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.06] hover:text-white"
+                className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
                 onClick={() => {
                   setEditing(true);
                   setManualConfigurationOpen(false);
@@ -211,7 +211,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               {connected || appConfigured ? (
                 <button
                   type="button"
-                  className="inline-flex h-10 w-10 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300"
+                  className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-dim transition hover:border-rose-400/60 hover:bg-rose-400/10 hover:text-rose-300"
                   onClick={() => setDisconnecting(true)}
                   title="Disconnect GitHub"
                   aria-label="Disconnect GitHub"
@@ -222,18 +222,18 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
             </div>
           </div>
 
-          <p className="mt-6 max-w-2xl text-sm leading-6 text-zinc-500">
+          <p className="mt-6 max-w-2xl text-sm leading-6 text-ink-dim">
             GitHub provides repository access, branch discovery, and deployment webhooks.
           </p>
 
-          <div className="mt-7 max-w-2xl border-y border-white/10">
-            <div className="grid gap-2 border-b border-white/10 py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
-              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-600">Mode</div>
-              <div className="text-sm capitalize text-zinc-300">{github.status.mode}</div>
+          <div className="mt-7 max-w-2xl border-y border-line">
+            <div className="grid gap-2 border-b border-line py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
+              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Mode</div>
+              <div className="text-sm capitalize text-ink-muted">{github.status.mode}</div>
             </div>
-            <div className="grid gap-2 border-b border-white/10 py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
-              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-zinc-600">Installations</div>
-              <div className="text-sm text-zinc-300">{github.status.installationCount}</div>
+            <div className="grid gap-2 border-b border-line py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
+              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Installations</div>
+              <div className="text-sm text-ink-muted">{github.status.installationCount}</div>
             </div>
           </div>
 
@@ -242,7 +242,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               href={github.status.installUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200"
+              className="mt-5 inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200"
             >
               <AppIcon icon={GithubIcon} size={15} />
               Install GitHub App
@@ -268,7 +268,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                 </button>
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-white/15 text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05]"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover"
                   onClick={() => setDisconnecting(false)}
                   disabled={busy}
                   title="Cancel"
@@ -289,13 +289,13 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               <AppIcon icon={GithubIcon} size={32} className="shrink-0 text-white" />
               <div>
                 <h2 className="text-2xl tracking-[-0.03em] text-white">Configure GitHub</h2>
-                <p className="mt-1.5 text-sm text-zinc-500">Connect with a GitHub App or enter credentials manually.</p>
+                <p className="mt-1.5 text-sm text-ink-dim">Connect with a GitHub App or enter credentials manually.</p>
               </div>
             </div>
             {connected || appConfigured ? (
               <button
                 type="button"
-                className="inline-flex min-h-10 w-fit items-center justify-center border border-white/15 px-4 text-sm text-zinc-400 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                className="inline-flex min-h-10 w-fit items-center justify-center border border-line px-4 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
                 onClick={() => {
                   setForm(formFromSettings(github));
                   setManualConfigurationOpen(false);
@@ -308,16 +308,16 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
             ) : null}
           </div>
 
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-y border-white/10 py-5">
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-y border-line py-5">
             <div className="min-w-0">
-              <div className="text-sm text-zinc-200">Connect automatically</div>
-              <div className="mt-1 text-xs text-zinc-500">Create and configure the GitHub App in one step.</div>
+              <div className="text-sm text-ink">Connect automatically</div>
+              <div className="mt-1 text-xs text-ink-dim">Create and configure the GitHub App in one step.</div>
             </div>
             <button
               type="button"
               onClick={() => void connectOneClick()}
               disabled={connecting || busy}
-              className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+              className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
             >
               <AppIcon icon={GithubIcon} size={15} />
               {connecting ? "Connecting…" : "Connect with GitHub"}
@@ -326,12 +326,12 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
 
           <button
             type="button"
-            className="flex w-full items-center justify-between gap-4 border-b border-white/10 py-5 text-left text-sm text-zinc-300 transition hover:text-white"
+            className="flex w-full items-center justify-between gap-4 border-b border-line py-5 text-left text-sm text-ink-muted transition hover:text-white"
             onClick={() => setManualConfigurationOpen((current) => !current)}
             aria-expanded={manualConfigurationOpen}
           >
             <span>Manual configuration</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
               {manualConfigurationOpen ? "Hide" : "Open"}
             </span>
           </button>
@@ -342,7 +342,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                 href="https://github.com/settings/apps/new"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-10 w-fit items-center justify-center gap-2 border border-white/15 px-3.5 text-sm text-zinc-300 transition hover:border-white/35 hover:bg-white/[0.05] hover:text-white"
+                className="inline-flex h-10 w-fit items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
               >
                 <AppIcon icon={LinkSquare02Icon} size={14} />
                 Create GitHub App
@@ -358,7 +358,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     placeholder="GitHub personal access token"
                     autoComplete="off"
                     variant="monochrome"
-                    className="border-white/15 bg-white/[0.03]"
+                    className="border-line bg-glass"
                   />
                 </div>
                 <div>
@@ -370,7 +370,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     placeholder="Webhook secret"
                     autoComplete="off"
                     variant="monochrome"
-                    className="border-white/15 bg-white/[0.03]"
+                    className="border-line bg-glass"
                   />
                 </div>
                 <div>
@@ -380,7 +380,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     onChange={(event) => setForm({ ...form, githubAppId: event.target.value })}
                     placeholder="123456"
                     variant="monochrome"
-                    className="border-white/15 bg-white/[0.03]"
+                    className="border-line bg-glass"
                   />
                 </div>
                 <div>
@@ -390,7 +390,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     onChange={(event) => setForm({ ...form, githubAppClientId: event.target.value })}
                     placeholder="Iv1.xxxxx"
                     variant="monochrome"
-                    className="border-white/15 bg-white/[0.03]"
+                    className="border-line bg-glass"
                   />
                 </div>
                 <div>
@@ -400,7 +400,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     onChange={(event) => setForm({ ...form, githubAppSlug: event.target.value })}
                     placeholder="orizoncp"
                     variant="monochrome"
-                    className="border-white/15 bg-white/[0.03]"
+                    className="border-line bg-glass"
                   />
                 </div>
                 <div>
@@ -409,21 +409,21 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     value={form.githubAppPrivateKey}
                     onChange={(event) => setForm({ ...form, githubAppPrivateKey: event.target.value })}
                     placeholder={github.settings.githubAppPrivateKeyConfigured ? "Leave blank to keep current private key" : "-----BEGIN PRIVATE KEY-----"}
-                    className="min-h-32 w-full resize-y border border-white/15 bg-white/[0.03] px-3 py-3 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-white focus:ring-2 focus:ring-white/10"
+                    className="min-h-32 w-full resize-y border border-line bg-glass px-3 py-3 font-mono text-xs text-zinc-100 outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
                     spellCheck={false}
                     autoComplete="off"
                   />
                 </div>
               </div>
 
-              <p className="mt-3 text-xs leading-5 text-zinc-500">
+              <p className="mt-3 text-xs leading-5 text-ink-dim">
                 Leave masked secrets unchanged to keep existing values.
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2">
                 <button
                   type="submit"
-                  className="inline-flex min-h-10 w-fit items-center justify-center bg-white px-4 text-sm text-black transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+                  className="inline-flex min-h-10 w-fit items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
                   disabled={busy}
                 >
                   {busy ? "Saving..." : "Save GitHub settings"}
@@ -435,7 +435,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {github.statusError || error || success ? (
-        <div className="border-t border-white/10 px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
+        <div className="border-t border-line px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
           {github.statusError ? (
             <div className="mt-5 border-l-2 border-amber-400 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
               {github.statusError}

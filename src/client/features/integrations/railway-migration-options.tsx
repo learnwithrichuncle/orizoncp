@@ -34,7 +34,7 @@ export function RailwayMigrationOptions({
         disabled={busy}
         label="Exclude RAILWAY_* variables"
       >
-        <span className="text-xs text-zinc-300 font-semibold font-mono uppercase tracking-wider">
+        <span className="text-xs text-ink-muted font-semibold font-mono uppercase tracking-wider">
           Exclude RAILWAY_* variables
         </span>
       </Checkbox>
@@ -46,7 +46,7 @@ export function RailwayMigrationOptions({
         disabled={busy}
         label="Recreate database engines"
       >
-        <span className="text-xs text-zinc-300 font-semibold font-mono uppercase tracking-wider">
+        <span className="text-xs text-ink-muted font-semibold font-mono uppercase tracking-wider">
           Recreate database engines
         </span>
       </Checkbox>
@@ -58,7 +58,7 @@ export function RailwayMigrationOptions({
         disabled={busy}
         label="Auto-deploy services"
       >
-        <span className="text-xs text-zinc-300 font-semibold font-mono uppercase tracking-wider">
+        <span className="text-xs text-ink-muted font-semibold font-mono uppercase tracking-wider">
           Auto-deploy services
         </span>
       </Checkbox>
@@ -70,7 +70,7 @@ export function RailwayMigrationOptions({
         disabled={busy || !canImportDatabaseData}
         label="Import database data"
       >
-        <span className={`text-xs font-semibold font-mono uppercase tracking-wider ${canImportDatabaseData ? "text-zinc-300" : "text-zinc-600"}`}>
+        <span className={`text-xs font-semibold font-mono uppercase tracking-wider ${canImportDatabaseData ? "text-ink-muted" : "text-ink-dim"}`}>
           Import database data
         </span>
       </Checkbox>

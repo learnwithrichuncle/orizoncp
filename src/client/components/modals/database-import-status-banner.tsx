@@ -60,24 +60,24 @@ export function DatabaseImportStatusBanner({ dataImport, onDismiss }: { dataImpo
     <div className={`mb-4 border px-3 py-2.5 ${tone.container}`}>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <span className={`grid h-8 w-8 flex-none place-items-center border bg-black/30 ${tone.icon}`}>
+          <span className={`grid h-8 w-8 flex-none place-items-center border bg-base/30 ${tone.icon}`}>
             <AppIcon icon={Icon} size={17} className={active ? "animate-pulse" : ""} />
           </span>
           <div className="min-w-0">
             <div className={`font-mono text-[9px] uppercase tracking-[0.16em] ${tone.label}`}>Database data import</div>
-            <div className="mt-1 truncate text-xs text-zinc-300">{details}</div>
+            <div className="mt-1 truncate text-xs text-ink-muted">{details}</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <span className={`px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] ${statusClass(statusTone(dataImport.status))}`}>
             {statusLabel(dataImport.status)}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
             {formatTime(dataImport.finishedAt ?? dataImport.startedAt ?? dataImport.createdAt)}
           </span>
           <button
             type="button"
-            className="inline-flex h-7 w-7 items-center justify-center border border-white/15 text-zinc-500 transition hover:border-white/35 hover:bg-black/20 hover:text-white"
+            className="inline-flex h-7 w-7 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-base/20 hover:text-white"
             onClick={onDismiss}
             aria-label="Dismiss database import status"
             title="Dismiss"

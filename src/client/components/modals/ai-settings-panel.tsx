@@ -166,12 +166,12 @@ export function AiSettingsPanel() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-white/10 bg-black">
+    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
       <div className="grid min-h-[640px] lg:grid-cols-[260px_minmax(0,1fr)]">
-        <aside className="border-b border-white/10 bg-white/[0.02] lg:border-b-0 lg:border-r">
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-4">
+        <aside className="border-b border-line bg-glass lg:border-b-0 lg:border-r">
+          <div className="flex items-center justify-between border-b border-line px-4 py-4">
             <span className="text-sm text-white">Providers</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-zinc-500">
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
               {connectedProviderCount} connected
             </span>
           </div>
@@ -202,10 +202,10 @@ export function AiSettingsPanel() {
 
           {loading ? (
             <div className="space-y-7" aria-label="Loading AI providers">
-              <div className="h-14 w-48 animate-pulse bg-white/5" />
+              <div className="h-14 w-48 animate-pulse bg-glass" />
               <div className="grid max-w-xl gap-5">
-                <div className="h-11 animate-pulse border border-white/10 bg-white/[0.03]" />
-                <div className="h-11 animate-pulse border border-white/10 bg-white/[0.03]" />
+                <div className="h-11 animate-pulse border border-line bg-glass" />
+                <div className="h-11 animate-pulse border border-line bg-glass" />
               </div>
             </div>
           ) : (
