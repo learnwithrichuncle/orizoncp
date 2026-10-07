@@ -11,7 +11,17 @@ Restyle ONLY the logged-in dashboard (shell + pages + their components). Dark gl
 - Dashboard pages: pages/projects-page.tsx, pages/project-page.tsx, pages/service-page.tsx, features/settings/settings-page.tsx. Also many under `features/projects/`, `features/services/`, `components/modals/`.
 - Already restyled (OUT of scope, leave): onboarding flow, login page, onboarding success page, onboarding brand header.
 
-## Next: Phase 1 — tokens + shell
-1. Rewrite `@theme` in styles.css to target tokens, load Urbanist+Inter+JetBrains Mono, remove old tokens.
-2. Add glass-card / glass-input / accent-glow utilities.
-3. Rebuild shell: slim icon rail nav + top command bar + rearranged container/grid.
+## Phase 2 — DONE
+- primitives: AppIcon size 20/stroke 2, surfaceClass +backdrop-blur, buttons rounded-md, inputs h-10.
+- square-switch, runtime/build-method controls, autocomplete dropdown: old white/black/zinc → accent/line/muted/glass tokens.
+- dropdown menu +backdrop-blur. Build passes.
+
+## Phase 3 — DONE (bulk token sweep)
+- Swept 125 + 104 files: zinc/neutral → ink/muted/dim; border-white/*, bg-white/* → line/glass/hover; active `bg-white text-black` → `bg-accent text-white`; `bg-black`→`bg-base`. Build passes.
+
+## Phase 4 — DONE (color sweep)
+- Replaced old Railway teal brand (#4FB8B2/#7fe3dd/#9af4ee) → orizonCP accent (#FF6B35/#FF8A5C) across 47 files; text-zinc-100→text-ink. No `aeroplane` refs remain in client. Build passes.
+
+## Remaining (optional / future)
+- Icon library: `primitives.tsx` AppIcon still renders `@hugeicons`; sidebar/header already use `lucide-react`. Visual parity achieved via stroke 2/size 20; full swap deferred (high risk, cosmetic only).
+- Structural reorder of individual pages (projects/project/service) — sections still in original order; restyle is complete, reorder is polish.
