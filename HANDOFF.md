@@ -23,5 +23,5 @@ Restyle ONLY the logged-in dashboard (shell + pages + their components). Dark gl
 - Replaced old Railway teal brand (#4FB8B2/#7fe3dd/#9af4ee) → orizonCP accent (#FF6B35/#FF8A5C) across 47 files; text-zinc-100→text-ink. No `aeroplane` refs remain in client. Build passes.
 
 ## Remaining (optional / future)
-- Icon library: `primitives.tsx` AppIcon still renders `@hugeicons`; sidebar/header already use `lucide-react`. Visual parity achieved via stroke 2/size 20; full swap deferred (high risk, cosmetic only).
-- Structural reorder of individual pages (projects/project/service) — sections still in original order; restyle is complete, reorder is polish.
+- Icon library: `primitives.tsx` AppIcon still renders `@hugeicons`; sidebar/header already use `lucide-react`. Visual parity achieved via stroke 2/size 20; full swap deferred (105 files, divergent icon names, high breakage risk, no visual gain).
+- Structural reorder: projects dashboard header wired in (stats + New project/Import actions). project-page/service-page section reorder still available as polish.
