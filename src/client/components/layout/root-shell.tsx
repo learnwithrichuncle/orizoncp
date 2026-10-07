@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "@tanstack/react-router";
 import { AuthGate } from "../auth/auth-gate";
 import { AppSidebar } from "./app-sidebar";
+import { RootHeader } from "./root-header";
 
 export function RootShell() {
   const location = useLocation();
@@ -21,13 +22,16 @@ export function RootShell() {
   return (
     <div className="flex min-h-dvh bg-base text-ink-muted">
       <AppSidebar />
-      <main className="min-w-0 flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-[1400px] px-[34px] py-8">
-          <AuthGate>
-            <Outlet />
-          </AuthGate>
-        </div>
-      </main>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <RootHeader />
+        <main className="min-w-0 flex-1 overflow-y-auto">
+          <div className="mx-auto w-full max-w-[1400px] px-8 py-8">
+            <AuthGate>
+              <Outlet />
+            </AuthGate>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
