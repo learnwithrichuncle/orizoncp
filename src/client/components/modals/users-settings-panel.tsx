@@ -2,6 +2,7 @@ import { Add01Icon } from "@hugeicons/core-free-icons";
 import { useEffect, useState } from "react";
 import { api, type ManagedUser } from "../../api";
 import { SettingsDialog } from "../../features/settings/settings-dialog";
+import { ConfirmationDialog } from "./confirmation-dialog";
 import { AppIcon } from "../ui/primitives";
 import { UserCreateForm } from "./user-create-form";
 import { UserList } from "./user-list";
@@ -20,6 +21,8 @@ export function UsersSettingsPanel({ open }: { open: boolean }) {
   const [createOpen, setCreateOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [creating, setCreating] = useState(false);
+  const [busy, setBusy] = useState("");
+  const [pendingDelete, setPendingDelete] = useState<ManagedUser | null>(null);
   const [error, setError] = useState("");
 
   async function loadUsers() {
@@ -54,6 +57,37 @@ export function UsersSettingsPanel({ open }: { open: boolean }) {
     }
   }
 
+  async function changeRole(userId: string, role: "owner" | "user") {
+    setBusy(userId);
+    setError("");
+    try {
+      const result = await api.updateSystemUser(userId, { role });
+      setUsers((current) =>
+        sortUsers(current.map((user) => (user.id === userId ? result.user : user)))
+      );
+    } catch (issue) {
+      setError(issue instanceof Error ? issue.message : "Could not update user");
+    } finally {
+      setBusy("");
+    }
+  }
+
+  async function confirmDelete() {
+    if (!pendingDelete) return;
+    const userId = pendingDelete.id;
+    setBusy(userId);
+    setError("");
+    try {
+      await api.deleteSystemUser(userId);
+      setUsers((current) => current.filter((user) => user.id !== userId));
+      setPendingDelete(null);
+    } catch (issue) {
+      setError(issue instanceof Error ? issue.message : "Could not delete user");
+    } finally {
+      setBusy("");
+    }
+  }
+
   return (
     <section className="mx-auto max-w-5xl overflow-hidden border border-neutral-800 bg-neutral-950">
       <header className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 px-5 py-5 sm:px-7 lg:px-8">
@@ -74,7 +108,13 @@ export function UsersSettingsPanel({ open }: { open: boolean }) {
         </button>
       </header>
 
-      <UserList users={users} loading={loading} />
+      <UserList
+        users={users}
+        loading={loading}
+        busy={busy}
+        onChangeRole={(userId, role) => void changeRole(userId, role)}
+        onDelete={(user) => setPendingDelete(user)}
+      />
 
       {error ? (
         <div className="border-t border-neutral-800 px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
@@ -94,6 +134,19 @@ export function UsersSettingsPanel({ open }: { open: boolean }) {
       >
         <UserCreateForm creating={creating} onCreate={createUser} />
       </SettingsDialog>
+
+      <ConfirmationDialog
+        open={Boolean(pendingDelete)}
+        title="Delete this user?"
+        subject={pendingDelete?.email}
+        description="This removes the user's access. Users who own projects must be emptied first."
+        confirmLabel="Delete user"
+        busy={busy === pendingDelete?.id}
+        onClose={() => {
+          if (!busy) setPendingDelete(null);
+        }}
+        onConfirm={() => void confirmDelete()}
+      />
     </section>
   );
 }

@@ -953,6 +953,13 @@ export const api = {
       method: "POST",
       body: JSON.stringify(body)
     }),
+  updateSystemUser: (userId: string, body: { role: "owner" | "user" }) =>
+    request<{ user: ManagedUser }>(`/api/system/users/${userId}`, {
+      method: "PATCH",
+      body: JSON.stringify(body)
+    }),
+  deleteSystemUser: (userId: string) =>
+    request(`/api/system/users/${userId}`, { method: "DELETE" }),
   apiKeys: () => request<{ apiKeys: ApiKeySummary[]; projects: ApiKeyProjectOption[] }>("/api/system/api-keys"),
   createApiKey: (body: {
     name: string;

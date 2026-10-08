@@ -9,6 +9,10 @@ export const createManagedUserSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters.")
 });
 
+export const updateManagedUserSchema = z.object({
+  role: z.enum(["owner", "user"])
+});
+
 export type PublicManagedUser = {
   id: string;
   name: string;
@@ -104,4 +108,30 @@ export function createManagedUser(input: z.infer<typeof createManagedUserSchema>
     activeServiceCount: 0,
     apiKeyCount: 0
   });
+}
+
+function assertOwnerConstraint(userId: string, nextRole: "owner" | "user") {
+  const existing = db.select({ id: users.id, role: users.role }).from(users).where(eq(users.id, userId)).get();
+  if (!existing) throw new Error("User not found");
+  if (existing.role === "owner" && nextRole !== "owner") {
+    const owners = db.select({ id: users.id }).from(users).where(eq(users.role, "owner")).all();
+    if (owners.length <= 1) throw new Error("At least one owner is required.");
+  }
+  return existing;
+}
+
+export function updateManagedUserRole(userId: string, role: "owner" | "user") {
+  assertOwnerConstraint(userId, role);
+  db.update(users).set({ role, updatedAt: new Date().toISOString() }).where(eq(users.id, userId)).run();
+  return listManagedUsers().find((managedUser) => managedUser.id === userId) ?? null;
+}
+
+export function deleteManagedUser(userId: string) {
+  assertOwnerConstraint(userId, "user");
+  const managed = listManagedUsers().find((managedUser) => managedUser.id === userId);
+  if (!managed) throw new Error("User not found");
+  if (managed.projectCount > 0) {
+    throw new Error("This user owns projects. Move or delete them first.");
+  }
+  db.delete(users).where(eq(users.id, userId)).run();
 }
