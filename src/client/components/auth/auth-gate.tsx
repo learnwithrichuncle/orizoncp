@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { api, type AuthStatus } from "../../api";
-import { Spinner } from "../ui/spinner";
+import { Loader } from "../ui/loader";
 import { AuthStatusContext } from "./auth-context";
 
 function AuthLoading() {
@@ -16,7 +16,7 @@ function AuthLoading() {
     <main className="grid min-h-dvh place-items-center overflow-hidden bg-neutral-950 text-neutral-100">
       <div role="status" aria-label="Checking access">
         <span className="sr-only">Checking access</span>
-        <Spinner size={32} />
+        <Loader />
       </div>
     </main>
   );

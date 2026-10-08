@@ -1,5 +1,9 @@
-import type { ReactNode } from "react";
+import { useSyncExternalStore, type ReactNode } from "react";
 import { settingsPages } from "../../features/settings/settings-pages";
+import {
+  getServiceNav,
+  subscribeServiceNav
+} from "../../features/services/service-nav-store";
 
 function NavIcon({ children }: { children: ReactNode }) {
   return (
@@ -238,10 +242,8 @@ const sections: NavLink[][] = [
     { href: "/databases", label: "Database" },
     { href: "/domains", label: "Domain" },
     { href: "/migrations", label: "Migrate" },
-    { href: "/cdn", label: "CDN" },
   ],
   [{ href: "/settings", label: "Settings" }],
-  [{ href: "/billing", label: "Billing" }],
 ];
 
 const SERVICE_NAV = [
@@ -271,6 +273,28 @@ const serviceTabIcons: Record<string, ReactNode> = {
     </NavIcon>
   ),
   domains: icons["/domains"],
+  "source-code": (
+    <NavIcon>
+      <path d="M9 8 5 12l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="m15 8 4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="m13.5 6-3 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity=".6" />
+    </NavIcon>
+  ),
+  data: icons["/databases"],
+  console: (
+    <NavIcon>
+      <rect x="3.5" y="4.5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.6" fill="none" />
+      <path d="m7.5 9 2.5 2.5-2.5 2.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M12.5 15h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </NavIcon>
+  ),
+  backups: (
+    <NavIcon>
+      <path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5v-9Z" fill="currentColor" opacity=".45" />
+      <path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5v-9Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+      <path d="m4 7.5 8 3.5 8-3.5M12 11v9" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+    </NavIcon>
+  ),
   settings: icons["/settings"]
 };
 
@@ -331,6 +355,11 @@ export function AppSidebar() {
   const serviceSlug = projectSlug && segments[1] ? segments[1] : null;
   const onService = Boolean(projectSlug && serviceSlug);
   const activeServiceTab = onService ? segments[2] ?? "overview" : "overview";
+  const serviceNavItems = useSyncExternalStore(
+    subscribeServiceNav,
+    getServiceNav,
+    getServiceNav
+  );
 
   function isActive(href: string) {
     if (href === "/") return path === "/";
@@ -394,54 +423,6 @@ export function AppSidebar() {
               </svg>
               <span className="group-data-[collapsible=icon]:hidden">rizon</span>
             </a>
-          </div>
-          <div className="flex flex-row items-center gap-2">
-            <a
-              title="Notifications"
-              href="/notifications"
-              className="relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-visible rounded-full bg-transparent text-white transition-colors hover:bg-white/10"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
-                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-              </svg>
-              <span className="absolute -right-0.5 -top-0.5 z-10 flex h-4 min-w-4 items-center justify-center rounded-full bg-blue-600 px-1 text-[9px] font-semibold leading-none text-white">
-                9+
-              </span>
-            </a>
-            <button
-              type="button"
-              title="Toggle theme"
-              aria-label="Toggle theme"
-              className="relative inline-flex h-7 w-7 cursor-pointer items-center justify-center border-none bg-transparent text-neutral-400 outline-none transition-colors hover:bg-white/10 hover:text-white"
-            >
-              <span className="theme-toggle-icon inline-flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  color="currentColor"
-                  strokeWidth="1.8"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M16.9991 12C16.9991 14.7614 14.7605 17 11.9991 17C9.23766 17 6.99908 14.7614 6.99908 12C6.99908 9.23858 9.23766 7 11.9991 7C14.7605 7 16.9991 9.23858 16.9991 12Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-                  <path d="M12.1247 3.25H11.9997M12.1242 20.75H11.9992M20.75 12.125V12M3.25 12.125V12M18.2752 5.90098L18.1868 5.81259M5.90051 18.275L5.81212 18.1866M18.0987 18.2756L18.187 18.1872M5.72429 5.9012L5.81267 5.81282M12.2497 3.25C12.2497 3.38807 12.1378 3.5 11.9997 3.5C11.8616 3.5 11.7497 3.38807 11.7497 3.25C11.7497 3.11193 11.8616 3 11.9997 3C12.1378 3 12.2497 3.11193 12.2497 3.25ZM12.2492 20.75C12.2492 20.8881 12.1373 21 11.9992 21C11.8611 21 11.7492 20.8881 11.7492 20.75C11.7492 20.6119 11.8611 20.5 11.9992 20.5C12.1373 20.5 12.2492 20.6119 12.2492 20.75ZM20.75 12.25C20.6119 12.25 20.5 12.1381 20.5 12C20.5 11.8619 20.6119 11.75 20.75 11.75C20.8881 11.75 21 11.8619 21 12C21 12.1381 20.8881 12.25 20.75 12.25ZM3.25 12.25C3.11193 12.25 3 12.1381 3 12C3 11.8619 3.11193 11.75 3.25 11.75C3.38807 11.75 3.5 11.8619 3.5 12C3.5 12.1381 3.38807 12.25 3.25 12.25ZM18.3636 5.98937C18.266 6.087 18.1077 6.087 18.01 5.98937C17.9124 5.89174 17.9124 5.73345 18.01 5.63582C18.1077 5.53819 18.266 5.53819 18.3636 5.63582C18.4612 5.73345 18.4612 5.89174 18.3636 5.98937ZM5.9889 18.3634C5.89127 18.461 5.73297 18.461 5.63534 18.3634C5.53771 18.2658 5.53771 18.1075 5.63534 18.0099C5.73297 17.9122 5.89127 17.9122 5.9889 18.0099C6.08653 18.1075 6.08653 18.2658 5.9889 18.3634ZM18.0103 18.364C17.9126 18.2663 17.9126 18.108 18.0103 18.0104C18.1079 17.9128 18.2662 17.9128 18.3638 18.0104C18.4614 18.108 18.4614 18.2663 18.3638 18.364C18.2662 18.4616 18.1079 18.4616 18.0103 18.364ZM5.6359 5.98959C5.53827 5.89196 5.53827 5.73367 5.6359 5.63604C5.73353 5.53841 5.89182 5.53841 5.98945 5.63604C6.08708 5.73367 6.08708 5.89196 5.98945 5.98959C6.08722 5.89182 6.08722 5.89182 5.6359 5.98959Z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-                </svg>
-              </span>
-            </button>
           </div>
         </div>
 
@@ -556,7 +537,7 @@ export function AppSidebar() {
                 data-sidebar="menu"
                 className="sidebar-nav m-0 flex w-full min-w-0 list-none flex-col gap-1 p-0"
               >
-                {SERVICE_NAV.map((tab) => {
+                {(serviceNavItems.length > 0 ? serviceNavItems : SERVICE_NAV).map((tab) => {
                   const href = `/${projectSlug}/${serviceSlug}/${tab.segment}`;
                   const active = activeServiceTab === tab.segment;
                   return (

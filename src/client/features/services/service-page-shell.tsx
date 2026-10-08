@@ -46,6 +46,8 @@ import { ServiceOverviewPanel } from "./service-overview-panel";
 import { FunctionSourcePanel } from "./function-source-panel";
 import { ProjectRouteLoader } from "../projects/project-route-loader";
 import type { ServiceTab } from "./service-tabs";
+import { serviceTabToRouteSegment } from "./service-tabs";
+import { setServiceNav } from "./service-nav-store";
 import { ApplicationServiceSettingsPanel } from "./application-service-settings-panel";
 import type { ServiceSettingsState } from "./service-settings-state";
 import { dockerImageForService, dockerImageRepoFullName, isDatabaseService, isDockerImageService } from "../../../shared/service-source";
@@ -106,6 +108,19 @@ const serviceTabLabels: Record<ServiceTab, string> = {
 
 function actionRequiresRedeploy(label: string) {
   return label === "env" || label === "settings" || label === "source";
+}
+
+function ServiceNavSync({
+  items
+}: {
+  items: Array<{ segment: string; label: string }>;
+}) {
+  const key = items.map((item) => item.segment).join("|");
+  useEffect(() => {
+    setServiceNav(items);
+    return () => setServiceNav([]);
+  }, [key]);
+  return null;
 }
 
 export function ServicePageShell({
@@ -622,6 +637,10 @@ export function ServicePageShell({
     ["settings", GithubIcon]
   ];
   const visibleTabs = isDatabase ? databaseTabs : appTabs;
+  const serviceNavItems = visibleTabs.map(([tab]) => ({
+    segment: serviceTabToRouteSegment[tab],
+    label: serviceTabLabels[tab]
+  }));
   const deployments = overview?.deployments ?? [];
   const env = overview?.env ?? [];
   const domains = overview?.domains ?? [];
@@ -661,6 +680,7 @@ export function ServicePageShell({
     <>
       <div className={viewportClass}>
         <div className={panelClass}>
+          <ServiceNavSync items={serviceNavItems} />
           <ServicePageToolbar
             services={pageServices}
             currentService={service ?? null}

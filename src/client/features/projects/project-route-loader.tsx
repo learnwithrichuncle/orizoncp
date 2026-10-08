@@ -1,4 +1,4 @@
-import { Spinner } from "../../components/ui/spinner";
+import { Loader } from "../../components/ui/loader";
 
 export function ProjectRouteLoader({
   label = "Loading project",
@@ -13,7 +13,7 @@ export function ProjectRouteLoader({
       aria-label={label}
       className="flex flex-col items-center justify-center gap-3 px-4 py-12 text-center"
     >
-      <Spinner size={28} />
+      <Loader />
       <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-400">
         {label}
       </p>
