@@ -565,11 +565,6 @@ const domainSchema = z.object({
   hostname: z.string().trim().toLowerCase().regex(hostnameRegex)
 });
 
-const searchSchema = z.object({
-  service: z.string().optional(),
-  tab: z.enum(["deployments", "logs", "environment", "domains", "data", "sql", "backups", "settings"]).optional()
-});
-
 function jsonError(message: string, status = 400) {
   return Response.json({ error: message }, { status });
 }
@@ -3747,11 +3742,6 @@ app.post("/api/integrations/vercel/import", async (c) => {
     const msg = error instanceof Error ? error.message : "Failed to import Vercel project";
     return jsonError(msg);
   }
-});
-
-app.get("/api/search", (c) => {
-  const result = searchSchema.safeParse(c.req.query());
-  return c.json(result.success ? result.data : {});
 });
 
 if (process.env.NODE_ENV === "production") {

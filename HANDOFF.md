@@ -18,10 +18,8 @@
 - Client: `api.rollbackDeployment(id)`; Rollback button in `features/services/service-deployments-panel.tsx`.
 
 ### 2. Cleanup
-- God files: `src/server/index.ts` (~3.8k), `src/server/deploy.ts` (1.7k), `create-service-modal.tsx` (1.3k), `service-page-shell.tsx` (~0.95k).
-- Duplication: two R2 stacks (`/api/system/r2` vs `/api/system/backup-storage/r2`), three DB viewers, overlapping env editors.
-- Unused `GET /api/search`; `exportMigrationBundle` bypasses the shared `request` helper.
-- Branding filenames: `website/src/components/aeroplane-logo.astro`, `website/src/content/docs/docs/migration/aeroplane-bundles.md`.
+- Done: removed unused `GET /api/search` (+ `searchSchema`); deleted dead `website/src/components/aeroplane-logo.astro`; renamed `aeroplane-bundles.md` → `orizoncp-bundles.md` (also fixed the docs sidebar entry in `astro.config.mjs`).
+- Remaining (larger/riskier): god-file splitting (`src/server/index.ts` ~3.8k, `deploy.ts` 1.7k, `create-service-modal.tsx` 1.3k, `service-page-shell.tsx` ~0.95k); duplication (two R2 stacks, three DB viewers, overlapping env editors); `exportMigrationBundle` bypasses the shared `request` helper.
 
 ## Notes
 - Repo root: `C:\Users\learn\Videos\ORIZON CP\aeroplane`. Commands: `npm run dev`, `npm run build`, `npm run typecheck`.
