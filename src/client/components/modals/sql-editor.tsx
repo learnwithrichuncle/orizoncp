@@ -41,16 +41,16 @@ function highlightedSql(sql: string) {
   return tokens.map((token, index) => {
     const lower = token.toLowerCase();
     if (token.startsWith("--")) {
-      return <span key={index} className="text-ink-dim">{token}</span>;
+      return <span key={index} className="text-neutral-500">{token}</span>;
     }
     if (token.startsWith("'") || token.startsWith("\"")) {
-      return <span key={index} className="text-ok">{token}</span>;
+      return <span key={index} className="text-green-500">{token}</span>;
     }
     if (sqlKeywords.has(lower)) {
-      return <span key={index} className="text-[#FF8A5C]">{token}</span>;
+      return <span key={index} className="text-blue-400">{token}</span>;
     }
     if (/^\d+(\.\d+)?$/.test(token)) {
-      return <span key={index} className="text-warn">{token}</span>;
+      return <span key={index} className="text-amber-500">{token}</span>;
     }
     return <span key={index}>{token}</span>;
   });
@@ -69,11 +69,11 @@ export function SqlEditor({
   const highlightRef = useRef<HTMLPreElement | null>(null);
 
   return (
-    <div className="relative min-h-[180px] overflow-hidden border border-line-strong bg-base">
+    <div className="relative min-h-[180px] overflow-hidden border border-neutral-700 bg-neutral-950">
       <pre
         ref={highlightRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-auto whitespace-pre-wrap break-words p-4 font-mono text-sm leading-6 text-ink"
+        className="pointer-events-none absolute inset-0 overflow-auto whitespace-pre-wrap break-words p-4 font-mono text-sm leading-6 text-neutral-100"
       >
         {highlighted}
       </pre>
@@ -87,7 +87,7 @@ export function SqlEditor({
           highlightRef.current.scrollTop = event.currentTarget.scrollTop;
           highlightRef.current.scrollLeft = event.currentTarget.scrollLeft;
         }}
-        className="relative h-[180px] w-full resize-none overflow-auto border-0 bg-transparent p-4 font-mono text-sm leading-6 text-transparent caret-[#FF8A5C] outline-none selection:bg-[#FF6B35]/30 disabled:opacity-60"
+        className="relative h-[180px] w-full resize-none overflow-auto border-0 bg-transparent p-4 font-mono text-sm leading-6 text-transparent caret-blue-400 outline-none selection:bg-blue-600/30 disabled:opacity-60"
       />
     </div>
   );

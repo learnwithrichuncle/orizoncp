@@ -68,7 +68,7 @@ function ClockIcon() {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.8"
-      className="text-[#FFFFFF50]"
+      className="text-neutral-400"
       aria-hidden="true"
     >
       <circle cx="12" cy="12" r="10" strokeWidth="1.8" />
@@ -125,15 +125,15 @@ function LogTerminal({
 
   return (
     <div
-      className={`deploy-term flex ${heightClass} w-full flex-col overflow-hidden rounded-xl border border-[#FFFFFF08] bg-[#0d0d0d]`}
+      className={`deploy-term flex ${heightClass} w-full flex-col overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900`}
     >
-      <div className="flex-shrink-0 border-b border-[#FFFFFF08] bg-[#0d0d0d] px-4 py-3">
+      <div className="flex-shrink-0 border-b border-neutral-800 bg-neutral-900 px-4 py-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-[11px] text-[#FFFFFF50]">
+            <span className="font-mono text-[11px] text-neutral-400">
               {logs.length} lines
             </span>
-            <span className="hidden text-[10px] text-[#FFFFFF30] sm:inline">
+            <span className="hidden text-[10px] text-neutral-600 sm:inline">
               {title}
             </span>
           </div>
@@ -141,19 +141,19 @@ function LogTerminal({
             <button
               type="button"
               onClick={() => void copyAll()}
-              className="flex items-center gap-1.5 rounded-md border border-[#FFFFFF15] bg-[#FFFFFF08] px-3 py-1.5 text-[11px] font-medium text-[#FFFFFF90] transition-colors hover:bg-[#FFFFFF10]"
+              className="flex items-center gap-1.5 rounded-md border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-[11px] font-medium text-neutral-200 transition-colors hover:bg-neutral-800"
             >
               <CopyIcon />
               {copied ? "Copied" : `Copy ${logs.length}`}
             </button>
-            <div className="flex items-center gap-2 rounded-md border border-[#FFFFFF08] bg-[#FFFFFF05] px-3 py-1.5">
+            <div className="flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1.5">
               <input
                 aria-label="Find in logs"
                 placeholder="⌘ F"
                 spellCheck={false}
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="w-32 bg-transparent text-[11px] text-[#FFFFFF90] outline-none placeholder:text-[#FFFFFF40]"
+                className="w-32 bg-transparent text-[11px] text-neutral-200 outline-none placeholder:text-neutral-500"
               />
             </div>
             <button
@@ -164,7 +164,7 @@ function LogTerminal({
               className={`flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-[11px] font-medium transition-colors ${
                 tail
                   ? "border-emerald-500/60 bg-emerald-500/10 text-emerald-400"
-                  : "border-[#FFFFFF15] bg-[#FFFFFF08] text-[#FFFFFF90] hover:bg-[#FFFFFF10]"
+                  : "border-neutral-700 bg-neutral-800 text-neutral-200 hover:bg-neutral-800"
               }`}
             >
               <span
@@ -175,9 +175,9 @@ function LogTerminal({
               Tail
             </button>
             {meta ? (
-              <div className="flex items-center gap-1.5 rounded-md border border-[#FFFFFF08] bg-[#FFFFFF05] px-3 py-1.5">
+              <div className="flex items-center gap-1.5 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1.5">
                 <ClockIcon />
-                <span className="font-mono text-[11px] text-[#FFFFFF70]">
+                <span className="font-mono text-[11px] text-neutral-300">
                   {meta}
                 </span>
               </div>
@@ -188,10 +188,10 @@ function LogTerminal({
       </div>
       <div
         ref={scrollRef}
-        className="flex-1 select-none overflow-y-auto bg-[#0d0d0d] font-mono text-[11px]"
+        className="flex-1 select-none overflow-y-auto bg-neutral-900 font-mono text-[11px]"
       >
         {visible.length === 0 ? (
-          <div className="px-4 py-4 text-[11px] text-[#FFFFFF40]">
+          <div className="px-4 py-4 text-[11px] text-neutral-500">
             {emptyLabel}
           </div>
         ) : (
@@ -208,10 +208,10 @@ function LogTerminal({
                       ? "border-l-emerald-500/60 bg-emerald-500/5"
                       : level === "error"
                         ? "border-l-red-500/60 bg-red-500/5"
-                        : "border-l-transparent hover:bg-[#FFFFFF05]"
+                        : "border-l-transparent hover:bg-neutral-900"
                   }`}
                 >
-                  <div className="flex w-[100px] shrink-0 select-none items-center gap-2 text-[11px] text-[#FFFFFF40]">
+                  <div className="flex w-[100px] shrink-0 select-none items-center gap-2 text-[11px] text-neutral-500">
                     <span>{logTime(log.createdAt)}</span>
                   </div>
                   <div className="min-w-0 flex-1">
@@ -221,7 +221,7 @@ function LogTerminal({
                           ? "text-emerald-400"
                           : level === "error"
                             ? "text-red-400"
-                            : "text-[#FFFFFF80]"
+                            : "text-neutral-300"
                       }`}
                     >
                       {log.line}

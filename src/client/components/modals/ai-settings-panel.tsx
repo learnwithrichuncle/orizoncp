@@ -141,32 +141,32 @@ export function AiSettingsPanel() {
     return (
       <div className="mx-auto max-w-5xl space-y-3" aria-label="Loading AI providers">
         <div className="h-10 w-48 animate-pulse rounded-lg bg-white/5" />
-        <div className="h-12 animate-pulse rounded-lg border border-[var(--cf-border)] bg-white/5" />
-        <div className="h-12 animate-pulse rounded-lg border border-[var(--cf-border)] bg-white/5" />
-        <div className="h-12 animate-pulse rounded-lg border border-[var(--cf-border)] bg-white/5" />
+        <div className="h-12 animate-pulse rounded-lg border border-neutral-800 bg-white/5" />
+        <div className="h-12 animate-pulse rounded-lg border border-neutral-800 bg-white/5" />
+        <div className="h-12 animate-pulse rounded-lg border border-neutral-800 bg-white/5" />
       </div>
     );
   }
 
   return (
     <>
-      <section className="mx-auto max-w-5xl overflow-hidden rounded-lg border border-[var(--cf-border)] bg-white/5">
-        <div className="flex items-center justify-between gap-3 border-b border-[var(--cf-border)] px-5 py-4">
+      <section className="mx-auto max-w-5xl overflow-hidden rounded-lg border border-neutral-800 bg-white/5">
+        <div className="flex items-center justify-between gap-3 border-b border-neutral-800 px-5 py-4">
           <span className="text-sm font-medium text-white">Models</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
             {connectedProviderCount} connected
           </span>
         </div>
 
         {credentialError ? (
-          <div className="border-b border-[var(--cf-border)] px-5 py-3 text-sm text-bad">
+          <div className="border-b border-neutral-800 px-5 py-3 text-sm text-red-500">
             {credentialError}
           </div>
         ) : null}
 
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b border-[var(--cf-border)] text-left font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
+            <tr className="border-b border-neutral-800 text-left font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-400">
               <th className="px-5 py-2.5 font-normal">Provider</th>
               <th className="px-5 py-2.5 font-normal">Status</th>
               <th className="hidden px-5 py-2.5 font-normal sm:table-cell">Model</th>
@@ -183,7 +183,7 @@ export function AiSettingsPanel() {
                 <tr
                   key={provider.id}
                   onClick={() => setOpenProviderId(provider.id)}
-                  className="cursor-pointer border-b border-[var(--cf-border)] transition-colors last:border-b-0 hover:bg-white/10"
+                  className="cursor-pointer border-b border-neutral-800 transition-colors last:border-b-0 hover:bg-white/10"
                 >
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-3">
@@ -196,7 +196,7 @@ export function AiSettingsPanel() {
                         {provider.name}
                       </span>
                       {isDefault ? (
-                        <span className="shrink-0 rounded-full bg-[var(--color-accent)] px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide text-white">
+                        <span className="shrink-0 rounded-full bg-blue-600 px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide text-white">
                           Default
                         </span>
                       ) : null}
@@ -206,25 +206,25 @@ export function AiSettingsPanel() {
                     <span
                       className={`inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] ${
                         connection.connected
-                          ? "text-ok"
-                          : "text-[var(--color-text-secondary)]"
+                          ? "text-green-500"
+                          : "text-neutral-400"
                       }`}
                     >
                       <span
                         className={`h-1.5 w-1.5 rounded-full ${
                           connection.connected
-                            ? "bg-ok"
-                            : "bg-[var(--color-text-secondary)]"
+                            ? "bg-green-500"
+                            : "bg-neutral-400"
                         }`}
                       />
                       {connection.connected ? "Connected" : "Not connected"}
                     </span>
                   </td>
-                  <td className="hidden px-5 py-3 font-mono text-[11px] text-[var(--color-text-secondary)] sm:table-cell">
+                  <td className="hidden px-5 py-3 font-mono text-[11px] text-neutral-400 sm:table-cell">
                     {connection.selectedModel || "—"}
                   </td>
                   <td className="px-5 py-3 text-right">
-                    <span className="inline-flex shrink-0 rounded-lg border border-[var(--cf-border)] px-2.5 py-1 text-xs text-[var(--color-text-secondary)]">
+                    <span className="inline-flex shrink-0 rounded-lg border border-neutral-800 px-2.5 py-1 text-xs text-neutral-400">
                       {connection.connected ? "Manage" : "Add key"}
                     </span>
                   </td>

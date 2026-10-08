@@ -43,12 +43,12 @@ export function CreateEnvironmentModal({
       if (!saving) onClose();
     }}>
       <form onSubmit={(event) => void submit(event)}>
-        <p className="text-sm leading-6 text-ink-dim">
+        <p className="text-sm leading-6 text-neutral-500">
           Create another place to organize this project's services.
         </p>
 
         <label className="mt-5 block">
-          <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
+          <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-400">
             Environment name
           </span>
           <input
@@ -59,20 +59,20 @@ export function CreateEnvironmentModal({
             autoFocus
             maxLength={50}
             required
-            className="h-11 w-full border border-line bg-glass px-3.5 text-sm text-white outline-none transition placeholder:text-zinc-700 hover:border-line-strong focus:border-white focus:bg-glass"
+            className="h-11 w-full border border-neutral-800 bg-neutral-900 px-3.5 text-sm text-white outline-none transition placeholder:text-zinc-700 hover:border-neutral-700 focus:border-white focus:bg-neutral-900"
           />
         </label>
 
         {error ? (
-          <div role="alert" className="mt-4 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+          <div role="alert" className="mt-4 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">
             {error}
           </div>
         ) : null}
 
-        <div className="mt-6 border-t border-line pt-4">
+        <div className="mt-6 border-t border-neutral-800 pt-4">
           <button
             type="submit"
-            className="flex h-11 w-full items-center justify-center bg-accent px-5 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+            className="flex h-11 w-full items-center justify-center bg-blue-600 px-5 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
             disabled={saving || !name.trim()}
           >
             {saving ? "Creating…" : "Create environment"}

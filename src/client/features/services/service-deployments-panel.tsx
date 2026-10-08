@@ -18,13 +18,13 @@ const toneClass = {
   ok: "bg-emerald-500/15 text-emerald-400",
   warn: "bg-amber-500/15 text-amber-400",
   bad: "bg-red-500/15 text-red-400",
-  muted: "bg-white/10 text-[var(--color-text-secondary)]"
+  muted: "bg-white/10 text-neutral-400"
 };
 
 function PropRow({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="flex items-center gap-4 border-b border-[var(--cf-border)] px-4 py-2.5 last:border-b-0">
-      <span className="w-24 shrink-0 text-xs text-[var(--color-text-secondary)]">
+    <div className="flex items-center gap-4 border-b border-neutral-800 px-4 py-2.5 last:border-b-0">
+      <span className="w-24 shrink-0 text-xs text-neutral-400">
         {label}
       </span>
       <span className="min-w-0 flex-1 truncate text-sm text-white">{value}</span>
@@ -66,10 +66,10 @@ export function ServiceDeploymentsPanel({
   const status = activeDeployment ? statusMeta(activeDeployment.status) : null;
 
   return (
-    <section className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden rounded-xl border border-[var(--cf-border)] bg-[#0d0d0d]">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--cf-border)] px-4 py-3">
-        <div className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+    <section className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800 px-4 py-3">
+        <div className="flex items-center gap-2 text-xs text-neutral-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
           {projectName ?? service?.name ?? "Service"}
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -78,7 +78,7 @@ export function ServiceDeploymentsPanel({
               href={service.primaryUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex h-9 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+              className="flex h-9 items-center gap-2 rounded-lg border border-neutral-800 px-3 text-sm text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
             >
               <ExternalLink size={14} />
               Visit
@@ -87,7 +87,7 @@ export function ServiceDeploymentsPanel({
           <button
             type="button"
             onClick={onOpenRuntimeLogs}
-            className="flex h-9 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+            className="flex h-9 items-center gap-2 rounded-lg border border-neutral-800 px-3 text-sm text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
           >
             <Terminal size={14} />
             Runtime logs
@@ -97,7 +97,7 @@ export function ServiceDeploymentsPanel({
               type="button"
               onClick={onAbortActiveDeployment}
               disabled={busy === "abort"}
-              className="flex h-9 items-center gap-2 rounded-lg border border-bad/40 px-3 text-sm text-bad transition-colors hover:bg-bad/10 disabled:opacity-50"
+              className="flex h-9 items-center gap-2 rounded-lg border border-red-500/40 px-3 text-sm text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
             >
               Abort build
             </button>
@@ -105,7 +105,7 @@ export function ServiceDeploymentsPanel({
             <button
               type="button"
               onClick={() => setFailureModalOpen(true)}
-              className="flex h-9 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+              className="flex h-9 items-center gap-2 rounded-lg border border-neutral-800 px-3 text-sm text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
             >
               What happened?
             </button>
@@ -114,7 +114,7 @@ export function ServiceDeploymentsPanel({
             type="button"
             onClick={onDeploy}
             disabled={busy === "deploy"}
-            className="flex h-9 items-center gap-2 rounded-lg bg-[var(--color-accent)] px-3 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-60"
+            className="flex h-9 items-center gap-2 rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-60"
           >
             <RotateCw size={14} />
             {busy === "deploy" ? "Deploying…" : "Redeploy"}
@@ -137,7 +137,7 @@ export function ServiceDeploymentsPanel({
           <select
             value={activeDeploymentId ?? ""}
             onChange={(event) => onSelectDeployment(event.target.value)}
-            className="ml-auto h-9 rounded-lg border border-[var(--cf-border)] bg-white/5 px-3 font-mono text-xs text-white outline-none"
+            className="ml-auto h-9 rounded-lg border border-neutral-800 bg-white/5 px-3 font-mono text-xs text-white outline-none"
           >
             {deployments.map((deployment) => (
               <option key={deployment.id} value={deployment.id}>
@@ -149,7 +149,7 @@ export function ServiceDeploymentsPanel({
       </div>
 
       {activeDeployment ? (
-        <div className="mx-4 mb-4 overflow-hidden rounded-lg border border-[var(--cf-border)]">
+        <div className="mx-4 mb-4 overflow-hidden rounded-lg border border-neutral-800">
           <PropRow label="Project" value={projectName ?? service?.name ?? "—"} />
           <PropRow label="Branch" value={service?.branch || "—"} />
           <PropRow label="Commit" value={shortSha(activeDeployment.commitSha)} />

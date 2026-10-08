@@ -14,7 +14,7 @@ export function ProjectRouteLoader({
       className="flex flex-col items-center justify-center gap-3 px-4 py-12 text-center"
     >
       <Spinner size={28} />
-      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted">
+      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-400">
         {label}
       </p>
       <span className="sr-only">Please wait</span>
@@ -23,7 +23,7 @@ export function ProjectRouteLoader({
 
   if (fullPage) {
     return (
-      <main className="grid h-dvh place-items-center overflow-hidden bg-base text-ink">
+      <main className="grid h-dvh place-items-center overflow-hidden bg-neutral-950 text-neutral-100">
         {loader}
       </main>
     );

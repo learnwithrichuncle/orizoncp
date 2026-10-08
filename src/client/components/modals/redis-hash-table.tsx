@@ -4,8 +4,8 @@ import type { DatabaseRow } from "../../api";
 import { AppIcon } from "../ui/primitives";
 
 const hashGridClass = "grid grid-cols-[minmax(160px,0.36fr)_minmax(240px,1fr)_168px]";
-const hashCellClass = "min-w-0 border-r border-line px-3 py-2.5";
-const hashInputClass = "h-8 w-full min-w-0 border border-line bg-base px-2 font-mono text-xs text-ink outline-none transition placeholder:text-zinc-700 focus:border-white";
+const hashCellClass = "min-w-0 border-r border-neutral-800 px-3 py-2.5";
+const hashInputClass = "h-8 w-full min-w-0 border border-neutral-800 bg-neutral-950 px-2 font-mono text-xs text-neutral-100 outline-none transition placeholder:text-zinc-700 focus:border-white";
 
 function valueText(value: unknown) {
   if (value === null || value === undefined) return "";
@@ -35,10 +35,10 @@ function HashActionButton({
 }) {
   const toneClass =
     tone === "primary"
-      ? "border-white bg-accent text-ink hover:bg-zinc-200"
+      ? "border-white bg-blue-600 text-neutral-100 hover:bg-zinc-200"
       : tone === "danger"
-        ? "border-bad/35 bg-bad/10 text-bad hover:bg-bad/15"
-        : "border-line text-ink-dim hover:border-line hover:bg-hover hover:text-white";
+        ? "border-red-500/35 bg-red-500/10 text-red-500 hover:bg-red-500/15"
+        : "border-neutral-800 text-neutral-500 hover:border-neutral-800 hover:bg-neutral-800 hover:text-white";
 
   return (
     <button
@@ -86,12 +86,12 @@ export function RedisHashTable({
   }
 
   return (
-    <div className="min-h-0 flex-1 overflow-auto border border-line bg-glass">
+    <div className="min-h-0 flex-1 overflow-auto border border-neutral-800 bg-neutral-900">
       {rows.length === 0 ? (
-        <div className="flex h-full min-h-48 items-center justify-center px-5 text-center text-sm text-ink-dim">No fields in this hash.</div>
+        <div className="flex h-full min-h-48 items-center justify-center px-5 text-center text-sm text-neutral-500">No fields in this hash.</div>
       ) : (
         <div className="min-w-[640px]">
-          <div className={`${hashGridClass} border-b border-line bg-glass font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim`}>
+          <div className={`${hashGridClass} border-b border-neutral-800 bg-neutral-900 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500`}>
             <div className={`${hashCellClass} py-2`}>Field</div>
             <div className={`${hashCellClass} py-2`}>Value</div>
             <div className="px-3 py-2 text-right">Actions</div>
@@ -103,7 +103,7 @@ export function RedisHashTable({
             const editing = editingItemId === itemId;
 
             return (
-              <div key={itemId} className={`${hashGridClass} border-b border-line text-xs text-ink-muted last:border-b-0`}>
+              <div key={itemId} className={`${hashGridClass} border-b border-neutral-800 text-xs text-neutral-400 last:border-b-0`}>
                 {editing ? (
                   <>
                     <div className={hashCellClass}>
@@ -138,13 +138,13 @@ export function RedisHashTable({
                 ) : confirming ? (
                   <>
                     <div className={hashCellClass}>
-                      <span className="block truncate font-mono text-ink-muted">{valueText(row.field)}</span>
+                      <span className="block truncate font-mono text-neutral-400">{valueText(row.field)}</span>
                     </div>
                     <div className={hashCellClass}>
-                      <span className="block break-words font-mono text-ink">{valueText(row.value)}</span>
+                      <span className="block break-words font-mono text-neutral-100">{valueText(row.value)}</span>
                     </div>
                     <div className="flex items-center justify-end gap-2 px-3 py-2.5">
-                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-bad">Confirm?</span>
+                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-red-500">Confirm?</span>
                       <HashActionButton
                         title="Yes, delete field"
                         tone="danger"
@@ -161,10 +161,10 @@ export function RedisHashTable({
                 ) : (
                   <>
                     <div className={hashCellClass}>
-                      <span className="block truncate font-mono text-ink-muted">{valueText(row.field)}</span>
+                      <span className="block truncate font-mono text-neutral-400">{valueText(row.field)}</span>
                     </div>
                     <div className={hashCellClass}>
-                      <span className="block break-words font-mono text-ink">{valueText(row.value)}</span>
+                      <span className="block break-words font-mono text-neutral-100">{valueText(row.value)}</span>
                     </div>
                     <div className="flex items-center justify-end gap-2 px-3 py-2.5">
                       <HashActionButton

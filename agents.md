@@ -1,6 +1,6 @@
 # AGENTS.md — orizonCP
 
-Follow these rules in every session. Order of priority: BRAND > UI > TOKEN SAVING.
+Follow these rules in every session.
 
 ## PROJECT
 - Product: orizonCP (self-hosted deployment control plane, part of the Orizon / orzn.io ecosystem)
@@ -17,15 +17,7 @@ Follow these rules in every session. Order of priority: BRAND > UI > TOKEN SAVIN
 - Don't rename DB tables/columns, past migrations, or API routes that clients depend on.
 - No hardcoded domains, emails, or registry paths. Use env/config vars.
 
-## UI RULES (override token-saving for UI work)
-- Before writing or editing ANY UI (component, page, form, modal, email template), read `UI-STYLE.md` first. It is short and always allowed.
-- Then open ONE existing component most similar to what you're building and copy its structure, classes, and spacing.
-- Use ONLY the tokens, colors, fonts, radius, and components in `UI-STYLE.md`. No new colors, no inline styles, no new libraries.
-- Reuse existing components (Button, Card, Input, Modal) before making new ones.
-- If `UI-STYLE.md` and an existing component conflict, follow `UI-STYLE.md` and tell me in one line.
-- Don't redesign anything I didn't ask to change.
-
-## TOKEN SAVING (applies to everything except UI reading above)
+## TOKEN SAVING
 
 ### Output
 - No greetings, no summaries, no explanations unless asked. Fewest words possible.

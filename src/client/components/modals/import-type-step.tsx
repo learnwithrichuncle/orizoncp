@@ -41,24 +41,24 @@ export function ImportTypeStep({ onSelect }: { onSelect: (type: ServiceType) => 
           key={option.key}
           type="button"
           onClick={() => onSelect(option.key)}
-          className="group flex w-full items-center gap-4 rounded-[14px] border border-line bg-glass p-4 text-left transition hover:border-accent/40 hover:bg-hover"
+          className="group flex w-full items-center gap-4 rounded-lg border border-neutral-800 bg-neutral-900 p-4 text-left transition hover:border-blue-600/40 hover:bg-neutral-800"
         >
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[10px] border border-line bg-hover text-muted transition group-hover:text-accent">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-neutral-800 bg-neutral-800 text-neutral-400 transition group-hover:text-blue-500">
             <ServiceTypeIcon
               type={option.key}
               className={option.key === "docker-image" ? "h-6 w-6 object-contain" : "h-5 w-5"}
             />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block font-hero text-sm font-semibold tracking-[-0.02em] text-ink">
+            <span className="block font-sans text-sm font-semibold tracking-[-0.02em] text-neutral-100">
               {option.name}
             </span>
-            <span className="mt-0.5 block text-xs text-muted">{option.desc}</span>
+            <span className="mt-0.5 block text-xs text-neutral-400">{option.desc}</span>
           </span>
           <AppIcon
             icon={ArrowLeft01Icon}
             size={16}
-            className="rotate-180 text-muted transition group-hover:translate-x-0.5 group-hover:text-ink"
+            className="rotate-180 text-neutral-400 transition group-hover:translate-x-0.5 group-hover:text-neutral-100"
           />
         </button>
       ))}

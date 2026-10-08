@@ -70,7 +70,7 @@ export function MigrationImportModal({
                 <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
                   Server migration
                 </p>
-                <h2 className="mt-1.5 font-hero text-xl tracking-[-0.04em]">
+                <h2 className="mt-1.5 font-sans text-xl tracking-[-0.04em]">
                   Import existing orizoncp
                 </h2>
                 <p className="mt-2 text-xs leading-5 text-zinc-500">

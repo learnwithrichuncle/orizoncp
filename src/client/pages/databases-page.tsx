@@ -95,7 +95,7 @@ export function DatabasesPage() {
           <h1 className="text-2xl font-semibold tracking-tight text-white">
             Databases
           </h1>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+          <p className="mt-1 text-sm text-neutral-400">
             Every database across your projects.
           </p>
         </div>
@@ -103,21 +103,21 @@ export function DatabasesPage() {
           type="button"
           onClick={startCreate}
           disabled={projects.length === 0}
-          className="inline-flex h-8 items-center justify-center rounded-lg bg-[var(--color-accent)] px-3 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-50"
+          className="inline-flex h-8 items-center justify-center rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-50"
         >
           New database
         </button>
       </div>
 
       {error ? (
-        <div className="rounded-lg border border-bad/40 bg-bad/10 p-3 text-sm text-bad">
+        <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-500">
           {error}
         </div>
       ) : null}
 
-      <section className="rounded-lg border border-[var(--cf-border)] bg-white/5">
+      <section className="rounded-lg border border-neutral-800 bg-white/5">
         {databases.length === 0 ? (
-          <p className="px-5 py-10 text-center text-sm text-[var(--color-text-secondary)]">
+          <p className="px-5 py-10 text-center text-sm text-neutral-400">
             No databases yet.
           </p>
         ) : (
@@ -125,7 +125,7 @@ export function DatabasesPage() {
             {databases.map(({ project, service }) => (
               <li
                 key={service.id}
-                className="border-b border-[var(--cf-border)] last:border-b-0"
+                className="border-b border-neutral-800 last:border-b-0"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3">
                   <div className="min-w-0">
@@ -133,11 +133,11 @@ export function DatabasesPage() {
                       <span className="truncate text-sm text-white">
                         {service.name}
                       </span>
-                      <span className="shrink-0 rounded border border-[var(--cf-border)] px-1.5 py-px font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+                      <span className="shrink-0 rounded border border-neutral-800 px-1.5 py-px font-mono text-[10px] uppercase tracking-[0.12em] text-neutral-400">
                         {engineLabel(service)}
                       </span>
                     </div>
-                    <div className="mt-0.5 truncate font-mono text-[11px] text-[var(--color-text-secondary)]">
+                    <div className="mt-0.5 truncate font-mono text-[11px] text-neutral-400">
                       {project.name}
                     </div>
                   </div>
@@ -148,7 +148,7 @@ export function DatabasesPage() {
                       serviceSlug: service.slug,
                       serviceTab: "data",
                     }}
-                    className="shrink-0 rounded-lg border border-[var(--cf-border)] px-2.5 py-1 text-xs text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+                    className="shrink-0 rounded-lg border border-neutral-800 px-2.5 py-1 text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
                   >
                     Open
                   </Link>
@@ -175,12 +175,12 @@ export function DatabasesPage() {
                   setPickerOpen(false);
                   setCreateProjectId(project.id);
                 }}
-                className="flex w-full items-center justify-between gap-3 rounded-lg border border-[var(--cf-border)] bg-white/5 px-3 py-2.5 text-left transition-colors hover:bg-white/10"
+                className="flex w-full items-center justify-between gap-3 rounded-lg border border-neutral-800 bg-white/5 px-3 py-2.5 text-left transition-colors hover:bg-white/10"
               >
                 <span className="truncate text-sm text-white">
                   {project.name}
                 </span>
-                <span className="shrink-0 font-mono text-[11px] text-[var(--color-text-secondary)]">
+                <span className="shrink-0 font-mono text-[11px] text-neutral-400">
                   {project.serviceCount} services
                 </span>
               </button>

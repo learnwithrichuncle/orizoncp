@@ -170,7 +170,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
+    <section className="mx-auto max-w-5xl overflow-hidden border border-neutral-800 bg-neutral-950">
       {!editing ? (
         <div className="p-5 sm:p-7 lg:p-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
@@ -182,13 +182,13 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                   <span
                     className={`h-1.5 w-1.5 ${
                       connected
-                        ? "bg-ok"
+                        ? "bg-green-500"
                         : appConfigured
-                          ? "bg-warn"
+                          ? "bg-amber-500"
                           : "border border-zinc-600"
                     }`}
                   />
-                  <span className={connected ? "text-ok" : appConfigured ? "text-warn" : "text-ink-dim"}>
+                  <span className={connected ? "text-green-500" : appConfigured ? "text-amber-500" : "text-neutral-500"}>
                     {connected ? "Connected" : appConfigured ? "Needs install" : "Not configured"}
                   </span>
                 </div>
@@ -198,7 +198,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+                className="inline-flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
                 onClick={() => {
                   setEditing(true);
                   setManualConfigurationOpen(false);
@@ -211,7 +211,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               {connected || appConfigured ? (
                 <button
                   type="button"
-                  className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad"
+                  className="inline-flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-red-500/60 hover:bg-red-500/10 hover:text-red-500"
                   onClick={() => setDisconnecting(true)}
                   title="Disconnect GitHub"
                   aria-label="Disconnect GitHub"
@@ -222,18 +222,18 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
             </div>
           </div>
 
-          <p className="mt-6 max-w-2xl text-sm leading-6 text-ink-dim">
+          <p className="mt-6 max-w-2xl text-sm leading-6 text-neutral-500">
             GitHub provides repository access, branch discovery, and deployment webhooks.
           </p>
 
-          <div className="mt-7 max-w-2xl border-y border-line">
-            <div className="grid gap-2 border-b border-line py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
-              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Mode</div>
-              <div className="text-sm capitalize text-ink-muted">{github.status.mode}</div>
+          <div className="mt-7 max-w-2xl border-y border-neutral-800">
+            <div className="grid gap-2 border-b border-neutral-800 py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
+              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">Mode</div>
+              <div className="text-sm capitalize text-neutral-400">{github.status.mode}</div>
             </div>
-            <div className="grid gap-2 border-b border-line py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
-              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Installations</div>
-              <div className="text-sm text-ink-muted">{github.status.installationCount}</div>
+            <div className="grid gap-2 border-b border-neutral-800 py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
+              <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">Installations</div>
+              <div className="text-sm text-neutral-400">{github.status.installationCount}</div>
             </div>
           </div>
 
@@ -242,7 +242,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               href={github.status.installUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200"
+              className="mt-5 inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200"
             >
               <AppIcon icon={GithubIcon} size={15} />
               Install GitHub App
@@ -250,15 +250,15 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
           ) : null}
 
           {disconnecting ? (
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-l-2 border-bad bg-bad/10 px-4 py-3">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-l-2 border-red-500 bg-red-500/10 px-4 py-3">
               <div>
-                <div className="text-sm text-bad">Disconnect GitHub?</div>
-                <div className="mt-1 text-xs text-bad/70">Repository browsing and webhooks will stop.</div>
+                <div className="text-sm text-red-500">Disconnect GitHub?</div>
+                <div className="mt-1 text-xs text-red-500/70">Repository browsing and webhooks will stop.</div>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-bad/50 text-bad transition hover:bg-bad/10"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-red-500/50 text-red-500 transition hover:bg-red-500/10"
                   onClick={() => void disconnect()}
                   disabled={busy}
                   title="Confirm disconnect"
@@ -268,7 +268,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                 </button>
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-neutral-800 text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800"
                   onClick={() => setDisconnecting(false)}
                   disabled={busy}
                   title="Cancel"
@@ -289,13 +289,13 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
               <AppIcon icon={GithubIcon} size={32} className="shrink-0 text-white" />
               <div>
                 <h2 className="text-2xl tracking-[-0.03em] text-white">Configure GitHub</h2>
-                <p className="mt-1.5 text-sm text-ink-dim">Connect with a GitHub App or enter credentials manually.</p>
+                <p className="mt-1.5 text-sm text-neutral-500">Connect with a GitHub App or enter credentials manually.</p>
               </div>
             </div>
             {connected || appConfigured ? (
               <button
                 type="button"
-                className="inline-flex min-h-10 w-fit items-center justify-center border border-line px-4 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+                className="inline-flex min-h-10 w-fit items-center justify-center border border-neutral-800 px-4 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
                 onClick={() => {
                   setForm(formFromSettings(github));
                   setManualConfigurationOpen(false);
@@ -308,16 +308,16 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
             ) : null}
           </div>
 
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-y border-line py-5">
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-y border-neutral-800 py-5">
             <div className="min-w-0">
-              <div className="text-sm text-ink">Connect automatically</div>
-              <div className="mt-1 text-xs text-ink-dim">Create and configure the GitHub App in one step.</div>
+              <div className="text-sm text-neutral-100">Connect automatically</div>
+              <div className="mt-1 text-xs text-neutral-500">Create and configure the GitHub App in one step.</div>
             </div>
             <button
               type="button"
               onClick={() => void connectOneClick()}
               disabled={connecting || busy}
-              className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+              className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
             >
               <AppIcon icon={GithubIcon} size={15} />
               {connecting ? "Connecting…" : "Connect with GitHub"}
@@ -326,12 +326,12 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
 
           <button
             type="button"
-            className="flex w-full items-center justify-between gap-4 border-b border-line py-5 text-left text-sm text-ink-muted transition hover:text-white"
+            className="flex w-full items-center justify-between gap-4 border-b border-neutral-800 py-5 text-left text-sm text-neutral-400 transition hover:text-white"
             onClick={() => setManualConfigurationOpen((current) => !current)}
             aria-expanded={manualConfigurationOpen}
           >
             <span>Manual configuration</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
               {manualConfigurationOpen ? "Hide" : "Open"}
             </span>
           </button>
@@ -342,7 +342,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                 href="https://github.com/settings/apps/new"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-10 w-fit items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+                className="inline-flex h-10 w-fit items-center justify-center gap-2 border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
               >
                 <AppIcon icon={LinkSquare02Icon} size={14} />
                 Create GitHub App
@@ -358,7 +358,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     placeholder="GitHub personal access token"
                     autoComplete="off"
                     variant="monochrome"
-                    className="border-line bg-glass"
+                    className="border-neutral-800 bg-neutral-900"
                   />
                 </div>
                 <div>
@@ -370,7 +370,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     placeholder="Webhook secret"
                     autoComplete="off"
                     variant="monochrome"
-                    className="border-line bg-glass"
+                    className="border-neutral-800 bg-neutral-900"
                   />
                 </div>
                 <div>
@@ -380,7 +380,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     onChange={(event) => setForm({ ...form, githubAppId: event.target.value })}
                     placeholder="123456"
                     variant="monochrome"
-                    className="border-line bg-glass"
+                    className="border-neutral-800 bg-neutral-900"
                   />
                 </div>
                 <div>
@@ -390,7 +390,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     onChange={(event) => setForm({ ...form, githubAppClientId: event.target.value })}
                     placeholder="Iv1.xxxxx"
                     variant="monochrome"
-                    className="border-line bg-glass"
+                    className="border-neutral-800 bg-neutral-900"
                   />
                 </div>
                 <div>
@@ -400,7 +400,7 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     onChange={(event) => setForm({ ...form, githubAppSlug: event.target.value })}
                     placeholder="orizoncp"
                     variant="monochrome"
-                    className="border-line bg-glass"
+                    className="border-neutral-800 bg-neutral-900"
                   />
                 </div>
                 <div>
@@ -409,21 +409,21 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
                     value={form.githubAppPrivateKey}
                     onChange={(event) => setForm({ ...form, githubAppPrivateKey: event.target.value })}
                     placeholder={github.settings.githubAppPrivateKeyConfigured ? "Leave blank to keep current private key" : "-----BEGIN PRIVATE KEY-----"}
-                    className="min-h-32 w-full resize-y border border-line bg-glass px-3 py-3 font-mono text-xs text-ink outline-none transition placeholder:text-ink-dim focus:border-white focus:ring-2 focus:ring-white/10"
+                    className="min-h-32 w-full resize-y border border-neutral-800 bg-neutral-900 px-3 py-3 font-mono text-xs text-neutral-100 outline-none transition placeholder:text-neutral-500 focus:border-white focus:ring-2 focus:ring-white/10"
                     spellCheck={false}
                     autoComplete="off"
                   />
                 </div>
               </div>
 
-              <p className="mt-3 text-xs leading-5 text-ink-dim">
+              <p className="mt-3 text-xs leading-5 text-neutral-500">
                 Leave masked secrets unchanged to keep existing values.
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-2">
                 <button
                   type="submit"
-                  className="inline-flex min-h-10 w-fit items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+                  className="inline-flex min-h-10 w-fit items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
                   disabled={busy}
                 >
                   {busy ? "Saving..." : "Save GitHub settings"}
@@ -435,19 +435,19 @@ export function GitHubSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {github.statusError || error || success ? (
-        <div className="border-t border-line px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
+        <div className="border-t border-neutral-800 px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
           {github.statusError ? (
-            <div className="mt-5 border-l-2 border-warn bg-warn/10 px-4 py-3 text-sm text-warn">
+            <div className="mt-5 border-l-2 border-amber-500 bg-amber-500/10 px-4 py-3 text-sm text-amber-500">
               {github.statusError}
             </div>
           ) : null}
           {error ? (
-            <div className="mt-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+            <div className="mt-5 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">
               {error}
             </div>
           ) : null}
           {success ? (
-            <div className="mt-5 flex items-center gap-2 border-l-2 border-ok bg-ok/10 px-4 py-3 text-sm text-ok">
+            <div className="mt-5 flex items-center gap-2 border-l-2 border-green-500 bg-green-500/10 px-4 py-3 text-sm text-green-500">
               <AppIcon icon={CheckmarkCircle02Icon} size={14} />
               {success}
             </div>

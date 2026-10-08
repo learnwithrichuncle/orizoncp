@@ -25,10 +25,10 @@ export function LoginForm() {
   return (
     <form
       onSubmit={submit}
-      className="rounded-lg border border-line bg-surface p-8"
+      className="rounded-lg border border-neutral-800 bg-neutral-900 p-8"
       aria-label="Sign in to orizonCP"
     >
-      <h1 className="text-2xl font-bold text-ink">Welcome back</h1>
+      <h1 className="text-2xl font-bold text-neutral-100">Welcome back</h1>
 
       <div className="mt-8 grid gap-y-5">
         <div>
@@ -58,7 +58,7 @@ export function LoginForm() {
       {error ? (
         <div
           role="alert"
-          className="mt-5 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad"
+          className="mt-5 rounded-md border border-red-500 bg-red-500/20 p-3 text-sm text-red-500"
         >
           {error}
         </div>
@@ -67,7 +67,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-8 flex h-12 w-full items-center justify-center rounded-sm bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand-hover disabled:cursor-wait disabled:opacity-60"
+        className="mt-8 flex h-12 w-full items-center justify-center rounded-sm bg-blue-600 px-4 text-sm font-semibold text-white transition hover:bg-blue-500 disabled:cursor-wait disabled:opacity-60"
       >
         {submitting ? "Signing in…" : "Sign in"}
       </button>

@@ -76,7 +76,7 @@ export function GitHubConfiguration({
             type="button"
             onClick={() => void connect()}
             disabled={connecting}
-            className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-sm bg-brand font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-brand-hover disabled:opacity-60"
+            className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-sm bg-blue-600 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-blue-500 disabled:opacity-60"
           >
             <AppIcon icon={GithubIcon} size={15} />
             {connecting ? "Connecting…" : "Connect GitHub"}

@@ -54,13 +54,13 @@ export function MoveServiceEnvironmentModal({
     <SettingsDialog open={open} title="Move to environment" width="max-w-md" onClose={() => {
       if (!moving) onClose();
     }}>
-      <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-ink-dim">{serviceName}</p>
-      <p className="mt-2 text-sm leading-6 text-ink-dim">
+      <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-neutral-500">{serviceName}</p>
+      <p className="mt-2 text-sm leading-6 text-neutral-500">
         Choose the environment that should contain this service.
       </p>
 
       <div className="mt-5">
-        <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
+        <span className="mb-2 block font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-400">
           Destination
         </span>
         <Dropdown
@@ -74,15 +74,15 @@ export function MoveServiceEnvironmentModal({
       </div>
 
       {error ? (
-        <div role="alert" className="mt-4 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+        <div role="alert" className="mt-4 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">
           {error}
         </div>
       ) : null}
 
-      <div className="mt-6 flex justify-end gap-2 border-t border-line pt-4">
+      <div className="mt-6 flex justify-end gap-2 border-t border-neutral-800 pt-4">
         <button
           type="button"
-          className="inline-flex h-10 items-center justify-center border border-line px-4 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
+          className="inline-flex h-10 items-center justify-center border border-neutral-800 px-4 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-50"
           onClick={onClose}
           disabled={moving}
         >
@@ -90,7 +90,7 @@ export function MoveServiceEnvironmentModal({
         </button>
         <button
           type="button"
-          className="inline-flex h-10 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-50"
+          className="inline-flex h-10 items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-50"
           onClick={() => void move()}
           disabled={moving || !environmentId}
         >

@@ -136,22 +136,22 @@ export function SetupTodoList({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex w-full items-center justify-between gap-3 rounded-[14px] border border-line bg-glass px-4 py-3 text-left backdrop-blur-xl transition hover:border-line-strong"
+        className="flex w-full items-center justify-between gap-3 rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-3 text-left backdrop-blur-xl transition hover:border-neutral-700"
       >
         <div className="flex min-w-0 items-center gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-warn/30 bg-warn/10 text-warn">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-500">
             <AppIcon icon={AlertCircleIcon} size={18} />
           </span>
           <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-100">
               Setup checklist
             </div>
-            <div className="mt-0.5 text-xs text-muted">
+            <div className="mt-0.5 text-xs text-neutral-400">
               {todos.length} item{todos.length === 1 ? "" : "s"} need attention
             </div>
           </div>
         </div>
-        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line px-2.5 py-1.5 font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-muted">
+        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-neutral-800 px-2.5 py-1.5 font-mono text-[8px] font-semibold uppercase tracking-[0.14em] text-neutral-400">
           Review
         </span>
       </button>
@@ -168,18 +168,18 @@ export function SetupTodoList({
           {todos.map((todo) => (
             <li
               key={todo.key}
-              className="rounded-[10px] border border-line bg-glass"
+              className="rounded-md border border-neutral-800 bg-neutral-900"
             >
               <div className="flex items-center justify-between gap-3 px-4 py-3">
                 <div className="flex min-w-0 items-center gap-3">
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line bg-hover text-ink-muted">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-neutral-800 bg-neutral-800 text-neutral-400">
                     <AppIcon icon={todo.icon} size={16} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-sm font-medium text-ink">
+                    <div className="text-sm font-medium text-neutral-100">
                       {todo.title}
                     </div>
-                    <p className="mt-0.5 text-xs leading-5 text-muted">
+                    <p className="mt-0.5 text-xs leading-5 text-neutral-400">
                       {todo.detail}
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export function SetupTodoList({
                 <button
                   type="button"
                   onClick={todo.onAction}
-                  className="shrink-0 rounded-[10px] border border-line px-3 py-1.5 text-xs font-medium text-muted transition hover:border-line-strong hover:text-ink"
+                  className="shrink-0 rounded-md border border-neutral-800 px-3 py-1.5 text-xs font-medium text-neutral-400 transition hover:border-neutral-700 hover:text-neutral-100"
                 >
                   {todo.actionLabel}
                 </button>

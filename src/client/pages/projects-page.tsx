@@ -200,7 +200,7 @@ export function ProjectsPage() {
 
       <div className="mt-7">
         {error ? (
-          <div className="mt-6 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad">
+          <div className="mt-6 rounded-md border border-red-500 bg-red-500/20 p-3 text-sm text-red-500">
             {error}
           </div>
         ) : null}

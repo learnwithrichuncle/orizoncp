@@ -30,15 +30,15 @@ function Stat({
   tone?: "ok" | "warn";
 }) {
   return (
-    <div className="rounded-lg border border-[var(--cf-border)] bg-white/5 px-4 py-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+    <div className="rounded-lg border border-neutral-800 bg-white/5 px-4 py-3">
+      <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
         {label}
       </div>
       <div className="mt-1.5 flex items-center gap-2">
         {tone ? (
           <span
             className={`h-1.5 w-1.5 rounded-full ${
-              tone === "ok" ? "bg-ok" : "bg-warn"
+              tone === "ok" ? "bg-green-500" : "bg-amber-500"
             }`}
           />
         ) : null}
@@ -134,13 +134,13 @@ export function OverviewPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-white">
           {name}&rsquo;s workspace
         </h1>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+        <p className="mt-1 text-sm text-neutral-400">
           Hi {name}, let&rsquo;s get into it.
         </p>
       </div>
 
       {error ? (
-        <div className="rounded-lg border border-bad/40 bg-bad/10 p-3 text-sm text-bad">
+        <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-500">
           {error}
         </div>
       ) : null}
@@ -169,14 +169,14 @@ export function OverviewPage() {
           <h2 className="text-sm font-medium text-white">Projects</h2>
           <Link
             to="/projects"
-            className="rounded-lg border border-[var(--cf-border)] px-3 py-1 text-xs text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+            className="rounded-lg border border-neutral-800 px-3 py-1 text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
           >
             View all
           </Link>
         </div>
 
         {projects.length === 0 ? (
-          <p className="rounded-lg border border-[var(--cf-border)] bg-white/5 px-5 py-10 text-center text-sm text-[var(--color-text-secondary)]">
+          <p className="rounded-lg border border-neutral-800 bg-white/5 px-5 py-10 text-center text-sm text-neutral-400">
             No projects yet.
           </p>
         ) : (

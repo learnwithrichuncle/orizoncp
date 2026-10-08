@@ -135,10 +135,10 @@ export function DnsManagementPanel() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden rounded-[14px] border border-line bg-glass backdrop-blur-xl">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4">
-        <span className="text-sm text-ink">Providers</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted">
+    <section className="mx-auto max-w-5xl overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 backdrop-blur-xl">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800 px-5 py-4">
+        <span className="text-sm text-neutral-100">Providers</span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-400">
           {connectedProviderCount} connected
         </span>
       </div>
@@ -155,15 +155,15 @@ export function DnsManagementPanel() {
         ))}
       </div>
 
-      <div className="min-w-0 border-t border-line p-5 sm:p-7 lg:p-8">
+      <div className="min-w-0 border-t border-neutral-800 p-5 sm:p-7 lg:p-8">
         {loading ? (
           <div className="space-y-5" aria-label="Loading DNS providers">
-            <div className="h-14 w-52 animate-pulse bg-glass" />
+            <div className="h-14 w-52 animate-pulse bg-neutral-900" />
             <div className="grid max-w-xl gap-4">
               {selectedProvider.fields.map((field) => (
                 <div key={field.key} className="space-y-2">
-                  <div className="h-3 w-20 animate-pulse bg-glass" />
-                  <div className="h-11 animate-pulse border border-line bg-glass" />
+                  <div className="h-3 w-20 animate-pulse bg-neutral-900" />
+                  <div className="h-11 animate-pulse border border-neutral-800 bg-neutral-900" />
                 </div>
               ))}
             </div>
@@ -171,7 +171,7 @@ export function DnsManagementPanel() {
         ) : (
           <>
             {credentialError && !editingSelectedProvider ? (
-              <div className="mb-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+              <div className="mb-5 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">
                 {credentialError}
               </div>
             ) : null}

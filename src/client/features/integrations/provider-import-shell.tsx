@@ -23,13 +23,13 @@ export function ProviderImportShell({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-base/80 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-neutral-950/80 p-4 backdrop-blur-sm">
       <div className="mx-auto flex min-h-full items-center justify-center">
         <section
           role="dialog"
           aria-modal="true"
           aria-label={title}
-          className={`flex max-h-[min(760px,calc(100dvh-2rem))] min-h-[420px] w-full ${width} flex-col rounded-lg border border-line bg-surface p-8 text-ink shadow-2xl`}
+          className={`flex max-h-[min(760px,calc(100dvh-2rem))] min-h-[420px] w-full ${width} flex-col rounded-lg border border-neutral-800 bg-neutral-900 p-8 text-neutral-100 shadow-2xl`}
         >
           <header className="flex items-start justify-between gap-5">
             <div className="flex min-w-0 items-center gap-4">
@@ -37,10 +37,10 @@ export function ProviderImportShell({
                 {logo}
               </span>
               <div className="min-w-0">
-                <h2 className="truncate text-2xl font-bold text-ink">
+                <h2 className="truncate text-2xl font-bold text-neutral-100">
                   {title}
                 </h2>
-                <p className="text-xs text-ink-dim">
+                <p className="text-xs text-neutral-500">
                   {stepLabel}
                 </p>
               </div>
@@ -48,7 +48,7 @@ export function ProviderImportShell({
             <button
               type="button"
               onClick={onClose}
-              className="grid h-9 w-9 flex-none place-items-center rounded-md text-ink-dim transition hover:bg-hover hover:text-ink"
+              className="grid h-9 w-9 flex-none place-items-center rounded-md text-neutral-500 transition hover:bg-neutral-800 hover:text-neutral-100"
               aria-label={`Close ${title}`}
             >
               <XIcon size={20} />

@@ -22,7 +22,7 @@ export function DomainDnsProviderActions({
           <button
             key={provider.id}
             type="button"
-            className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
+            className="inline-flex h-8 items-center justify-center gap-2 border border-neutral-800 px-3 text-xs text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-40"
             disabled={Boolean(busyProviderId)}
             onClick={() => onApply(provider.id)}
           >

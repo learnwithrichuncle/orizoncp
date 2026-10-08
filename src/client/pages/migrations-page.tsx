@@ -21,7 +21,7 @@ export function MigrationsPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-white">
           Migrate to Orizon CP
         </h1>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+        <p className="mt-1 text-sm text-neutral-400">
           Bring your projects over from Vercel or Railway.
         </p>
       </div>
@@ -30,14 +30,14 @@ export function MigrationsPage() {
         <button
           type="button"
           onClick={() => setActive("vercel")}
-          className="flex flex-col items-start gap-4 rounded-lg border border-[var(--cf-border)] bg-white/5 p-5 text-left transition-colors hover:bg-white/10"
+          className="flex flex-col items-start gap-4 rounded-lg border border-neutral-800 bg-white/5 p-5 text-left transition-colors hover:bg-white/10"
         >
           <VercelLogo className="h-6 w-6 text-white" />
           <div>
             <div className="text-sm font-medium text-white">
               Migrate from Vercel
             </div>
-            <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
+            <div className="mt-1 text-xs text-neutral-400">
               Import Vercel projects, domains, and environment variables.
             </div>
           </div>
@@ -46,14 +46,14 @@ export function MigrationsPage() {
         <button
           type="button"
           onClick={() => setActive("railway")}
-          className="flex flex-col items-start gap-4 rounded-lg border border-[var(--cf-border)] bg-white/5 p-5 text-left transition-colors hover:bg-white/10"
+          className="flex flex-col items-start gap-4 rounded-lg border border-neutral-800 bg-white/5 p-5 text-left transition-colors hover:bg-white/10"
         >
           <RailwayLogo className="h-6 w-6 text-white" />
           <div>
             <div className="text-sm font-medium text-white">
               Migrate from Railway
             </div>
-            <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
+            <div className="mt-1 text-xs text-neutral-400">
               Import Railway projects, services, and variables.
             </div>
           </div>

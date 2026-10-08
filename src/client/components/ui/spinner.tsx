@@ -1,6 +1,6 @@
 export function Spinner({
   size = 28,
-  className = "text-accent",
+  className = "text-blue-500",
 }: {
   size?: number;
   className?: string;

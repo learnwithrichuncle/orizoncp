@@ -6,7 +6,7 @@ import { usePageTitle } from "../lib/page-title";
 import { isDatabaseService } from "../../shared/service-source";
 
 const selectClass =
-  "h-9 w-full rounded-lg border border-[var(--cf-border)] bg-white/5 px-3 text-sm text-white outline-none transition-colors disabled:opacity-50";
+  "h-9 w-full rounded-lg border border-neutral-800 bg-white/5 px-3 text-sm text-white outline-none transition-colors disabled:opacity-50";
 
 export function DomainsPage() {
   usePageTitle("Domains");
@@ -103,20 +103,20 @@ export function DomainsPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-white">
           Domains
         </h1>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+        <p className="mt-1 text-sm text-neutral-400">
           Pick a project and service, then connect the DNS records.
         </p>
       </div>
 
       {error ? (
-        <div className="rounded-lg border border-bad/40 bg-bad/10 p-3 text-sm text-bad">
+        <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-500">
           {error}
         </div>
       ) : null}
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
             Project
           </span>
           <select
@@ -134,7 +134,7 @@ export function DomainsPage() {
         </label>
 
         <label className="flex flex-col gap-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-400">
             Service
           </span>
           <select
@@ -154,7 +154,7 @@ export function DomainsPage() {
       </div>
 
       {selectedProject && domainServices.length === 0 ? (
-        <p className="text-sm text-[var(--color-text-secondary)]">
+        <p className="text-sm text-neutral-400">
           This project has no services that can take a domain yet.
         </p>
       ) : null}
@@ -175,7 +175,7 @@ export function DomainsPage() {
       ) : null}
 
       {!selectedProjectId ? (
-        <div className="rounded-lg border border-[var(--cf-border)] bg-white/5 px-5 py-10 text-center text-sm text-[var(--color-text-secondary)]">
+        <div className="rounded-lg border border-neutral-800 bg-white/5 px-5 py-10 text-center text-sm text-neutral-400">
           Select a project to add a domain.
         </div>
       ) : null}

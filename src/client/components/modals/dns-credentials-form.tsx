@@ -63,8 +63,8 @@ export function DnsCredentialsForm({
             </div>
             <div>
               <h2 className="text-2xl tracking-[-0.03em] text-white">{provider.name}</h2>
-              <div className="mt-2 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
-                <span className="h-1.5 w-1.5 bg-accent" />
+              <div className="mt-2 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
+                <span className="h-1.5 w-1.5 bg-blue-600" />
                 Connected
               </div>
             </div>
@@ -73,7 +73,7 @@ export function DnsCredentialsForm({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center border border-line bg-transparent text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center border border-neutral-800 bg-transparent text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
               onClick={onEdit}
               disabled={busy}
               title="Edit DNS credentials"
@@ -83,7 +83,7 @@ export function DnsCredentialsForm({
             </button>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center border border-line bg-transparent text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center border border-neutral-800 bg-transparent text-neutral-500 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
               onClick={onDisconnect}
               disabled={busy}
               title="Remove DNS credentials"
@@ -94,18 +94,18 @@ export function DnsCredentialsForm({
           </div>
         </div>
 
-        <div className="mt-8 border-y border-line">
-          <div className="grid gap-2 border-b border-line py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
-            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Credential</div>
-            <div className="font-mono text-xs text-ink">••••••{connection.keySuffix}</div>
+        <div className="mt-8 border-y border-neutral-800">
+          <div className="grid gap-2 border-b border-neutral-800 py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">Credential</div>
+            <div className="font-mono text-xs text-neutral-100">••••••{connection.keySuffix}</div>
           </div>
           <div className="grid gap-2 py-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:items-center">
-            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-dim">Last updated</div>
-            <div className="text-sm text-ink-muted">{savedLabel(connection.savedAt)}</div>
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-neutral-500">Last updated</div>
+            <div className="text-sm text-neutral-400">{savedLabel(connection.savedAt)}</div>
           </div>
         </div>
 
-        <p className="mt-auto pt-8 text-sm leading-6 text-ink-dim">
+        <p className="mt-auto pt-8 text-sm leading-6 text-neutral-500">
           orizonCP uses this connection when creating and updating service DNS records.
         </p>
       </section>
@@ -137,14 +137,14 @@ export function DnsCredentialsForm({
               required={field.required}
               autoComplete="off"
               variant="monochrome"
-              className="border-line bg-glass"
+              className="border-neutral-800 bg-neutral-900"
             />
           </div>
         ))}
       </div>
 
       {error ? (
-        <div className="mt-5 border-l-2 border-white bg-hover px-4 py-3 text-sm text-ink">
+        <div className="mt-5 border-l-2 border-white bg-neutral-800 px-4 py-3 text-sm text-neutral-100">
           {error}
         </div>
       ) : null}
@@ -152,7 +152,7 @@ export function DnsCredentialsForm({
       <div className="mt-auto flex flex-col gap-2 pt-8 sm:flex-row">
         <button
           type="submit"
-          className="inline-flex min-h-10 w-fit items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+          className="inline-flex min-h-10 w-fit items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
           disabled={busy}
         >
           {busy ? "Saving..." : "Save credentials"}
@@ -160,7 +160,7 @@ export function DnsCredentialsForm({
         {connection.connected ? (
           <button
             type="button"
-            className="inline-flex min-h-11 items-center justify-center gap-2 border border-line px-5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-neutral-800 px-5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-50"
             onClick={onCancel}
             disabled={busy}
           >

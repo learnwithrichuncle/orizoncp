@@ -10,18 +10,18 @@ import { usePageTitle } from "../lib/page-title";
 
 function statusTone(status: string) {
   if (status === "queued" || status === "building")
-    return "text-[var(--color-accent)]";
-  if (status === "running" || status === "superseded") return "text-ok";
-  if (status === "failed") return "text-bad";
-  return "text-[var(--color-text-secondary)]";
+    return "text-blue-500";
+  if (status === "running" || status === "superseded") return "text-green-500";
+  if (status === "failed") return "text-red-500";
+  return "text-neutral-400";
 }
 
 function dotTone(status: string) {
   if (status === "queued" || status === "building")
-    return "bg-[var(--color-accent)] animate-pulse";
-  if (status === "running" || status === "superseded") return "bg-ok";
-  if (status === "failed") return "bg-bad";
-  return "bg-[var(--color-text-secondary)]";
+    return "bg-blue-600 animate-pulse";
+  if (status === "running" || status === "superseded") return "bg-green-500";
+  if (status === "failed") return "bg-red-500";
+  return "bg-neutral-400";
 }
 
 function relativeTime(value: string) {
@@ -84,20 +84,20 @@ export function DeploymentsPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-white">
           Deployments
         </h1>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+        <p className="mt-1 text-sm text-neutral-400">
           All deployments across every project.
         </p>
       </div>
 
       {error ? (
-        <div className="rounded-lg border border-bad/40 bg-bad/10 p-3 text-sm text-bad">
+        <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-500">
           {error}
         </div>
       ) : null}
 
-      <section className="rounded-lg border border-[var(--cf-border)] bg-white/5">
+      <section className="rounded-lg border border-neutral-800 bg-white/5">
         {deployments.length === 0 ? (
-          <p className="px-5 py-10 text-center text-sm text-[var(--color-text-secondary)]">
+          <p className="px-5 py-10 text-center text-sm text-neutral-400">
             No deployments yet.
           </p>
         ) : (
@@ -105,7 +105,7 @@ export function DeploymentsPage() {
             {deployments.map((deployment) => (
               <li
                 key={deployment.id}
-                className="border-b border-[var(--cf-border)] last:border-b-0"
+                className="border-b border-neutral-800 last:border-b-0"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3">
                   <div className="min-w-0">
@@ -126,7 +126,7 @@ export function DeploymentsPage() {
                         {deploymentStatusLabel(deployment.status)}
                       </span>
                     </div>
-                    <div className="mt-0.5 truncate font-mono text-[11px] text-[var(--color-text-secondary)]">
+                    <div className="mt-0.5 truncate font-mono text-[11px] text-neutral-400">
                       {deployment.projectName} · {deployment.trigger}
                       {deployment.commitSha
                         ? ` · ${deployment.commitSha.slice(0, 7)}`
@@ -134,7 +134,7 @@ export function DeploymentsPage() {
                     </div>
                   </div>
                   <div className="flex shrink-0 items-center gap-3">
-                    <span className="font-mono text-[11px] text-[var(--color-text-secondary)]">
+                    <span className="font-mono text-[11px] text-neutral-400">
                       {relativeTime(deployment.createdAt)}
                     </span>
                     {deployment.projectSlug && deployment.serviceSlug ? (
@@ -145,7 +145,7 @@ export function DeploymentsPage() {
                           serviceSlug: deployment.serviceSlug,
                           serviceTab: "deployments",
                         }}
-                        className="rounded-lg border border-[var(--cf-border)] px-2.5 py-1 text-xs text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+                        className="rounded-lg border border-neutral-800 px-2.5 py-1 text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
                       >
                         View
                       </Link>

@@ -62,7 +62,7 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
           {owner ? (
             <Link
               to="/onboarding"
-              className="inline-flex h-8 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-xs text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+              className="inline-flex h-8 items-center gap-2 rounded-lg border border-neutral-800 px-3 text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
             >
               <AppIcon icon={Refresh03Icon} size={16} />
               Restart onboarding
@@ -70,10 +70,10 @@ export function SettingsPage({ requestedPage }: { requestedPage: SettingsPageSlu
           ) : null}
 
           <div className="flex items-center gap-2.5">
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-[var(--color-accent)] text-xs text-white">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-blue-600 text-xs text-white">
               {userInitials(currentUser)}
             </span>
-            <span className="hidden text-xs text-[var(--color-text-secondary)] sm:block">
+            <span className="hidden text-xs text-neutral-400 sm:block">
               {currentUser?.name || "orizonCP user"}
             </span>
             <SignOutButton />

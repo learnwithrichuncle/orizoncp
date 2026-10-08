@@ -90,7 +90,7 @@ export function TransferServiceModal({
     >
       <div className="space-y-4">
         <div>
-          <p className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Destination project</p>
+          <p className="mb-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">Destination project</p>
           <Dropdown
             value={targetProjectId}
             options={projectOptions}
@@ -101,7 +101,7 @@ export function TransferServiceModal({
             size="compact"
             className="[&>button]:!h-9"
           />
-          <div className="mt-2 text-xs leading-5 text-ink-dim">
+          <div className="mt-2 text-xs leading-5 text-neutral-500">
             {selectedProject
               ? `${serviceName} will move to ${selectedProject.name}.`
               : projectOptions.length > 0
@@ -110,17 +110,17 @@ export function TransferServiceModal({
           </div>
         </div>
 
-        <div className="border border-line bg-glass px-3 py-2.5 text-xs leading-5 text-ink-dim">
+        <div className="border border-neutral-800 bg-neutral-900 px-3 py-2.5 text-xs leading-5 text-neutral-500">
           The service lands in the destination project's production environment. Deployments, variables, domains, backups, and runtime state stay with it.
         </div>
 
-        {error ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
+        {error ? <div className="border border-red-500/30 bg-red-500/10 px-3 py-2.5 text-xs text-red-500">{error}</div> : null}
 
-        <div className="flex flex-wrap justify-end gap-2 border-t border-line pt-4">
-          <button type="button" className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40" onClick={onClose} disabled={busy}>
+        <div className="flex flex-wrap justify-end gap-2 border-t border-neutral-800 pt-4">
+          <button type="button" className="inline-flex h-9 items-center justify-center border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-40" onClick={onClose} disabled={busy}>
             Cancel
           </button>
-          <button type="button" className="inline-flex h-9 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:opacity-40" onClick={() => void submitTransfer()} disabled={busy || loading || !targetProjectId}>
+          <button type="button" className="inline-flex h-9 items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-40" onClick={() => void submitTransfer()} disabled={busy || loading || !targetProjectId}>
             {busy ? "Moving…" : "Move service"}
           </button>
         </div>

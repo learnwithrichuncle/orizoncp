@@ -33,34 +33,34 @@ export function SourcePickerModal({ open, query, repos, loading, error, onClose,
     >
       <div className="space-y-3">
         <div className="relative">
-          <AppIcon icon={Search01Icon} size={14} className="pointer-events-none absolute left-3 top-[11px] text-ink-dim" />
+          <AppIcon icon={Search01Icon} size={14} className="pointer-events-none absolute left-3 top-[11px] text-neutral-500" />
           <FormInput
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Search repositories"
             variant="monochrome"
-            className="!h-9 border-line bg-base pl-9 text-xs"
+            className="!h-9 border-neutral-800 bg-neutral-950 pl-9 text-xs"
           />
         </div>
 
-        {error ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
+        {error ? <div className="border border-red-500/30 bg-red-500/10 px-3 py-2.5 text-xs text-red-500">{error}</div> : null}
 
-        <div className="max-h-[380px] overflow-auto border border-line bg-base">
+        <div className="max-h-[380px] overflow-auto border border-neutral-800 bg-neutral-950">
           {repos.length === 0 ? (
-            <div className="px-3 py-6 text-center text-xs text-ink-dim">{loading ? "Loading repositories…" : "No repositories found."}</div>
+            <div className="px-3 py-6 text-center text-xs text-neutral-500">{loading ? "Loading repositories…" : "No repositories found."}</div>
           ) : (
             sortedRepos.map((repo) => (
               <button
                 key={repo.id}
                 type="button"
-                className="group flex w-full items-center justify-between gap-4 border-b border-line px-3 py-3 text-left transition last:border-b-0 hover:bg-hover"
+                className="group flex w-full items-center justify-between gap-4 border-b border-neutral-800 px-3 py-3 text-left transition last:border-b-0 hover:bg-neutral-800"
                 onClick={() => onSelect(repo)}
               >
                 <div className="min-w-0">
-                  <div className="truncate text-sm text-ink group-hover:text-white">{repo.name}</div>
-                  <div className="mt-0.5 truncate font-mono text-[9px] tracking-[0.08em] text-ink-dim">{repo.fullName}</div>
+                  <div className="truncate text-sm text-neutral-100 group-hover:text-white">{repo.name}</div>
+                  <div className="mt-0.5 truncate font-mono text-[9px] tracking-[0.08em] text-neutral-500">{repo.fullName}</div>
                 </div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim group-hover:text-ink-muted">Select</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500 group-hover:text-neutral-400">Select</span>
               </button>
             ))
           )}

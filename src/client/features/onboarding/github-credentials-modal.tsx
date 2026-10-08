@@ -50,7 +50,7 @@ export function GitHubCredentialsModal({
       <div className="mx-auto flex min-h-full items-center justify-center">
         <div className="w-full max-w-2xl border border-white/15 bg-zinc-950 p-6 text-white shadow-[0_30px_100px_rgba(0,0,0,0.6)] sm:p-8">
           <div className="mb-9 flex items-start justify-between gap-5">
-            <h2 className="font-hero text-2xl tracking-[-0.04em] text-white sm:text-3xl">
+            <h2 className="font-sans text-2xl tracking-[-0.04em] text-white sm:text-3xl">
               Enter GitHub credentials manually
             </h2>
             <button

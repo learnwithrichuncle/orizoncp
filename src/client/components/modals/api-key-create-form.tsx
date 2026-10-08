@@ -89,13 +89,13 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
           placeholder="Production deploys"
           disabled={creating}
           variant="monochrome"
-          className="!h-9 border-line bg-glass text-sm"
+          className="!h-9 border-neutral-800 bg-neutral-900 text-sm"
         />
       </div>
 
-      <div className="border-y border-line">
-        <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
-          <span className="text-xs text-ink-muted">Access</span>
+      <div className="border-y border-neutral-800">
+        <div className="flex items-center justify-between gap-4 border-b border-neutral-800 py-2.5">
+          <span className="text-xs text-neutral-400">Access</span>
           <Dropdown
             value={accessLevel}
             options={accessOptions}
@@ -107,8 +107,8 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
           />
         </div>
 
-        <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
-          <span className="text-xs text-ink-muted">Projects</span>
+        <div className="flex items-center justify-between gap-4 border-b border-neutral-800 py-2.5">
+          <span className="text-xs text-neutral-400">Projects</span>
           <Dropdown
             value={projectScope}
             options={projectScopeOptions}
@@ -121,7 +121,7 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
         </div>
 
         <div className="flex items-center justify-between gap-4 py-2.5">
-          <span className="text-xs text-ink-muted">Expiration</span>
+          <span className="text-xs text-neutral-400">Expiration</span>
           <Dropdown
             value={expiresInDays === null ? "never" : String(expiresInDays)}
             options={expiryOptions}
@@ -140,7 +140,7 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
       {projectScope === "selected" ? (
         <div>
           <FieldLabel>Choose projects</FieldLabel>
-          <div className="grid max-h-40 gap-0.5 overflow-y-auto border border-line bg-glass p-1.5">
+          <div className="grid max-h-40 gap-0.5 overflow-y-auto border border-neutral-800 bg-neutral-900 p-1.5">
             {projects.map((project) => (
               <Checkbox
                 key={project.id}
@@ -148,11 +148,11 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
                 label={project.name}
                 onChange={(checked) => toggleProject(project.id, checked)}
                 disabled={creating}
-                className="w-full px-2.5 py-2 transition hover:bg-glass"
+                className="w-full px-2.5 py-2 transition hover:bg-neutral-900"
               >
                 <span className="min-w-0">
-                  <span className="block truncate text-sm text-ink">{project.name}</span>
-                  <span className="mt-0.5 block truncate font-mono text-[9px] text-ink-dim">{project.slug}</span>
+                  <span className="block truncate text-sm text-neutral-100">{project.name}</span>
+                  <span className="mt-0.5 block truncate font-mono text-[9px] text-neutral-500">{project.slug}</span>
                 </span>
               </Checkbox>
             ))}
@@ -163,12 +163,12 @@ export function ApiKeyCreateForm({ projects, creating, onCreate }: ApiKeyCreateF
       <div className="flex flex-wrap items-center gap-3 pt-1">
         <button
           type="submit"
-          className="inline-flex min-h-8 w-fit items-center justify-center bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
+          className="inline-flex min-h-8 w-fit items-center justify-center bg-blue-600 px-3 text-xs text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
           disabled={creating}
         >
           {creating ? "Creating..." : "Create key"}
         </button>
-        {error ? <span className="text-sm text-bad">{error}</span> : null}
+        {error ? <span className="text-sm text-red-500">{error}</span> : null}
       </div>
     </form>
   );

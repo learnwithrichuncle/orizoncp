@@ -635,8 +635,8 @@ export function ServicePageShell({
   const panelClass = "flex min-h-0 w-full flex-1 flex-col";
   const tabButtonClass = (tab: ServiceTab) =>
     selectedTab === tab
-      ? "relative inline-flex h-10 shrink-0 items-center gap-2 border-b-2 border-accent px-2 text-xs text-ink"
-      : "relative inline-flex h-10 shrink-0 items-center gap-2 border-b-2 border-transparent px-2 text-xs text-muted transition hover:text-ink";
+      ? "relative inline-flex h-10 shrink-0 items-center gap-2 border-b-2 border-blue-600 px-2 text-xs text-neutral-100"
+      : "relative inline-flex h-10 shrink-0 items-center gap-2 border-b-2 border-transparent px-2 text-xs text-neutral-400 transition hover:text-neutral-100";
   const tabUsesContainedScroll = selectedTab === "deployments" || selectedTab === "logs" || selectedTab === "source" || selectedTab === "data" || selectedTab === "sql" || selectedTab === "backups";
   const contentClass = `min-h-0 flex-1 pt-5 ${tabUsesContainedScroll ? "overflow-hidden" : "overflow-y-auto"}`;
 
@@ -668,7 +668,7 @@ export function ServicePageShell({
             onServiceSelect={onServiceSelect ?? (() => undefined)}
           />
 
-          {error ? <div className="mt-3 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div> : null}
+          {error ? <div className="mt-3 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">{error}</div> : null}
 
             <div className={contentClass}>
               {selectedTab === "overview" ? (
@@ -747,17 +747,17 @@ export function ServicePageShell({
               ) : null}
 
               {selectedTab === "settings" ? (
-                <form onSubmit={saveSettings} className="mx-auto w-full max-w-[1100px] overflow-visible border border-line bg-glass backdrop-blur-xl">
-                  <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
+                <form onSubmit={saveSettings} className="mx-auto w-full max-w-[1100px] overflow-visible border border-neutral-800 bg-neutral-900 backdrop-blur-xl">
+                  <header className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 px-4 py-4 sm:px-5">
                     <div>
-                      <h2 className="text-lg tracking-[-0.03em] text-ink">Settings</h2>
-                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
+                      <h2 className="text-lg tracking-[-0.03em] text-neutral-100">Settings</h2>
+                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
                         {isDatabase ? "Database service" : isDockerImage ? "Container service" : isFunction ? "Function service" : "Application service"}
                       </p>
                     </div>
                     <button
                       type="submit"
-                      className="inline-flex h-8 items-center justify-center bg-accent px-3 text-xs text-white transition hover:bg-brand-hover disabled:opacity-40"
+                      className="inline-flex h-8 items-center justify-center bg-blue-600 px-3 text-xs text-white transition hover:bg-blue-500 disabled:opacity-40"
                       disabled={busy === "settings"}
                     >
                       {busy === "settings" ? "Saving…" : "Save settings"}
@@ -811,10 +811,10 @@ export function ServicePageShell({
                     )}
                   </div>
 
-                  <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-4 sm:px-5">
+                  <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-800 px-4 py-4 sm:px-5">
                     <div className="flex items-center gap-3">
                       {isDatabase ? (
-                        <div className="flex h-8 items-center gap-2 text-xs text-ink-dim">
+                        <div className="flex h-8 items-center gap-2 text-xs text-neutral-500">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">
                             {service?.databasePublicHostname
@@ -823,7 +823,7 @@ export function ServicePageShell({
                           </span>
                         </div>
                       ) : isWorker && service?.reachable ? (
-                        <div className="flex h-8 items-center gap-2 text-xs text-ink-dim">
+                        <div className="flex h-8 items-center gap-2 text-xs text-neutral-500">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">Worker process running</span>
                         </div>
@@ -832,18 +832,18 @@ export function ServicePageShell({
                           href={service.primaryUrl.replace("127.0.0.1", window.location.hostname)}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex h-8 items-center gap-2 text-xs text-ink-dim transition hover:text-white"
+                          className="flex h-8 items-center gap-2 text-xs text-neutral-500 transition hover:text-white"
                         >
                           <BrowserIconFallback size={14} />
                           <span className="truncate">{service.primaryUrl.replace("127.0.0.1", window.location.hostname).replace(/^https?:\/\//, "")}</span>
                         </a>
                       ) : service?.status === "queued" || service?.status === "building" ? (
-                        <div className="flex h-8 items-center gap-2 text-xs text-warn">
+                        <div className="flex h-8 items-center gap-2 text-xs text-amber-500">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">Deployment in progress</span>
                         </div>
                       ) : (
-                        <div className="flex h-8 items-center gap-2 text-xs text-bad">
+                        <div className="flex h-8 items-center gap-2 text-xs text-red-500">
                           <BrowserIconFallback size={14} />
                           <span className="truncate">Service crashed</span>
                         </div>
@@ -852,7 +852,7 @@ export function ServicePageShell({
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
-                        className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
+                        className="inline-flex h-8 items-center justify-center gap-2 border border-neutral-800 px-3 text-xs text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-40"
                         onClick={() => setTransferOpen(true)}
                         disabled={transferDisabled}
                       >
@@ -861,7 +861,7 @@ export function ServicePageShell({
                       </button>
                       <button
                         type="button"
-                        className="inline-flex h-8 items-center justify-center gap-2 border border-bad/40 px-3 text-xs text-bad transition hover:bg-bad/10 disabled:opacity-40"
+                        className="inline-flex h-8 items-center justify-center gap-2 border border-red-500/40 px-3 text-xs text-red-500 transition hover:bg-red-500/10 disabled:opacity-40"
                         onClick={() => setDeleteDialogOpen(true)}
                         disabled={busy === "delete"}
                       >

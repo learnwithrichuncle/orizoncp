@@ -47,7 +47,7 @@ export function CreateProjectModal({
   return (
     <div className="fixed inset-0 z-50">
       <div
-        className="absolute inset-0 bg-base/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-neutral-950/60 backdrop-blur-sm"
         onClick={busy ? undefined : onClose}
         aria-hidden="true"
       />
@@ -55,12 +55,12 @@ export function CreateProjectModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="create-project-title"
-        className="slide-in-right absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-line bg-base shadow-2xl"
+        className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-neutral-800 bg-neutral-950 shadow-2xl"
       >
-        <header className="flex items-start justify-between gap-5 border-b border-line px-6 py-5">
+        <header className="flex items-start justify-between gap-5 border-b border-neutral-800 px-6 py-5">
           <h2
             id="create-project-title"
-            className="font-hero text-xl tracking-[-0.03em] text-ink"
+            className="font-sans text-xl tracking-[-0.03em] text-neutral-100"
           >
             Create project
           </h2>
@@ -68,7 +68,7 @@ export function CreateProjectModal({
             type="button"
             onClick={onClose}
             disabled={busy}
-            className="grid h-9 w-9 flex-none place-items-center rounded-[10px] text-muted transition hover:bg-hover hover:text-ink disabled:opacity-50"
+            className="grid h-9 w-9 flex-none place-items-center rounded-md text-neutral-400 transition hover:bg-neutral-800 hover:text-neutral-100 disabled:opacity-50"
             aria-label="Close create project"
           >
             <XIcon size={20} />
@@ -80,7 +80,7 @@ export function CreateProjectModal({
           className="flex flex-1 flex-col gap-y-5 overflow-y-auto px-6 py-6"
         >
           <label className="block">
-            <span className="mb-2 block text-xs font-medium text-muted">
+            <span className="mb-2 block text-xs font-medium text-neutral-400">
               Project name
             </span>
             <input
@@ -95,14 +95,14 @@ export function CreateProjectModal({
               autoComplete="off"
               required
               autoFocus
-              className="h-10 w-full rounded-[10px] border border-line bg-glass px-3 text-sm text-ink outline-none transition placeholder:text-muted hover:border-line-strong focus:border-accent focus:ring-2 focus:ring-accent-soft"
+              className="h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 text-sm text-neutral-100 outline-none transition placeholder:text-neutral-400 hover:border-neutral-700 focus:border-blue-600 focus:ring-2 focus:ring-blue-900"
             />
           </label>
 
           {error ? (
             <div
               role="alert"
-              className="rounded-[10px] border border-bad bg-bad/20 p-3 text-sm text-bad"
+              className="rounded-md border border-red-500 bg-red-500/20 p-3 text-sm text-red-500"
             >
               {error}
             </div>
@@ -113,14 +113,14 @@ export function CreateProjectModal({
               type="button"
               onClick={onClose}
               disabled={busy}
-              className="h-10 rounded-[10px] border border-line px-4 text-sm font-medium text-muted transition hover:border-line-strong hover:text-ink disabled:opacity-50"
+              className="h-10 rounded-md border border-neutral-800 px-4 text-sm font-medium text-neutral-400 transition hover:border-neutral-700 hover:text-neutral-100 disabled:opacity-50"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={busy}
-              className="h-10 rounded-[10px] bg-accent px-4 text-sm font-medium text-white transition hover:bg-brand-hover disabled:cursor-wait disabled:opacity-60"
+              className="h-10 rounded-md bg-blue-600 px-4 text-sm font-medium text-white transition hover:bg-blue-500 disabled:cursor-wait disabled:opacity-60"
             >
               {busy ? "Creating…" : "Create project"}
             </button>

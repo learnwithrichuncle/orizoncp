@@ -25,17 +25,17 @@ export function DatabaseGridSortPopover({
   }
 
   return (
-    <div className="absolute left-0 top-full z-30 mt-2 w-[360px] border border-line-strong bg-base shadow-[0_22px_70px_rgba(0,0,0,0.45)]">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
-        <div className="text-[13px] font-semibold text-ink">Sort by</div>
+    <div className="absolute left-0 top-full z-30 mt-2 w-[360px] border border-neutral-700 bg-neutral-950 shadow-[0_22px_70px_rgba(0,0,0,0.45)]">
+      <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-3">
+        <div className="text-[13px] font-semibold text-neutral-100">Sort by</div>
         <button
           type="button"
-          className="inline-flex items-center gap-3 text-[13px] text-ink disabled:opacity-50"
+          className="inline-flex items-center gap-3 text-[13px] text-neutral-100 disabled:opacity-50"
           onClick={() => setDirection(direction === "asc" ? "desc" : "asc")}
           disabled={!selectedColumn}
         >
           <span>{direction === "asc" ? "Ascending" : "Descending"}</span>
-          <span className={`relative h-6 w-10 rounded-full transition ${direction === "asc" ? "bg-teal-500/25" : "bg-elevated"}`}>
+          <span className={`relative h-6 w-10 rounded-full transition ${direction === "asc" ? "bg-teal-500/25" : "bg-neutral-800"}`}>
             <span className={`absolute top-1 h-4 w-4 rounded-full transition ${direction === "asc" ? "right-1 bg-teal-400" : "left-1 bg-zinc-500"}`} />
           </span>
         </button>
@@ -48,11 +48,11 @@ export function DatabaseGridSortPopover({
               key={column.name}
               type="button"
               className={`flex w-full items-center gap-3 px-3 py-2.5 text-left text-[13px] transition ${
-                active ? "bg-elevated text-zinc-50" : "text-ink-muted hover:bg-base hover:text-white"
+                active ? "bg-neutral-800 text-zinc-50" : "text-neutral-400 hover:bg-neutral-950 hover:text-white"
               }`}
               onClick={() => setColumn(column.name)}
             >
-              <span className={`grid h-5 w-5 flex-none place-items-center rounded-full border ${active ? "border-teal-500" : "border-line-strong"}`}>
+              <span className={`grid h-5 w-5 flex-none place-items-center rounded-full border ${active ? "border-teal-500" : "border-neutral-700"}`}>
                 {active ? <span className="h-2.5 w-2.5 rounded-full bg-teal-400" /> : null}
               </span>
               <span className="min-w-0 flex-1 truncate">{column.name}</span>
@@ -61,8 +61,8 @@ export function DatabaseGridSortPopover({
         })}
       </div>
       {sort ? (
-        <div className="border-t border-line p-2">
-          <button type="button" className="inline-flex w-full items-center gap-3 px-3 py-2 text-[13px] text-ink-muted hover:bg-base hover:text-white" onClick={() => onSortChange(null)}>
+        <div className="border-t border-neutral-800 p-2">
+          <button type="button" className="inline-flex w-full items-center gap-3 px-3 py-2 text-[13px] text-neutral-400 hover:bg-neutral-950 hover:text-white" onClick={() => onSortChange(null)}>
             <AppIcon icon={Cancel01Icon} size={15} />
             Clear sorting
           </button>

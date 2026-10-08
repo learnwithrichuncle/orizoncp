@@ -256,7 +256,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
           <ProjectRouteLoader label="Loading project" />
         ) : (
           <>
-            <header className="border-b border-line pb-6">
+            <header className="border-b border-neutral-800 pb-6">
                     <ProjectPageToolbar
                       projects={projects}
                       currentProject={currentProject}
@@ -268,7 +268,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                     <div className="mt-5 flex items-center justify-end gap-2">
                         <button
                           type="button"
-                          className="inline-flex h-10 items-center justify-center bg-accent px-4 text-sm text-white transition hover:bg-brand-hover disabled:opacity-50"
+                          className="inline-flex h-10 items-center justify-center bg-blue-600 px-4 text-sm text-white transition hover:bg-blue-500 disabled:opacity-50"
                           onClick={() => setCreateServiceOpen(true)}
                           disabled={!currentProject || !selectedEnvironment}
                         >
@@ -276,7 +276,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         </button>
                         <button
                           type="button"
-                          className="h-10 rounded-[10px] border border-line px-3 text-sm text-muted transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad disabled:opacity-50"
+                          className="h-10 rounded-md border border-neutral-800 px-3 text-sm text-neutral-400 transition hover:border-red-500/60 hover:bg-red-500/10 hover:text-red-500 disabled:opacity-50"
                           onClick={() => setDeleteProjectOpen(true)}
                           aria-label="Delete project"
                           disabled={!currentProject}
@@ -287,7 +287,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                   </header>
 
                   {error ? (
-                    <div className="mt-6 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+                    <div className="mt-6 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">
                       {error}
                     </div>
                   ) : null}
@@ -307,17 +307,17 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                         />
 
                         {environmentServices.length === 0 ? (
-                          <section className="flex min-h-[400px] items-center justify-center rounded-[14px] border border-line bg-glass px-6 py-16 text-center backdrop-blur-xl">
+                          <section className="flex min-h-[400px] items-center justify-center rounded-lg border border-neutral-800 bg-neutral-900 px-6 py-16 text-center backdrop-blur-xl">
                             <div>
-                              <h2 className="font-hero text-2xl tracking-[-0.03em] text-ink">
+                              <h2 className="font-sans text-2xl tracking-[-0.03em] text-neutral-100">
                                 No services in {selectedEnvironment.name}
                               </h2>
-                              <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-muted">
+                              <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-neutral-400">
                                 Add a service here or move one from another environment.
                               </p>
                               <button
                                 type="button"
-                                className="mt-7 inline-flex h-12 items-center justify-center rounded-[10px] bg-accent px-6 text-sm font-medium text-white transition hover:bg-brand-hover"
+                                className="mt-7 inline-flex h-12 items-center justify-center rounded-md bg-blue-600 px-6 text-sm font-medium text-white transition hover:bg-blue-500"
                                 onClick={() => setCreateServiceOpen(true)}
                               >
                                 Add service

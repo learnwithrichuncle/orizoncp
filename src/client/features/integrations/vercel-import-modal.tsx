@@ -303,7 +303,7 @@ export function VercelImportModal({
     >
       {step === "auth" && (
         <div className="space-y-5">
-          <div className="text-sm text-ink-muted leading-relaxed">
+          <div className="text-sm text-neutral-400 leading-relaxed">
             Migrate a Vercel project to your self-hosted orizonCP control
             plane. The connected Git repository, build commands, environment
             variables, and custom domains are imported. Builds then run through
@@ -317,7 +317,7 @@ export function VercelImportModal({
                 href="https://vercel.com/account/tokens"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted transition hover:text-white"
+                className="font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-400 transition hover:text-white"
               >
                 Get token →
               </a>
@@ -340,7 +340,7 @@ export function VercelImportModal({
                 disabled={busy}
                 label="Remember my Vercel token"
               >
-                <span className="font-mono text-xs uppercase tracking-wider text-ink-muted">
+                <span className="font-mono text-xs uppercase tracking-wider text-neutral-400">
                   Remember my Vercel token
                 </span>
               </Checkbox>
@@ -348,12 +348,12 @@ export function VercelImportModal({
           </div>
 
           {error && (
-            <div className="border-l-2 border-white bg-hover px-4 py-3 font-mono text-xs text-ink">
+            <div className="border-l-2 border-white bg-neutral-800 px-4 py-3 font-mono text-xs text-neutral-100">
               {error}
             </div>
           )}
 
-          <div className="mt-6 flex justify-between gap-3 border-t border-line pt-5">
+          <div className="mt-6 flex justify-between gap-3 border-t border-neutral-800 pt-5">
             <button
               type="button"
               className={shellButton("ghost")}
@@ -365,7 +365,7 @@ export function VercelImportModal({
             </button>
             <button
               type="button"
-              className="inline-flex h-11 items-center justify-center bg-accent px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200 disabled:opacity-60"
+              className="inline-flex h-11 items-center justify-center bg-blue-600 px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-60"
               onClick={handleConnect}
               disabled={busy || !apiToken.trim()}
             >
@@ -395,7 +395,7 @@ export function VercelImportModal({
             <AppIcon
               icon={Search01Icon}
               size={16}
-              className="pointer-events-none absolute left-3 top-3 text-ink-dim"
+              className="pointer-events-none absolute left-3 top-3 text-neutral-500"
             />
             <FormInput
               variant="monochrome"
@@ -407,15 +407,15 @@ export function VercelImportModal({
           </div>
 
           {error && (
-            <div className="mb-4 border-l-2 border-white bg-hover px-4 py-3 font-mono text-xs text-ink">
+            <div className="mb-4 border-l-2 border-white bg-neutral-800 px-4 py-3 font-mono text-xs text-neutral-100">
               {error}
             </div>
           )}
 
-          <div className="min-h-0 flex-1 overflow-hidden border border-line bg-base/20">
+          <div className="min-h-0 flex-1 overflow-hidden border border-neutral-800 bg-neutral-950/20">
             <div className="max-h-[300px] overflow-y-auto">
               {filteredProjects.length === 0 ? (
-                <div className="px-5 py-8 text-center font-mono text-xs text-ink-muted">
+                <div className="px-5 py-8 text-center font-mono text-xs text-neutral-400">
                   No Vercel projects found.
                 </div>
               ) : (
@@ -424,13 +424,13 @@ export function VercelImportModal({
                   return (
                     <div
                       key={project.id}
-                      className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5 last:border-b-0"
+                      className="flex items-center justify-between gap-4 border-b border-neutral-800 px-4 py-3.5 last:border-b-0"
                     >
                       <div className="min-w-0">
-                        <div className="text-sm font-semibold text-ink">
+                        <div className="text-sm font-semibold text-neutral-100">
                           {project.name}
                         </div>
-                        <div className="flex items-center gap-1.5 text-[11px] text-ink-muted truncate max-w-sm mt-0.5 font-mono">
+                        <div className="flex items-center gap-1.5 text-[11px] text-neutral-400 truncate max-w-sm mt-0.5 font-mono">
                           <AppIcon
                             icon={unsupported ? Alert02Icon : GithubIcon}
                             size={12}
@@ -440,7 +440,7 @@ export function VercelImportModal({
                       </div>
                       <button
                         type="button"
-                        className="inline-flex h-9 items-center justify-center border border-line px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-muted transition hover:border-white hover:bg-accent hover:text-ink disabled:opacity-50"
+                        className="inline-flex h-9 items-center justify-center border border-neutral-800 px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-400 transition hover:border-white hover:bg-blue-600 hover:text-neutral-100 disabled:opacity-50"
                         onClick={() => void handleSelectProject(project)}
                         disabled={busy || unsupported}
                       >
@@ -453,7 +453,7 @@ export function VercelImportModal({
             </div>
           </div>
 
-          <div className="mt-5 flex justify-start border-t border-line pt-5">
+          <div className="mt-5 flex justify-start border-t border-neutral-800 pt-5">
             <button
               type="button"
               className={shellButton("ghost")}
@@ -469,7 +469,7 @@ export function VercelImportModal({
 
       {step === "configure" && projectDetails && (
         <div className="flex flex-col min-h-full space-y-4">
-          <div className="text-sm text-ink-muted leading-relaxed mb-1">
+          <div className="text-sm text-neutral-400 leading-relaxed mb-1">
             Customize how <strong>{selectedProject?.name}</strong> is migrated
             to your self-hosted stack.
           </div>
@@ -489,7 +489,7 @@ export function VercelImportModal({
                   label: targetLabel[value],
                 }))}
               />
-              <div className="text-[10px] text-ink-dim font-mono mt-1 uppercase tracking-wider">
+              <div className="text-[10px] text-neutral-500 font-mono mt-1 uppercase tracking-wider">
                 Pull env vars from this Vercel target
               </div>
             </div>
@@ -507,9 +507,9 @@ export function VercelImportModal({
 
           <div>
             <FieldLabel>Source</FieldLabel>
-            <div className="space-y-1.5 border border-line bg-base/20 px-4 py-3 font-mono text-[11px]">
+            <div className="space-y-1.5 border border-neutral-800 bg-neutral-950/20 px-4 py-3 font-mono text-[11px]">
               {isUnsupported ? (
-                <div className="flex items-start gap-2 text-ink-dim">
+                <div className="flex items-start gap-2 text-neutral-500">
                   <AppIcon
                     icon={Alert02Icon}
                     size={14}
@@ -546,12 +546,12 @@ export function VercelImportModal({
           </div>
 
           {error && (
-            <div className="border-l-2 border-white bg-hover px-4 py-3 font-mono text-xs text-ink">
+            <div className="border-l-2 border-white bg-neutral-800 px-4 py-3 font-mono text-xs text-neutral-100">
               {error}
             </div>
           )}
 
-          <div className="mt-5 flex justify-between gap-3 border-t border-line pt-5">
+          <div className="mt-5 flex justify-between gap-3 border-t border-neutral-800 pt-5">
             <button
               type="button"
               className={shellButton("ghost")}
@@ -563,7 +563,7 @@ export function VercelImportModal({
             </button>
             <button
               type="button"
-              className="inline-flex h-11 items-center justify-center gap-2 bg-accent px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200 disabled:opacity-60"
+              className="inline-flex h-11 items-center justify-center gap-2 bg-blue-600 px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-60"
               onClick={handleExecuteImport}
               disabled={busy || isUnsupported}
             >
@@ -577,25 +577,25 @@ export function VercelImportModal({
       {step === "importing" && (
         <div className="py-8 flex flex-col items-center justify-center text-center space-y-4">
           <div className="relative flex items-center justify-center">
-            <div className="h-12 w-12 rounded-full border-2 border-t-2 border-line-strong border-t-zinc-100 animate-spin" />
+            <div className="h-12 w-12 rounded-full border-2 border-t-2 border-neutral-700 border-t-zinc-100 animate-spin" />
             <AppIcon
               icon={WorkflowSquare07Icon}
               size={18}
-              className="absolute text-ink"
+              className="absolute text-neutral-100"
             />
           </div>
           <div>
-            <h3 className="font-semibold text-ink text-base">
+            <h3 className="font-semibold text-neutral-100 text-base">
               Migrating Project
             </h3>
-            <p className="text-xs text-ink-muted font-mono mt-1">
+            <p className="text-xs text-neutral-400 font-mono mt-1">
               Importing "{selectedProject?.name}" from Vercel...
             </p>
           </div>
-          <div className="relative h-1 w-64 overflow-hidden border border-line bg-base">
-            <div className="absolute inset-y-0 w-1/2 animate-marquee bg-accent" />
+          <div className="relative h-1 w-64 overflow-hidden border border-neutral-800 bg-neutral-950">
+            <div className="absolute inset-y-0 w-1/2 animate-marquee bg-blue-600" />
           </div>
-          <div className="text-[10px] text-ink-dim font-mono space-y-1">
+          <div className="text-[10px] text-neutral-500 font-mono space-y-1">
             <div>Resolving Git source and build commands...</div>
             <div>Importing environment variables...</div>
             <div>Importing custom domains and queueing the deploy...</div>
@@ -605,35 +605,35 @@ export function VercelImportModal({
 
       {step === "success" && (
         <div className="py-6 flex flex-col items-center justify-center text-center space-y-5">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-ink">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-neutral-100">
             <AppIcon icon={CheckmarkCircle02Icon} size={30} />
           </div>
           <div>
-            <h3 className="font-hero text-xl font-bold text-ink">
+            <h3 className="font-sans text-xl font-bold text-neutral-100">
               Migration Completed!
             </h3>
-            <p className="text-sm text-ink-muted max-w-sm mt-2">
+            <p className="text-sm text-neutral-400 max-w-sm mt-2">
               Successfully imported "{selectedProject?.name}" from Vercel,
               including its Git source and build commands.
             </p>
           </div>
 
           {summary && (
-            <div className="w-full max-w-sm space-y-1.5 border border-line bg-base/20 px-4 py-3 text-left font-mono text-[11px]">
-              <div className="flex justify-between text-ink-muted">
-                <span className="text-ink-dim uppercase tracking-wider">
+            <div className="w-full max-w-sm space-y-1.5 border border-neutral-800 bg-neutral-950/20 px-4 py-3 text-left font-mono text-[11px]">
+              <div className="flex justify-between text-neutral-400">
+                <span className="text-neutral-500 uppercase tracking-wider">
                   Variables
                 </span>
                 <span>{summary.importedVariableCount ?? 0} imported</span>
               </div>
-              <div className="flex justify-between text-ink-muted">
-                <span className="text-ink-dim uppercase tracking-wider">
+              <div className="flex justify-between text-neutral-400">
+                <span className="text-neutral-500 uppercase tracking-wider">
                   Domains
                 </span>
                 <span>{summary.importedCustomDomainCount ?? 0} imported</span>
               </div>
               {Boolean(summary.skippedSensitiveCount) && (
-                <div className="mt-1 flex items-start gap-2 border-t border-line pt-2 text-ink-dim">
+                <div className="mt-1 flex items-start gap-2 border-t border-neutral-800 pt-2 text-neutral-500">
                   <AppIcon
                     icon={Alert02Icon}
                     size={13}
@@ -653,7 +653,7 @@ export function VercelImportModal({
 
           <button
             type="button"
-            className="inline-flex h-11 items-center justify-center gap-2 bg-accent px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-zinc-200"
+            className="inline-flex h-11 items-center justify-center gap-2 bg-blue-600 px-5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-100 transition hover:bg-zinc-200"
             onClick={() => {
               handleClose();
               void navigate({
@@ -681,12 +681,12 @@ function SummaryRow({
   value: string;
 }) {
   return (
-    <div className="flex items-center gap-2 text-ink-muted">
-      <span className="inline-flex items-center gap-1.5 w-24 shrink-0 text-ink-dim uppercase tracking-wider text-[10px]">
+    <div className="flex items-center gap-2 text-neutral-400">
+      <span className="inline-flex items-center gap-1.5 w-24 shrink-0 text-neutral-500 uppercase tracking-wider text-[10px]">
         {icon && <AppIcon icon={icon} size={12} />}
         {label}
       </span>
-      <span className="truncate text-ink">{value}</span>
+      <span className="truncate text-neutral-100">{value}</span>
     </div>
   );
 }

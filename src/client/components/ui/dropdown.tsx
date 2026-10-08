@@ -45,7 +45,7 @@ export function Dropdown({
     <div ref={rootRef} className={`relative ${className}`}>
       <button
         type="button"
-        className="flex h-9 w-full items-center justify-between rounded-md border border-line bg-elevated px-3 text-left text-sm text-ink outline-none transition hover:border-line-strong focus:border-brand-edge focus:ring-2 focus:ring-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-9 w-full items-center justify-between rounded-md border border-neutral-800 bg-neutral-800 px-3 text-left text-sm text-neutral-100 outline-none transition hover:border-neutral-700 focus:border-blue-600 focus:ring-2 focus:ring-blue-900 disabled:cursor-not-allowed disabled:opacity-60"
         onClick={() => setOpen((current) => !current)}
         onKeyDown={(event) => {
           if (event.key === "Escape") setOpen(false);
@@ -54,18 +54,18 @@ export function Dropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span className={`min-w-0 truncate ${selected ? "" : "text-ink-dim"}`}>{selected?.label ?? placeholder}</span>
-        <ChevronDownIcon size={16} className={`shrink-0 text-ink-dim transition ${open ? "rotate-180" : ""}`} />
+        <span className={`min-w-0 truncate ${selected ? "" : "text-neutral-500"}`}>{selected?.label ?? placeholder}</span>
+        <ChevronDownIcon size={16} className={`shrink-0 text-neutral-500 transition ${open ? "rotate-180" : ""}`} />
       </button>
       {open ? (
         <div
-          className={`absolute left-0 right-0 z-40 max-h-64 overflow-y-auto rounded-md border border-line bg-surface p-1 shadow-2xl backdrop-blur-xl ${
+          className={`absolute left-0 right-0 z-40 max-h-64 overflow-y-auto rounded-md border border-neutral-800 bg-neutral-900 p-1 shadow-2xl backdrop-blur-xl ${
             placement === "top" ? "bottom-full mb-2" : "top-full mt-2"
           }`}
           role="listbox"
         >
           {options.length === 0 ? (
-            <div className="px-2.5 py-2 text-sm text-ink-dim">No options</div>
+            <div className="px-2.5 py-2 text-sm text-neutral-500">No options</div>
           ) : options.map((option) => {
             const active = option.value === value;
             return (
@@ -74,8 +74,8 @@ export function Dropdown({
                 type="button"
                 className={`block w-full rounded-md px-2 py-1.5 text-left text-sm transition disabled:cursor-not-allowed disabled:opacity-50 ${
                   active
-                    ? "bg-active text-ink"
-                    : "text-ink-muted hover:bg-hover hover:text-ink"
+                    ? "bg-neutral-700 text-neutral-100"
+                    : "text-neutral-400 hover:bg-neutral-800 hover:text-neutral-100"
                 }`}
                 onClick={() => {
                   onChange(option.value);

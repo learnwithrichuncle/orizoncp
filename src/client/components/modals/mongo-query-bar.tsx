@@ -53,7 +53,7 @@ function highlightedSuggestion(text: string, needle: string) {
   return (
     <>
       {text.slice(0, index)}
-      <span className="text-[#FF8A5C]">{text.slice(index, index + needle.length)}</span>
+      <span className="text-blue-400">{text.slice(index, index + needle.length)}</span>
       {text.slice(index + needle.length)}
     </>
   );
@@ -267,14 +267,14 @@ export function MongoQueryBar({
   return (
     <div ref={rootRef} className="relative mb-3">
       <form
-        className={`flex h-11 items-center border bg-base text-ink ${
-          syntaxError ? "border-bad/70" : "border-line-strong"
+        className={`flex h-11 items-center border bg-neutral-950 text-neutral-100 ${
+          syntaxError ? "border-red-500/70" : "border-neutral-700"
         }`}
         onSubmit={runFind}
       >
         <button
           type="button"
-          className="flex h-full items-center gap-2 border-r border-line px-3 text-ink transition hover:bg-base"
+          className="flex h-full items-center gap-2 border-r border-neutral-800 px-3 text-neutral-100 transition hover:bg-neutral-950"
           onClick={() => {
             setActiveTab("recents");
             setMenuOpen((current) => !current);
@@ -283,10 +283,10 @@ export function MongoQueryBar({
           aria-expanded={menuOpen}
         >
           <AppIcon icon={Clock01Icon} size={16} />
-          <AppIcon icon={ArrowDown01Icon} size={13} className={`text-ink-muted transition ${menuOpen ? "rotate-180" : ""}`} />
+          <AppIcon icon={ArrowDown01Icon} size={13} className={`text-neutral-400 transition ${menuOpen ? "rotate-180" : ""}`} />
         </button>
 
-        <div className="h-full min-w-0 flex-1 overflow-hidden bg-base">
+        <div className="h-full min-w-0 flex-1 overflow-hidden bg-neutral-950">
           <CodeMirror
             value={query}
             height="42px"
@@ -295,7 +295,7 @@ export function MongoQueryBar({
             onChange={onQueryChange}
             placeholder="Type a query: { field: 'value' }"
             theme="dark"
-            className="h-full bg-base [&_.cm-content]:bg-base [&_.cm-editor]:bg-base [&_.cm-scroller]:bg-base"
+            className="h-full bg-neutral-950 [&_.cm-content]:bg-neutral-950 [&_.cm-editor]:bg-neutral-950 [&_.cm-scroller]:bg-neutral-950"
           />
         </div>
 
@@ -305,8 +305,8 @@ export function MongoQueryBar({
               type="button"
               className={`mr-2 inline-flex h-7 w-7 items-center justify-center border transition ${
                 favoriteTexts.has(trimmedQuery)
-                  ? "border-warn/40 bg-warn/10 text-warn"
-                  : "border-line-strong bg-base/80 text-ink-muted hover:border-zinc-500 hover:text-white"
+                  ? "border-amber-500/40 bg-amber-500/10 text-amber-500"
+                  : "border-neutral-700 bg-neutral-950/80 text-neutral-400 hover:border-zinc-500 hover:text-white"
               }`}
               onClick={() => toggleFavorite(trimmedQuery)}
               title={favoriteTexts.has(trimmedQuery) ? "Remove favorite" : "Save favorite"}
@@ -316,7 +316,7 @@ export function MongoQueryBar({
             </button>
             <button
               type="button"
-              className="mr-2 inline-flex h-7 items-center gap-1.5 border border-line-strong bg-base/80 px-2.5 text-xs text-ink-muted transition hover:border-zinc-500 hover:text-white"
+              className="mr-2 inline-flex h-7 items-center gap-1.5 border border-neutral-700 bg-neutral-950/80 px-2.5 text-xs text-neutral-400 transition hover:border-zinc-500 hover:text-white"
               onClick={onClear}
               disabled={busy === "rows"}
             >
@@ -328,7 +328,7 @@ export function MongoQueryBar({
 
         <button
           type="submit"
-          className="mr-2 inline-flex h-7 items-center gap-1.5 border border-[#FF6B35]/45 bg-[#FF6B35]/15 px-2.5 text-xs font-medium text-[#FF8A5C] transition hover:bg-[#FF6B35]/25 disabled:cursor-not-allowed disabled:opacity-50"
+          className="mr-2 inline-flex h-7 items-center gap-1.5 border border-blue-600/45 bg-blue-600/15 px-2.5 text-xs font-medium text-blue-400 transition hover:bg-blue-600/25 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={Boolean(syntaxError) || busy === "rows"}
         >
           <AppIcon icon={Search01Icon} size={13} />
@@ -336,18 +336,18 @@ export function MongoQueryBar({
         </button>
       </form>
 
-      {syntaxError ? <div className="mt-1 font-mono text-[10px] text-bad">{syntaxError}</div> : null}
+      {syntaxError ? <div className="mt-1 font-mono text-[10px] text-red-500">{syntaxError}</div> : null}
 
       {menuOpen ? (
-        <div className="absolute left-0 top-full z-50 mt-2 w-[460px] border border-line-strong bg-base p-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
-          <div className="font-hero text-lg text-ink">Queries in {scopeLabel}</div>
-          <div className="mt-4 inline-flex border border-line-strong bg-base p-1">
+        <div className="absolute left-0 top-full z-50 mt-2 w-[460px] border border-neutral-700 bg-neutral-950 p-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
+          <div className="font-sans text-lg text-neutral-100">Queries in {scopeLabel}</div>
+          <div className="mt-4 inline-flex border border-neutral-700 bg-neutral-950 p-1">
             {(["recents", "favorites"] as QueryTab[]).map((tab) => (
               <button
                 key={tab}
                 type="button"
                 className={`inline-flex h-8 items-center gap-2 px-3 text-sm font-semibold capitalize transition ${
-                  activeTab === tab ? "bg-ink text-zinc-950" : "text-ink-muted hover:bg-base hover:text-white"
+                  activeTab === tab ? "bg-ink text-zinc-950" : "text-neutral-400 hover:bg-neutral-950 hover:text-white"
                 }`}
                 onClick={() => setActiveTab(tab)}
               >
@@ -359,14 +359,14 @@ export function MongoQueryBar({
 
           <div className="mt-4 max-h-64 overflow-y-auto">
             {listedQueries.length === 0 ? (
-              <div className="flex min-h-40 items-center justify-center border border-line bg-base/70 px-5 text-center text-sm text-ink-dim">
+              <div className="flex min-h-40 items-center justify-center border border-neutral-800 bg-neutral-950/70 px-5 text-center text-sm text-neutral-500">
                 {activeTab === "recents" ? "Your recent queries will appear here." : "Saved favorite queries will appear here."}
               </div>
             ) : listedQueries.map((item) => (
               <div key={item.text} className="group flex items-center gap-2 border-b border-zinc-900 py-2 last:border-b-0">
                 <button
                   type="button"
-                  className="min-w-0 flex-1 truncate px-2 py-1.5 text-left font-mono text-xs text-ink-muted transition group-hover:bg-base group-hover:text-white"
+                  className="min-w-0 flex-1 truncate px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition group-hover:bg-neutral-950 group-hover:text-white"
                   onClick={() => selectQuery(item.text)}
                 >
                   {item.text}
@@ -375,8 +375,8 @@ export function MongoQueryBar({
                   type="button"
                   className={`inline-flex h-7 w-7 items-center justify-center border transition ${
                     favoriteTexts.has(item.text)
-                      ? "border-warn/40 bg-warn/10 text-warn"
-                      : "border-line bg-base/70 text-ink-dim hover:border-zinc-600 hover:text-ink"
+                      ? "border-amber-500/40 bg-amber-500/10 text-amber-500"
+                      : "border-neutral-800 bg-neutral-950/70 text-neutral-500 hover:border-zinc-600 hover:text-neutral-100"
                   }`}
                   onClick={() => toggleFavorite(item.text)}
                   title={favoriteTexts.has(item.text) ? "Remove favorite" : "Save favorite"}

@@ -428,9 +428,9 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
 
   if (!supported) {
     return (
-      <div className="border border-line bg-base/45 p-6">
-        <h3 className="font-hero text-lg text-ink">Database browser unavailable</h3>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">{message}</p>
+      <div className="border border-neutral-800 bg-neutral-950/45 p-6">
+        <h3 className="font-sans text-lg text-neutral-100">Database browser unavailable</h3>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-400">{message}</p>
       </div>
     );
   }
@@ -439,15 +439,15 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
 
   return (
     <div className="flex h-full min-h-0 gap-4">
-      <aside className="flex min-h-0 w-64 flex-none flex-col overflow-hidden border border-line bg-base/45">
-        <div className="flex items-center justify-between border-b border-line px-4 py-3">
-          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">{nouns.list}</div>
-          <button type="button" className="text-ink-muted hover:text-ink" onClick={() => void loadTables()} disabled={busy === "tables"} aria-label="Refresh tables">
+      <aside className="flex min-h-0 w-64 flex-none flex-col overflow-hidden border border-neutral-800 bg-neutral-950/45">
+        <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-3">
+          <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-400">{nouns.list}</div>
+          <button type="button" className="text-neutral-400 hover:text-neutral-100" onClick={() => void loadTables()} disabled={busy === "tables"} aria-label="Refresh tables">
             <AppIcon icon={Refresh03Icon} size={15} className={busy === "tables" ? "animate-spin" : ""} />
           </button>
         </div>
-        <div className="border-b border-line p-3">
-          <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-dim">{nouns.group}</div>
+        <div className="border-b border-neutral-800 p-3">
+          <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-500">{nouns.group}</div>
           <Dropdown
             value={selectedSchema}
             options={schemaOptions}
@@ -458,24 +458,24 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto">
           {busy === "tables" ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">Loading...</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-neutral-500">Loading...</div>
           ) : hasRuntimeNotice ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">Database not ready.</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-neutral-500">Database not ready.</div>
           ) : schemaOptions.length === 0 ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">{nouns.empty}</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-neutral-500">{nouns.empty}</div>
           ) : visibleTables.length === 0 ? (
-            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-ink-dim">{nouns.scopedEmpty}</div>
+            <div className="flex h-full items-center justify-center px-4 py-5 text-center text-sm text-neutral-500">{nouns.scopedEmpty}</div>
           ) : visibleTables.map((table) => (
             <button
               key={table.id}
               type="button"
-              className={`block w-full border-b border-zinc-900 px-4 py-3 text-left text-sm ${selectedTable === table.id ? "bg-elevated text-ink" : "text-ink-muted hover:bg-base"}`}
+              className={`block w-full border-b border-zinc-900 px-4 py-3 text-left text-sm ${selectedTable === table.id ? "bg-neutral-800 text-neutral-100" : "text-neutral-400 hover:bg-neutral-950"}`}
               onClick={() => setSelectedTable(table.id)}
             >
               <span className="block truncate font-medium">{table.name}</span>
-              <span className="mt-1 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
+              <span className="mt-1 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
                 <span className="min-w-0 truncate">{table.schema}</span>
-                <span className="shrink-0 text-ink-muted">{itemCountLabel(table.rowCount, engine)}</span>
+                <span className="shrink-0 text-neutral-400">{itemCountLabel(table.rowCount, engine)}</span>
               </span>
             </button>
           ))}
@@ -483,10 +483,10 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
       </aside>
 
       <section className="relative flex min-w-0 flex-1 flex-col overflow-hidden">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-neutral-800 pb-4">
           <div>
-            <h3 className="font-hero text-xl text-ink">{selectedTableName || "Data"}</h3>
-            <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
+            <h3 className="font-sans text-xl text-neutral-100">{selectedTableName || "Data"}</h3>
+            <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
               {rowsResult
                 ? `${rowCountFormatter.format(rowsResult.totalRows)} total ${nouns.record}${rowsResult.totalRows === 1 ? "" : "s"}`
                 : `${rowCountFormatter.format(rows.length)} loaded ${nouns.record}${rows.length === 1 ? "" : "s"}`}
@@ -507,17 +507,17 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
               <div className="relative">
                 <button
                   type="button"
-                  className="inline-flex h-9 w-9 items-center justify-center border border-line bg-base/70 text-ink-muted transition hover:border-zinc-600 hover:text-ink"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-neutral-800 bg-neutral-950/70 text-neutral-400 transition hover:border-zinc-600 hover:text-neutral-100"
                   onClick={() => setOptionsOpen((current) => !current)}
                   aria-label="Data options"
                 >
                   <AppIcon icon={MoreVerticalIcon} size={17} />
                 </button>
                 {optionsOpen ? (
-                  <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-52 border border-line-strong bg-base shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
+                  <div className="absolute right-0 top-[calc(100%+0.5rem)] z-20 w-52 border border-neutral-700 bg-neutral-950 shadow-[0_20px_40px_rgba(0,0,0,0.35)]">
                     <button
                       type="button"
-                      className="flex w-full items-center gap-2 px-3 py-3 text-left font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-ink transition hover:bg-elevated hover:text-white"
+                      className="flex w-full items-center gap-2 px-3 py-3 text-left font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-100 transition hover:bg-neutral-800 hover:text-white"
                       onClick={() => {
                         setOptionsOpen(false);
                         setImportOpen(true);
@@ -539,9 +539,9 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             onDismiss={() => setDismissedDataImportIds((current) => new Set(current).add(visibleDataImport.id))}
           />
         ) : null}
-        {error ? <div className="mb-4 border border-bad/30 bg-bad/25 px-4 py-3 text-sm text-bad">{error}</div> : null}
+        {error ? <div className="mb-4 border border-red-500/30 bg-red-500/25 px-4 py-3 text-sm text-red-500">{error}</div> : null}
         {!hasPrimaryKey && editable && rows.length > 0 ? (
-          <div className="mb-4 border border-warn/30 bg-warn/20 px-4 py-3 text-xs text-warn">
+          <div className="mb-4 border border-amber-500/30 bg-amber-500/20 px-4 py-3 text-xs text-amber-500">
             Editing and deleting require a primary key on this table.
           </div>
         ) : null}
@@ -554,7 +554,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             onRefresh={() => void loadTables()}
           />
         ) : !rowsResult ? (
-          <div className="flex min-h-0 flex-1 items-center justify-center border border-line bg-base/45 px-5 py-8 text-center text-sm text-ink-dim">
+          <div className="flex min-h-0 flex-1 items-center justify-center border border-neutral-800 bg-neutral-950/45 px-5 py-8 text-center text-sm text-neutral-500">
             {busy ? "Loading data..." : `Choose ${engine === "redis" ? "a key" : engine === "mongodb" || engine === "mongo" ? "a collection" : "a table"} to inspect ${nouns.record}s.`}
           </div>
         ) : isMongo ? (
@@ -586,7 +586,7 @@ export function DatabaseBrowserPanel({ serviceId }: { serviceId: string }) {
             onDeleteDocument={deleteMongoDocument}
           />
         ) : columns.length === 0 ? (
-          <div className="flex min-h-0 flex-1 items-center justify-center border border-line bg-base/45 px-5 py-8 text-center text-sm text-ink-dim">
+          <div className="flex min-h-0 flex-1 items-center justify-center border border-neutral-800 bg-neutral-950/45 px-5 py-8 text-center text-sm text-neutral-500">
             {busy ? "Loading data..." : `Choose ${engine === "redis" ? "a key" : "a table"} to inspect ${nouns.record}s.`}
           </div>
         ) : (

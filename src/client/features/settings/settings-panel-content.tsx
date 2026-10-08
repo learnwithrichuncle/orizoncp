@@ -21,9 +21,9 @@ export function SettingsPanelContent({
 }) {
   if (activeTab === "root-domain") {
     return (
-      <div className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
+      <div className="mx-auto max-w-5xl overflow-hidden border border-neutral-800 bg-neutral-950">
         <ControlPlaneDomainSettingsPanel open />
-        <div className="border-t border-line">
+        <div className="border-t border-neutral-800">
           <RootDomainSettingsPanel open />
         </div>
       </div>

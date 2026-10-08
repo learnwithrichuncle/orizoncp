@@ -24,7 +24,7 @@ export function ControlPlaneDomainInstructions({ hostname, publicIp }: { hostnam
   return (
     <div className="mt-5 border border-zinc-800 bg-zinc-950/50">
       <div className="border-b border-zinc-800 px-4 py-3">
-        <h3 className="font-hero text-sm tracking-tight text-zinc-100">Dashboard DNS setup</h3>
+        <h3 className="font-sans text-sm tracking-tight text-zinc-100">Dashboard DNS setup</h3>
         <p className="mt-1 font-mono text-[11px] leading-relaxed text-zinc-500">
           Add one A record for the orizonCP dashboard. Caddy will route it to the control plane and issue HTTPS.
         </p>

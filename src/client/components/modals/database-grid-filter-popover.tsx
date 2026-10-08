@@ -10,7 +10,7 @@ type OpenMenu = {
 } | null;
 
 function pillClass(extra = "") {
-  return `inline-flex h-8 items-center justify-between gap-2 bg-elevated px-2.5 text-[13px] text-ink ${extra}`.trim();
+  return `inline-flex h-8 items-center justify-between gap-2 bg-neutral-800 px-2.5 text-[13px] text-neutral-100 ${extra}`.trim();
 }
 
 export function DatabaseGridFilterPopover({
@@ -69,8 +69,8 @@ export function DatabaseGridFilterPopover({
   }
 
   const wrapperClass = floating
-    ? "absolute left-0 top-full z-40 mt-2 w-[920px] max-w-[calc(100vw-3rem)] border border-line-strong bg-base shadow-[0_22px_70px_rgba(0,0,0,0.45)]"
-    : "mb-3 border border-line-strong bg-base";
+    ? "absolute left-0 top-full z-40 mt-2 w-[920px] max-w-[calc(100vw-3rem)] border border-neutral-700 bg-neutral-950 shadow-[0_22px_70px_rgba(0,0,0,0.45)]"
+    : "mb-3 border border-neutral-700 bg-neutral-950";
 
   return (
     <div className={wrapperClass}>
@@ -83,10 +83,10 @@ export function DatabaseGridFilterPopover({
 
             return (
               <div key={filter.id} className="grid gap-2 md:grid-cols-[34px_96px_minmax(150px,1fr)_minmax(150px,1fr)_minmax(140px,1fr)]">
-                <button type="button" className="grid h-8 w-8 place-items-center bg-elevated text-ink-muted hover:bg-zinc-700 hover:text-white" onClick={() => removeFilter(filter.id)} aria-label="Remove filter">
+                <button type="button" className="grid h-8 w-8 place-items-center bg-neutral-800 text-neutral-400 hover:bg-zinc-700 hover:text-white" onClick={() => removeFilter(filter.id)} aria-label="Remove filter">
                   <AppIcon icon={Cancel01Icon} size={14} />
                 </button>
-                <div className={`${pillClass("justify-center")} text-ink-muted`}>{index === 0 ? "where" : "and"}</div>
+                <div className={`${pillClass("justify-center")} text-neutral-400`}>{index === 0 ? "where" : "and"}</div>
 
                 <div className="relative min-w-0">
                   <button type="button" className={`${pillClass("w-full")}`} onClick={() => setOpenMenu(columnMenuOpen ? null : { filterId: filter.id, kind: "column" })}>
@@ -94,14 +94,14 @@ export function DatabaseGridFilterPopover({
                     <AppIcon icon={ArrowDown01Icon} size={13} />
                   </button>
                   {columnMenuOpen ? (
-                    <div className="absolute left-0 top-full z-50 mt-2 w-[280px] border border-line-strong bg-base shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
-                      <div className="flex items-center gap-2 border-b border-line px-2.5 py-1.5 text-ink-muted">
+                    <div className="absolute left-0 top-full z-50 mt-2 w-[280px] border border-neutral-700 bg-neutral-950 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+                      <div className="flex items-center gap-2 border-b border-neutral-800 px-2.5 py-1.5 text-neutral-400">
                         <AppIcon icon={Search01Icon} size={15} />
                         <input
                           value={columnSearch}
                           onChange={(event) => setColumnSearch(event.target.value)}
                           placeholder="Search column..."
-                          className="h-8 min-w-0 flex-1 bg-transparent text-[13px] text-ink outline-none placeholder:text-ink-dim"
+                          className="h-8 min-w-0 flex-1 bg-transparent text-[13px] text-neutral-100 outline-none placeholder:text-neutral-500"
                         />
                       </div>
                       <div className="max-h-64 overflow-y-auto p-1.5">
@@ -109,7 +109,7 @@ export function DatabaseGridFilterPopover({
                           <button
                             key={column.name}
                             type="button"
-                            className={`block w-full px-2.5 py-1.5 text-left text-[13px] ${filter.column === column.name ? "bg-elevated text-zinc-50" : "text-ink-muted hover:bg-base hover:text-white"}`}
+                            className={`block w-full px-2.5 py-1.5 text-left text-[13px] ${filter.column === column.name ? "bg-neutral-800 text-zinc-50" : "text-neutral-400 hover:bg-neutral-950 hover:text-white"}`}
                             onClick={() => selectColumn(filter.id, column.name)}
                           >
                             <span className="block truncate">{column.name}</span>
@@ -126,12 +126,12 @@ export function DatabaseGridFilterPopover({
                     <AppIcon icon={ArrowDown01Icon} size={13} />
                   </button>
                   {operatorMenuOpen ? (
-                    <div className="absolute left-0 top-full z-50 mt-2 w-[230px] border border-line-strong bg-base p-1.5 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
+                    <div className="absolute left-0 top-full z-50 mt-2 w-[230px] border border-neutral-700 bg-neutral-950 p-1.5 shadow-[0_18px_50px_rgba(0,0,0,0.45)]">
                       {filterOperators.map((item) => (
                         <button
                           key={item.value}
                           type="button"
-                          className={`block w-full px-2.5 py-1.5 text-left text-[13px] ${filter.operator === item.value ? "bg-elevated text-zinc-50" : "text-ink-muted hover:bg-base hover:text-white"}`}
+                          className={`block w-full px-2.5 py-1.5 text-left text-[13px] ${filter.operator === item.value ? "bg-neutral-800 text-zinc-50" : "text-neutral-400 hover:bg-neutral-950 hover:text-white"}`}
                           onClick={() => selectOperator(filter.id, item.value)}
                         >
                           {item.label}
@@ -145,7 +145,7 @@ export function DatabaseGridFilterPopover({
                   value={filter.value}
                   onChange={(event) => updateFilter(filter.id, { value: event.target.value })}
                   disabled={!operator.requiresValue}
-                  className="h-8 min-w-0 bg-elevated px-2.5 text-[13px] text-ink outline-none placeholder:text-ink-dim disabled:text-ink-dim"
+                  className="h-8 min-w-0 bg-neutral-800 px-2.5 text-[13px] text-neutral-100 outline-none placeholder:text-neutral-500 disabled:text-neutral-500"
                   placeholder={operator.requiresValue ? "Value" : "No value needed"}
                 />
               </div>
@@ -153,16 +153,16 @@ export function DatabaseGridFilterPopover({
           })}
         </div>
 
-        <div className="border-line md:border-l md:pl-3">
+        <div className="border-neutral-800 md:border-l md:pl-3">
           <div className="flex flex-wrap gap-2">
-            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 bg-elevated px-2.5 text-[13px] text-ink hover:bg-zinc-700" onClick={addFilter}>
+            <button type="button" className="inline-flex h-8 items-center justify-center gap-2 bg-neutral-800 px-2.5 text-[13px] text-neutral-100 hover:bg-zinc-700" onClick={addFilter}>
               <AppIcon icon={Add01Icon} size={15} />
               Add filter
             </button>
             {canClear ? (
               <button
                 type="button"
-                className="inline-flex h-8 items-center justify-center bg-elevated px-2.5 text-[13px] text-ink transition hover:bg-zinc-700 disabled:opacity-50"
+                className="inline-flex h-8 items-center justify-center bg-neutral-800 px-2.5 text-[13px] text-neutral-100 transition hover:bg-zinc-700 disabled:opacity-50"
                 onClick={onClear}
                 disabled={applying}
               >

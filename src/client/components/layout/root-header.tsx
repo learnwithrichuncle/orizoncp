@@ -14,8 +14,8 @@ export function RootHeader() {
           : "orizonCP";
 
   return (
-    <header className="flex h-topbar flex-none items-center gap-4 bg-sidebar px-6">
-      <div className="flex items-center gap-2 font-mono text-[12px] tracking-wide text-[var(--color-text-secondary)]">
+    <header className="flex h-topbar flex-none items-center gap-4 bg-neutral-950 px-6">
+      <div className="flex items-center gap-2 font-mono text-[12px] tracking-wide text-neutral-400">
         <Link to="/" className="transition-colors hover:text-white">
           {crumb}
         </Link>

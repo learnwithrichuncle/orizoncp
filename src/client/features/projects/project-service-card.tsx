@@ -18,18 +18,18 @@ import { ServiceCardActions } from "./service-card-actions";
 
 function statusTone(status: string) {
   if (status === "active" || status === "running") {
-    return { text: "text-ok", dot: "bg-ok" };
+    return { text: "text-green-500", dot: "bg-green-500" };
   }
   if (status === "building" || status === "queued") {
-    return { text: "text-warn", dot: "animate-pulse bg-warn" };
+    return { text: "text-amber-500", dot: "animate-pulse bg-amber-500" };
   }
   if (status === "crashed") {
     return { text: "text-orange-300", dot: "bg-orange-400" };
   }
   if (status === "failed") {
-    return { text: "text-bad", dot: "bg-bad" };
+    return { text: "text-red-500", dot: "bg-red-500" };
   }
-  return { text: "text-ink-dim", dot: "bg-zinc-600" };
+  return { text: "text-neutral-500", dot: "bg-zinc-600" };
 }
 
 export function ProjectServiceCard({
@@ -83,10 +83,10 @@ export function ProjectServiceCard({
       role="button"
       tabIndex={0}
       draggable={canMoveEnvironment}
-      className={`group relative flex min-h-52 flex-col border bg-base p-4 text-left transition-all ${
+      className={`group relative flex min-h-52 flex-col border bg-neutral-950 p-4 text-left transition-all ${
         isDragging
-          ? "scale-[0.98] cursor-grabbing border-accent/70 opacity-35 shadow-[0_0_36px_rgba(103,232,249,0.16)]"
-          : "cursor-grab border-line hover:border-line-strong hover:bg-glass active:cursor-grabbing"
+          ? "scale-[0.98] cursor-grabbing border-blue-600/70 opacity-35 shadow-[0_0_36px_rgba(103,232,249,0.16)]"
+          : "cursor-grab border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900 active:cursor-grabbing"
       }`}
       onClick={onOpen}
       onDragStart={(event: DragEvent<HTMLElement>) => {
@@ -108,17 +108,17 @@ export function ProjectServiceCard({
         </span>
       ) : null}
       <div className="flex items-start gap-3">
-        <div className="grid h-10 w-10 shrink-0 place-items-center border border-line bg-glass p-2.5">
+        <div className="grid h-10 w-10 shrink-0 place-items-center border border-neutral-800 bg-neutral-900 p-2.5">
           <FrameworkMark
             framework={service.framework}
             size={20}
-            fallback={<AppIcon icon={fallbackIcon} size={17} className="text-ink-muted" />}
+            fallback={<AppIcon icon={fallbackIcon} size={17} className="text-neutral-400" />}
           />
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
-            <h2 className="truncate text-base text-ink">{service.name}</h2>
+            <h2 className="truncate text-base text-neutral-100">{service.name}</h2>
             <span className={`inline-flex shrink-0 items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] ${status.text}`}>
               <span className={`h-1.5 w-1.5 ${status.dot}`} />
               {service.status}
@@ -126,7 +126,7 @@ export function ProjectServiceCard({
           </div>
 
           {isDatabase ? (
-            <p className="mt-1 truncate font-mono text-[10px] text-ink-dim">
+            <p className="mt-1 truncate font-mono text-[10px] text-neutral-500">
               {window.location.hostname}:{service.hostPort}
             </p>
           ) : visibleUrl ? (
@@ -134,40 +134,40 @@ export function ProjectServiceCard({
               href={visibleUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 block truncate text-xs text-ink-dim transition hover:text-white"
+              className="mt-1 block truncate text-xs text-neutral-500 transition hover:text-white"
               onClick={(event) => event.stopPropagation()}
             >
               {visibleLabel}
             </a>
           ) : (
-            <p className="mt-1 text-xs text-ink-dim">No public URL</p>
+            <p className="mt-1 text-xs text-neutral-500">No public URL</p>
           )}
         </div>
       </div>
 
       <div className="mt-5 min-w-0">
-        <div className="flex min-w-0 items-center gap-2 text-xs text-ink-muted">
-          <AppIcon icon={sourceIcon} size={14} className="shrink-0 text-ink-dim" />
+        <div className="flex min-w-0 items-center gap-2 text-xs text-neutral-400">
+          <AppIcon icon={sourceIcon} size={14} className="shrink-0 text-neutral-500" />
           <span className="truncate">{isDatabase ? "Database service" : sourceLabel}</span>
         </div>
 
         {!isDatabase && !isDockerImage && !isFunction ? (
-          <div className="mt-3 flex min-w-0 items-center gap-2 text-xs text-ink-dim">
-            <AppIcon icon={FolderOpenIcon} size={14} className="shrink-0 text-ink-dim" />
+          <div className="mt-3 flex min-w-0 items-center gap-2 text-xs text-neutral-500">
+            <AppIcon icon={FolderOpenIcon} size={14} className="shrink-0 text-neutral-500" />
             <span className="truncate">{service.rootDir || "Repository root"}</span>
           </div>
         ) : null}
       </div>
 
-      <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-4">
+      <div className="mt-auto flex items-end justify-between gap-4 border-t border-neutral-800 pt-4">
         <div className="min-w-0">
           {!isDatabase && !isDockerImage && !isFunction ? (
-            <span className="inline-flex max-w-full items-center gap-1.5 font-mono text-[9px] text-ink-dim">
+            <span className="inline-flex max-w-full items-center gap-1.5 font-mono text-[9px] text-neutral-500">
               <AppIcon icon={GitBranchIcon} size={12} />
               <span className="truncate">{service.branch}</span>
             </span>
           ) : null}
-          <p className="mt-1 font-mono text-[9px] text-ink-dim">
+          <p className="mt-1 font-mono text-[9px] text-neutral-500">
             {formatTime(service.lastDeployedAt ?? service.updatedAt)}
           </p>
         </div>

@@ -80,16 +80,16 @@ export function MaintenanceHistoryChart({
     : "#ffffff";
 
   return (
-    <section className="min-w-0 border border-line bg-base">
-      <header className="flex items-start justify-between gap-4 border-b border-line px-4 py-3">
+    <section className="min-w-0 border border-neutral-800 bg-neutral-950">
+      <header className="flex items-start justify-between gap-4 border-b border-neutral-800 px-4 py-3">
         <div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{label}</div>
-          <div className="mt-1.5 text-lg text-ink">
+          <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">{label}</div>
+          <div className="mt-1.5 text-lg text-neutral-100">
             {latest === null ? "No data" : metricValue(latest, metric)}
           </div>
         </div>
         {latest !== null && values.length > 1 ? (
-          <span className={`font-mono text-[9px] uppercase tracking-[0.12em] ${delta > 0 ? "text-warn" : delta < 0 ? "text-ok" : "text-ink-dim"}`}>
+          <span className={`font-mono text-[9px] uppercase tracking-[0.12em] ${delta > 0 ? "text-amber-500" : delta < 0 ? "text-green-500" : "text-neutral-500"}`}>
             {metricDelta(delta, metric)}
           </span>
         ) : null}
@@ -97,7 +97,7 @@ export function MaintenanceHistoryChart({
 
       <div className="h-48 px-2 pb-1 pt-3">
         {values.length === 0 ? (
-          <div className="grid h-full place-items-center text-xs text-ink-dim">No samples yet</div>
+          <div className="grid h-full place-items-center text-xs text-neutral-500">No samples yet</div>
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -159,7 +159,7 @@ export function MaintenanceHistoryChart({
         )}
       </div>
 
-      <footer className="grid grid-cols-3 border-t border-line">
+      <footer className="grid grid-cols-3 border-t border-neutral-800">
         <ChartStat label="Low" value={minimum === null ? "—" : metricValue(minimum, metric)} />
         <ChartStat label="High" value={maximum === null ? "—" : metricValue(maximum, metric)} />
         <ChartStat label="Samples" value={String(values.length)} />
@@ -170,9 +170,9 @@ export function MaintenanceHistoryChart({
 
 function ChartStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border-r border-line px-3 py-2.5 last:border-r-0">
+    <div className="border-r border-neutral-800 px-3 py-2.5 last:border-r-0">
       <div className="font-mono text-[8px] uppercase tracking-[0.14em] text-zinc-700">{label}</div>
-      <div className="mt-1 truncate font-mono text-[10px] text-ink-muted">{value}</div>
+      <div className="mt-1 truncate font-mono text-[10px] text-neutral-400">{value}</div>
     </div>
   );
 }

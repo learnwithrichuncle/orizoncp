@@ -147,30 +147,30 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
   }
 
   return (
-    <section className="mx-auto max-w-4xl overflow-hidden border border-line bg-base">
+    <section className="mx-auto max-w-4xl overflow-hidden border border-neutral-800 bg-neutral-950">
       {loading ? (
         <div className="divide-y divide-white/10">
-          <div className="h-20 animate-pulse bg-glass" />
-          <div className="h-44 animate-pulse bg-glass" />
+          <div className="h-20 animate-pulse bg-neutral-900" />
+          <div className="h-44 animate-pulse bg-neutral-900" />
         </div>
       ) : null}
 
       {!loading && !editing && r2.connected ? (
         <>
-          <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-7">
+          <header className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 px-5 py-5 sm:px-7">
             <div>
               <h2 className="text-xl tracking-[-0.03em] text-white">Cloudflare R2</h2>
-              <p className="mt-1.5 text-sm text-ink-dim">{r2.bucket}</p>
+              <p className="mt-1.5 text-sm text-neutral-500">{r2.bucket}</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 pr-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ok">
-                <span className="h-1.5 w-1.5 bg-ok" />
+              <span className="inline-flex items-center gap-2 pr-2 font-mono text-[9px] uppercase tracking-[0.16em] text-green-500">
+                <span className="h-1.5 w-1.5 bg-green-500" />
                 Connected
               </span>
-              <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white" onClick={() => setEditing(true)} title="Edit R2 connection" aria-label="Edit R2 connection">
+              <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-neutral-800 text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white" onClick={() => setEditing(true)} title="Edit R2 connection" aria-label="Edit R2 connection">
                 <AppIcon icon={PencilEdit02Icon} size={15} />
               </button>
-              <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-dim transition hover:border-bad/60 hover:bg-bad/10 hover:text-bad" onClick={() => setDisconnecting(true)} title="Disconnect R2" aria-label="Disconnect R2">
+              <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-red-500/60 hover:bg-red-500/10 hover:text-red-500" onClick={() => setDisconnecting(true)} title="Disconnect R2" aria-label="Disconnect R2">
                 <AppIcon icon={Delete02Icon} size={15} />
               </button>
             </div>
@@ -178,30 +178,30 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
 
           <dl className="divide-y divide-white/10 px-5 sm:px-7">
             <div className="grid gap-1 py-4 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <dt className="text-xs text-ink-dim">Account ID</dt>
-              <dd className="truncate font-mono text-xs text-ink-muted">{r2.accountId}</dd>
+              <dt className="text-xs text-neutral-500">Account ID</dt>
+              <dd className="truncate font-mono text-xs text-neutral-400">{r2.accountId}</dd>
             </div>
             <div className="grid gap-1 py-4 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <dt className="text-xs text-ink-dim">Endpoint</dt>
-              <dd className="truncate font-mono text-xs text-ink-muted">{r2.endpoint}</dd>
+              <dt className="text-xs text-neutral-500">Endpoint</dt>
+              <dd className="truncate font-mono text-xs text-neutral-400">{r2.endpoint}</dd>
             </div>
             <div className="grid gap-1 py-4 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <dt className="text-xs text-ink-dim">Access key</dt>
-              <dd className="truncate font-mono text-xs text-ink-muted">••••••{r2.accessKeyIdSuffix}</dd>
+              <dt className="text-xs text-neutral-500">Access key</dt>
+              <dd className="truncate font-mono text-xs text-neutral-400">••••••{r2.accessKeyIdSuffix}</dd>
             </div>
           </dl>
 
           {disconnecting ? (
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-bad/30 bg-bad/10 px-5 py-4 sm:px-7">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-red-500/30 bg-red-500/10 px-5 py-4 sm:px-7">
               <div>
-                <div className="text-sm text-bad">Disconnect R2?</div>
-                <div className="mt-1 text-xs text-bad/70">Future uploads to this bucket will stop.</div>
+                <div className="text-sm text-red-500">Disconnect R2?</div>
+                <div className="mt-1 text-xs text-red-500/70">Future uploads to this bucket will stop.</div>
               </div>
               <div className="flex items-center gap-2">
-                <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-bad/50 text-bad transition hover:bg-bad/10 disabled:opacity-50" onClick={() => void disconnect()} disabled={busy} title="Disconnect" aria-label="Confirm disconnect">
+                <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-red-500/50 text-red-500 transition hover:bg-red-500/10 disabled:opacity-50" onClick={() => void disconnect()} disabled={busy} title="Disconnect" aria-label="Confirm disconnect">
                   <AppIcon icon={CheckmarkCircle02Icon} size={16} />
                 </button>
-                <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50" onClick={() => setDisconnecting(false)} disabled={busy} title="Cancel" aria-label="Cancel disconnect">
+                <button type="button" className="inline-flex h-9 w-9 items-center justify-center border border-neutral-800 text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 disabled:opacity-50" onClick={() => setDisconnecting(false)} disabled={busy} title="Cancel" aria-label="Cancel disconnect">
                   <AppIcon icon={Cancel01Icon} size={16} />
                 </button>
               </div>
@@ -212,29 +212,29 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
 
       {!loading && editing ? (
         <form onSubmit={saveConnection}>
-          <header className="flex items-start justify-between gap-4 border-b border-line px-5 py-5 sm:px-7">
+          <header className="flex items-start justify-between gap-4 border-b border-neutral-800 px-5 py-5 sm:px-7">
             <div>
               <h2 className="text-xl tracking-[-0.03em] text-white">{r2.connected ? copy.editTitle : copy.connectTitle}</h2>
-              <p className="mt-1.5 text-sm text-ink-dim">Cloudflare R2 credentials for database backups.</p>
+              <p className="mt-1.5 text-sm text-neutral-500">Cloudflare R2 credentials for database backups.</p>
             </div>
-            <AppIcon icon={CloudUploadIcon} size={18} className="mt-1 text-ink-dim" />
+            <AppIcon icon={CloudUploadIcon} size={18} className="mt-1 text-neutral-500" />
           </header>
 
           <div className="divide-y divide-white/10 px-5 sm:px-7">
             <div className="grid gap-2 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <label htmlFor="r2-account-id" className="text-xs text-ink-dim">Account ID</label>
-              <FormInput id="r2-account-id" value={form.accountId} onChange={(event) => setForm({ ...form, accountId: event.target.value })} placeholder="Cloudflare account ID" required variant="monochrome" className="!h-9 border-line bg-glass text-sm" />
+              <label htmlFor="r2-account-id" className="text-xs text-neutral-500">Account ID</label>
+              <FormInput id="r2-account-id" value={form.accountId} onChange={(event) => setForm({ ...form, accountId: event.target.value })} placeholder="Cloudflare account ID" required variant="monochrome" className="!h-9 border-neutral-800 bg-neutral-900 text-sm" />
             </div>
             <div className="grid gap-2 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <label htmlFor="r2-bucket" className="text-xs text-ink-dim">Bucket</label>
-              <FormInput id="r2-bucket" value={form.bucket} onChange={(event) => setForm({ ...form, bucket: event.target.value })} placeholder="orizoncp-backups" required variant="monochrome" className="!h-9 border-line bg-glass text-sm" />
+              <label htmlFor="r2-bucket" className="text-xs text-neutral-500">Bucket</label>
+              <FormInput id="r2-bucket" value={form.bucket} onChange={(event) => setForm({ ...form, bucket: event.target.value })} placeholder="orizoncp-backups" required variant="monochrome" className="!h-9 border-neutral-800 bg-neutral-900 text-sm" />
             </div>
             <div className="grid gap-2 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <label htmlFor="r2-access-key" className="text-xs text-ink-dim">Access key ID</label>
-              <FormInput id="r2-access-key" value={form.accessKeyId} onChange={(event) => setForm({ ...form, accessKeyId: event.target.value })} placeholder="R2 access key ID" required variant="monochrome" className="!h-9 border-line bg-glass text-sm" />
+              <label htmlFor="r2-access-key" className="text-xs text-neutral-500">Access key ID</label>
+              <FormInput id="r2-access-key" value={form.accessKeyId} onChange={(event) => setForm({ ...form, accessKeyId: event.target.value })} placeholder="R2 access key ID" required variant="monochrome" className="!h-9 border-neutral-800 bg-neutral-900 text-sm" />
             </div>
             <div className="grid gap-2 py-3.5 sm:grid-cols-[140px_minmax(0,1fr)] sm:items-center">
-              <label htmlFor="r2-secret-key" className="text-xs text-ink-dim">Secret key</label>
+              <label htmlFor="r2-secret-key" className="text-xs text-neutral-500">Secret key</label>
               <FormInput
                 id="r2-secret-key"
                 type="password"
@@ -243,30 +243,30 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
                 placeholder={r2.connected ? "Leave blank to keep current secret" : "R2 secret access key"}
                 required={!r2.connected}
                 variant="monochrome"
-                className="!h-9 border-line bg-glass text-sm"
+                className="!h-9 border-neutral-800 bg-neutral-900 text-sm"
               />
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line px-5 py-4 sm:px-7">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-neutral-800 px-5 py-4 sm:px-7">
             <Checkbox
               checked={form.createBucket}
               label="Create or verify bucket"
               onChange={(createBucket) => setForm({ ...form, createBucket })}
             >
-              <span className="text-xs text-ink-muted">Create or verify bucket</span>
+              <span className="text-xs text-neutral-400">Create or verify bucket</span>
             </Checkbox>
 
             <div className="flex items-center gap-2">
               {r2.connected ? (
-                <button type="button" className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50" onClick={() => {
+                <button type="button" className="inline-flex h-9 items-center justify-center border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 disabled:opacity-50" onClick={() => {
                   setForm(formFromR2(r2));
                   setEditing(false);
                 }} disabled={busy}>
                   Cancel
                 </button>
               ) : null}
-              <button type="submit" className="inline-flex h-9 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50" disabled={busy}>
+              <button type="submit" className="inline-flex h-9 items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50" disabled={busy}>
                 {busy ? "Saving..." : "Save"}
               </button>
             </div>
@@ -275,12 +275,12 @@ export function R2StorageSettingsPanel({ open, mode = "system" }: { open: boolea
       ) : null}
 
       {error ? (
-        <div className="border-t border-line px-5 py-4 sm:px-7">
-          <div className="border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div>
+        <div className="border-t border-neutral-800 px-5 py-4 sm:px-7">
+          <div className="border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">{error}</div>
         </div>
       ) : null}
       {success ? (
-        <div className="flex items-center gap-2 border-t border-ok/20 bg-ok/10 px-5 py-3 text-xs text-ok sm:px-7">
+        <div className="flex items-center gap-2 border-t border-green-500/20 bg-green-500/10 px-5 py-3 text-xs text-green-500 sm:px-7">
           <AppIcon icon={CheckmarkCircle02Icon} size={13} />
           {success}
         </div>

@@ -38,7 +38,7 @@ export function OnboardingRuntimePage({
         aria-label="Configure runtime"
       >
         <div className="mb-9">
-          <h2 className="font-hero text-2xl tracking-[-0.04em] text-white sm:text-3xl">
+          <h2 className="font-sans text-2xl tracking-[-0.04em] text-white sm:text-3xl">
             Configure the runtime
           </h2>
         </div>

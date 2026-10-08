@@ -49,7 +49,7 @@ export function FunctionRuntimeDropdown({
     <div ref={rootRef} className={`relative ${className}`}>
       <button
         type="button"
-        className="flex h-9 w-full items-center justify-between gap-3 border border-line bg-base px-3 text-left text-xs text-ink-muted outline-none transition hover:border-line disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-9 w-full items-center justify-between gap-3 border border-neutral-800 bg-neutral-950 px-3 text-left text-xs text-neutral-400 outline-none transition hover:border-neutral-800 disabled:cursor-not-allowed disabled:opacity-60"
         onClick={() => setOpen((current) => !current)}
         onKeyDown={(event) => {
           if (event.key === "Escape") setOpen(false);
@@ -62,12 +62,12 @@ export function FunctionRuntimeDropdown({
           <RuntimeLogo runtime={value} />
           <span className="truncate">{selectedLabel}</span>
         </span>
-        <AppIcon icon={ArrowDown01Icon} size={15} className={`shrink-0 text-ink-muted transition ${open ? "rotate-180" : ""}`} />
+        <AppIcon icon={ArrowDown01Icon} size={15} className={`shrink-0 text-neutral-400 transition ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open ? (
         <div
-          className="absolute left-0 right-0 top-full z-40 mt-2 max-h-64 overflow-y-auto border border-line bg-base p-1 shadow-[0_18px_50px_rgba(0,0,0,0.55)]"
+          className="absolute left-0 right-0 top-full z-40 mt-2 max-h-64 overflow-y-auto border border-neutral-800 bg-neutral-950 p-1 shadow-[0_18px_50px_rgba(0,0,0,0.55)]"
           role="listbox"
         >
           {functionRuntimes.map((runtime) => {
@@ -77,7 +77,7 @@ export function FunctionRuntimeDropdown({
                 key={runtime}
                 type="button"
                 className={`flex w-full items-center justify-between gap-3 px-2.5 py-2 text-left text-xs transition ${
-                  active ? "bg-accent text-ink" : "text-ink-muted hover:bg-hover hover:text-white"
+                  active ? "bg-blue-600 text-neutral-100" : "text-neutral-400 hover:bg-neutral-800 hover:text-white"
                 }`}
                 onClick={() => {
                   onChange(runtime);

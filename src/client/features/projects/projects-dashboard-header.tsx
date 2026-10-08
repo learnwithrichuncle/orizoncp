@@ -13,15 +13,15 @@ export function ProjectsDashboardHeader({
   onImport: () => void;
 }) {
   return (
-    <header className="border-b border-line pb-7">
+    <header className="border-b border-neutral-800 pb-7">
       <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <h1 className="font-hero text-3xl tracking-[-0.05em] text-ink sm:text-4xl">
+          <h1 className="font-sans text-3xl tracking-[-0.05em] text-neutral-100 sm:text-4xl">
             Projects
           </h1>
-          <p className="mt-3 text-sm text-ink-dim">
+          <p className="mt-3 text-sm text-neutral-500">
             {projectCount} project{projectCount === 1 ? "" : "s"}
-            <span className="mx-2 text-ink-off">/</span>
+            <span className="mx-2 text-neutral-600">/</span>
             {serviceCount} service{serviceCount === 1 ? "" : "s"}
           </p>
         </div>
@@ -30,7 +30,7 @@ export function ProjectsDashboardHeader({
           <button
             type="button"
             onClick={onImport}
-            className="flex h-10 items-center gap-2 rounded-[10px] border border-line px-3.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted transition hover:border-line-strong hover:text-ink"
+            className="flex h-10 items-center gap-2 rounded-md border border-neutral-800 px-3.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-neutral-400 transition hover:border-neutral-700 hover:text-neutral-100"
           >
             <AppIcon icon={DatabaseImportIcon} size={14} />
             Import from…
@@ -38,7 +38,7 @@ export function ProjectsDashboardHeader({
           <button
             type="button"
             onClick={onCreate}
-            className="flex h-10 items-center gap-2 rounded-[10px] bg-accent px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-brand-hover"
+            className="flex h-10 items-center gap-2 rounded-md bg-blue-600 px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-blue-500"
           >
             <AppIcon icon={Add01Icon} size={14} />
             New project

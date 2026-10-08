@@ -144,18 +144,18 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
 
   return (
     <>
-      <section className="mx-auto flex h-full min-h-0 w-full max-w-[1200px] flex-col overflow-hidden border border-line bg-base">
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
+      <section className="mx-auto flex h-full min-h-0 w-full max-w-[1200px] flex-col overflow-hidden border border-neutral-800 bg-neutral-950">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 px-4 py-4 sm:px-5">
           <div>
             <h2 className="text-lg tracking-[-0.03em] text-white">Backups</h2>
-            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
+            <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
               {backups.length} {backups.length === 1 ? "backup" : "backups"} · {storageLabel(activeSettings.storage, r2Available)}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
+              className="inline-flex h-8 w-8 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-40"
               onClick={openSettings}
               title="Backup settings"
               aria-label="Backup settings"
@@ -164,7 +164,7 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
             </button>
             <button
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
+              className="inline-flex h-8 w-8 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-40"
               onClick={() => void loadBackups()}
               disabled={loading || creating}
               title="Refresh backups"
@@ -174,7 +174,7 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
             </button>
             <button
               type="button"
-              className="inline-flex h-8 items-center justify-center gap-2 bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
+              className="inline-flex h-8 items-center justify-center gap-2 bg-blue-600 px-3 text-xs text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-40"
               onClick={() => void createBackup()}
               disabled={creating || loading}
             >
@@ -185,18 +185,18 @@ export function DatabaseBackupsPanel({ serviceId }: { serviceId: string }) {
         </header>
 
         {r2Available ? (
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line bg-glass px-4 py-2.5 font-mono text-[9px] tracking-[0.12em] text-ink-dim sm:px-5">
-            <span className="uppercase text-ink-muted">R2 connected</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-neutral-800 bg-neutral-900 px-4 py-2.5 font-mono text-[9px] tracking-[0.12em] text-neutral-500 sm:px-5">
+            <span className="uppercase text-neutral-400">R2 connected</span>
             <span>{r2?.bucket}</span>
             <span className="truncate">{r2?.endpoint}</span>
           </div>
         ) : null}
 
         {error || success ? (
-          <div className="border-b border-line px-4 py-3 sm:px-5">
-            {error ? <div className="border border-bad/30 bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
+          <div className="border-b border-neutral-800 px-4 py-3 sm:px-5">
+            {error ? <div className="border border-red-500/30 bg-red-500/10 px-3 py-2.5 text-xs text-red-500">{error}</div> : null}
             {success ? (
-              <div className="flex items-center gap-2 border border-ok/30 bg-ok/10 px-3 py-2.5 text-xs text-ok">
+              <div className="flex items-center gap-2 border border-green-500/30 bg-green-500/10 px-3 py-2.5 text-xs text-green-500">
                 <AppIcon icon={CheckmarkCircle02Icon} size={13} />
                 {success}
               </div>

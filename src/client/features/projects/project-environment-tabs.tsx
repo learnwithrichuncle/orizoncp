@@ -12,11 +12,11 @@ function environmentTabTone({
   validTarget: boolean;
   activeTarget: boolean;
 }) {
-  if (activeTarget) return "scale-[1.04] border border-accent bg-accent-soft text-ink";
-  if (validTarget) return "animate-pulse border border-dashed border-accent/60 bg-accent-soft text-ink-muted";
-  if (source) return "bg-glass text-muted opacity-50";
-  if (selected) return "bg-accent text-white";
-  return "text-muted hover:bg-hover hover:text-ink";
+  if (activeTarget) return "scale-[1.04] border border-blue-600 bg-blue-950 text-neutral-100";
+  if (validTarget) return "animate-pulse border border-dashed border-blue-600/60 bg-blue-950 text-neutral-400";
+  if (source) return "bg-neutral-900 text-neutral-400 opacity-50";
+  if (selected) return "bg-blue-600 text-white";
+  return "text-neutral-400 hover:bg-neutral-800 hover:text-neutral-100";
 }
 
 export function ProjectEnvironmentTabs({
@@ -56,10 +56,10 @@ export function ProjectEnvironmentTabs({
 
   return (
     <div className="mb-5">
-      <div className={`overflow-hidden font-mono text-[9px] uppercase tracking-[0.14em] text-accent transition-all ${draggingService ? "mb-2 max-h-8 opacity-100" : "max-h-0 opacity-0"}`}>
+      <div className={`overflow-hidden font-mono text-[9px] uppercase tracking-[0.14em] text-blue-500 transition-all ${draggingService ? "mb-2 max-h-8 opacity-100" : "max-h-0 opacity-0"}`}>
         Drop {draggingService?.name ?? "the service"} onto another environment
       </div>
-      <div className="inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-line bg-glass p-1">
+      <div className="inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-neutral-800 bg-neutral-900 p-1">
         {environments.map((environment) => {
           const selected = environment.id === selectedEnvironmentId;
           const serviceCount = serviceCounts.get(environment.id) ?? 0;
@@ -95,7 +95,7 @@ export function ProjectEnvironmentTabs({
               ) : null}
               <span
                 className={`grid h-5 min-w-5 place-items-center rounded-full px-1 font-mono text-[10px] ${
-                  selected ? "bg-white/20" : "bg-hover"
+                  selected ? "bg-white/20" : "bg-neutral-800"
                 }`}
               >
                 {serviceCount}
@@ -106,7 +106,7 @@ export function ProjectEnvironmentTabs({
 
         <button
           type="button"
-          className="inline-flex h-8 shrink-0 items-center rounded-full px-3 text-sm text-muted transition hover:bg-hover hover:text-ink"
+          className="inline-flex h-8 shrink-0 items-center rounded-full px-3 text-sm text-neutral-400 transition hover:bg-neutral-800 hover:text-neutral-100"
           onClick={onCreate}
         >
           New

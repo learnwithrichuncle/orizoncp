@@ -35,7 +35,7 @@ export function ProjectPageToolbar({
     <div className="flex min-w-0 flex-wrap items-center gap-2">
       <button
         type="button"
-        className="inline-flex h-9 w-9 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
+        className="inline-flex h-9 w-9 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
         onClick={onBack}
         aria-label="Back to all projects"
       >
@@ -45,7 +45,7 @@ export function ProjectPageToolbar({
       <div ref={menuRef} className="relative min-w-0">
         <button
           type="button"
-          className="inline-flex h-9 max-w-[340px] items-center justify-center gap-2 border border-line px-3 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+          className="inline-flex h-9 max-w-[340px] items-center justify-center gap-2 border border-neutral-800 px-3 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
           onClick={() => setOpen((current) => !current)}
         >
           <span className="min-w-0 truncate">{currentProject?.name ?? fallbackProjectName}</span>
@@ -53,24 +53,24 @@ export function ProjectPageToolbar({
         </button>
 
         {open ? (
-          <div className="absolute left-0 top-full z-30 mt-1 w-[320px] max-w-[calc(100vw-2rem)] border border-line bg-base shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-            <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Switch project</div>
+          <div className="absolute left-0 top-full z-30 mt-1 w-[320px] max-w-[calc(100vw-2rem)] border border-neutral-800 bg-neutral-950 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+            <div className="border-b border-neutral-800 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">Switch project</div>
             <div className="max-h-80 overflow-y-auto p-1">
               {otherProjects.length === 0 ? (
-                <div className="px-3 py-4 text-sm text-ink-dim">No other projects yet.</div>
+                <div className="px-3 py-4 text-sm text-neutral-500">No other projects yet.</div>
               ) : (
                 otherProjects.map((project) => (
                   <button
                     key={project.id}
                     type="button"
-                    className="flex w-full min-w-0 items-center gap-3 px-3 py-2.5 text-left text-sm text-ink-muted transition hover:bg-hover hover:text-white"
+                    className="flex w-full min-w-0 items-center gap-3 px-3 py-2.5 text-left text-sm text-neutral-400 transition hover:bg-neutral-800 hover:text-white"
                     onClick={() => {
                       setOpen(false);
                       onProjectSelect(project.slug);
                     }}
                   >
                     <span className="min-w-0 flex-1 truncate">{project.name}</span>
-                    <span className="font-mono text-[9px] text-ink-dim">
+                    <span className="font-mono text-[9px] text-neutral-500">
                       {project.serviceCount}
                     </span>
                   </button>

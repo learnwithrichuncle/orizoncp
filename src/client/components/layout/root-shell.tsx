@@ -11,7 +11,7 @@ export function RootShell() {
 
   if (standalone) {
     return (
-      <div className="min-h-dvh bg-base text-ink-muted">
+      <div className="min-h-dvh bg-neutral-950 text-neutral-400">
         <AuthGate>
           <Outlet />
         </AuthGate>
@@ -20,11 +20,11 @@ export function RootShell() {
   }
 
   return (
-    <div className="min-h-dvh bg-sidebar text-ink-muted md:pl-[var(--sidebar-width)]">
+    <div className="min-h-dvh bg-neutral-950 text-neutral-400 md:pl-[220px]">
       <AppSidebar />
-      <div className="flex min-h-dvh flex-col bg-sidebar">
+      <div className="flex min-h-dvh flex-col bg-neutral-950">
         <RootHeader />
-        <main className="min-w-0 flex-1 overflow-y-auto rounded-tl-2xl bg-[#131314]">
+        <main className="min-w-0 flex-1 overflow-y-auto rounded-tl-2xl bg-neutral-900">
           <div className="mx-auto h-full w-full max-w-[1400px] px-8 py-8">
             <AuthGate>
               <Outlet />

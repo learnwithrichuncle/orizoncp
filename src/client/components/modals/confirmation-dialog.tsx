@@ -35,33 +35,33 @@ export function ConfirmationDialog({
 }: ConfirmationDialogProps) {
   const titleId = useId();
   const descriptionId = useId();
-  const iconToneClass = tone === "warning" ? "text-warn" : "text-bad";
+  const iconToneClass = tone === "warning" ? "text-amber-500" : "text-red-500";
   const descriptionToneClass = tone === "warning"
-    ? "border-warn bg-warn/10 text-warn"
-    : "border-bad bg-bad/10 text-bad";
+    ? "border-amber-500 bg-amber-500/10 text-amber-500"
+    : "border-red-500 bg-red-500/10 text-red-500";
   const confirmToneClass = tone === "warning"
-    ? "border-warn/50 text-warn hover:bg-warn/10"
-    : "border-bad/50 text-bad hover:bg-bad/10";
+    ? "border-amber-500/50 text-amber-500 hover:bg-amber-500/10"
+    : "border-red-500/50 text-red-500 hover:bg-red-500/10";
 
   if (!open) return null;
 
   return (
-    <div className={`fixed inset-0 ${zIndexClassName} overflow-y-auto bg-base/75 p-4`}>
+    <div className={`fixed inset-0 ${zIndexClassName} overflow-y-auto bg-neutral-950/75 p-4`}>
       <div className="mx-auto flex min-h-full items-center justify-center">
-        <section role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} className="w-full max-w-md rounded-[14px] border border-line bg-glass backdrop-blur-xl">
-          <header className="flex items-center justify-between gap-4 border-b border-line px-4 py-3.5">
+        <section role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} className="w-full max-w-md rounded-lg border border-neutral-800 bg-neutral-900 backdrop-blur-xl">
+          <header className="flex items-center justify-between gap-4 border-b border-neutral-800 px-4 py-3.5">
             <div className="flex min-w-0 items-center gap-2.5">
               <AppIcon icon={icon} size={16} className={`shrink-0 ${iconToneClass}`} />
               <div className="min-w-0">
-                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-ink-dim">{eyebrow}</div>
-                <h2 id={titleId} className="truncate text-lg tracking-[-0.03em] text-ink">
+                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-neutral-500">{eyebrow}</div>
+                <h2 id={titleId} className="truncate text-lg tracking-[-0.03em] text-neutral-100">
               {title}
                 </h2>
               </div>
             </div>
             <button
               type="button"
-              className="grid h-9 w-9 shrink-0 place-items-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-50"
+              className="grid h-9 w-9 shrink-0 place-items-center border border-neutral-800 text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-50"
               onClick={onClose}
               disabled={busy}
               aria-label="Close"
@@ -72,15 +72,15 @@ export function ConfirmationDialog({
           </header>
 
           <div className="p-4">
-            {subject ? <p className="truncate font-mono text-[10px] uppercase tracking-[0.14em] text-ink-dim">{subject}</p> : null}
+            {subject ? <p className="truncate font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-500">{subject}</p> : null}
             <p id={descriptionId} className={`mt-4 border-l-2 px-4 py-3 text-sm leading-relaxed ${descriptionToneClass}`}>
               {description}
             </p>
 
-            <div className="mt-5 flex flex-wrap items-center justify-end gap-2 border-t border-line pt-4">
+            <div className="mt-5 flex flex-wrap items-center justify-end gap-2 border-t border-neutral-800 pt-4">
               <button
                 type="button"
-                className="inline-flex h-9 items-center justify-center border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover disabled:opacity-50"
+                className="inline-flex h-9 items-center justify-center border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 disabled:opacity-50"
                 onClick={onClose}
                 disabled={busy}
               >

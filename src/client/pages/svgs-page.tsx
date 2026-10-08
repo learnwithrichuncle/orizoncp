@@ -51,7 +51,7 @@ export function SvgsPage() {
         <header className="flex flex-col gap-4 border-b border-zinc-800 pb-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#7fe3dd]">Icon Gallery</p>
-            <h1 className="mt-3 font-hero text-5xl tracking-tight text-zinc-50 md:text-7xl">SVGs</h1>
+            <h1 className="mt-3 font-sans text-5xl tracking-tight text-zinc-50 md:text-7xl">SVGs</h1>
             <p className="mt-3 max-w-2xl text-sm text-zinc-400">
               Checked-in framework and database SVGs served by orizonCP.
             </p>
@@ -77,7 +77,7 @@ function IconSection({ icons, title }: { icons: FrameworkIconAsset[]; title: str
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between border-b border-zinc-900 pb-2">
-        <h2 className="font-hero text-2xl tracking-tight text-zinc-100">{title}</h2>
+        <h2 className="font-sans text-2xl tracking-tight text-zinc-100">{title}</h2>
         <span className="font-mono text-xs uppercase tracking-[0.18em] text-zinc-500">{icons.length}</span>
       </div>
 

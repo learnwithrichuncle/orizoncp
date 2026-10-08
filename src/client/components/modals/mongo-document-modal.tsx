@@ -108,15 +108,15 @@ export function MongoDocumentModal({
   const canSubmit = !busy && !documentError && hasTarget;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-base/55 px-6 py-8">
-      <form onSubmit={onSubmit} className="flex max-h-full w-full max-w-3xl flex-col border border-line-strong bg-base shadow-[0_24px_90px_rgba(0,0,0,0.5)]">
-        <div className="border-b border-line px-5 py-4">
-          <div className="font-hero text-lg text-ink">{title}</div>
-          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">{subtitle}</div>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-neutral-950/55 px-6 py-8">
+      <form onSubmit={onSubmit} className="flex max-h-full w-full max-w-3xl flex-col border border-neutral-700 bg-neutral-950 shadow-[0_24px_90px_rgba(0,0,0,0.5)]">
+        <div className="border-b border-neutral-800 px-5 py-4">
+          <div className="font-sans text-lg text-neutral-100">{title}</div>
+          <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">{subtitle}</div>
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-          {error ? <div className="mb-4 border border-bad/30 bg-bad/25 px-4 py-3 text-sm text-bad">{error}</div> : null}
+          {error ? <div className="mb-4 border border-red-500/30 bg-red-500/25 px-4 py-3 text-sm text-red-500">{error}</div> : null}
 
           {showTargetFields ? (
             <div className="grid gap-4 sm:grid-cols-2">
@@ -133,7 +133,7 @@ export function MongoDocumentModal({
 
           <div className={showTargetFields ? "mt-4" : ""}>
             <FieldLabel>Document JSON</FieldLabel>
-            <div className={`overflow-hidden border ${documentError ? "border-bad/70" : "border-line-strong"}`}>
+            <div className={`overflow-hidden border ${documentError ? "border-red-500/70" : "border-neutral-700"}`}>
               <CodeMirror
                 value={draft.document ?? ""}
                 height="280px"
@@ -152,14 +152,14 @@ export function MongoDocumentModal({
                 onChange={(document) => onDraftChange({ ...draft, document })}
                 placeholder={'{\n  "name": "example"\n}'}
                 theme="dark"
-                className="bg-base [&_.cm-content]:bg-base [&_.cm-editor]:bg-base [&_.cm-scroller]:bg-base"
+                className="bg-neutral-950 [&_.cm-content]:bg-neutral-950 [&_.cm-editor]:bg-neutral-950 [&_.cm-scroller]:bg-neutral-950"
               />
             </div>
-            {documentError ? <div className="mt-2 font-mono text-[10px] text-bad">{documentError}</div> : null}
+            {documentError ? <div className="mt-2 font-mono text-[10px] text-red-500">{documentError}</div> : null}
           </div>
         </div>
 
-        <div className="flex justify-end gap-2 border-t border-line px-5 py-4">
+        <div className="flex justify-end gap-2 border-t border-neutral-800 px-5 py-4">
           <button type="button" className={shellButton("ghost")} onClick={onClose}>
             Cancel
           </button>

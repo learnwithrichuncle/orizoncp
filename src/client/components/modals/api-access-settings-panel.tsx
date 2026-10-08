@@ -79,17 +79,17 @@ export function ApiAccessSettingsPanel({ open }: { open: boolean }) {
   }
 
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden border border-line bg-base">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-5 sm:px-7 lg:px-8">
+    <section className="mx-auto max-w-5xl overflow-hidden border border-neutral-800 bg-neutral-950">
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-800 px-5 py-5 sm:px-7 lg:px-8">
         <div>
           <h2 className="text-xl tracking-[-0.03em] text-white">Keys</h2>
-          <p className="mt-1.5 text-sm text-ink-dim">
+          <p className="mt-1.5 text-sm text-neutral-500">
             {loading ? "Loading keys…" : `${apiKeys.length} ${apiKeys.length === 1 ? "key" : "keys"}`}
           </p>
         </div>
         <button
           type="button"
-          className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex min-h-10 w-fit items-center justify-center gap-2 bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => setCreateOpen(true)}
           disabled={loading}
         >
@@ -101,8 +101,8 @@ export function ApiAccessSettingsPanel({ open }: { open: boolean }) {
       <ApiKeyList apiKeys={apiKeys} projects={projects} revokingId={revokingId} onRevoke={revokeKey} />
 
       {error ? (
-        <div className="border-t border-line px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
-          <div className="mt-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+        <div className="border-t border-neutral-800 px-5 pb-5 sm:px-7 sm:pb-7 lg:px-8 lg:pb-8">
+          <div className="mt-5 border-l-2 border-red-500 bg-red-500/10 px-4 py-3 text-sm text-red-500">
             {error}
           </div>
         </div>

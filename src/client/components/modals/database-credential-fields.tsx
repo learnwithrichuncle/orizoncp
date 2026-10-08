@@ -17,8 +17,8 @@ export function DatabaseCredentialFields({ dbType, entries, disabled, onChange }
 
   return (
     <div className="space-y-3">
-      <div className="border-b border-line pb-2">
-        <span className="text-sm font-medium text-ink">Database details</span>
+      <div className="border-b border-neutral-800 pb-2">
+        <span className="text-sm font-medium text-neutral-100">Database details</span>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         {fields.map((field) => (

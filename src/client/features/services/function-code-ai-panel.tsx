@@ -96,13 +96,13 @@ export function FunctionCodeAiPanel({
   }
 
   return (
-    <form onSubmit={generateCode} className={`flex h-full min-h-0 flex-col overflow-hidden border border-line-strong bg-base/95 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ${className}`}>
-      <div className="space-y-3 border-b border-line px-4 py-3">
+    <form onSubmit={generateCode} className={`flex h-full min-h-0 flex-col overflow-hidden border border-neutral-700 bg-neutral-950/95 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ${className}`}>
+      <div className="space-y-3 border-b border-neutral-800 px-4 py-3">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center border border-line bg-base text-[#FF8A5C]">
+          <span className="grid h-8 w-8 place-items-center border border-neutral-800 bg-neutral-950 text-blue-400">
             <AppIcon icon={AiBrain01Icon} size={16} />
           </span>
-          <div className="min-w-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">AI code generation</div>
+          <div className="min-w-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-400">AI code generation</div>
         </div>
 
         {aiProviders.length > 0 ? (
@@ -115,7 +115,7 @@ export function FunctionCodeAiPanel({
             onSelect={changeProviderModel}
           />
         ) : (
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
             {loadingProviders ? "Loading AI providers" : "No AI provider connected"}
           </div>
         )}
@@ -132,7 +132,7 @@ export function FunctionCodeAiPanel({
             }}
             disabled={disabled || generating}
             placeholder="Create a JSON API that validates input and returns a response"
-            className="min-h-[180px] flex-1 resize-none border border-line-strong bg-base px-3 py-2.5 text-sm leading-6 text-ink outline-none transition placeholder:text-ink-dim focus:border-[#FF6B35]/60 disabled:opacity-60"
+            className="min-h-[180px] flex-1 resize-none border border-neutral-700 bg-neutral-950 px-3 py-2.5 text-sm leading-6 text-neutral-100 outline-none transition placeholder:text-neutral-500 focus:border-blue-600/60 disabled:opacity-60"
           />
         </div>
         <button
@@ -146,12 +146,12 @@ export function FunctionCodeAiPanel({
       </div>
 
       {generation ? (
-        <div className="mx-4 mb-4 border border-[#FF6B35]/30 bg-[#FF6B35]/10 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#FF8A5C]">
+        <div className="mx-4 mb-4 border border-blue-600/30 bg-blue-600/10 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-blue-400">
           Generated with {generation.providerName} / {generation.model}
         </div>
       ) : null}
       {error ? (
-        <div className="mx-4 mb-4 flex items-start gap-2 border border-bad/25 bg-bad/20 px-3 py-2 text-sm text-bad">
+        <div className="mx-4 mb-4 flex items-start gap-2 border border-red-500/25 bg-red-500/20 px-3 py-2 text-sm text-red-500">
           <AppIcon icon={AlertCircleIcon} size={16} className="mt-0.5 shrink-0" />
           <div>{error}</div>
         </div>

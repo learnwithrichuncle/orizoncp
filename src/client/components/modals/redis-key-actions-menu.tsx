@@ -34,7 +34,7 @@ export function RedisKeyActionsMenu({
     <div ref={rootRef} className="relative shrink-0">
       <button
         type="button"
-        className="inline-flex h-8 w-8 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+        className="inline-flex h-8 w-8 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
         onClick={() => setOpen((current) => !current)}
         disabled={disabled}
         aria-label="Redis key actions"
@@ -45,10 +45,10 @@ export function RedisKeyActionsMenu({
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-full z-40 mt-2 w-44 border border-line bg-base p-1 shadow-[0_18px_50px_rgba(0,0,0,0.55)]" role="menu">
+        <div className="absolute right-0 top-full z-40 mt-2 w-44 border border-neutral-800 bg-neutral-950 p-1 shadow-[0_18px_50px_rgba(0,0,0,0.55)]" role="menu">
           <button
             type="button"
-            className="block w-full px-3 py-2 text-left text-xs text-ink-muted transition hover:bg-glass hover:text-white"
+            className="block w-full px-3 py-2 text-left text-xs text-neutral-400 transition hover:bg-neutral-900 hover:text-white"
             onClick={() => void runAction(onCopyContent)}
             role="menuitem"
           >
@@ -56,7 +56,7 @@ export function RedisKeyActionsMenu({
           </button>
           <button
             type="button"
-            className="block w-full px-3 py-2 text-left text-xs text-ink-muted transition hover:bg-glass hover:text-white"
+            className="block w-full px-3 py-2 text-left text-xs text-neutral-400 transition hover:bg-neutral-900 hover:text-white"
             onClick={() => void runAction(onCopyKey)}
             role="menuitem"
           >
@@ -64,7 +64,7 @@ export function RedisKeyActionsMenu({
           </button>
           <button
             type="button"
-            className="block w-full px-3 py-2 text-left text-xs text-bad transition hover:bg-bad/10"
+            className="block w-full px-3 py-2 text-left text-xs text-red-500 transition hover:bg-red-500/10"
             onClick={() => void runAction(onDelete)}
             role="menuitem"
           >

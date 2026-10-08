@@ -30,7 +30,7 @@ export function OnboardingOwnerPage({
       >
         <div className="mb-9 flex items-start justify-between gap-5">
           <div>
-            <h2 className="font-hero text-2xl tracking-[-0.04em] text-white sm:text-3xl">
+            <h2 className="font-sans text-2xl tracking-[-0.04em] text-white sm:text-3xl">
               Create the owner account
             </h2>
           </div>

@@ -32,10 +32,10 @@ export function Checkbox({
       />
       <span
         aria-hidden="true"
-        className={`grid h-4 w-4 place-items-center rounded-sm border transition peer-focus-visible:ring-2 peer-focus-visible:ring-accent-soft ${
+        className={`grid h-4 w-4 place-items-center rounded-sm border transition peer-focus-visible:ring-2 peer-focus-visible:ring-blue-900 ${
           checked
-            ? "border-brand bg-brand text-white"
-            : "border-line bg-elevated text-transparent group-hover:border-line-strong"
+            ? "border-blue-600 bg-blue-600 text-white"
+            : "border-neutral-800 bg-neutral-800 text-transparent group-hover:border-neutral-700"
         } ${boxClassName}`}
       >
         <CheckIcon size={12} strokeWidth={3} />

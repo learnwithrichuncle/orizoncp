@@ -19,8 +19,8 @@ export function SettingsIndexPage() {
   }, [authStatus?.user?.role, navigate]);
 
   return (
-    <main className="grid min-h-dvh place-items-center bg-base text-white">
-      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-dim">
+    <main className="grid min-h-dvh place-items-center bg-neutral-950 text-white">
+      <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-500">
         Loading settings
       </div>
     </main>

@@ -14,19 +14,19 @@ const runtimeStateCopy: Record<Exclude<DatabaseRuntimeState, "ready">, { title: 
     title: "Database is deploying",
     fallback: "Data will be available once the container is running.",
     icon: DatabaseSync01Icon,
-    accent: "border-warn/35 bg-warn/10 text-warn"
+    accent: "border-amber-500/35 bg-amber-500/10 text-amber-500"
   },
   idle: {
     title: "Database is idle",
     fallback: "Deploy this service before browsing its data.",
     icon: Clock01Icon,
-    accent: "border-line-strong bg-base/80 text-ink-muted"
+    accent: "border-neutral-700 bg-neutral-950/80 text-neutral-400"
   },
   failed: {
     title: "Database deployment failed",
     fallback: "Check the deployment logs, then retry the deployment.",
     icon: Alert02Icon,
-    accent: "border-bad/35 bg-bad/10 text-bad"
+    accent: "border-red-500/35 bg-red-500/10 text-red-500"
   },
   unavailable: {
     title: "Database runtime unavailable",
@@ -45,11 +45,11 @@ export function DatabaseRuntimeStatePanel({ state, message, busy = false, onRefr
         <div className={`mb-4 grid h-10 w-10 place-items-center border ${copy.accent}`}>
           <AppIcon icon={copy.icon} size={19} className={state === "deploying" ? "animate-pulse" : ""} />
         </div>
-        <h3 className="text-sm text-ink">{copy.title}</h3>
-        <p className="mt-2 text-xs leading-5 text-ink-dim">{message || copy.fallback}</p>
+        <h3 className="text-sm text-neutral-100">{copy.title}</h3>
+        <p className="mt-2 text-xs leading-5 text-neutral-500">{message || copy.fallback}</p>
         <button
           type="button"
-          className="mt-5 inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:opacity-40"
+          className="mt-5 inline-flex h-8 items-center justify-center gap-2 border border-neutral-800 px-3 text-xs text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:opacity-40"
           onClick={onRefresh}
           disabled={busy}
         >

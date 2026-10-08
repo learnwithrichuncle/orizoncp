@@ -26,7 +26,7 @@ export function GitHubInstallModal({
       width="max-w-2xl"
     >
       <div className="space-y-5">
-        <div className="border border-line bg-base/70 px-4 py-3 text-sm leading-6 text-ink-muted">
+        <div className="border border-neutral-800 bg-neutral-950/70 px-4 py-3 text-sm leading-6 text-neutral-400">
           The server is configured, but the GitHub App is not installed on any repositories yet. Install it once, then new services can browse repos, pick branches, and choose deployment directories directly.
         </div>
         <div className="flex justify-end">

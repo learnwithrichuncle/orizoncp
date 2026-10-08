@@ -16,26 +16,26 @@ export function MaintenanceUsageBar({
   const clampedPercent = Math.max(0, Math.min(100, percent));
   const color =
     tone === "rose"
-      ? "bg-bad"
+      ? "bg-red-500"
       : tone === "amber"
-        ? "bg-warn"
+        ? "bg-amber-500"
         : tone === "zinc"
           ? "bg-zinc-400"
-          : "bg-accent";
+          : "bg-blue-600";
 
   return (
-    <div className="border border-line bg-base p-4">
+    <div className="border border-neutral-800 bg-neutral-950 p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{label}</div>
-          <div className="mt-2 text-lg text-ink">{value}</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">{label}</div>
+          <div className="mt-2 text-lg text-neutral-100">{value}</div>
         </div>
-        <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">{percentLabel ?? `${Math.round(clampedPercent)}%`}</div>
+        <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">{percentLabel ?? `${Math.round(clampedPercent)}%`}</div>
       </div>
-      <div className="mt-4 h-1 bg-hover">
+      <div className="mt-4 h-1 bg-neutral-800">
         <div className={`h-full ${color}`} style={{ width: `${clampedPercent}%` }} />
       </div>
-      {detail ? <p className="mt-3 text-xs leading-relaxed text-ink-dim">{detail}</p> : null}
+      {detail ? <p className="mt-3 text-xs leading-relaxed text-neutral-500">{detail}</p> : null}
     </div>
   );
 }

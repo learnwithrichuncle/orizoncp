@@ -112,12 +112,12 @@ export function ServicePage({
   if (error) {
     return (
       <section className="grid min-h-dvh place-items-center px-5 py-12">
-        <div className="w-full max-w-lg rounded-[14px] border border-line bg-glass p-5 backdrop-blur-xl">
-          <h1 className="text-lg text-ink">Could not load service</h1>
-          <p className="mt-2 text-sm text-bad">{error}</p>
+        <div className="w-full max-w-lg rounded-lg border border-neutral-800 bg-neutral-900 p-5 backdrop-blur-xl">
+          <h1 className="text-lg text-neutral-100">Could not load service</h1>
+          <p className="mt-2 text-sm text-red-500">{error}</p>
           <button
             type="button"
-            className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-muted transition hover:border-line hover:bg-hover"
+            className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800"
             onClick={navigateToProject}
           >
             <AppIcon icon={ArrowLeft01Icon} size={15} />
@@ -135,16 +135,16 @@ export function ServicePage({
   if (!service) {
     return (
       <section className="grid min-h-dvh place-items-center px-5 py-12">
-        <div className="w-full max-w-lg rounded-[14px] border border-line bg-glass p-5 backdrop-blur-xl">
-          <AppIcon icon={CloudServerIcon} size={20} className="text-ink-dim" />
-          <h1 className="mt-4 text-lg text-ink">Service not found</h1>
-          <p className="mt-2 text-sm leading-6 text-ink-dim">
-            There is no service named <span className="font-mono text-ink-muted">{serviceSlug}</span> in this project.
+        <div className="w-full max-w-lg rounded-lg border border-neutral-800 bg-neutral-900 p-5 backdrop-blur-xl">
+          <AppIcon icon={CloudServerIcon} size={20} className="text-neutral-500" />
+          <h1 className="mt-4 text-lg text-neutral-100">Service not found</h1>
+          <p className="mt-2 text-sm leading-6 text-neutral-500">
+            There is no service named <span className="font-mono text-neutral-400">{serviceSlug}</span> in this project.
           </p>
           <Link
             to="/$projectSlug"
             params={{ projectSlug }}
-            className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-line px-3.5 text-sm text-muted transition hover:border-line hover:bg-hover"
+            className="mt-5 inline-flex h-9 items-center justify-center gap-2 border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800"
           >
             <AppIcon icon={ArrowLeft01Icon} size={15} />
             Back to project

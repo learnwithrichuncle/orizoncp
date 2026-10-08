@@ -287,8 +287,8 @@ function NavItem({ href, label, badge, active }: NavLink & { active: boolean }) 
         aria-current={active ? "page" : undefined}
         className={`peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left outline-none ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate h-9 text-sm flex flex-row items-center px-2 transition-colors ${
           active
-            ? "bg-black/5 text-[var(--color-text-primary)] shadow-xs dark:bg-white/10 dark:text-white active"
-            : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] dark:text-neutral-400 dark:hover:text-white"
+            ? "bg-black/5 text-neutral-100 shadow-xs dark:bg-white/10 dark:text-white active"
+            : "text-neutral-400 hover:text-neutral-100 dark:text-neutral-400 dark:hover:text-white"
         }`}
       >
         <span className="sidebar-nav-icon flex shrink-0 items-center justify-center overflow-visible">
@@ -298,7 +298,7 @@ function NavItem({ href, label, badge, active }: NavLink & { active: boolean }) 
           {label}
         </span>
         {badge ? (
-          <span className="ml-auto shrink-0 bg-[var(--color-accent)] px-1.5 py-px text-[8.5px] font-semibold uppercase tracking-wide text-white group-data-[collapsible=icon]:hidden">
+          <span className="ml-auto shrink-0 bg-blue-600 px-1.5 py-px text-[8.5px] font-semibold uppercase tracking-wide text-white group-data-[collapsible=icon]:hidden">
             {badge}
           </span>
         ) : null}
@@ -355,10 +355,10 @@ export function AppSidebar() {
   }
 
   return (
-    <div className="group fixed inset-y-0 left-0 z-40 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex">
+    <div className="group fixed inset-y-0 left-0 z-40 hidden h-svh w-[220px] transition-[left,right,width] duration-200 ease-linear md:flex">
       <div
         data-sidebar="sidebar"
-        className="relative flex h-full w-full flex-col bg-sidebar"
+        className="relative flex h-full w-full flex-col bg-neutral-950"
       >
         <div
           data-sidebar="header"
@@ -370,7 +370,7 @@ export function AppSidebar() {
               href="/"
             >
               <svg
-                className="mr-[1px] h-[1.15em] w-[1.15em] translate-y-[0.06em] text-accent"
+                className="mr-[1px] h-[1.15em] w-[1.15em] translate-y-[0.06em] text-blue-500"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -415,7 +415,7 @@ export function AppSidebar() {
                 <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
                 <path d="M13.73 21a2 2 0 0 1-3.46 0" />
               </svg>
-              <span className="absolute -right-0.5 -top-0.5 z-10 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[9px] font-semibold leading-none text-white">
+              <span className="absolute -right-0.5 -top-0.5 z-10 flex h-4 min-w-4 items-center justify-center rounded-full bg-blue-600 px-1 text-[9px] font-semibold leading-none text-white">
                 9+
               </span>
             </a>
@@ -423,7 +423,7 @@ export function AppSidebar() {
               type="button"
               title="Toggle theme"
               aria-label="Toggle theme"
-              className="relative inline-flex h-7 w-7 cursor-pointer items-center justify-center border-none bg-transparent text-[var(--color-text-secondary)] outline-none transition-colors hover:bg-white/10 hover:text-white"
+              className="relative inline-flex h-7 w-7 cursor-pointer items-center justify-center border-none bg-transparent text-neutral-400 outline-none transition-colors hover:bg-white/10 hover:text-white"
             >
               <span className="theme-toggle-icon inline-flex">
                 <svg
@@ -457,7 +457,7 @@ export function AppSidebar() {
                   <div
                     data-orientation="horizontal"
                     role="none"
-                    className="my-1 h-px w-full shrink-0 bg-[var(--cf-border)]"
+                    className="my-1 h-px w-full shrink-0 bg-neutral-800"
                   />
                 ) : null}
                 <ul
@@ -477,7 +477,7 @@ export function AppSidebar() {
               <button
                 type="button"
                 onClick={() => window.history.back()}
-                className="flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+                className="flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <span className="sidebar-nav-icon flex shrink-0 items-center justify-center">
                   <svg
@@ -499,9 +499,9 @@ export function AppSidebar() {
               <div
                 data-orientation="horizontal"
                 role="none"
-                className="my-1 h-px w-full shrink-0 bg-[var(--cf-border)]"
+                className="my-1 h-px w-full shrink-0 bg-neutral-800"
               />
-              <div className="px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+              <div className="px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
                 Settings
               </div>
               <ul
@@ -525,7 +525,7 @@ export function AppSidebar() {
                         className={`peer/menu-button flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium transition-colors ${
                           active
                             ? "bg-white/10 text-white shadow-xs"
-                            : "text-[var(--color-text-secondary)] hover:text-white"
+                            : "text-neutral-400 hover:text-white"
                         }`}
                       >
                         <span className="sidebar-nav-icon flex shrink-0 items-center justify-center overflow-visible">
@@ -547,9 +547,9 @@ export function AppSidebar() {
               <div
                 data-orientation="horizontal"
                 role="none"
-                className="my-1 h-px w-full shrink-0 bg-[var(--cf-border)]"
+                className="my-1 h-px w-full shrink-0 bg-neutral-800"
               />
-              <div className="px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
+              <div className="px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
                 Service
               </div>
               <ul
@@ -573,7 +573,7 @@ export function AppSidebar() {
                         className={`peer/menu-button flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium transition-colors ${
                           active
                             ? "bg-white/10 text-white shadow-xs"
-                            : "text-[var(--color-text-secondary)] hover:text-white"
+                            : "text-neutral-400 hover:text-white"
                         }`}
                       >
                         <span className="sidebar-nav-icon flex shrink-0 items-center justify-center overflow-visible">
@@ -588,7 +588,7 @@ export function AppSidebar() {
               <button
                 type="button"
                 onClick={() => window.history.back()}
-                className="flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+                className="flex h-9 w-full flex-row items-center rounded-md px-2 text-sm font-medium text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <span className="sidebar-nav-icon flex shrink-0 items-center justify-center">
                   <svg

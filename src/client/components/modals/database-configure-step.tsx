@@ -122,9 +122,9 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
     <form onSubmit={handleFormSubmit} className="flex min-h-full flex-col">
       <div className="min-h-0 flex-1 overflow-y-auto pr-1">
         <div className="space-y-4">
-          <div className="flex items-center justify-between gap-3 border border-line px-3 py-2.5">
-            <span className="text-xs text-ink-muted">{dbLabel}</span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim">New database</span>
+          <div className="flex items-center justify-between gap-3 border border-neutral-800 px-3 py-2.5">
+            <span className="text-xs text-neutral-400">{dbLabel}</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500">New database</span>
           </div>
 
           <div className="grid gap-3 md:grid-cols-2">
@@ -137,27 +137,27 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
                 required
                 disabled={busy}
                 variant="monochrome"
-                className="!h-9 border-line bg-base text-xs"
+                className="!h-9 border-neutral-800 bg-neutral-950 text-xs"
               />
             </div>
             <div>
               <FieldLabel>Internal port</FieldLabel>
-              <div className="flex h-9 items-center border border-line px-3 font-mono text-xs text-ink-dim">
+              <div className="flex h-9 items-center border border-neutral-800 px-3 font-mono text-xs text-neutral-500">
                 {defaultPort}
               </div>
             </div>
           </div>
 
-          <div className="grid border border-line md:grid-cols-2">
+          <div className="grid border border-neutral-800 md:grid-cols-2">
             <div>
-              <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim md:border-r">Public hostname</div>
-              <div className="flex h-9 min-w-0 items-center px-3 font-mono text-xs text-ink-muted md:border-r">
+              <div className="border-b border-neutral-800 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500 md:border-r">Public hostname</div>
+              <div className="flex h-9 min-w-0 items-center px-3 font-mono text-xs text-neutral-400 md:border-r">
                 <span className="truncate">{publicHostname || "Set root domain first"}</span>
               </div>
             </div>
             <div>
-              <div className="border-b border-line px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-dim">Public URL variable</div>
-              <div className="flex h-9 min-w-0 items-center px-3 font-mono text-xs text-ink-muted">
+              <div className="border-b border-neutral-800 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.14em] text-neutral-500">Public URL variable</div>
+              <div className="flex h-9 min-w-0 items-center px-3 font-mono text-xs text-neutral-400">
                 <span className="truncate">{isPostgresFamilyDatabase(dbType) ? "POSTGRES_PUBLIC_URL" : `${dbType.toUpperCase()}_PUBLIC_URL`}</span>
               </div>
             </div>
@@ -165,27 +165,27 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
 
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
-              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">Database variables</span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">Database variables</span>
               <span className="font-mono text-[9px] text-zinc-700">{envEntries.length} generated</span>
             </div>
 
-            <div className="overflow-hidden border border-line">
+            <div className="overflow-hidden border border-neutral-800">
               {envEntries.length === 0 ? (
-                <div className="px-3 py-5 text-xs text-ink-dim">No database variables configured.</div>
+                <div className="px-3 py-5 text-xs text-neutral-500">No database variables configured.</div>
               ) : (
                 envEntries.map((item) => (
                   <div
                     key={item.key}
-                    className="grid gap-2 border-b border-line px-3 py-2.5 last:border-b-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:items-center"
+                    className="grid gap-2 border-b border-neutral-800 px-3 py-2.5 last:border-b-0 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:items-center"
                   >
-                    <span className="truncate font-mono text-[10px] tracking-[0.08em] text-ink-muted">{item.key}</span>
+                    <span className="truncate font-mono text-[10px] tracking-[0.08em] text-neutral-400">{item.key}</span>
                     <FormInput
                       value={item.value}
                       onChange={(event) => updateEnvValue(item.key, event.target.value)}
                       disabled={busy}
                       autoComplete="off"
                       variant="monochrome"
-                      className="!h-8 border-line bg-base font-mono text-xs"
+                      className="!h-8 border-neutral-800 bg-neutral-950 font-mono text-xs"
                     />
                   </div>
                 ))
@@ -195,12 +195,12 @@ export function DatabaseConfigureStep({ dbType, onBack, onSubmit, busy }: Databa
         </div>
       </div>
 
-      <div className="mt-4 flex shrink-0 items-center justify-between gap-3 border-t border-line pt-4">
-        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white disabled:opacity-40" onClick={onBack} disabled={busy}>
+      <div className="mt-4 flex shrink-0 items-center justify-between gap-3 border-t border-neutral-800 pt-4">
+        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-neutral-500 transition hover:bg-neutral-800 hover:text-white disabled:opacity-40" onClick={onBack} disabled={busy}>
           <AppIcon icon={ArrowLeft01Icon} size={16} />
           Back
         </button>
-        <button type="submit" className="inline-flex h-8 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy || !name.trim()}>
+        <button type="submit" className="inline-flex h-8 items-center justify-center bg-blue-600 px-4 text-xs text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy || !name.trim()}>
           {busy ? "Creating…" : "Create database"}
         </button>
       </div>

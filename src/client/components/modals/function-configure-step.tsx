@@ -67,7 +67,7 @@ export function FunctionConfigureStep({
             </div>
             <div>
               <FieldLabel>Service name</FieldLabel>
-              <FormInput value={name} onChange={(event) => setName(event.target.value)} placeholder="resize-image" required variant="monochrome" className="!h-9 border-line bg-base text-xs" />
+              <FormInput value={name} onChange={(event) => setName(event.target.value)} placeholder="resize-image" required variant="monochrome" className="!h-9 border-neutral-800 bg-neutral-950 text-xs" />
             </div>
           </div>
 
@@ -87,7 +87,7 @@ export function FunctionConfigureStep({
                   onChange={(event) => setInternalPort(Number(event.target.value))}
                   required
                   variant="monochrome"
-                  className="!h-9 border-line bg-base text-xs"
+                  className="!h-9 border-neutral-800 bg-neutral-950 text-xs"
                 />
               </div>
             ) : null}
@@ -96,22 +96,22 @@ export function FunctionConfigureStep({
           <div>
             <div className="mb-2 flex items-center justify-between gap-3">
               <FieldLabel>Source code</FieldLabel>
-              <span className="font-mono text-[9px] tracking-[0.1em] text-ink-dim">
+              <span className="font-mono text-[9px] tracking-[0.1em] text-neutral-500">
                 {functionRuntimeFileNames[runtime]}
               </span>
             </div>
             <FunctionSourceEditor runtime={runtime} value={sourceCode} onChange={setSourceCode} height="420px" disabled={busy} />
-            {error ? <div className="mt-2 border border-bad/30 bg-bad/10 px-3 py-2 text-xs text-bad">{error}</div> : null}
+            {error ? <div className="mt-2 border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-500">{error}</div> : null}
           </div>
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
-        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-ink-dim transition hover:bg-hover hover:text-white" onClick={onBack}>
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-neutral-800 pt-4">
+        <button type="button" className="inline-flex h-8 items-center justify-center gap-2 px-3 text-xs text-neutral-500 transition hover:bg-neutral-800 hover:text-white" onClick={onBack}>
           <AppIcon icon={ArrowLeft01Icon} size={16} />
           Back
         </button>
-        <button type="submit" className="inline-flex h-8 items-center justify-center bg-accent px-4 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy}>
+        <button type="submit" className="inline-flex h-8 items-center justify-center bg-blue-600 px-4 text-xs text-neutral-100 transition hover:bg-zinc-200 disabled:opacity-40" disabled={busy}>
           Create function
         </button>
       </div>

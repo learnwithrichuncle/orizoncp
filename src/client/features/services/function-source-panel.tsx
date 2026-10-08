@@ -70,28 +70,28 @@ export function FunctionSourcePanel({
 
   if (loading) {
     return (
-      <div className="grid min-h-[420px] place-items-center border border-line bg-base/50">
-        <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-dim">Loading function source...</div>
+      <div className="grid min-h-[420px] place-items-center border border-neutral-800 bg-neutral-950/50">
+        <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-500">Loading function source...</div>
       </div>
     );
   }
 
   if (error) {
-    return <div className="border border-bad/25 bg-bad/20 px-4 py-3 text-sm text-bad">{error}</div>;
+    return <div className="border border-red-500/25 bg-red-500/20 px-4 py-3 text-sm text-red-500">{error}</div>;
   }
 
   return (
     <div className="flex min-h-0 flex-col space-y-5">
-      <section className="border border-line bg-base/50 p-5">
+      <section className="border border-neutral-800 bg-neutral-950/50 p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center border border-line bg-base text-[#FF8A5C]">
+              <span className="grid h-10 w-10 place-items-center border border-neutral-800 bg-neutral-950 text-blue-400">
                 <AppIcon icon={FileCodeIcon} size={20} />
               </span>
               <div className="min-w-0">
-                <h2 className="truncate font-hero text-xl font-bold tracking-tight text-ink">{serviceName}</h2>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
+                <h2 className="truncate font-sans text-xl font-bold tracking-tight text-neutral-100">{serviceName}</h2>
+                <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
                   {functionRuntimeFileNames[draft.runtime]}
                 </div>
               </div>
@@ -115,7 +115,7 @@ export function FunctionSourcePanel({
               className="w-full min-w-[220px] md:w-64"
             />
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-dim">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-neutral-500">
             {source?.updatedAt ? `Saved ${new Date(source.updatedAt).toLocaleString()}` : ""}
           </div>
         </div>

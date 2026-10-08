@@ -1,5 +1,5 @@
 export function SkeletonBlock({ className = "" }: { className?: string }) {
-  return <span aria-hidden className={`block animate-pulse rounded-md bg-surface-header ${className}`} />;
+  return <span aria-hidden className={`block animate-pulse rounded-md bg-neutral-900 ${className}`} />;
 }
 
 export function SkeletonText({

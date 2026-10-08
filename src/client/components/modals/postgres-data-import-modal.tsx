@@ -147,23 +147,23 @@ export function PostgresDataImportModal({
     return (
       <ModalShell open={open} onClose={closeModal} icon={progressIcon} title={progressTitle} meta="Postgres data import progress." width="max-w-xl">
         <div className="space-y-5">
-          <div className="border border-line bg-base/35 p-5">
+          <div className="border border-neutral-800 bg-neutral-950/35 p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-dim">Source</div>
-                <div className="mt-1 text-sm text-ink">{sourceLabel}</div>
+                <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500">Source</div>
+                <div className="mt-1 text-sm text-neutral-100">{sourceLabel}</div>
               </div>
               <span className={`px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${statusClass(progressStatus)}`}>
                 {progressLabel}
               </span>
             </div>
-            <div className="mt-5 h-2 overflow-hidden border border-line bg-base">
+            <div className="mt-5 h-2 overflow-hidden border border-neutral-800 bg-neutral-950">
               <div
-                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-bad" : "bg-[#FF6B35]"}`}
+                className={`h-full transition-[width,background-color] duration-500 ${error ? "bg-red-500" : "bg-blue-600"}`}
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <p className="mt-4 text-sm leading-6 text-ink-muted">
+            <p className="mt-4 text-sm leading-6 text-neutral-400">
               {result
                 ? "The source dump was restored into this orizonCP Postgres database."
                 : error
@@ -172,16 +172,16 @@ export function PostgresDataImportModal({
             </p>
           </div>
 
-          {error ? <div className="border border-bad/35 bg-bad/20 px-4 py-3 text-sm text-bad">{error}</div> : null}
+          {error ? <div className="border border-red-500/35 bg-red-500/20 px-4 py-3 text-sm text-red-500">{error}</div> : null}
 
           {result ? (
-            <div className="border border-ok/25 bg-ok/20 px-4 py-3 text-sm text-ok">
+            <div className="border border-green-500/25 bg-green-500/20 px-4 py-3 text-sm text-green-500">
               Imported {formatBytes(result.dumpSizeBytes)} from {result.sourceLabel}
               {result.sourceVariableKey ? ` using ${result.sourceVariableKey}` : ""}.
             </div>
           ) : null}
 
-          <div className="flex justify-end gap-2 border-t border-line pt-5">
+          <div className="flex justify-end gap-2 border-t border-neutral-800 pt-5">
             {error ? (
               <button
                 type="button"
@@ -212,14 +212,14 @@ export function PostgresDataImportModal({
             type="button"
             className={`border px-4 py-3 text-left transition ${
               mode === "railway"
-                ? "border-[#FF6B35]/45 bg-[#FF6B35]/10 text-ink"
-                : "border-line bg-base/35 text-ink-muted hover:border-zinc-600"
+                ? "border-blue-600/45 bg-blue-600/10 text-neutral-100"
+                : "border-neutral-800 bg-neutral-950/35 text-neutral-400 hover:border-zinc-600"
             } ${!railwaySource && !loadingSources ? "opacity-60" : ""}`}
             onClick={() => setMode("railway")}
             disabled={!railwaySource && !loadingSources}
           >
-            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF8A5C]">Railway</span>
-            <span className="mt-2 block text-sm text-ink-muted">
+            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400">Railway</span>
+            <span className="mt-2 block text-sm text-neutral-400">
               {railwaySource ? railwaySource.externalServiceName ?? "Saved Railway service" : loadingSources ? "Checking saved source..." : "No saved Railway source"}
             </span>
           </button>
@@ -228,31 +228,31 @@ export function PostgresDataImportModal({
             type="button"
             className={`border px-4 py-3 text-left transition ${
               mode === "postgres-url"
-                ? "border-[#FF6B35]/45 bg-[#FF6B35]/10 text-ink"
-                : "border-line bg-base/35 text-ink-muted hover:border-zinc-600"
+                ? "border-blue-600/45 bg-blue-600/10 text-neutral-100"
+                : "border-neutral-800 bg-neutral-950/35 text-neutral-400 hover:border-zinc-600"
             }`}
             onClick={() => setMode("postgres-url")}
           >
-            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF8A5C]">Postgres URL</span>
-            <span className="mt-2 block text-sm text-ink-muted">Use a direct source connection string</span>
+            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400">Postgres URL</span>
+            <span className="mt-2 block text-sm text-neutral-400">Use a direct source connection string</span>
           </button>
         </div>
 
         {mode === "railway" ? (
-          <div className="space-y-4 border border-line bg-base/35 p-4">
+          <div className="space-y-4 border border-neutral-800 bg-neutral-950/35 p-4">
             {railwaySource ? (
-              <div className="grid gap-3 text-sm text-ink-muted sm:grid-cols-2">
+              <div className="grid gap-3 text-sm text-neutral-400 sm:grid-cols-2">
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">Project</div>
-                  <div className="mt-1 truncate text-ink">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">Project</div>
+                  <div className="mt-1 truncate text-neutral-100">{railwayProjectName ?? railwaySource.externalProjectId ?? "Railway project"}</div>
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">Environment</div>
-                  <div className="mt-1 truncate text-ink">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">Environment</div>
+                  <div className="mt-1 truncate text-neutral-100">{railwayEnvironmentName ?? railwaySource.externalEnvironmentId ?? "Railway environment"}</div>
                 </div>
               </div>
             ) : (
-              <div className="border border-warn/30 bg-warn/20 px-4 py-3 text-sm text-warn">
+              <div className="border border-amber-500/30 bg-amber-500/20 px-4 py-3 text-sm text-amber-500">
                 This database was not imported from Railway, so there is no saved Railway service ID.
               </div>
             )}
@@ -270,7 +270,7 @@ export function PostgresDataImportModal({
             </div>
           </div>
         ) : (
-          <div className="border border-line bg-base/35 p-4">
+          <div className="border border-neutral-800 bg-neutral-950/35 p-4">
             <FieldLabel>Source Postgres URL</FieldLabel>
             <FormInput
               type="password"
@@ -283,22 +283,22 @@ export function PostgresDataImportModal({
           </div>
         )}
 
-        <div className="border border-bad/30 bg-bad/20 px-4 py-3">
+        <div className="border border-red-500/30 bg-red-500/20 px-4 py-3">
           <Checkbox checked={confirmed} onChange={setConfirmed} disabled={busy} label="Replace existing Postgres data">
-            <span className="text-sm text-bad">Replace existing data in this orizonCP Postgres database.</span>
+            <span className="text-sm text-red-500">Replace existing data in this orizonCP Postgres database.</span>
           </Checkbox>
         </div>
 
-        {error ? <div className="border border-bad/35 bg-bad/20 px-4 py-3 text-sm text-bad">{error}</div> : null}
+        {error ? <div className="border border-red-500/35 bg-red-500/20 px-4 py-3 text-sm text-red-500">{error}</div> : null}
 
         {result ? (
-          <div className="border border-ok/25 bg-ok/20 px-4 py-3 text-sm text-ok">
+          <div className="border border-green-500/25 bg-green-500/20 px-4 py-3 text-sm text-green-500">
             Imported {formatBytes(result.dumpSizeBytes)} from {result.sourceLabel}
             {result.sourceVariableKey ? ` using ${result.sourceVariableKey}` : ""}.
           </div>
         ) : null}
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-neutral-800 pt-5">
           <span className={`px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${statusClass(busy ? "building" : result ? "active" : "idle")}`}>
             {busy ? "Importing" : result ? "Imported" : "Ready"}
           </span>

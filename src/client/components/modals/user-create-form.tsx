@@ -37,7 +37,7 @@ export function UserCreateForm({ creating, onCreate }: UserCreateFormProps) {
   return (
     <form onSubmit={submit} className="space-y-4">
       <div className="space-y-1.5">
-        <label htmlFor="new-user-email" className="block text-xs text-ink-muted">
+        <label htmlFor="new-user-email" className="block text-xs text-neutral-400">
           Email
         </label>
         <FormInput
@@ -49,12 +49,12 @@ export function UserCreateForm({ creating, onCreate }: UserCreateFormProps) {
           disabled={creating}
           autoComplete="email"
           variant="monochrome"
-          className="!h-9 border-line bg-glass text-sm"
+          className="!h-9 border-neutral-800 bg-neutral-900 text-sm"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="new-user-password" className="block text-xs text-ink-muted">
+        <label htmlFor="new-user-password" className="block text-xs text-neutral-400">
           Password
         </label>
         <FormInput
@@ -66,16 +66,16 @@ export function UserCreateForm({ creating, onCreate }: UserCreateFormProps) {
           disabled={creating}
           autoComplete="new-password"
           variant="monochrome"
-          className="!h-9 border-line bg-glass text-sm"
+          className="!h-9 border-neutral-800 bg-neutral-900 text-sm"
         />
       </div>
 
-      {error ? <div className="border-l-2 border-bad bg-bad/10 px-3 py-2.5 text-xs text-bad">{error}</div> : null}
+      {error ? <div className="border-l-2 border-red-500 bg-red-500/10 px-3 py-2.5 text-xs text-red-500">{error}</div> : null}
 
-      <div className="flex justify-end border-t border-line pt-4">
+      <div className="flex justify-end border-t border-neutral-800 pt-4">
         <button
           type="submit"
-          className="inline-flex h-9 items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex h-9 items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={creating}
         >
           {creating ? "Adding..." : "Add user"}

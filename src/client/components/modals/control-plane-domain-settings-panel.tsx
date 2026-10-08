@@ -131,14 +131,14 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 className="text-xl tracking-[-0.03em] text-white">Dashboard domain</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-dim">
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-neutral-500">
             The hostname used to access this orizonCP control plane.
           </p>
           {hasSavedHostname && !editing ? (
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <span className="text-lg text-ink">{savedHostname}</span>
-              <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
-                <span className={`h-1.5 w-1.5 ${dnsStatus === "active" ? "bg-accent" : "border border-zinc-600"}`} />
+              <span className="text-lg text-neutral-100">{savedHostname}</span>
+              <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-500">
+                <span className={`h-1.5 w-1.5 ${dnsStatus === "active" ? "bg-blue-600" : "border border-zinc-600"}`} />
                 {dnsStatus === "active" ? "DNS active" : "DNS pending"}
               </span>
             </div>
@@ -149,7 +149,7 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
               onClick={() => setEditing(true)}
               title="Edit dashboard domain"
               aria-label="Edit dashboard domain"
@@ -158,7 +158,7 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
             </button>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center border border-line text-ink-dim transition hover:border-line hover:bg-hover hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center border border-neutral-800 text-neutral-500 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
               onClick={() => void clearHostname()}
               title="Delete dashboard domain"
               aria-label="Delete dashboard domain"
@@ -181,13 +181,13 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
               inputMode="url"
               autoComplete="off"
               variant="monochrome"
-              className="border-line bg-glass"
+              className="border-neutral-800 bg-neutral-900"
             />
           </div>
           <div className="mt-5 flex flex-wrap items-center gap-2">
             <button
               type="submit"
-              className="inline-flex min-h-10 w-fit items-center justify-center bg-accent px-4 text-sm text-ink transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex min-h-10 w-fit items-center justify-center bg-blue-600 px-4 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={saving || !normalizedHostname || !hasUnsavedChanges}
             >
               {saving ? "Saving..." : "Save dashboard domain"}
@@ -195,7 +195,7 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
             {hasSavedHostname ? (
               <button
                 type="button"
-                className="inline-flex min-h-10 items-center justify-center border border-line px-4 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
+                className="inline-flex min-h-10 items-center justify-center border border-neutral-800 px-4 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white"
                 onClick={() => {
                   setHostname(savedHostname);
                   setEditing(false);
@@ -210,20 +210,20 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
       ) : null}
 
       {hasSavedHostname && !editing ? (
-        <div className="mt-7 max-w-2xl border-y border-line font-mono text-[10px]">
-          <div className="grid grid-cols-[100px_minmax(0,1fr)] border-b border-line">
-            <div className="py-3 uppercase tracking-[0.18em] text-ink-dim">Type</div>
-            <div className="py-3 text-ink">A</div>
+        <div className="mt-7 max-w-2xl border-y border-neutral-800 font-mono text-[10px]">
+          <div className="grid grid-cols-[100px_minmax(0,1fr)] border-b border-neutral-800">
+            <div className="py-3 uppercase tracking-[0.18em] text-neutral-500">Type</div>
+            <div className="py-3 text-neutral-100">A</div>
           </div>
-          <div className="grid grid-cols-[100px_minmax(0,1fr)] border-b border-line">
-            <div className="py-3 uppercase tracking-[0.18em] text-ink-dim">Host</div>
-            <div className="truncate py-3 text-ink">{savedHostname}</div>
+          <div className="grid grid-cols-[100px_minmax(0,1fr)] border-b border-neutral-800">
+            <div className="py-3 uppercase tracking-[0.18em] text-neutral-500">Host</div>
+            <div className="truncate py-3 text-neutral-100">{savedHostname}</div>
           </div>
           <div className="grid grid-cols-[100px_minmax(0,1fr)]">
-            <div className="py-3 uppercase tracking-[0.18em] text-ink-dim">Value</div>
+            <div className="py-3 uppercase tracking-[0.18em] text-neutral-500">Value</div>
             <div className="flex min-w-0 items-center gap-2 py-3">
-              <span className="truncate text-ink">{publicIp}</span>
-              <button type="button" onClick={copyIp} className="shrink-0 p-0.5 text-ink-dim transition-colors hover:text-ink" title={copiedIp ? "Copied" : "Copy IP"}>
+              <span className="truncate text-neutral-100">{publicIp}</span>
+              <button type="button" onClick={copyIp} className="shrink-0 p-0.5 text-neutral-500 transition-colors hover:text-neutral-100" title={copiedIp ? "Copied" : "Copy IP"}>
                 <AppIcon icon={copiedIp ? CopyCheckIcon : CopyIcon} size={13} />
               </button>
             </div>
@@ -234,7 +234,7 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
       {hasSavedHostname && !editing ? (
         <button
           type="button"
-          className="mt-5 inline-flex h-10 items-center justify-center gap-2 border border-line px-3.5 text-sm text-ink-muted transition hover:border-line hover:bg-hover hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-5 inline-flex h-10 items-center justify-center gap-2 border border-neutral-800 px-3.5 text-sm text-neutral-400 transition hover:border-neutral-800 hover:bg-neutral-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
           onClick={() => void refreshSettings()}
           disabled={verifying}
         >
@@ -243,13 +243,13 @@ export function ControlPlaneDomainSettingsPanel({ open }: { open: boolean }) {
         </button>
       ) : null}
 
-      {error ? <div className="mt-5 border-l-2 border-white bg-hover px-4 py-3 text-sm text-ink">{error}</div> : null}
+      {error ? <div className="mt-5 border-l-2 border-white bg-neutral-800 px-4 py-3 text-sm text-neutral-100">{error}</div> : null}
       {success ? (
         <div
           className={
             waitingForDns
-              ? "mt-5 flex items-center gap-2 border-l-2 border-warn bg-warn/10 px-4 py-3 text-sm text-warn"
-              : "mt-5 flex items-center gap-2 border-l-2 border-ok bg-ok/10 px-4 py-3 text-sm text-ok"
+              ? "mt-5 flex items-center gap-2 border-l-2 border-amber-500 bg-amber-500/10 px-4 py-3 text-sm text-amber-500"
+              : "mt-5 flex items-center gap-2 border-l-2 border-green-500 bg-green-500/10 px-4 py-3 text-sm text-green-500"
           }
         >
           <AppIcon icon={waitingForDns ? AlertCircleIcon : CheckmarkCircle02Icon} size={14} />

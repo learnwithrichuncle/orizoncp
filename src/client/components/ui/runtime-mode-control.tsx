@@ -17,8 +17,8 @@ export function RuntimeModeControl({ value, onChange, disabled = false }: { valu
           type="button"
           className={`inline-flex h-9 min-w-0 items-center justify-center gap-2 px-3 text-xs transition disabled:opacity-40 ${
             value === mode.value
-              ? "bg-accent text-white"
-              : "border border-line text-muted hover:border-line-strong hover:bg-hover hover:text-ink"
+              ? "bg-blue-600 text-white"
+              : "border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:bg-neutral-800 hover:text-neutral-100"
           }`}
           disabled={disabled}
           onClick={() => onChange(mode.value)}
