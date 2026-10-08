@@ -6,7 +6,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { api, type ProjectCard, type ProjectDetail, type Service } from "../api";
+import { api, type ProjectCard, type ProjectDetail, type ProjectEnvironment, type Service } from "../api";
+import { ConfirmationDialog } from "../components/modals/confirmation-dialog";
 import { CreateServiceModal } from "../components/modals/create-service-modal";
 import { DeleteProjectModal } from "../components/modals/delete-project-modal";
 import { EditProjectModal } from "../features/projects/edit-project-modal";
@@ -28,6 +29,8 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
   const [projects, setProjects] = useState<ProjectCard[]>([]);
   const [createServiceOpen, setCreateServiceOpen] = useState(false);
   const [createEnvironmentOpen, setCreateEnvironmentOpen] = useState(false);
+  const [renameEnvironmentOpen, setRenameEnvironmentOpen] = useState(false);
+  const [deleteEnvironmentTarget, setDeleteEnvironmentTarget] = useState<ProjectEnvironment | null>(null);
   const [movingService, setMovingService] = useState<Service | null>(null);
   const [draggingService, setDraggingService] = useState<Service | null>(null);
   const [movingEnvironmentId, setMovingEnvironmentId] = useState("");
@@ -161,6 +164,20 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
     const result = await api.createProjectEnvironment(currentProject.id, { name });
     setSelectedEnvironmentId(result.environment.id);
     setCreateEnvironmentOpen(false);
+    await loadProject();
+  }
+
+  async function renameEnvironment(name: string) {
+    if (!currentProject || !selectedEnvironment) return;
+    await api.updateProjectEnvironment(currentProject.id, selectedEnvironment.id, { name });
+    setRenameEnvironmentOpen(false);
+    await loadProject();
+  }
+
+  async function deleteEnvironment() {
+    if (!currentProject || !deleteEnvironmentTarget) return;
+    await api.deleteProjectEnvironment(currentProject.id, deleteEnvironmentTarget.id);
+    setDeleteEnvironmentTarget(null);
     await loadProject();
   }
 
@@ -306,6 +323,24 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
                           onDropService={(environmentId) => void dropServiceIntoEnvironment(environmentId)}
                         />
 
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setRenameEnvironmentOpen(true)}
+                            className="inline-flex h-8 items-center rounded-md border border-neutral-800 px-3 text-xs text-neutral-400 transition hover:bg-neutral-800 hover:text-white"
+                          >
+                            Rename environment
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setDeleteEnvironmentTarget(selectedEnvironment)}
+                            disabled={selectedEnvironment.isDefault}
+                            className="inline-flex h-8 items-center rounded-md border border-red-500/40 px-3 text-xs text-red-500 transition hover:bg-red-500/10 disabled:opacity-40"
+                          >
+                            Delete environment
+                          </button>
+                        </div>
+
                         {environmentServices.length === 0 ? (
                           <section className="flex min-h-[400px] items-center justify-center rounded-lg border border-neutral-800 bg-neutral-900 px-6 py-16 text-center backdrop-blur-xl">
                             <div>
@@ -374,6 +409,24 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
         open={createEnvironmentOpen}
         onClose={() => setCreateEnvironmentOpen(false)}
         onCreate={createEnvironment}
+      />
+      <CreateEnvironmentModal
+        open={renameEnvironmentOpen}
+        onClose={() => setRenameEnvironmentOpen(false)}
+        onCreate={renameEnvironment}
+        title="Rename environment"
+        submitLabel="Save name"
+        initialName={selectedEnvironment?.name ?? ""}
+        description="Give this environment a new name."
+      />
+      <ConfirmationDialog
+        open={Boolean(deleteEnvironmentTarget)}
+        title="Delete this environment?"
+        subject={deleteEnvironmentTarget?.name}
+        description="Services in this environment must be moved to another environment first."
+        confirmLabel="Delete environment"
+        onClose={() => setDeleteEnvironmentTarget(null)}
+        onConfirm={() => void deleteEnvironment()}
       />
       <MoveServiceEnvironmentModal
         open={Boolean(movingService)}

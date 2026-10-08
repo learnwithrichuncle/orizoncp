@@ -5,23 +5,31 @@ import { SettingsDialog } from "../settings/settings-dialog";
 export function CreateEnvironmentModal({
   open,
   onClose,
-  onCreate
+  onCreate,
+  title = "New environment",
+  submitLabel = "Create environment",
+  initialName = "",
+  description = "Create another place to organize this project's services."
 }: {
   open: boolean;
   onClose: () => void;
   onCreate: (name: string) => Promise<void>;
+  title?: string;
+  submitLabel?: string;
+  initialName?: string;
+  description?: string;
 }) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(initialName);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!open) {
-      setName("");
+    if (open) {
+      setName(initialName);
       setError("");
       setSaving(false);
     }
-  }, [open]);
+  }, [open, initialName]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,12 +47,12 @@ export function CreateEnvironmentModal({
   }
 
   return (
-    <SettingsDialog open={open} title="New environment" width="max-w-md" onClose={() => {
+    <SettingsDialog open={open} title={title} width="max-w-md" onClose={() => {
       if (!saving) onClose();
     }}>
       <form onSubmit={(event) => void submit(event)}>
         <p className="text-sm leading-6 text-neutral-500">
-          Create another place to organize this project's services.
+          {description}
         </p>
 
         <label className="mt-5 block">
@@ -75,7 +83,7 @@ export function CreateEnvironmentModal({
             className="flex h-11 w-full items-center justify-center bg-blue-600 px-5 text-sm text-neutral-100 transition hover:bg-zinc-200 disabled:cursor-wait disabled:opacity-50"
             disabled={saving || !name.trim()}
           >
-            {saving ? "Creating…" : "Create environment"}
+            {saving ? "Saving…" : submitLabel}
           </button>
         </div>
       </form>
