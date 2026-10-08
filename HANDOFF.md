@@ -1,36 +1,32 @@
 # HANDOFF.md
 
 ## Done (this session)
-- Removed the entire design system / design rules (branch `remove-design-rules`): tokens, glass utilities, UI-STYLE.md, HANDOFF.md, agents.md UI-RULES; remapped classes to neutral Tailwind defaults; cleaned website css; index.html.
+- Removed the entire design system / design rules (branch `remove-design-rules`).
 - Unified loaders to one circle loader (`components/ui/loader.tsx` + `.page-loader` css + static one in index.html); deleted `spinner.tsx`.
-- Top bar: removed title, height `h-5`, no border.
-- Sidebar: removed theme toggle + notification bell; removed dead `/cdn` + `/billing` nav; added root `notFoundComponent` (404) via `pages/not-found-page.tsx`.
-- Service tabs now drive the sidebar via `features/services/service-nav-store.ts` (all 10 tabs, per service type).
-- Fixed the 3 pre-existing typecheck errors (`ai-provider-form.tsx`, `function-source-panel.tsx`). `tsc --noEmit` is clean; build passes.
+- Top bar: no title, `h-5`, no border. Sidebar: removed theme toggle + notification bell; removed dead `/cdn` + `/billing` nav.
+- Added root `notFoundComponent` (404) via `pages/not-found-page.tsx`.
+- Service tabs drive the sidebar via `features/services/service-nav-store.ts` (all 10 tabs, per service type).
+- Fixed the 3 pre-existing typecheck errors. `tsc --noEmit` (client + server) is clean; build passes.
+- **User CRUD (DONE)**: `PATCH`/`DELETE /api/system/users/:userId` (`system-user-routes.ts`, `user-management.ts`) with last-owner + owns-projects guards; `api.updateSystemUser`/`deleteSystemUser`; role `<select>` + Delete (with confirm) in `components/modals/user-list.tsx` + `users-settings-panel.tsx`.
+- **Environment CRUD (backend + api DONE)**: `PATCH`/`DELETE /api/projects/:projectId/environments/:environmentId` (`index.ts` ~L2282, `project-environments.ts` rename/delete with guards — no default, ≥1 env, must be empty); `api.updateProjectEnvironment`/`deleteProjectEnvironment`.
 
-## Remaining (next steps, in order)
+## Remaining
 
-### 1. Deployment rollback
-- Server: add `POST /api/deployments/:deploymentId/rollback` in `src/server/index.ts` (near the other `/api/deployments/:id/*` routes ~L3145).
-  - Auth via `getAuthorizedDeploymentService(c)`. Load the source deployment; require `imageTag`.
-  - Re-enqueue with a trigger that encodes the source: `enqueueDeployment(service.id, { trigger: "rollback:" + source.id })` (avoids a schema change).
-  - In `src/server/deploy.ts` `runDeployment()` (~L847), add an early branch: if `deployment.trigger.startsWith("rollback:")`, resolve the source deployment's `imageTag` and run it using the same container-run path as the docker-image branch (~L994–1030) instead of building.
-- Client: `api.rollbackDeployment(deploymentId)` in `src/client/api.ts`; add a "Rollback" button in `features/services/service-deployments-panel.tsx` (top action row).
+### 1. Environment rename/delete UI (backend ready)
+- `components/modals/create-environment-modal.tsx` already parameterized-ready — add `title`/`submitLabel`/`initialName`/`description` props (not yet added) to reuse it for rename, or make a small `RenameEnvironmentModal`.
+- In `pages/project-page.tsx` (~L295): add "Rename" / "Delete" buttons for `selectedEnvironment` (disable when `isDefault`); wire `api.updateProjectEnvironment` / `api.deleteProjectEnvironment`, then reload the project. Add a `ConfirmationDialog` for delete.
 
-### 2. User CRUD
-- Server: handlers for `/api/system/users` are registered under `app.use("/api/system/users", requireOwnerSessionAccessMiddleware)` (`index.ts` ~L1610). Add `PATCH /api/system/users/:userId` (role: owner|user) and `DELETE /api/system/users/:userId` (block deleting the last owner / self).
-- Client: `api.updateSystemUser` / `api.deleteSystemUser`; add role select + delete in `src/client/components/modals/users-settings-panel.tsx`. Roles exist only as `owner|user` in `src/server/auth.ts`.
+### 2. Deployment rollback
+- Server: `POST /api/deployments/:deploymentId/rollback` (`index.ts` ~L3145, auth via `getAuthorizedDeploymentService`). Require the source deployment has an `imageTag`; re-enqueue with `enqueueDeployment(service.id, { trigger: "rollback:" + source.id })`.
+- `deploy.ts runDeployment()` (~L847): add an early branch — if `deployment.trigger.startsWith("rollback:")`, resolve the source deployment's `imageTag` and run it via the same container-run path as the docker-image branch (~L994–1030) instead of building.
+- Client: `api.rollbackDeployment(id)`; add a Rollback button in `features/services/service-deployments-panel.tsx` (top action row).
 
-### 3. Environment rename/delete
-- Server: `PATCH /api/projects/:projectId/environments/:environmentId`, `DELETE ...` (reassign or block if services exist). Create-only today (`POST .../environments`).
-- Client: `api.updateEnvironment` / `api.deleteEnvironment`; wire into `features/projects/` (project page / create-environment-modal area).
-
-### 4. Cleanup
-- God files: `src/server/index.ts` (3.7k), `src/server/deploy.ts` (1.7k), `create-service-modal.tsx` (1.3k), `service-page-shell.tsx` (0.9k).
+### 3. Cleanup
+- God files: `src/server/index.ts` (~3.8k), `src/server/deploy.ts` (1.7k), `create-service-modal.tsx` (1.3k), `service-page-shell.tsx` (~0.95k).
 - Duplication: two R2 stacks (`/api/system/r2` vs `/api/system/backup-storage/r2`), three DB viewers, overlapping env editors.
 - Unused `GET /api/search`; `exportMigrationBundle` bypasses the shared `request` helper.
 - Branding filenames: `website/src/components/aeroplane-logo.astro`, `website/src/content/docs/docs/migration/aeroplane-bundles.md`.
 
 ## Notes
 - Repo root: `C:\Users\learn\Videos\ORIZON CP\aeroplane`. Commands: `npm run dev`, `npm run build`, `npm run typecheck`.
-- Current branch: `remove-design-rules` (design-rule removal is committed here; the rest above is uncommitted/committed incrementally).
+- Branch: `remove-design-rules`. `tsc --noEmit` clean; `vite build` passes.
