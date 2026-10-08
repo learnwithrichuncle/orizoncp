@@ -2,7 +2,7 @@ import { asc, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { createUniqueSlug } from "../shared/slug.js";
 import { db, nowIso } from "./db.js";
-import { projectEnvironments, type ProjectEnvironment } from "./schema.js";
+import { projectEnvironments, services, type ProjectEnvironment } from "./schema.js";
 
 const defaultEnvironments = [
   { name: "Prod", slug: "production", isDefault: true },
@@ -81,4 +81,37 @@ export function createProjectEnvironment(projectId: string, name: string) {
   };
   db.insert(projectEnvironments).values(environment).run();
   return environment;
+}
+
+export function renameProjectEnvironment(projectId: string, environmentId: string, name: string) {
+  const environment = getProjectEnvironment(projectId, environmentId);
+  if (!environment) throw new Error("Environment not found");
+  const duplicate = getProjectEnvironments(projectId).find(
+    (item) => item.id !== environmentId && item.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+  );
+  if (duplicate) throw new Error("An environment with this name already exists.");
+  const timestamp = nowIso();
+  db.update(projectEnvironments)
+    .set({ name, updatedAt: timestamp })
+    .where(eq(projectEnvironments.id, environmentId))
+    .run();
+  return { ...environment, name, updatedAt: timestamp };
+}
+
+export function deleteProjectEnvironment(projectId: string, environmentId: string) {
+  const environment = getProjectEnvironment(projectId, environmentId);
+  if (!environment) throw new Error("Environment not found");
+  if (environment.isDefault) throw new Error("The default environment cannot be deleted.");
+  if (getProjectEnvironments(projectId).length <= 1) {
+    throw new Error("At least one environment is required.");
+  }
+  const serviceCount = db
+    .select()
+    .from(services)
+    .where(eq(services.environmentId, environmentId))
+    .all().length;
+  if (serviceCount > 0) {
+    throw new Error("Move or delete this environment's services first.");
+  }
+  db.delete(projectEnvironments).where(eq(projectEnvironments.id, environmentId)).run();
 }

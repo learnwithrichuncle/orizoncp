@@ -761,6 +761,10 @@ export const api = {
     request<{ project: ProjectDetail }>(`/api/projects/${projectId}`, { method: "PATCH", body: JSON.stringify(body) }),
   createProjectEnvironment: (projectId: string, body: { name: string }) =>
     request<{ environment: ProjectEnvironment }>(`/api/projects/${projectId}/environments`, { method: "POST", body: JSON.stringify(body) }),
+  updateProjectEnvironment: (projectId: string, environmentId: string, body: { name: string }) =>
+    request<{ environment: ProjectEnvironment }>(`/api/projects/${projectId}/environments/${environmentId}`, { method: "PATCH", body: JSON.stringify(body) }),
+  deleteProjectEnvironment: (projectId: string, environmentId: string) =>
+    request(`/api/projects/${projectId}/environments/${environmentId}`, { method: "DELETE" }),
   createService: (projectId: string, body: unknown) =>
     request<{ service: Service }>(`/api/projects/${projectId}/services`, { method: "POST", body: JSON.stringify(body) }),
   projectDatabaseVariableSuggestions: (projectId: string) =>

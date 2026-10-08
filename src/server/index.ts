@@ -32,9 +32,11 @@ import { getVercelTeams, getVercelProjects, getVercelProjectDetails, importVerce
 import {
   createDefaultProjectEnvironments,
   createProjectEnvironment,
+  deleteProjectEnvironment,
   getDefaultProjectEnvironment,
   getProjectEnvironment,
-  getProjectEnvironments
+  getProjectEnvironments,
+  renameProjectEnvironment
 } from "./project-environments.js";
 import { buildGitHubAppManifest, convertGitHubManifestCode, githubConnectionStatus, listConnectedRepos, listRepoBranches, listRepoDirectories, repoUrlFromFullName } from "./github-connect.js";
 import { branchFromGitRef, verifyGitHubSignature } from "./github.js";
@@ -2277,6 +2279,45 @@ app.post("/api/projects/:projectId/environments", async (c) => {
   const environment = createProjectEnvironment(project.id, body.data.name);
   db.update(projectGroups).set({ updatedAt: nowIso() }).where(eq(projectGroups.id, project.id)).run();
   return c.json({ environment }, 201);
+});
+
+app.patch("/api/projects/:projectId/environments/:environmentId", async (c) => {
+  const project = getProjectById(c.req.param("projectId"));
+  if (!project) {
+    return jsonError("Project not found", 404);
+  }
+  const denied = requireProjectAccess(c, project.id);
+  if (denied) return denied;
+
+  const body = createProjectEnvironmentSchema.safeParse(await c.req.json());
+  if (!body.success) {
+    return jsonError(body.error.issues[0]?.message ?? "Invalid environment");
+  }
+
+  try {
+    const environment = renameProjectEnvironment(project.id, c.req.param("environmentId"), body.data.name);
+    db.update(projectGroups).set({ updatedAt: nowIso() }).where(eq(projectGroups.id, project.id)).run();
+    return c.json({ environment });
+  } catch (error) {
+    return jsonError(error instanceof Error ? error.message : "Could not rename environment", 400);
+  }
+});
+
+app.delete("/api/projects/:projectId/environments/:environmentId", (c) => {
+  const project = getProjectById(c.req.param("projectId"));
+  if (!project) {
+    return jsonError("Project not found", 404);
+  }
+  const denied = requireProjectAccess(c, project.id);
+  if (denied) return denied;
+
+  try {
+    deleteProjectEnvironment(project.id, c.req.param("environmentId"));
+    db.update(projectGroups).set({ updatedAt: nowIso() }).where(eq(projectGroups.id, project.id)).run();
+    return c.json({ ok: true });
+  } catch (error) {
+    return jsonError(error instanceof Error ? error.message : "Could not delete environment", 400);
+  }
 });
 
 app.get("/api/projects/:projectId/database-variable-suggestions", async (c) => {
