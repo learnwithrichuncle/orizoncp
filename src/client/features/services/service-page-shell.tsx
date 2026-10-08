@@ -12,6 +12,7 @@ import {
   DashboardSquare02Icon,
   DatabaseExportIcon
 } from "@hugeicons/core-free-icons";
+import { sileo } from "sileo";
 import { FormEvent, startTransition, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   api,
@@ -44,7 +45,6 @@ import { RuntimeLogsPanel } from "./service-log-panels";
 import { ServiceOverviewPanel } from "./service-overview-panel";
 import { FunctionSourcePanel } from "./function-source-panel";
 import { ProjectRouteLoader } from "../projects/project-route-loader";
-import { RedeployRequiredToast } from "./redeploy-required-toast";
 import type { ServiceTab } from "./service-tabs";
 import { ApplicationServiceSettingsPanel } from "./application-service-settings-panel";
 import type { ServiceSettingsState } from "./service-settings-state";
@@ -117,7 +117,8 @@ export function ServicePageShell({
   onDeleted,
   pageServices = [],
   onServiceSelect,
-  onTransferred
+  onTransferred,
+  projectName
 }: {
   selectedTab: ServiceTab;
   serviceId: string;
@@ -128,6 +129,7 @@ export function ServicePageShell({
   pageServices?: Service[];
   onServiceSelect?: (serviceSlug: string) => void;
   onTransferred: (projectSlug: string, serviceSlug: string) => void;
+  projectName?: string;
 }) {
   const [overview, setOverview] = useState<null | ServiceOverview>(null);
   const [activeDeploymentId, setActiveDeploymentId] = useState<null | string>(null);
@@ -170,7 +172,6 @@ export function ServicePageShell({
   const [settingsDirectoryError, setSettingsDirectoryError] = useState("");
   const [settingsDirectoryLoadingPaths, setSettingsDirectoryLoadingPaths] = useState<Set<string>>(new Set());
   const [overviewLoading, setOverviewLoading] = useState(true);
-  const [redeployToastVisible, setRedeployToastVisible] = useState(false);
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [nowMs, setNowMs] = useState(() => Date.now());
@@ -386,7 +387,20 @@ export function ServicePageShell({
       await loadSuggestionKeys();
       await onProjectRefresh();
       if (actionRequiresRedeploy(label)) {
-        setRedeployToastVisible(true);
+        let toastId = "";
+        toastId = sileo.show({
+          title: "Redeploy required",
+          description: "Redeploy to apply the settings you just saved.",
+          type: "warning",
+          duration: null,
+          button: {
+            title: "Redeploy",
+            onClick: () => {
+              sileo.dismiss(toastId);
+              deployFromToast();
+            }
+          }
+        });
       }
     } catch (issue) {
       setError(issue instanceof Error ? issue.message : "Something went wrong");
@@ -510,7 +524,6 @@ export function ServicePageShell({
   }
 
   async function deployService() {
-    setRedeployToastVisible(false);
     setBusy("deploy");
     setError("");
     try {
@@ -655,21 +668,7 @@ export function ServicePageShell({
             onServiceSelect={onServiceSelect ?? (() => undefined)}
           />
 
-          <nav aria-label="Service" className="flex shrink-0 gap-3 overflow-x-auto border-b border-line">
-              {visibleTabs.map(([tab, icon]) => (
-                <button key={tab} type="button" className={tabButtonClass(tab)} onClick={() => onTabChange(tab)}>
-                  <AppIcon icon={icon} size={14} />
-                  <span>{serviceTabLabels[tab]}</span>
-                  {tab === "deployments" && hasPendingDeployment ? (
-                    <span className="h-1.5 w-1.5 bg-warn">
-                      <span className="sr-only">Deployment in progress</span>
-                    </span>
-                  ) : null}
-                </button>
-              ))}
-            </nav>
-
-            {error ? <div className="mt-3 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div> : null}
+          {error ? <div className="mt-3 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">{error}</div> : null}
 
             <div className={contentClass}>
               {selectedTab === "overview" ? (
@@ -691,18 +690,20 @@ export function ServicePageShell({
               ) : null}
 
               {selectedTab === "deployments" ? (
-                <ServiceDeploymentsPanel
-                  deployments={deployments}
-                  activeDeployment={activeDeployment}
-                  activeDeploymentId={activeDeploymentId}
-                  deploymentLogs={deploymentLogs}
-                  activeDeploymentDuration={activeDeploymentDuration}
-                  busy={busy}
-                  nowMs={nowMs}
-                  onSelectDeployment={setActiveDeploymentId}
-                  onDeploy={() => void deployService()}
-                  onAbortActiveDeployment={() => void abortActiveDeployment()}
-                />
+        <ServiceDeploymentsPanel
+          service={service ?? null}
+          projectName={projectName}
+          deployments={deployments}
+          activeDeployment={activeDeployment}
+          activeDeploymentId={activeDeploymentId}
+          deploymentLogs={deploymentLogs}
+          activeDeploymentDuration={activeDeploymentDuration}
+          busy={busy}
+          onSelectDeployment={setActiveDeploymentId}
+          onDeploy={() => void deployService()}
+          onAbortActiveDeployment={() => void abortActiveDeployment()}
+          onOpenRuntimeLogs={() => onTabChange("logs")}
+        />
               ) : null}
 
               {selectedTab === "logs" ? <RuntimeLogsPanel logs={runtimeLogs} title="Live service logs" emptyLabel="No runtime logs yet." /> : null}
@@ -928,13 +929,6 @@ export function ServicePageShell({
         busy={busy === "delete"}
         onClose={() => setDeleteDialogOpen(false)}
         onConfirm={deleteService}
-      />
-      <RedeployRequiredToast
-        visible={redeployToastVisible}
-        busy={busy === "deploy"}
-        serviceName={service?.name ?? "Service"}
-        onDismiss={() => setRedeployToastVisible(false)}
-        onRedeploy={deployFromToast}
       />
     </>
   );

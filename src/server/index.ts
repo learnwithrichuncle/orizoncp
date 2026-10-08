@@ -3170,6 +3170,43 @@ app.get("/api/services/:serviceId/deployments", (c) => {
   return c.json({ deployments: rows });
 });
 
+app.get("/api/deployments", (c) => {
+  const groups = db
+    .select()
+    .from(projectGroups)
+    .all()
+    .filter((group) => canAccessProject(c, group.id));
+  const groupById = new Map(groups.map((group) => [group.id, group]));
+  const serviceRows = db
+    .select()
+    .from(services)
+    .all()
+    .filter((service) => groupById.has(service.projectId));
+  const serviceById = new Map(serviceRows.map((service) => [service.id, service]));
+
+  const rows = db
+    .select()
+    .from(deployments)
+    .orderBy(desc(deployments.createdAt))
+    .limit(200)
+    .all()
+    .filter((deployment) => serviceById.has(deployment.serviceId));
+
+  return c.json({
+    deployments: rows.map((deployment) => {
+      const service = serviceById.get(deployment.serviceId);
+      const project = service ? groupById.get(service.projectId) : undefined;
+      return {
+        ...deployment,
+        serviceName: service?.name ?? "Service",
+        serviceSlug: service?.slug ?? null,
+        projectName: project?.name ?? "Project",
+        projectSlug: project?.slug ?? null
+      };
+    })
+  });
+});
+
 app.get("/api/deployments/:deploymentId/logs", (c) => {
   const serviceAccess = getAuthorizedDeploymentService(c);
   if (serviceAccess.response) return serviceAccess.response;

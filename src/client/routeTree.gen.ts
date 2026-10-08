@@ -10,10 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SvgsRouteImport } from './routes/svgs'
+import { Route as MigrationsRouteImport } from './routes/migrations'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as DomainsRouteImport } from './routes/domains'
+import { Route as DeploymentsRouteImport } from './routes/deployments'
+import { Route as DatabasesRouteImport } from './routes/databases'
 import { Route as ProjectSlugRouteImport } from './routes/$projectSlug'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
+import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
 import { Route as ProjectSlugIndexRouteImport } from './routes/$projectSlug/index'
 import { Route as SettingsSettingsPageRouteImport } from './routes/settings/$settingsPage'
@@ -27,9 +32,29 @@ const SvgsRoute = SvgsRouteImport.update({
   path: '/svgs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MigrationsRoute = MigrationsRouteImport.update({
+  id: '/migrations',
+  path: '/migrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DomainsRoute = DomainsRouteImport.update({
+  id: '/domains',
+  path: '/domains',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeploymentsRoute = DeploymentsRouteImport.update({
+  id: '/deployments',
+  path: '/deployments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatabasesRoute = DatabasesRouteImport.update({
+  id: '/databases',
+  path: '/databases',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectSlugRoute = ProjectSlugRouteImport.update({
@@ -45,6 +70,11 @@ const IndexRoute = IndexRouteImport.update({
 const SettingsIndexRoute = SettingsIndexRouteImport.update({
   id: '/settings/',
   path: '/settings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
@@ -88,25 +118,35 @@ const ProjectSlugServiceSlugServiceTabRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$projectSlug': typeof ProjectSlugRouteWithChildren
+  '/databases': typeof DatabasesRoute
+  '/deployments': typeof DeploymentsRoute
+  '/domains': typeof DomainsRoute
   '/login': typeof LoginRoute
+  '/migrations': typeof MigrationsRoute
   '/svgs': typeof SvgsRoute
   '/$projectSlug/$serviceSlug': typeof ProjectSlugServiceSlugRouteWithChildren
   '/onboarding/success': typeof OnboardingSuccessRoute
   '/settings/$settingsPage': typeof SettingsSettingsPageRoute
   '/$projectSlug/': typeof ProjectSlugIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/$projectSlug/$serviceSlug/$serviceTab': typeof ProjectSlugServiceSlugServiceTabRoute
   '/$projectSlug/$serviceSlug/': typeof ProjectSlugServiceSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/databases': typeof DatabasesRoute
+  '/deployments': typeof DeploymentsRoute
+  '/domains': typeof DomainsRoute
   '/login': typeof LoginRoute
+  '/migrations': typeof MigrationsRoute
   '/svgs': typeof SvgsRoute
   '/onboarding/success': typeof OnboardingSuccessRoute
   '/settings/$settingsPage': typeof SettingsSettingsPageRoute
   '/$projectSlug': typeof ProjectSlugIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/$projectSlug/$serviceSlug/$serviceTab': typeof ProjectSlugServiceSlugServiceTabRoute
   '/$projectSlug/$serviceSlug': typeof ProjectSlugServiceSlugIndexRoute
@@ -115,13 +155,18 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$projectSlug': typeof ProjectSlugRouteWithChildren
+  '/databases': typeof DatabasesRoute
+  '/deployments': typeof DeploymentsRoute
+  '/domains': typeof DomainsRoute
   '/login': typeof LoginRoute
+  '/migrations': typeof MigrationsRoute
   '/svgs': typeof SvgsRoute
   '/$projectSlug/$serviceSlug': typeof ProjectSlugServiceSlugRouteWithChildren
   '/onboarding/success': typeof OnboardingSuccessRoute
   '/settings/$settingsPage': typeof SettingsSettingsPageRoute
   '/$projectSlug/': typeof ProjectSlugIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/$projectSlug/$serviceSlug/$serviceTab': typeof ProjectSlugServiceSlugServiceTabRoute
   '/$projectSlug/$serviceSlug/': typeof ProjectSlugServiceSlugIndexRoute
@@ -131,25 +176,35 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$projectSlug'
+    | '/databases'
+    | '/deployments'
+    | '/domains'
     | '/login'
+    | '/migrations'
     | '/svgs'
     | '/$projectSlug/$serviceSlug'
     | '/onboarding/success'
     | '/settings/$settingsPage'
     | '/$projectSlug/'
     | '/onboarding/'
+    | '/projects/'
     | '/settings/'
     | '/$projectSlug/$serviceSlug/$serviceTab'
     | '/$projectSlug/$serviceSlug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/databases'
+    | '/deployments'
+    | '/domains'
     | '/login'
+    | '/migrations'
     | '/svgs'
     | '/onboarding/success'
     | '/settings/$settingsPage'
     | '/$projectSlug'
     | '/onboarding'
+    | '/projects'
     | '/settings'
     | '/$projectSlug/$serviceSlug/$serviceTab'
     | '/$projectSlug/$serviceSlug'
@@ -157,13 +212,18 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$projectSlug'
+    | '/databases'
+    | '/deployments'
+    | '/domains'
     | '/login'
+    | '/migrations'
     | '/svgs'
     | '/$projectSlug/$serviceSlug'
     | '/onboarding/success'
     | '/settings/$settingsPage'
     | '/$projectSlug/'
     | '/onboarding/'
+    | '/projects/'
     | '/settings/'
     | '/$projectSlug/$serviceSlug/$serviceTab'
     | '/$projectSlug/$serviceSlug/'
@@ -172,11 +232,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProjectSlugRoute: typeof ProjectSlugRouteWithChildren
+  DatabasesRoute: typeof DatabasesRoute
+  DeploymentsRoute: typeof DeploymentsRoute
+  DomainsRoute: typeof DomainsRoute
   LoginRoute: typeof LoginRoute
+  MigrationsRoute: typeof MigrationsRoute
   SvgsRoute: typeof SvgsRoute
   OnboardingSuccessRoute: typeof OnboardingSuccessRoute
   SettingsSettingsPageRoute: typeof SettingsSettingsPageRoute
   OnboardingIndexRoute: typeof OnboardingIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
   SettingsIndexRoute: typeof SettingsIndexRoute
 }
 
@@ -189,11 +254,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SvgsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/migrations': {
+      id: '/migrations'
+      path: '/migrations'
+      fullPath: '/migrations'
+      preLoaderRoute: typeof MigrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/domains': {
+      id: '/domains'
+      path: '/domains'
+      fullPath: '/domains'
+      preLoaderRoute: typeof DomainsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deployments': {
+      id: '/deployments'
+      path: '/deployments'
+      fullPath: '/deployments'
+      preLoaderRoute: typeof DeploymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/databases': {
+      id: '/databases'
+      path: '/databases'
+      fullPath: '/databases'
+      preLoaderRoute: typeof DatabasesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$projectSlug': {
@@ -215,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings/'
       preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/onboarding/': {
@@ -303,11 +403,16 @@ const ProjectSlugRouteWithChildren = ProjectSlugRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProjectSlugRoute: ProjectSlugRouteWithChildren,
+  DatabasesRoute: DatabasesRoute,
+  DeploymentsRoute: DeploymentsRoute,
+  DomainsRoute: DomainsRoute,
   LoginRoute: LoginRoute,
+  MigrationsRoute: MigrationsRoute,
   SvgsRoute: SvgsRoute,
   OnboardingSuccessRoute: OnboardingSuccessRoute,
   SettingsSettingsPageRoute: SettingsSettingsPageRoute,
   OnboardingIndexRoute: OnboardingIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
   SettingsIndexRoute: SettingsIndexRoute,
 }
 export const routeTree = rootRouteImport

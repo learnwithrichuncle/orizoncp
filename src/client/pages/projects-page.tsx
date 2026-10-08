@@ -2,11 +2,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { startTransition, useCallback, useEffect, useMemo, useState } from "react";
 import {
   api,
-  type AuthUser,
   type GitHubStatus,
   type ProjectCard,
-  type R2SettingsStatus,
-  type ToolCheck,
 } from "../api";
 import { GitHubInstallModal } from "../features/github/github-install-modal";
 import {
@@ -25,12 +22,7 @@ import {
   writePinnedProjectIds,
 } from "../features/projects/pinned-projects";
 import { ProjectsEmptyState } from "../features/projects/projects-empty-state";
-import { ProjectsGridSkeleton } from "../features/projects/projects-grid-skeleton";
-import { SetupTodoList } from "../features/projects/setup-todo-list";
-import {
-  settingsPageForTab,
-  type SystemSettingsTab,
-} from "../features/settings/settings-pages";
+import { ProjectRouteLoader } from "../features/projects/project-route-loader";
 import { serviceIsDeploying } from "../lib/deployment-status";
 import { usePageTitle } from "../lib/page-title";
 
@@ -39,13 +31,7 @@ export function ProjectsPage() {
   usePageTitle("Projects");
 
   const [projects, setProjects] = useState<ProjectCard[]>([]);
-  const [tools, setTools] = useState<ToolCheck[]>([]);
-  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const [githubStatus, setGitHubStatus] = useState<GitHubStatus | null>(null);
-  const [domainSettings, setDomainSettings] = useState<
-    Awaited<ReturnType<typeof api.systemSettings>> | null
-  >(null);
-  const [r2Status, setR2Status] = useState<R2SettingsStatus | null>(null);
   const [setupLoading, setSetupLoading] = useState(true);
   const [createOpen, setCreateOpen] = useState(false);
   const [projectImportView, setProjectImportView] = useState<
@@ -61,31 +47,13 @@ export function ProjectsPage() {
       const showLoading = options.showLoading ?? true;
       if (showLoading) setSetupLoading(true);
       try {
-        const [
-          authData,
-          projectData,
-          systemData,
-          githubData,
-          domainData,
-          r2Data,
-        ] = await Promise.all([
-          api.authStatus(),
+        const [projectData, githubData] = await Promise.all([
           api.projects(),
-          api.system().catch(() => ({ tools: [] })),
           api.githubStatus().catch(() => null),
-          api.systemSettings().catch(() => null),
-          api
-            .r2Settings()
-            .then((result) => result.r2)
-            .catch(() => null),
         ]);
         startTransition(() => {
-          setCurrentUser(authData.user);
           setProjects(projectData.projects);
-          setTools(systemData.tools);
           setGitHubStatus(githubData);
-          setDomainSettings(domainData);
-          setR2Status(r2Data);
           setGitHubInstallOpen(
             Boolean(
               githubData &&
@@ -161,13 +129,6 @@ export function ProjectsPage() {
     });
   }
 
-  function openSystemSettings(tab: SystemSettingsTab = "root-domain") {
-    void navigate({
-      to: "/settings/$settingsPage",
-      params: { settingsPage: settingsPageForTab(tab).slug },
-    });
-  }
-
   function openProject(project: ProjectCard) {
     void navigate({
       to: "/$projectSlug",
@@ -183,16 +144,8 @@ export function ProjectsPage() {
     setPinnedProjectIds(next);
   }
 
-  const owner = currentUser?.role === "owner";
   const serviceCount = projects.reduce(
     (total, project) => total + project.serviceCount,
-    0,
-  );
-  const deployingCount = projects.reduce(
-    (total, project) =>
-      total +
-      project.services.filter((service) => serviceIsDeploying(service.status))
-        .length,
     0,
   );
   const visibleProjects = useMemo(() => {
@@ -245,50 +198,10 @@ export function ProjectsPage() {
         onImport={() => setProjectImportView("choose")}
       />
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <div className="rounded-[14px] border border-line bg-glass px-4 py-3 backdrop-blur-xl">
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-            Projects
-          </div>
-          <div className="mt-1 font-hero text-2xl tracking-[-0.03em] text-ink">
-            {projects.length}
-          </div>
-        </div>
-        <div className="rounded-[14px] border border-line bg-glass px-4 py-3 backdrop-blur-xl">
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-            Services
-          </div>
-          <div className="mt-1 font-hero text-2xl tracking-[-0.03em] text-ink">
-            {serviceCount}
-          </div>
-        </div>
-        <div className="rounded-[14px] border border-line bg-glass px-4 py-3 backdrop-blur-xl">
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-            Deploying
-          </div>
-          <div className="mt-1 font-hero text-2xl tracking-[-0.03em] text-ink">
-            {deployingCount}
-          </div>
-        </div>
-      </div>
-
       <div className="mt-7">
         {error ? (
           <div className="mt-6 rounded-md border border-bad bg-bad/20 p-3 text-sm text-bad">
             {error}
-          </div>
-        ) : null}
-
-        {!setupLoading && owner ? (
-          <div className="mt-7">
-            <SetupTodoList
-              domainSettings={domainSettings}
-              githubStatus={githubStatus}
-              r2Status={r2Status}
-              tools={tools}
-              onOpenSettings={openSystemSettings}
-              onOpenGitHubInstall={() => setGitHubInstallOpen(true)}
-            />
           </div>
         ) : null}
 
@@ -305,7 +218,7 @@ export function ProjectsPage() {
           ) : null}
 
           {setupLoading ? (
-            <ProjectsGridSkeleton />
+            <ProjectRouteLoader label="Loading projects" />
           ) : projects.length === 0 ? (
             <ProjectsEmptyState onCreate={() => setCreateOpen(true)} />
           ) : visibleProjects.length === 0 ? (

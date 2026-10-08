@@ -66,12 +66,14 @@ export function CreateServiceModal({
   projectId,
   open,
   onClose,
-  onCreate
+  onCreate,
+  initialType
 }: {
   projectId: string;
   open: boolean;
   onClose: () => void;
   onCreate: (payload: ServiceFormPayload) => Promise<void>;
+  initialType?: ServiceType;
 }) {
   const [step, setStep] = useState<"type" | "repo" | "directory" | "configure" | "database-select" | "database-configure" | "docker-image-configure" | "function-configure">("type");
   const [serviceType, setServiceType] = useState<ServiceType | null>(null);
@@ -133,6 +135,14 @@ export function CreateServiceModal({
   }, [ownerFilter, repos]);
 
   const selectedRepo = useMemo(() => repos.find((repo) => repo.fullName === form.repoFullName) ?? null, [repos, form.repoFullName]);
+
+  useEffect(() => {
+    if (!open) return;
+    if (initialType) {
+      setServiceType(initialType);
+      if (initialType === "database") setStep("database-select");
+    }
+  }, [open, initialType]);
 
   useEffect(() => {
     if (!open) {

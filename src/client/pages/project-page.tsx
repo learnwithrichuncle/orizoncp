@@ -194,7 +194,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
   }
 
   function navigateToProjects() {
-    void navigate({ to: "/" });
+    void navigate({ to: "/projects" });
   }
 
   function navigateToProject(nextProjectSlug: string) {
@@ -243,7 +243,7 @@ export function ProjectPage({ projectSlug }: { projectSlug: string }) {
     setDeletingProject(true);
     try {
       await api.deleteProject(currentProject.id);
-      void navigate({ to: "/" });
+      void navigate({ to: "/projects" });
     } finally {
       setDeletingProject(false);
     }

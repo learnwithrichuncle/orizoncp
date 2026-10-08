@@ -166,6 +166,7 @@ export function ServicePage({
       pageServices={currentProject.services}
       onServiceSelect={navigateToService}
       onTransferred={navigateToTransferredService}
+      projectName={currentProject.name}
     />
   );
 }

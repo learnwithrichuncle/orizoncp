@@ -93,6 +93,13 @@ export type Deployment = {
   createdAt: string;
 };
 
+export type GlobalDeployment = Deployment & {
+  serviceName: string;
+  serviceSlug: null | string;
+  projectName: string;
+  projectSlug: null | string;
+};
+
 export type DeploymentLog = {
   id: number;
   deploymentId: string;
@@ -764,6 +771,7 @@ export const api = {
     ),
   deleteProject: (projectId: string) => request(`/api/projects/${projectId}`, { method: "DELETE" }),
   serviceOverview: (serviceId: string) => request<ServiceOverview>(`/api/services/${serviceId}/overview`),
+  deployments: () => request<{ deployments: GlobalDeployment[] }>("/api/deployments"),
   functionSource: (serviceId: string) => request<{ source: FunctionSource }>(`/api/services/${serviceId}/function-source`),
   updateFunctionSource: (serviceId: string, body: { runtime?: FunctionRuntime; sourceCode?: string }) =>
     request<{ source: FunctionSource; service: Service | null }>(`/api/services/${serviceId}/function-source`, { method: "PATCH", body: JSON.stringify(body) }),

@@ -20,11 +20,11 @@ export function RootShell() {
   }
 
   return (
-    <div className="flex min-h-dvh bg-base text-ink-muted">
+    <div className="min-h-dvh bg-sidebar text-ink-muted md:pl-[var(--sidebar-width)]">
       <AppSidebar />
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-h-dvh flex-col bg-sidebar">
         <RootHeader />
-        <main className="min-w-0 flex-1 overflow-y-auto">
+        <main className="min-w-0 flex-1 overflow-y-auto rounded-tl-2xl bg-[#131314]">
           <div className="mx-auto h-full w-full max-w-[1400px] px-8 py-8">
             <AuthGate>
               <Outlet />

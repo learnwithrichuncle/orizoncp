@@ -1,147 +1,176 @@
-import { Cancel01Icon, ChatQuestionIcon } from "@hugeicons/core-free-icons";
 import { useState } from "react";
-import type { Deployment, DeploymentLog } from "../../api";
-import { DeployPlaneIcon } from "../../components/icons/deploy-plane-icon";
-import { AppIcon, statusClass } from "../../components/ui/primitives";
-import { displayDeploymentStatus } from "../../lib/deployment-status";
-import { formatTime, shortSha } from "../../lib/format";
+import type { ReactNode } from "react";
+import { ExternalLink, RotateCw, Terminal } from "lucide-react";
+import type { Deployment, DeploymentLog, Service } from "../../api";
+import { shortSha, formatTime } from "../../lib/format";
 import { DeploymentFailureExplanationModal } from "./deployment-failure-explanation-modal";
 import { DeploymentLogsPanel } from "./service-log-panels";
-import { formatBuildDuration } from "./service-format";
+
+function statusMeta(status: string) {
+  if (status === "failed") return { label: "Failed", tone: "bad" as const };
+  if (status === "aborted") return { label: "Aborted", tone: "muted" as const };
+  if (status === "queued") return { label: "Queued", tone: "warn" as const };
+  if (status === "building") return { label: "Building", tone: "warn" as const };
+  return { label: "Healthy", tone: "ok" as const };
+}
+
+const toneClass = {
+  ok: "bg-emerald-500/15 text-emerald-400",
+  warn: "bg-amber-500/15 text-amber-400",
+  bad: "bg-red-500/15 text-red-400",
+  muted: "bg-white/10 text-[var(--color-text-secondary)]"
+};
+
+function PropRow({ label, value }: { label: string; value: ReactNode }) {
+  return (
+    <div className="flex items-center gap-4 border-b border-[var(--cf-border)] px-4 py-2.5 last:border-b-0">
+      <span className="w-24 shrink-0 text-xs text-[var(--color-text-secondary)]">
+        {label}
+      </span>
+      <span className="min-w-0 flex-1 truncate text-sm text-white">{value}</span>
+    </div>
+  );
+}
 
 export function ServiceDeploymentsPanel({
+  service,
+  projectName,
   deployments,
   activeDeployment,
   activeDeploymentId,
   deploymentLogs,
   activeDeploymentDuration,
   busy,
-  nowMs,
   onSelectDeployment,
   onDeploy,
-  onAbortActiveDeployment
+  onAbortActiveDeployment,
+  onOpenRuntimeLogs
 }: {
+  service: Service | null;
+  projectName?: string;
   deployments: Deployment[];
   activeDeployment: Deployment | null;
   activeDeploymentId: string | null;
   deploymentLogs: DeploymentLog[];
   activeDeploymentDuration: string | null;
   busy: string;
-  nowMs: number;
   onSelectDeployment: (deploymentId: string) => void;
   onDeploy: () => void;
   onAbortActiveDeployment: () => void;
+  onOpenRuntimeLogs: () => void;
 }) {
   const [failureModalOpen, setFailureModalOpen] = useState(false);
   const failedDeploymentSelected = activeDeployment?.status === "failed";
+  const buildingDeployment =
+    activeDeployment?.status === "queued" || activeDeployment?.status === "building";
+  const status = activeDeployment ? statusMeta(activeDeployment.status) : null;
 
   return (
-    <section className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden border border-line bg-base">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-line px-4 py-4 sm:px-5">
-        <div>
-          <h2 className="text-lg tracking-[-0.03em] text-white">Deployments</h2>
-          <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
-            {deployments.length} {deployments.length === 1 ? "deployment" : "deployments"}
-          </p>
+    <section className="mx-auto flex h-full min-h-0 w-full max-w-[1440px] flex-col overflow-hidden rounded-xl border border-[var(--cf-border)] bg-[#0d0d0d]">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--cf-border)] px-4 py-3">
+        <div className="flex items-center gap-2 text-xs text-[var(--color-text-secondary)]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+          {projectName ?? service?.name ?? "Service"}
         </div>
-        <button
-          type="button"
-          className="inline-flex h-8 items-center justify-center gap-2 bg-accent px-3 text-xs text-ink transition hover:bg-zinc-200 disabled:opacity-40"
-          onClick={onDeploy}
-          disabled={busy === "deploy"}
-        >
-          <DeployPlaneIcon size={13} />
-          {busy === "deploy" ? "Deploying…" : "Deploy"}
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {service?.primaryUrl ? (
+            <a
+              href={service.primaryUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex h-9 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+            >
+              <ExternalLink size={14} />
+              Visit
+            </a>
+          ) : null}
+          <button
+            type="button"
+            onClick={onOpenRuntimeLogs}
+            className="flex h-9 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <Terminal size={14} />
+            Runtime logs
+          </button>
+          {buildingDeployment ? (
+            <button
+              type="button"
+              onClick={onAbortActiveDeployment}
+              disabled={busy === "abort"}
+              className="flex h-9 items-center gap-2 rounded-lg border border-bad/40 px-3 text-sm text-bad transition-colors hover:bg-bad/10 disabled:opacity-50"
+            >
+              Abort build
+            </button>
+          ) : failedDeploymentSelected ? (
+            <button
+              type="button"
+              onClick={() => setFailureModalOpen(true)}
+              className="flex h-9 items-center gap-2 rounded-lg border border-[var(--cf-border)] px-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:bg-white/10 hover:text-white"
+            >
+              What happened?
+            </button>
+          ) : null}
+          <button
+            type="button"
+            onClick={onDeploy}
+            disabled={busy === "deploy"}
+            className="flex h-9 items-center gap-2 rounded-lg bg-[var(--color-accent)] px-3 text-sm font-medium text-white transition-colors hover:opacity-90 disabled:opacity-60"
+          >
+            <RotateCw size={14} />
+            {busy === "deploy" ? "Deploying…" : "Redeploy"}
+          </button>
+        </div>
       </header>
 
-      <div className="grid min-h-0 flex-1 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="flex min-h-0 flex-col border-b border-line lg:border-b-0 lg:border-r">
-          <div className="flex h-10 items-center justify-between border-b border-line px-4 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-dim">
-            <span>History</span>
-            <span>{deployments.length}</span>
-          </div>
-          <div className="min-h-0 flex-1 overflow-y-auto">
-          {deployments.map((deployment) => {
-            const displayStatus = displayDeploymentStatus(deployment.status);
-            const selected = deployment.id === activeDeploymentId;
-            const buildDuration = formatBuildDuration(
-              deployment.startedAt ?? deployment.createdAt,
-              deployment.finishedAt,
-              nowMs
-            );
-            return (
-              <button
-                key={deployment.id}
-                type="button"
-                className={
-                  selected
-                    ? "flex min-h-14 w-full items-center justify-between gap-3 border-b border-line bg-glass px-4 py-3 text-left text-white"
-                    : "flex min-h-14 w-full items-center justify-between gap-3 border-b border-line-subtle px-4 py-3 text-left text-ink-muted transition hover:bg-glass hover:text-white"
-                }
-                onClick={() => onSelectDeployment(deployment.id)}
-              >
-                <div className="min-w-0">
-                  <div className="font-mono text-xs">{shortSha(deployment.commitSha)}</div>
-                  <div className={`mt-1 text-[10px] ${selected ? "text-ink-dim" : "text-ink-dim"}`}>
-                    {formatTime(deployment.createdAt)}
-                    {buildDuration ? ` · ${buildDuration}` : ""}
-                  </div>
-                </div>
-                <span className={`shrink-0 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.12em] ${statusClass(displayStatus)}`}>
-                  {displayStatus}
-                </span>
-              </button>
-            );
-          })}
-          {deployments.length === 0 ? (
-            <div className="flex min-h-40 items-center justify-center px-4 text-center text-xs text-ink-dim">
-              No deployments yet.
-            </div>
-          ) : null}
-          </div>
-        </aside>
+      <div className="flex flex-wrap items-center gap-3 px-4 py-4">
+        <h1 className="font-mono text-xl text-white">
+          {activeDeployment ? `dep_${activeDeployment.id}` : "Deployments"}
+        </h1>
+        {status ? (
+          <span
+            className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${toneClass[status.tone]}`}
+          >
+            {status.label}
+          </span>
+        ) : null}
+        {deployments.length > 0 ? (
+          <select
+            value={activeDeploymentId ?? ""}
+            onChange={(event) => onSelectDeployment(event.target.value)}
+            className="ml-auto h-9 rounded-lg border border-[var(--cf-border)] bg-white/5 px-3 font-mono text-xs text-white outline-none"
+          >
+            {deployments.map((deployment) => (
+              <option key={deployment.id} value={deployment.id}>
+                {shortSha(deployment.commitSha)} · {formatTime(deployment.createdAt)}
+              </option>
+            ))}
+          </select>
+        ) : null}
+      </div>
 
-        <div className="min-h-0 min-w-0">
+      {activeDeployment ? (
+        <div className="mx-4 mb-4 overflow-hidden rounded-lg border border-[var(--cf-border)]">
+          <PropRow label="Project" value={projectName ?? service?.name ?? "—"} />
+          <PropRow label="Branch" value={service?.branch || "—"} />
+          <PropRow label="Commit" value={shortSha(activeDeployment.commitSha)} />
+          <PropRow
+            label="Stack"
+            value={service?.runtimeMode === "worker" ? "worker" : "server"}
+          />
+          <PropRow label="Duration" value={activeDeploymentDuration ?? "—"} />
+        </div>
+      ) : null}
+
+      <div className="min-h-0 flex-1 px-4 pb-4">
         <DeploymentLogsPanel
           logs={deploymentLogs}
-          title="Deploy output"
-          meta={
-            activeDeploymentDuration
-              ? `${activeDeployment?.status === "queued" ? "Queued for" : "Building for"} ${activeDeploymentDuration}`
-              : undefined
-          }
-          actions={
-            activeDeployment && (activeDeployment.status === "queued" || activeDeployment.status === "building") ? (
-              <div className="flex flex-wrap justify-end gap-2">
-                <button
-                  type="button"
-                  className="inline-flex h-8 items-center justify-center gap-2 border border-bad/40 px-3 text-xs text-bad transition hover:bg-bad/10 disabled:opacity-40"
-                  onClick={onAbortActiveDeployment}
-                  disabled={busy === "abort"}
-                >
-                  <AppIcon icon={Cancel01Icon} size={13} />
-                  Abort build
-                </button>
-              </div>
-            ) : failedDeploymentSelected ? (
-              <div className="flex flex-wrap justify-end gap-2">
-                <button
-                  type="button"
-                  className="inline-flex h-8 items-center justify-center gap-2 border border-line px-3 text-xs text-ink-muted transition hover:border-line hover:bg-hover hover:text-white"
-                  onClick={() => setFailureModalOpen(true)}
-                >
-                  <AppIcon icon={ChatQuestionIcon} size={13} />
-                  What happened?
-                </button>
-              </div>
-            ) : undefined
-          }
+          title="Build logs"
+          meta={activeDeploymentDuration ?? undefined}
           emptyLabel="Choose a deployment to inspect its build and deploy logs."
           embedded
         />
-        </div>
       </div>
+
       <DeploymentFailureExplanationModal
         deployment={activeDeployment}
         open={failureModalOpen && failedDeploymentSelected}

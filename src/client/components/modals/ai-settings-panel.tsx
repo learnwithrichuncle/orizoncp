@@ -1,30 +1,27 @@
-import { useEffect, useMemo, useState } from "react";
+import { Key02Icon } from "@hugeicons/core-free-icons";
+import { useEffect, useState } from "react";
 import { api, type AiSettingsStatus } from "../../api";
-import { AiProviderCard } from "./ai-provider-card";
 import { AiProviderDetails } from "./ai-provider-details";
 import {
   aiProviders,
   createAiConnections,
   type AiProviderId
 } from "./ai-settings-data";
+import { ModalShell } from "./modal-shell";
 
 export function AiSettingsPanel() {
-  const [selectedProviderId, setSelectedProviderId] = useState<AiProviderId>("openai");
   const [defaultProviderId, setDefaultProviderId] = useState<AiProviderId | null>(null);
   const [defaultModel, setDefaultModel] = useState("");
   const [connections, setConnections] = useState(createAiConnections);
   const [credentialError, setCredentialError] = useState("");
   const [loading, setLoading] = useState(true);
   const [busyProviderId, setBusyProviderId] = useState<AiProviderId | null>(null);
+  const [openProviderId, setOpenProviderId] = useState<AiProviderId | null>(null);
 
-  const selectedProvider = useMemo(
-    () => aiProviders.find((provider) => provider.id === selectedProviderId) ?? aiProviders[0],
-    [selectedProviderId]
-  );
-  const selectedConnection = connections[selectedProvider.id];
-  const selectedProviderIsDefault =
-    selectedProvider.id === defaultProviderId &&
-    selectedConnection.selectedModel === defaultModel;
+  const openProvider = openProviderId
+    ? aiProviders.find((provider) => provider.id === openProviderId) ?? null
+    : null;
+  const openConnection = openProviderId ? connections[openProviderId] : null;
   const connectedProviderCount = aiProviders.filter(
     (provider) => connections[provider.id].connected
   ).length;
@@ -73,35 +70,15 @@ export function AiSettingsPanel() {
     };
   }, []);
 
-  function selectProvider(providerId: AiProviderId) {
-    setSelectedProviderId(providerId);
-    setCredentialError("");
-  }
-
-  function updateProviderModelDraft(providerId: AiProviderId, modelId: string) {
-    setConnections((current) => ({
-      ...current,
-      [providerId]: {
-        ...current[providerId],
-        selectedModel: modelId
-      }
-    }));
-    if (defaultProviderId === providerId) setDefaultModel(modelId);
-  }
-
   async function updateProviderModel(providerId: AiProviderId, modelId: string) {
     if (connections[providerId].selectedModel === modelId) return;
 
-    const provider = aiProviders.find((item) => item.id === providerId);
-    const previousConnection = connections[providerId];
-    const previousDefaultModel = defaultModel;
-    updateProviderModelDraft(providerId, modelId);
+    setConnections((current) => ({
+      ...current,
+      [providerId]: { ...current[providerId], selectedModel: modelId }
+    }));
 
-    if (!previousConnection.connected) {
-      setSelectedProviderId(providerId);
-      setCredentialError("");
-      return;
-    }
+    if (!connections[providerId].connected) return;
 
     setBusyProviderId(providerId);
     try {
@@ -109,8 +86,7 @@ export function AiSettingsPanel() {
       syncAiSettings(response.ai);
       setCredentialError("");
     } catch (error) {
-      setConnections((current) => ({ ...current, [providerId]: previousConnection }));
-      setDefaultModel(previousDefaultModel);
+      const provider = aiProviders.find((item) => item.id === providerId);
       setCredentialError(error instanceof Error ? error.message : `Could not update ${provider?.name ?? providerId} model.`);
     } finally {
       setBusyProviderId(null);
@@ -141,13 +117,11 @@ export function AiSettingsPanel() {
     if (defaultProviderId === providerId && defaultModel === modelId) return;
 
     if (!connection.connected) {
-      setSelectedProviderId(providerId);
+      setOpenProviderId(providerId);
       setCredentialError(`Save a ${provider?.name ?? providerId} API key before setting it as default.`);
       return;
     }
 
-    const previousDefaultProvider = defaultProviderId;
-    const previousDefaultModel = defaultModel;
     setDefaultProviderId(providerId);
     setDefaultModel(modelId);
     setBusyProviderId(providerId);
@@ -157,68 +131,139 @@ export function AiSettingsPanel() {
       syncAiSettings(response.ai);
       setCredentialError("");
     } catch (error) {
-      setDefaultProviderId(previousDefaultProvider);
-      setDefaultModel(previousDefaultModel);
       setCredentialError(error instanceof Error ? error.message : `Could not set ${provider?.name ?? providerId} as default.`);
     } finally {
       setBusyProviderId(null);
     }
   }
 
+  if (loading) {
+    return (
+      <div className="mx-auto max-w-5xl space-y-3" aria-label="Loading AI providers">
+        <div className="h-10 w-48 animate-pulse rounded-lg bg-white/5" />
+        <div className="h-12 animate-pulse rounded-lg border border-[var(--cf-border)] bg-white/5" />
+        <div className="h-12 animate-pulse rounded-lg border border-[var(--cf-border)] bg-white/5" />
+        <div className="h-12 animate-pulse rounded-lg border border-[var(--cf-border)] bg-white/5" />
+      </div>
+    );
+  }
+
   return (
-    <section className="mx-auto max-w-5xl overflow-hidden rounded-[14px] border border-line bg-glass backdrop-blur-xl">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4">
-        <span className="text-sm text-ink">Providers</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted">
-          {connectedProviderCount} connected
-        </span>
-      </div>
+    <>
+      <section className="mx-auto max-w-5xl overflow-hidden rounded-lg border border-[var(--cf-border)] bg-white/5">
+        <div className="flex items-center justify-between gap-3 border-b border-[var(--cf-border)] px-5 py-4">
+          <span className="text-sm font-medium text-white">Models</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)]">
+            {connectedProviderCount} connected
+          </span>
+        </div>
 
-      <div className="flex gap-2 overflow-x-auto px-5 py-3">
-        {aiProviders.map((provider) => (
-          <AiProviderCard
-            key={provider.id}
-            provider={provider}
-            selected={provider.id === selectedProvider.id}
-            connected={connections[provider.id].connected}
-            isDefaultModel={
-              provider.id === defaultProviderId &&
-              connections[provider.id].selectedModel === defaultModel
-            }
-            onSelect={() => selectProvider(provider.id)}
-          />
-        ))}
-      </div>
-
-      <div className="min-w-0 border-t border-line p-5 sm:p-7 lg:p-8">
         {credentialError ? (
-          <div className="mb-5 border-l-2 border-bad bg-bad/10 px-4 py-3 text-sm text-bad">
+          <div className="border-b border-[var(--cf-border)] px-5 py-3 text-sm text-bad">
             {credentialError}
           </div>
         ) : null}
 
-        {loading ? (
-          <div className="space-y-7" aria-label="Loading AI providers">
-            <div className="h-14 w-48 animate-pulse bg-glass" />
-            <div className="grid max-w-xl gap-5">
-              <div className="h-11 animate-pulse border border-line bg-glass" />
-              <div className="h-11 animate-pulse border border-line bg-glass" />
-            </div>
-          </div>
-        ) : (
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b border-[var(--cf-border)] text-left font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
+              <th className="px-5 py-2.5 font-normal">Provider</th>
+              <th className="px-5 py-2.5 font-normal">Status</th>
+              <th className="hidden px-5 py-2.5 font-normal sm:table-cell">Model</th>
+              <th className="px-5 py-2.5" />
+            </tr>
+          </thead>
+          <tbody>
+            {aiProviders.map((provider) => {
+              const connection = connections[provider.id];
+              const isDefault =
+                provider.id === defaultProviderId &&
+                connection.selectedModel === defaultModel;
+              return (
+                <tr
+                  key={provider.id}
+                  onClick={() => setOpenProviderId(provider.id)}
+                  className="cursor-pointer border-b border-[var(--cf-border)] transition-colors last:border-b-0 hover:bg-white/10"
+                >
+                  <td className="px-5 py-3">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={provider.logoUrl}
+                        alt=""
+                        className="h-6 w-6 shrink-0 object-contain"
+                      />
+                      <span className="truncate text-sm text-white">
+                        {provider.name}
+                      </span>
+                      {isDefault ? (
+                        <span className="shrink-0 rounded-full bg-[var(--color-accent)] px-1.5 py-px text-[9px] font-semibold uppercase tracking-wide text-white">
+                          Default
+                        </span>
+                      ) : null}
+                    </div>
+                  </td>
+                  <td className="px-5 py-3">
+                    <span
+                      className={`inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] ${
+                        connection.connected
+                          ? "text-ok"
+                          : "text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          connection.connected
+                            ? "bg-ok"
+                            : "bg-[var(--color-text-secondary)]"
+                        }`}
+                      />
+                      {connection.connected ? "Connected" : "Not connected"}
+                    </span>
+                  </td>
+                  <td className="hidden px-5 py-3 font-mono text-[11px] text-[var(--color-text-secondary)] sm:table-cell">
+                    {connection.selectedModel || "—"}
+                  </td>
+                  <td className="px-5 py-3 text-right">
+                    <span className="inline-flex shrink-0 rounded-lg border border-[var(--cf-border)] px-2.5 py-1 text-xs text-[var(--color-text-secondary)]">
+                      {connection.connected ? "Manage" : "Add key"}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+
+      <ModalShell
+        open={Boolean(openProvider)}
+        title={openProvider?.name ?? "Model"}
+        meta="API key"
+        icon={Key02Icon}
+        width="max-w-xl"
+        onClose={() => setOpenProviderId(null)}
+      >
+        {openProvider && openConnection ? (
           <AiProviderDetails
-            provider={selectedProvider}
-            model={selectedConnection.selectedModel}
-            connected={selectedConnection.connected}
-            keySuffix={selectedConnection.keySuffix}
-            isDefaultModel={selectedProviderIsDefault}
-            updating={busyProviderId === selectedProvider.id}
-            onSelectModel={(modelId) => void updateProviderModel(selectedProvider.id, modelId)}
-            onSaveApiKey={(apiKey) => updateProviderApiKey(selectedProvider.id, apiKey)}
-            onSetDefaultModel={() => void updateDefaultModel(selectedProvider.id)}
+            provider={openProvider}
+            model={openConnection.selectedModel}
+            connected={openConnection.connected}
+            keySuffix={openConnection.keySuffix}
+            isDefaultModel={
+              openProvider.id === defaultProviderId &&
+              openConnection.selectedModel === defaultModel
+            }
+            updating={busyProviderId === openProvider.id}
+            onSelectModel={(modelId) =>
+              void updateProviderModel(openProvider.id, modelId)
+            }
+            onSaveApiKey={(apiKey) =>
+              updateProviderApiKey(openProvider.id, apiKey)
+            }
+            onSetDefaultModel={() => void updateDefaultModel(openProvider.id)}
           />
-        )}
-      </div>
-    </section>
+        ) : null}
+      </ModalShell>
+    </>
   );
 }
